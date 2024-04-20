@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Series de Tiempo"
+author: "Laura, Cristian, Jairo Enrique Alba Talero"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -15,17 +15,13 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# About
+# Introducción a las series de tiempo
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+Una serie de tiempo es una secuencia de datos ordenados en función del tiempo. Estos datos se recopilan en intervalos regulares, como horas, días, meses, años, etc. El objetivo principal de analizar una serie de tiempo es descubrir patrones, tendencias y comportamientos que cambian con el tiempo.
 
-## Usage 
+Las series de tiempo se utilizan en una amplia variedad de campos, como finanzas, economía, meteorología, ciencias sociales y muchas otras áreas donde se registran datos a lo largo del tiempo. Algunos ejemplos comunes de series de tiempo incluyen el precio de las acciones en bolsa a lo largo del tiempo, las ventas mensuales de una empresa, la temperatura diaria registrada en una región, entre otros.
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
-
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+El análisis de series de tiempo implica técnicas como el modelado de tendencias, la detección de estacionalidad, la identificación de patrones cíclicos y la predicción de valores futuros. Estas técnicas son útiles para tomar decisiones informadas y predecir el comportamiento futuro basado en datos históricos.
 
 ## Render book
 
