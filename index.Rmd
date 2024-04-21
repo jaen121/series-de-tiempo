@@ -40,12 +40,42 @@ Las series de tiempo se utilizan en una amplia variedad de campos, como finanzas
 
 El análisis de series de tiempo implica técnicas como el modelado de tendencias, la detección de estacionalidad, la identificación de patrones cíclicos y la predicción de valores futuros. Estas técnicas son útiles para tomar decisiones informadas y predecir el comportamiento futuro basado en datos históricos.
 
+## Principales campos donde se aplican las series de tiempo 
+
+Las series de tiempo se utilizan en una amplia variedad de situaciones y campos. Algunas de las situaciones más comunes en las que se utilizan las series de tiempo son:
+
++ **Finanzas y economía**: En análisis financiero, las series de tiempo se utilizan para estudiar el rendimiento de acciones, bonos, índices bursátiles y otros instrumentos financieros a lo largo del tiempo. También son fundamentales en el análisis económico para estudiar indicadores como el PIB, la inflación, el desempleo y las tasas de interés a lo largo del tiempo.
+
++ **Ciencias naturales**: En campos como la meteorología, la climatología y la oceanografía, las series de tiempo se utilizan para analizar patrones climáticos, temperaturas, niveles de precipitación, concentraciones de gases, entre otros datos ambientales a lo largo del tiempo.
+
++ **Ingeniería y tecnología**: En ingeniería eléctrica, mecánica y civil, las series de tiempo se utilizan para monitorear el rendimiento de sistemas, predecir fallas, analizar el comportamiento de estructuras y realizar mantenimiento predictivo.
+
++ **Ciencias de la salud**: En medicina y epidemiología, las series de tiempo se utilizan para analizar tendencias en la propagación de enfermedades, estudiar la eficacia de tratamientos médicos, analizar datos de pacientes a lo largo del tiempo y realizar proyecciones epidemiológicas.
+
++ **Marketing y ventas**: En análisis de mercado, las series de tiempo se utilizan para estudiar tendencias de ventas, patrones estacionales, efectividad de campañas de marketing, demanda de productos y pronósticos de ventas.
+
++ **Investigación social**: En sociología, psicología y ciencias sociales en general, las series de tiempo se utilizan para estudiar tendencias sociales, cambios de actitudes, análisis de encuestas a lo largo del tiempo y estudios longitudinales.
+
+Por lo tanto las series de tiempo son herramientas poderosas que se utilizan en una amplia gama de disciplinas para analizar patrones, tendencias y cambios a lo largo del tiempo, lo que permite tomar decisiones informadas y realizar pronósticos precisos.
+
+## Principales pasos para llevar a cabo un aálisis de series de tiempo
+
+El análisis de series de tiempo se refiere al proceso de analizar los datos disponibles para descubrir el patrón o la tendencia en los datos. Permite extraer y modelar las relaciones entre datos a lo largo del tiempo, sea extrapolando (hacia futuro) o interpolando (hacia el pasado) el comportamiento de datos no observados.
+
+En general los análisis de series de tiempo tienen los siguientes tres pasos:
+
++ Análisis exploratorio
++ Escogencia y ajuste del modelo
++ Diagnóstico
+
 
 # Importación de Datos
  
- Importemos la matriz  de datos
+Los datos a trabajar se obtuvieron de https://es.investing.com/commodities/us-corn-streaming-chart y corresponden al mercado de maiz, durante los años....
 
-```{r,include=FALSE}
+Se importa la matriz de  datos
+
+```{r}
 # Importar datos desde un archivo CSV con la ruta completa
 ruta_archivo <- "C:/Users/USUARIO/Desktop/Tercer semestre/series_tiempo/series_de_tiempo/Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
 
@@ -57,6 +87,14 @@ df_maiz <- read.csv(ruta_archivo, sep = ";")
 head(df_maiz)
 
 ```
+La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, consta de las siguientes columnas:
+-	Fecha: Fecha de transacción
+-	Ultimo: Ultimo precio del día, precio de cierre
+-	Apertura: Primer precio del día, precio de apertura
+-	Máximo: Máximo precio en la negociación del día
+-	Mínimo: Mínimo precio en la negociación del día
+-	Vol: Volumen negociado en toneladas
+-	% Var: Porcentaje de variación. 
 
 # Analisis Descriptivo
 

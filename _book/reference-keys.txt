@@ -36,3 +36,6 @@ teoremas-y-demostraciones
 importación-de-datos-1
 introducción-a-las-series-de-tiempo-1
 analisis-descriptivo
+para-ver
+principales-campos-donde-se-aplican-las-series-de-tiempo
+principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo
