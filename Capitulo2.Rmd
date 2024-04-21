@@ -1,0 +1,8 @@
+# Introducción a las series de tiempo
+
+Una serie de tiempo es una secuencia de datos ordenados en función del tiempo. Estos datos se recopilan en intervalos regulares, como horas, días, meses, años, etc. El objetivo principal de analizar una serie de tiempo es descubrir patrones, tendencias y comportamientos que cambian con el tiempo.
+
+Las series de tiempo se utilizan en una amplia variedad de campos, como finanzas, economía, meteorología, ciencias sociales y muchas otras áreas donde se registran datos a lo largo del tiempo. Algunos ejemplos comunes de series de tiempo incluyen el precio de las acciones en bolsa a lo largo del tiempo, las ventas mensuales de una empresa, la temperatura diaria registrada en una región, entre otros.
+
+El análisis de series de tiempo implica técnicas como el modelado de tendencias, la detección de estacionalidad, la identificación de patrones cíclicos y la predicción de valores futuros. Estas técnicas son útiles para tomar decisiones informadas y predecir el comportamiento futuro basado en datos históricos.
+

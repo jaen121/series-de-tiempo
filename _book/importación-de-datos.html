@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Series de Tiempo</title>
+  <title>Chapter 3 Importación de Datos | Series de Tiempo</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Series de Tiempo" />
+  <meta property="og:title" content="Chapter 3 Importación de Datos | Series de Tiempo" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Series de Tiempo" />
+  <meta name="twitter:title" content="Chapter 3 Importación de Datos | Series de Tiempo" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -36,8 +36,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introducción-a-las-series-de-tiempo.html"/>
+<link rel="prev" href="introducción-a-las-series-de-tiempo.html"/>
+<link rel="next" href="analisis-descriptivo.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,34 +218,25 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Series de Tiempo</h1>
-<p class="author"><em>Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño</em></p>
-<p class="date"><em>2024-04-20</em></p>
-</div>
-<div id="justificación-uso-de-datos-historicos-del-precio-del-maíz" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Justificación uso de datos historicos del precio del maíz<a href="index.html#justificación-uso-de-datos-historicos-del-precio-del-maíz" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>En el curso se va a trabajar con la base de datos del precio del maíz a través de la historia, con el fin de proyectar su precio futuro.
-La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, consta de las siguientes columnas:
-- Fecha: Fecha de transacción
-- Ultimo: Ultimo precio del día, precio de cierre
-- Apertura: Primer precio del día, precio de apertura
-- Máximo: Máximo precio en la negociación del día
-- Mínimo: Mínimo precio en la negociación del día
-- Vol: Volumen negociado en toneladas
-- % Var: Porcentaje de variación.</p>
-<p>Es importante predecir el valor del maíz con el fin de anticipar y mitigar los efectos de la inflación por la posible subida del precio del maíz, esto dado que el maíz es un insumo muy importante para el alimento de aves de corral como lo son, gallinas reproductoras, pollos de engorde y gallinas ponedoras, también desempeña un papel fundamental en la producción de alimento balanceado para cerdos.
-El maíz representa una proporción significativa, que oscila entre el 50 % y el 70 %, de los ingredientes utilizados en la elaboración de alimentos balanceados para aves de corral y cerdos. Es evidente que el precio del maíz ejerce una influencia directa y proporcional en el costo de la carne de pollo, huevo y cerdo, ya que el alimento balanceado representa la mayor parte de los costos en la producción de aves de corral y cerdo.
-La industria de alimentos balanceados también depende de la predicción del precio del maíz. Las empresas de alimentos balanceados pueden ajustar sus estrategias de aprovisionamiento y producción para reducir el impacto de los cambios en los costos de materias primas al conocer con anticipación las variaciones en el precio del maíz. Esto a su vez ayuda a mantener estables los precios del alimento balanceado para animales, lo que es esencial para garantizar la rentabilidad y sostenibilidad de sus productos.
-Además, la predicción del precio del maíz puede ayudar a los gobiernos nacionales y regionales a desarrollar políticas y programas efectivos para proteger la seguridad alimentaria. El gobierno se puede anticipar a posibles aumentos de los costos de alimentos básicos y tomar medidas preventivas para disminuir su impacto negativo en el aumento de precios por el aumento de costos en las materias primas observando de cerca las tendencias del precio del maíz Esto puede incluir la implementación de subsidios alimentarios, programas de asistencia alimentaria y políticas para respaldar la producción agrícola nacional.</p>
+<div id="importación-de-datos" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Importación de Datos<a href="importación-de-datos.html#importación-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Importemos la matriz de datos</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="importación-de-datos.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_maiz)</span></code></pre></div>
+<pre><code>##        Fecha Último Apertura Máximo Mínimo    Vol. X..var.
+## 1 19/04/2024 433.50   427.10 433.90 426.88           1.58%
+## 2 18/04/2024 426.75   429.50 431.00 426.25 180.78K  -0.81%
+## 3 17/04/2024 430.25   431.00 433.00 429.50 139.24K  -0.17%
+## 4 16/04/2024 431.00   431.25 432.25 428.50 148.12K  -0.12%
+## 5 15/04/2024 431.50   434.50 435.00 430.25 152.25K  -0.92%
+## 6 12/04/2024 435.50   428.25 437.50 427.00 202.05K   1.57%</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introducción-a-las-series-de-tiempo.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introducción-a-las-series-de-tiempo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisis-descriptivo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -24,3 +24,15 @@ publishing
 pages
 metadata-for-sharing
 introducción-a-las-series-de-tiempo
+importación-de-datos
+justificación-uso-de-datos-historicos-del-precio-del-maíz
+url-your-book-url-like-httpsbookdown.orgyihuibookdown
+compartiendo-tu-libro
+publicando-el-libro
+error-404
+ïndice-de-ecuaciones
+ecuaciones
+teoremas-y-demostraciones
+importación-de-datos-1
+introducción-a-las-series-de-tiempo-1
+analisis-descriptivo

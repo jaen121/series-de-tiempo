@@ -14,6 +14,23 @@ description: |
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
+# Justificación uso de datos historicos del precio del maíz 
+
+En el curso se va a trabajar con la base de datos del precio del maíz a través de la historia, con el fin de proyectar su precio futuro. 
+La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, consta de las siguientes columnas:
+-	Fecha: Fecha de transacción
+-	Ultimo: Ultimo precio del día, precio de cierre
+-	Apertura: Primer precio del día, precio de apertura
+-	Máximo: Máximo precio en la negociación del día
+-	Mínimo: Mínimo precio en la negociación del día
+-	Vol: Volumen negociado en toneladas
+-	% Var: Porcentaje de variación. 
+
+Es importante predecir el valor del maíz con el fin de anticipar y mitigar los efectos de la inflación por la posible subida del precio del maíz, esto dado que el maíz es un insumo muy importante para el alimento de aves de corral como lo son, gallinas reproductoras, pollos de engorde y gallinas ponedoras, también desempeña un papel fundamental en la producción de alimento balanceado para cerdos. 
+El maíz representa una proporción significativa, que oscila entre el 50 % y el 70 %, de los ingredientes utilizados en la elaboración de alimentos balanceados para aves de corral y cerdos. Es evidente que el precio del maíz ejerce una influencia directa y proporcional en el costo de la carne de pollo, huevo y cerdo, ya que el alimento balanceado representa la mayor parte de los costos en la producción de aves de corral y cerdo.
+La industria de alimentos balanceados también depende de la predicción del precio del maíz. Las empresas de alimentos balanceados pueden ajustar sus estrategias de aprovisionamiento y producción para reducir el impacto de los cambios en los costos de materias primas al conocer con anticipación las variaciones en el precio del maíz. Esto a su vez ayuda a mantener estables los precios del alimento balanceado para animales, lo que es esencial para garantizar la rentabilidad y sostenibilidad de sus productos.
+Además, la predicción del precio del maíz puede ayudar a los gobiernos nacionales y regionales a desarrollar políticas y programas efectivos para proteger la seguridad alimentaria. El gobierno se puede anticipar a posibles aumentos de los costos de alimentos básicos y tomar medidas preventivas para disminuir su impacto negativo en el aumento de precios por el aumento de costos en las materias primas observando de cerca las tendencias del precio del maíz Esto puede incluir la implementación de subsidios alimentarios, programas de asistencia alimentaria y políticas para respaldar la producción agrícola nacional.
+
 
 # Introducción a las series de tiempo
 
@@ -23,34 +40,26 @@ Las series de tiempo se utilizan en una amplia variedad de campos, como finanzas
 
 El análisis de series de tiempo implica técnicas como el modelado de tendencias, la detección de estacionalidad, la identificación de patrones cíclicos y la predicción de valores futuros. Estas técnicas son útiles para tomar decisiones informadas y predecir el comportamiento futuro basado en datos históricos.
 
-## Render book
 
-You can render the HTML version of this example book without changing anything:
+# Importación de Datos
+ 
+ Importemos la matriz  de datos
 
-1. Find the **Build** pane in the RStudio IDE, and
+```{r,include=FALSE}
+# Importar datos desde un archivo CSV con la ruta completa
+ruta_archivo <- "C:/Users/USUARIO/Desktop/Tercer semestre/series_tiempo/series_de_tiempo/Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+df_maiz <- read.csv(ruta_archivo, sep = ";")
 
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
 ```
 
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+```{r}
+head(df_maiz)
 
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
 ```
 
+# Analisis Descriptivo
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+
+
+
