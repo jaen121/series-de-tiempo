@@ -98,6 +98,51 @@ La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, con
 
 # Analisis Descriptivo
 
-erykreyuoiñoñklf,lñjk
+A continuación se estudiarán los estadísticos descriptivos de la matriz de datos:
+
+```{r}
+summary(df_maiz)
+```
+De la salida anterior podemos visualizar que se presentan 6170 registros, la apertura mínima fue de 182.8 con una media de 409.2, cuya apertura máxima fue de 837.5.
+
+```{r}
+library(dplyr)
+
+# Suponiendo que tienes un dataframe llamado df y la columna se llama "vol"
+df_maiz <- mutate(df_maiz, vol_sin_K = as.numeric(sub("K", "", Vol.)))
+#df_maiz
+#str(df_maiz)
+# Mostrar las últimas filas del dataframe
+#tail(df_maiz)
+
+# Suponiendo que serie_temporal es tu objeto de serie temporal y deseas seleccionar la segunda columna
+solovolumen <- df_maiz[, 8]
+solovolumen
+
+```
+
+# Series de Tiempo
+
+Convertir el archivo en formato ts
+
+```{r}
+#install.packages("tseries")
+#install.packages("timsac")
+#install.packages("changepoint")
+
+
+library(tseries)
+library(timsac)
+library(changepoint)
+#serie_temporal <- ts(df_maiz$vol_sin_K, start = c(2000,1),  frequency = 365.25)
+serie_temporal <- ts(solovolumen, start = c(2000,1),  frequency = 365.25)
+serie_temporal
+```
+```{r}
+#columna_a_trazar <- serie_temporal[, 6]
+#columna_a_trazar 
+plot(serie_temporal,main="")
+
+```
 
 

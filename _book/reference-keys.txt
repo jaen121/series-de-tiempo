@@ -41,3 +41,4 @@ principales-campos-donde-se-aplican-las-series-de-tiempo
 principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo
 principales-campos-donde-se-aplican-las-series-de-tiempo-1
 principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo-1
+series-de-tiempo

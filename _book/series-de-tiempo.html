@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Analisis Descriptivo | Series de Tiempo</title>
+  <title>Chapter 5 Series de Tiempo | Series de Tiempo</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Analisis Descriptivo | Series de Tiempo" />
+  <meta property="og:title" content="Chapter 5 Series de Tiempo | Series de Tiempo" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Analisis Descriptivo | Series de Tiempo" />
+  <meta name="twitter:title" content="Chapter 5 Series de Tiempo | Series de Tiempo" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -36,8 +36,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="importación-de-datos.html"/>
-<link rel="next" href="series-de-tiempo.html"/>
+<link rel="prev" href="analisis-descriptivo.html"/>
+<link rel="next" href="url-your-book-url-like-httpsbookdown.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -180,46 +180,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analisis-descriptivo" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Analisis Descriptivo<a href="analisis-descriptivo.html#analisis-descriptivo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A continuación se estudiarán los estadísticos descriptivos de la matriz de datos:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="analisis-descriptivo.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_maiz)</span></code></pre></div>
-<pre><code>##     Fecha               Último         Apertura         Máximo     
-##  Length:6170        Min.   :182.5   Min.   :182.8   Min.   :183.5  
-##  Class :character   1st Qu.:268.2   1st Qu.:268.3   1st Qu.:270.9  
-##  Mode  :character   Median :374.8   Median :374.8   Median :379.0  
-##                     Mean   :409.3   Mean   :409.2   Mean   :414.1  
-##                     3rd Qu.:509.7   3rd Qu.:509.0   3rd Qu.:516.9  
-##                     Max.   :838.8   Max.   :837.5   Max.   :849.0  
-##      Mínimo          Vol.             X..var.         
-##  Min.   :181.2   Length:6170        Length:6170       
-##  1st Qu.:265.8   Class :character   Class :character  
-##  Median :371.2   Mode  :character   Mode  :character  
-##  Mean   :404.6                                        
-##  3rd Qu.:503.5                                        
-##  Max.   :828.2</code></pre>
-<p>De la salida anterior podemos visualizar que se presentan 6170 registros, la apertura mínima fue de 182.8 con una media de 409.2, cuya apertura máxima fue de 837.5.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="analisis-descriptivo.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.2.3</code></pre>
+<div id="series-de-tiempo" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Series de Tiempo<a href="series-de-tiempo.html#series-de-tiempo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Convertir el archivo en formato ts</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="series-de-tiempo.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;tseries&quot;)</span></span>
+<span id="cb13-2"><a href="series-de-tiempo.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;timsac&quot;)</span></span>
+<span id="cb13-3"><a href="series-de-tiempo.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;changepoint&quot;)</span></span>
+<span id="cb13-4"><a href="series-de-tiempo.html#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="series-de-tiempo.html#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="series-de-tiempo.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span></code></pre></div>
+<pre><code>## Warning: package &#39;tseries&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="series-de-tiempo.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(timsac)</span></code></pre></div>
+<pre><code>## Warning: package &#39;timsac&#39; was built under R version 4.2.3</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="series-de-tiempo.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(changepoint)</span></code></pre></div>
+<pre><code>## Warning: package &#39;changepoint&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
 <pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
+## Attaching package: &#39;zoo&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="analisis-descriptivo.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suponiendo que tienes un dataframe llamado df y la columna se llama &quot;vol&quot;</span></span>
-<span id="cb11-2"><a href="analisis-descriptivo.html#cb11-2" aria-hidden="true" tabindex="-1"></a>df_maiz <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_maiz, <span class="at">vol_sin_K =</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">&quot;K&quot;</span>, <span class="st">&quot;&quot;</span>, Vol.)))</span>
-<span id="cb11-3"><a href="analisis-descriptivo.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#df_maiz</span></span>
-<span id="cb11-4"><a href="analisis-descriptivo.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#str(df_maiz)</span></span>
-<span id="cb11-5"><a href="analisis-descriptivo.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar las últimas filas del dataframe</span></span>
-<span id="cb11-6"><a href="analisis-descriptivo.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#tail(df_maiz)</span></span>
-<span id="cb11-7"><a href="analisis-descriptivo.html#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="analisis-descriptivo.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Suponiendo que serie_temporal es tu objeto de serie temporal y deseas seleccionar la segunda columna</span></span>
-<span id="cb11-9"><a href="analisis-descriptivo.html#cb11-9" aria-hidden="true" tabindex="-1"></a>solovolumen <span class="ot">&lt;-</span> df_maiz[, <span class="dv">8</span>]</span>
-<span id="cb11-10"><a href="analisis-descriptivo.html#cb11-10" aria-hidden="true" tabindex="-1"></a>solovolumen</span></code></pre></div>
-<pre><code>##    [1]     NA 180.78 139.24 148.12 152.25 202.05 250.70 210.26 219.30 215.99
+##     as.Date, as.Date.numeric</code></pre>
+<pre><code>## Successfully loaded changepoint package version 2.2.4
+##  See NEWS for details of changes.</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="series-de-tiempo.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#serie_temporal &lt;- ts(df_maiz$vol_sin_K, start = c(2000,1),  frequency = 365.25)</span></span>
+<span id="cb24-2"><a href="series-de-tiempo.html#cb24-2" aria-hidden="true" tabindex="-1"></a>serie_temporal <span class="ot">&lt;-</span> <span class="fu">ts</span>(solovolumen, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>,<span class="dv">1</span>),  <span class="at">frequency =</span> <span class="fl">365.25</span>)</span>
+<span id="cb24-3"><a href="series-de-tiempo.html#cb24-3" aria-hidden="true" tabindex="-1"></a>serie_temporal</span></code></pre></div>
+<pre><code>## Time Series:
+## Start = 2000 
+## End = 2016.88980150582 
+## Frequency = 365.25 
+##    [1]     NA 180.78 139.24 148.12 152.25 202.05 250.70 210.26 219.30 215.99
 ##   [11] 192.94 153.81 187.68 235.50 200.47     NA 360.09 165.19 155.31 118.61
 ##   [21] 132.90 158.79 131.97 115.12 121.82 140.24   0.05   0.08   0.53   0.62
 ##   [31]   0.76   1.65   2.54   1.54   2.21   3.48 145.91 227.19 223.74 227.18
@@ -836,14 +829,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [6141]  11.13  17.76  20.94  14.88  11.19  11.46  13.11  12.39   6.14   7.02
 ## [6151]   9.37   5.47  11.09  11.57   9.74  15.06   7.93   6.06   8.34  10.59
 ## [6161]  13.69  18.35  19.98   8.12   6.32   4.91   4.77   4.32   3.62   4.43</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="series-de-tiempo.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#columna_a_trazar &lt;- serie_temporal[, 6]</span></span>
+<span id="cb26-2"><a href="series-de-tiempo.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#columna_a_trazar </span></span>
+<span id="cb26-3"><a href="series-de-tiempo.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(serie_temporal,<span class="at">main=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="importación-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="series-de-tiempo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analisis-descriptivo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="url-your-book-url-like-httpsbookdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
