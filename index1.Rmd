@@ -1,0 +1,103 @@
+--- 
+  title: "Series de Tiempo"
+author: "Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+  # Justificación uso de datos historicos del precio del maíz 
+  
+  En el curso se va a trabajar con la base de datos del precio del maíz a través de la historia, con el fin de proyectar su precio futuro. 
+La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, consta de las siguientes columnas:
+  -	Fecha: Fecha de transacción
+-	Ultimo: Ultimo precio del día, precio de cierre
+-	Apertura: Primer precio del día, precio de apertura
+-	Máximo: Máximo precio en la negociación del día
+-	Mínimo: Mínimo precio en la negociación del día
+-	Vol: Volumen negociado en toneladas
+-	% Var: Porcentaje de variación. 
+
+Es importante predecir el valor del maíz con el fin de anticipar y mitigar los efectos de la inflación por la posible subida del precio del maíz, esto dado que el maíz es un insumo muy importante para el alimento de aves de corral como lo son, gallinas reproductoras, pollos de engorde y gallinas ponedoras, también desempeña un papel fundamental en la producción de alimento balanceado para cerdos. 
+El maíz representa una proporción significativa, que oscila entre el 50 % y el 70 %, de los ingredientes utilizados en la elaboración de alimentos balanceados para aves de corral y cerdos. Es evidente que el precio del maíz ejerce una influencia directa y proporcional en el costo de la carne de pollo, huevo y cerdo, ya que el alimento balanceado representa la mayor parte de los costos en la producción de aves de corral y cerdo.
+La industria de alimentos balanceados también depende de la predicción del precio del maíz. Las empresas de alimentos balanceados pueden ajustar sus estrategias de aprovisionamiento y producción para reducir el impacto de los cambios en los costos de materias primas al conocer con anticipación las variaciones en el precio del maíz. Esto a su vez ayuda a mantener estables los precios del alimento balanceado para animales, lo que es esencial para garantizar la rentabilidad y sostenibilidad de sus productos.
+Además, la predicción del precio del maíz puede ayudar a los gobiernos nacionales y regionales a desarrollar políticas y programas efectivos para proteger la seguridad alimentaria. El gobierno se puede anticipar a posibles aumentos de los costos de alimentos básicos y tomar medidas preventivas para disminuir su impacto negativo en el aumento de precios por el aumento de costos en las materias primas observando de cerca las tendencias del precio del maíz Esto puede incluir la implementación de subsidios alimentarios, programas de asistencia alimentaria y políticas para respaldar la producción agrícola nacional.
+
+
+# Introducción a las series de tiempo
+
+Una serie de tiempo es una secuencia de datos ordenados en función del tiempo. Estos datos se recopilan en intervalos regulares, como horas, días, meses, años, etc. El objetivo principal de analizar una serie de tiempo es descubrir patrones, tendencias y comportamientos que cambian con el tiempo.
+
+Las series de tiempo se utilizan en una amplia variedad de campos, como finanzas, economía, meteorología, ciencias sociales y muchas otras áreas donde se registran datos a lo largo del tiempo. Algunos ejemplos comunes de series de tiempo incluyen el precio de las acciones en bolsa a lo largo del tiempo, las ventas mensuales de una empresa, la temperatura diaria registrada en una región, entre otros.
+
+El análisis de series de tiempo implica técnicas como el modelado de tendencias, la detección de estacionalidad, la identificación de patrones cíclicos y la predicción de valores futuros. Estas técnicas son útiles para tomar decisiones informadas y predecir el comportamiento futuro basado en datos históricos.
+
+## Principales campos donde se aplican las series de tiempo 
+
+Las series de tiempo se utilizan en una amplia variedad de situaciones y campos. Algunas de las situaciones más comunes en las que se utilizan las series de tiempo son:
+  
+  + **Finanzas y economía**: En análisis financiero, las series de tiempo se utilizan para estudiar el rendimiento de acciones, bonos, índices bursátiles y otros instrumentos financieros a lo largo del tiempo. También son fundamentales en el análisis económico para estudiar indicadores como el PIB, la inflación, el desempleo y las tasas de interés a lo largo del tiempo.
+
++ **Ciencias naturales**: En campos como la meteorología, la climatología y la oceanografía, las series de tiempo se utilizan para analizar patrones climáticos, temperaturas, niveles de precipitación, concentraciones de gases, entre otros datos ambientales a lo largo del tiempo.
+
++ **Ingeniería y tecnología**: En ingeniería eléctrica, mecánica y civil, las series de tiempo se utilizan para monitorear el rendimiento de sistemas, predecir fallas, analizar el comportamiento de estructuras y realizar mantenimiento predictivo.
+
++ **Ciencias de la salud**: En medicina y epidemiología, las series de tiempo se utilizan para analizar tendencias en la propagación de enfermedades, estudiar la eficacia de tratamientos médicos, analizar datos de pacientes a lo largo del tiempo y realizar proyecciones epidemiológicas.
+
++ **Marketing y ventas**: En análisis de mercado, las series de tiempo se utilizan para estudiar tendencias de ventas, patrones estacionales, efectividad de campañas de marketing, demanda de productos y pronósticos de ventas.
+
++ **Investigación social**: En sociología, psicología y ciencias sociales en general, las series de tiempo se utilizan para estudiar tendencias sociales, cambios de actitudes, análisis de encuestas a lo largo del tiempo y estudios longitudinales.
+
+Por lo tanto las series de tiempo son herramientas poderosas que se utilizan en una amplia gama de disciplinas para analizar patrones, tendencias y cambios a lo largo del tiempo, lo que permite tomar decisiones informadas y realizar pronósticos precisos.
+
+## Principales pasos para llevar a cabo un aálisis de series de tiempo
+
+El análisis de series de tiempo se refiere al proceso de analizar los datos disponibles para descubrir el patrón o la tendencia en los datos. Permite extraer y modelar las relaciones entre datos a lo largo del tiempo, sea extrapolando (hacia futuro) o interpolando (hacia el pasado) el comportamiento de datos no observados.
+
+En general los análisis de series de tiempo tienen los siguientes tres pasos:
+  
+  + Análisis exploratorio
++ Escogencia y ajuste del modelo
++ Diagnóstico
+
+
+# Importación de Datos
+
+Los datos a trabajar se obtuvieron de https://es.investing.com/commodities/us-corn-streaming-chart y corresponden al mercado de maiz, durante los años....
+
+Se importa la matriz de  datos
+
+```{r}
+# Importar datos desde un archivo CSV con la ruta completa
+ruta_archivo <- "C:/Users/USUARIO/Desktop/Tercer semestre/series_tiempo/series_de_tiempo/Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
+
+df_maiz <- read.csv(ruta_archivo, sep = ";")
+
+```
+
+```{r}
+head(df_maiz)
+
+```
+La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, consta de las siguientes columnas:
+  -	Fecha: Fecha de transacción
+-	Ultimo: Ultimo precio del día, precio de cierre
+-	Apertura: Primer precio del día, precio de apertura
+-	Máximo: Máximo precio en la negociación del día
+-	Mínimo: Mínimo precio en la negociación del día
+-	Vol: Volumen negociado en toneladas
+-	% Var: Porcentaje de variación. 
+
+# Analisis Descriptivo
+
+
+
+
