@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Importación de Datos | Series de Tiempo</title>
+  <title>Chapter 4 Filtro base de datos | Series de Tiempo</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Importación de Datos | Series de Tiempo" />
+  <meta property="og:title" content="Chapter 4 Filtro base de datos | Series de Tiempo" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Importación de Datos | Series de Tiempo" />
+  <meta name="twitter:title" content="Chapter 4 Filtro base de datos | Series de Tiempo" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -29,15 +29,15 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-05-05" />
+<meta name="date" content="2024-05-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introducción-a-las-series-de-tiempo.html"/>
-<link rel="next" href="análisis-descriptivo-y-filtro-base-de-datos.html"/>
+<link rel="prev" href="importación-de-datos.html"/>
+<link rel="next" href="analisis-descriptivo.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -153,16 +153,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="introducción-a-las-series-de-tiempo.html"><a href="introducción-a-las-series-de-tiempo.html#principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo"><i class="fa fa-check"></i><b>2.2</b> Principales pasos para llevar a cabo un aálisis de series de tiempo</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>3</b> Importación de Datos</a></li>
-<li class="chapter" data-level="4" data-path="análisis-descriptivo-y-filtro-base-de-datos.html"><a href="análisis-descriptivo-y-filtro-base-de-datos.html"><i class="fa fa-check"></i><b>4</b> Análisis descriptivo y filtro base de datos</a>
+<li class="chapter" data-level="4" data-path="filtro-base-de-datos.html"><a href="filtro-base-de-datos.html"><i class="fa fa-check"></i><b>4</b> Filtro base de datos</a></li>
+<li class="chapter" data-level="5" data-path="analisis-descriptivo.html"><a href="analisis-descriptivo.html"><i class="fa fa-check"></i><b>5</b> Analisis Descriptivo</a></li>
+<li class="chapter" data-level="6" data-path="url-your-book-url-like-httpsbookdown.html"><a href="url-your-book-url-like-httpsbookdown.html"><i class="fa fa-check"></i><b>6</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="análisis-descriptivo-y-filtro-base-de-datos.html"><a href="análisis-descriptivo-y-filtro-base-de-datos.html#filtro-de-datos."><i class="fa fa-check"></i><b>4.1</b> Filtro de datos.</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-descriptivo-y-filtro-base-de-datos.html"><a href="análisis-descriptivo-y-filtro-base-de-datos.html#analisis-descriptivo"><i class="fa fa-check"></i><b>4.2</b> Analisis Descriptivo</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>5</b> Series de Tiempo</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#aproximación-en-media-móvil"><i class="fa fa-check"></i><b>5.1</b> Aproximación en media móvil</a></li>
-<li class="chapter" data-level="5.2" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#componentes-de-una-serie-de-tiempo"><i class="fa fa-check"></i><b>5.2</b> Componentes de una Serie de Tiempo</a></li>
-<li class="chapter" data-level="5.3" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#estacionalidad"><i class="fa fa-check"></i><b>5.3</b> Estacionalidad</a></li>
+<li class="chapter" data-level="6.1" data-path="url-your-book-url-like-httpsbookdown.html"><a href="url-your-book-url-like-httpsbookdown.html#principales-campos-donde-se-aplican-las-series-de-tiempo-1"><i class="fa fa-check"></i><b>6.1</b> Principales campos donde se aplican las series de tiempo</a></li>
+<li class="chapter" data-level="6.2" data-path="url-your-book-url-like-httpsbookdown.html"><a href="url-your-book-url-like-httpsbookdown.html#principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo-1"><i class="fa fa-check"></i><b>6.2</b> Principales pasos para llevar a cabo un aálisis de series de tiempo</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -184,41 +180,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="importación-de-datos" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Importación de Datos<a href="importación-de-datos.html#importación-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Los datos a trabajar se obtuvieron de <a href="https://es.investing.com/commodities/us-corn-streaming-chart" class="uri">https://es.investing.com/commodities/us-corn-streaming-chart</a> y corresponden al mercado de maiz, durante los años….</p>
-<p>Se importa la matriz de datos</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="importación-de-datos.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos desde un archivo CSV con la ruta completa</span></span>
-<span id="cb1-2"><a href="importación-de-datos.html#cb1-2" aria-hidden="true" tabindex="-1"></a>ruta_archivo <span class="ot">&lt;-</span> <span class="st">&quot;C:/Users/USUARIO/Desktop/Tercer semestre/series_tiempo/series_de_tiempo/Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv&quot;</span></span>
-<span id="cb1-3"><a href="importación-de-datos.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="importación-de-datos.html#cb1-4" aria-hidden="true" tabindex="-1"></a>df_maiz <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(ruta_archivo, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>)</span>
-<span id="cb1-5"><a href="importación-de-datos.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="importación-de-datos.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_maiz)</span></code></pre></div>
-<pre><code>## [1] &quot;Fecha&quot;    &quot;Último&quot;   &quot;Apertura&quot; &quot;Máximo&quot;   &quot;Mínimo&quot;   &quot;Vol.&quot;     &quot;X..var.&quot;</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="importación-de-datos.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_maiz)</span></code></pre></div>
-<pre><code>##        Fecha Último Apertura Máximo Mínimo    Vol. X..var.
-## 1 19/04/2024 433.50   427.10 433.90 426.88           1.58%
-## 2 18/04/2024 426.75   429.50 431.00 426.25 180.78K  -0.81%
-## 3 17/04/2024 430.25   431.00 433.00 429.50 139.24K  -0.17%
-## 4 16/04/2024 431.00   431.25 432.25 428.50 148.12K  -0.12%
-## 5 15/04/2024 431.50   434.50 435.00 430.25 152.25K  -0.92%
-## 6 12/04/2024 435.50   428.25 437.50 427.00 202.05K   1.57%</code></pre>
-<p>La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, consta de las siguientes columnas:
-- Fecha: Fecha de transacción
-- Ultimo: Ultimo precio del día, precio de cierre
-- Apertura: Primer precio del día, precio de apertura
-- Máximo: Máximo precio en la negociación del día
-- Mínimo: Mínimo precio en la negociación del día
-- Vol: Volumen negociado en toneladas
-- % Var: Porcentaje de variación.</p>
+<div id="filtro-base-de-datos" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Filtro base de datos<a href="filtro-base-de-datos.html#filtro-base-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Considerando que el foco principal de este ejercicio recae en la variable objetivo <strong>último</strong>, se opta por construir un nuevo data frame que contenga exclusivamente la fecha y el valor de último.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="filtro-base-de-datos.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#data frame filtrado</span></span>
+<span id="cb4-2"><a href="filtro-base-de-datos.html#cb4-2" aria-hidden="true" tabindex="-1"></a>df_maiz_filtrado <span class="ot">&lt;-</span> df_maiz[, <span class="fu">c</span>(<span class="st">&quot;Fecha&quot;</span>, <span class="st">&quot;Último&quot;</span>)]</span>
+<span id="cb4-3"><a href="filtro-base-de-datos.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="filtro-base-de-datos.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_maiz_filtrado, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##        Fecha Último
+## 1 19/04/2024 433.50
+## 2 18/04/2024 426.75
+## 3 17/04/2024 430.25
+## 4 16/04/2024 431.00
+## 5 15/04/2024 431.50</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introducción-a-las-series-de-tiempo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="análisis-descriptivo-y-filtro-base-de-datos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="importación-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisis-descriptivo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

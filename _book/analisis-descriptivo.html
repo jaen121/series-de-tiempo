@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Analisis Descriptivo | Series de Tiempo</title>
+  <title>Chapter 5 Analisis Descriptivo | Series de Tiempo</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Analisis Descriptivo | Series de Tiempo" />
+  <meta property="og:title" content="Chapter 5 Analisis Descriptivo | Series de Tiempo" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Analisis Descriptivo | Series de Tiempo" />
+  <meta name="twitter:title" content="Chapter 5 Analisis Descriptivo | Series de Tiempo" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -29,15 +29,15 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-04-29" />
+<meta name="date" content="2024-05-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="importación-de-datos.html"/>
-<link rel="next" href="series-de-tiempo.html"/>
+<link rel="prev" href="análisis-ddescriptivo-y-filtro-base-de-datos.html"/>
+<link rel="next" href="url-your-book-url-like-httpsbookdown.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -153,8 +153,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="introducción-a-las-series-de-tiempo.html"><a href="introducción-a-las-series-de-tiempo.html#principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo"><i class="fa fa-check"></i><b>2.2</b> Principales pasos para llevar a cabo un aálisis de series de tiempo</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>3</b> Importación de Datos</a></li>
-<li class="chapter" data-level="4" data-path="analisis-descriptivo.html"><a href="analisis-descriptivo.html"><i class="fa fa-check"></i><b>4</b> Analisis Descriptivo</a></li>
-<li class="chapter" data-level="5" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>5</b> Series de Tiempo</a></li>
+<li class="chapter" data-level="4" data-path="análisis-ddescriptivo-y-filtro-base-de-datos.html"><a href="análisis-ddescriptivo-y-filtro-base-de-datos.html"><i class="fa fa-check"></i><b>4</b> Análisis Ddescriptivo y filtro base de datos</a></li>
+<li class="chapter" data-level="5" data-path="analisis-descriptivo.html"><a href="analisis-descriptivo.html"><i class="fa fa-check"></i><b>5</b> Analisis Descriptivo</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="analisis-descriptivo.html"><a href="analisis-descriptivo.html#series-de-tiempo"><i class="fa fa-check"></i><b>5.1</b> Series de Tiempo</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="url-your-book-url-like-httpsbookdown.html"><a href="url-your-book-url-like-httpsbookdown.html"><i class="fa fa-check"></i><b>6</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="url-your-book-url-like-httpsbookdown.html"><a href="url-your-book-url-like-httpsbookdown.html#principales-campos-donde-se-aplican-las-series-de-tiempo-1"><i class="fa fa-check"></i><b>6.1</b> Principales campos donde se aplican las series de tiempo</a></li>
@@ -180,670 +183,836 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analisis-descriptivo" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Analisis Descriptivo<a href="analisis-descriptivo.html#analisis-descriptivo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="analisis-descriptivo" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Analisis Descriptivo<a href="analisis-descriptivo.html#analisis-descriptivo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>A continuación se estudiarán los estadísticos descriptivos de la matriz de datos:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="analisis-descriptivo.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_maiz)</span></code></pre></div>
-<pre><code>##     Fecha               Último         Apertura         Máximo     
-##  Length:6170        Min.   :182.5   Min.   :182.8   Min.   :183.5  
-##  Class :character   1st Qu.:268.2   1st Qu.:268.3   1st Qu.:270.9  
-##  Mode  :character   Median :374.8   Median :374.8   Median :379.0  
-##                     Mean   :409.3   Mean   :409.2   Mean   :414.1  
-##                     3rd Qu.:509.7   3rd Qu.:509.0   3rd Qu.:516.9  
-##                     Max.   :838.8   Max.   :837.5   Max.   :849.0  
-##      Mínimo          Vol.             X..var.         
-##  Min.   :181.2   Length:6170        Length:6170       
-##  1st Qu.:265.8   Class :character   Class :character  
-##  Median :371.2   Mode  :character   Mode  :character  
-##  Mean   :404.6                                        
-##  3rd Qu.:503.5                                        
-##  Max.   :828.2</code></pre>
-<p>De la salida anterior podemos visualizar que se presentan 6170 registros, la apertura mínima fue de 182.8 con una media de 409.2, cuya apertura máxima fue de 837.5.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="analisis-descriptivo.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.2.3</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="analisis-descriptivo.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_maiz_filtrado)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    6170 obs. of  2 variables:
+##  $ Fecha : chr  &quot;19/04/2024&quot; &quot;18/04/2024&quot; &quot;17/04/2024&quot; &quot;16/04/2024&quot; ...
+##  $ Último: num  434 427 430 431 432 ...</code></pre>
+<p>Teniendo en cuenta que la variable <strong>Fecha</strong> se encuentra categorizada como caracter y no como fecha, se convierte esta columna a tipo fecha</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="analisis-descriptivo.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Convertir fecha en formato fecha</span></span>
+<span id="cb8-2"><a href="analisis-descriptivo.html#cb8-2" aria-hidden="true" tabindex="-1"></a>df_maiz_filtrado<span class="sc">$</span>Fecha <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(df_maiz_filtrado<span class="sc">$</span>Fecha, <span class="at">format =</span> <span class="st">&quot;%d/%m/%Y&quot;</span>)</span>
+<span id="cb8-3"><a href="analisis-descriptivo.html#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="analisis-descriptivo.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#validar</span></span>
+<span id="cb8-5"><a href="analisis-descriptivo.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_maiz_filtrado)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    6170 obs. of  2 variables:
+##  $ Fecha : Date, format: &quot;2024-04-19&quot; &quot;2024-04-18&quot; ...
+##  $ Último: num  434 427 430 431 432 ...</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="analisis-descriptivo.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;skimr&quot;)</span></span>
+<span id="cb10-2"><a href="analisis-descriptivo.html#cb10-2" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df_maiz_filtrado)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-6">Table 5.1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">df_maiz_filtrado</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">6170</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Date</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">min</th>
+<th align="left">max</th>
+<th align="left">median</th>
+<th align="right">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fecha</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">2000-01-03</td>
+<td align="left">2024-04-19</td>
+<td align="left">2012-03-08</td>
+<td align="right">6170</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Último</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">409.31</td>
+<td align="right">159.8</td>
+<td align="right">182.5</td>
+<td align="right">268.25</td>
+<td align="right">374.75</td>
+<td align="right">509.69</td>
+<td align="right">838.75</td>
+<td align="left">▅▇▂▂▁</td>
+</tr>
+</tbody>
+</table>
+<p>De la salida anterior podemos visualizar que se presentan 6170 registros, el data frame tiene datos que van desde el 03 de Enero del año 2000 hasta el 19 de abril del año 2024, el precio de cierre del maíz en este periodo de tiempo tiene una media de 409 dolares con una desviación estándar de 159 dolares, el valor mínimo se encuentra en 182,5 dolares y el precio máximo en 838.75 dolares.</p>
+<p>Ahora, se va analizar el precio de cierre por día de la semana.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="analisis-descriptivo.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Crear una columna que muestre el día de la semana</span></span>
+<span id="cb11-2"><a href="analisis-descriptivo.html#cb11-2" aria-hidden="true" tabindex="-1"></a>df_maiz_filtrado<span class="sc">$</span>Dia_Semana <span class="ot">&lt;-</span> <span class="fu">weekdays</span>(<span class="fu">as.Date</span>(df_maiz_filtrado<span class="sc">$</span>Fecha))</span>
+<span id="cb11-3"><a href="analisis-descriptivo.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="analisis-descriptivo.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_maiz_filtrado, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##        Fecha Último Dia_Semana
+## 1 2024-04-19 433.50    viernes
+## 2 2024-04-18 426.75     jueves
+## 3 2024-04-17 430.25  miércoles
+## 4 2024-04-16 431.00     martes
+## 5 2024-04-15 431.50      lunes</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="analisis-descriptivo.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Ordenar la variable Dia_Semana</span></span>
+<span id="cb13-2"><a href="analisis-descriptivo.html#cb13-2" aria-hidden="true" tabindex="-1"></a>df_maiz_filtrado<span class="sc">$</span>Dia_Semana <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_maiz_filtrado<span class="sc">$</span>Dia_Semana, </span>
+<span id="cb13-3"><a href="analisis-descriptivo.html#cb13-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;lunes&quot;</span>, </span>
+<span id="cb13-4"><a href="analisis-descriptivo.html#cb13-4" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">&quot;martes&quot;</span>, </span>
+<span id="cb13-5"><a href="analisis-descriptivo.html#cb13-5" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">&quot;miércoles&quot;</span>, </span>
+<span id="cb13-6"><a href="analisis-descriptivo.html#cb13-6" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">&quot;jueves&quot;</span>, </span>
+<span id="cb13-7"><a href="analisis-descriptivo.html#cb13-7" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">&quot;viernes&quot;</span>, </span>
+<span id="cb13-8"><a href="analisis-descriptivo.html#cb13-8" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">&quot;sábado&quot;</span>, </span>
+<span id="cb13-9"><a href="analisis-descriptivo.html#cb13-9" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">&quot;domingo&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="analisis-descriptivo.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cargar libreria para graficar</span></span>
+<span id="cb14-2"><a href="analisis-descriptivo.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;ggplot2&quot;)</span></span>
+<span id="cb14-3"><a href="analisis-descriptivo.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.2.3</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="analisis-descriptivo.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el gráfico de barras de la frecuencia por día de la semana</span></span>
+<span id="cb16-2"><a href="analisis-descriptivo.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_maiz_filtrado, <span class="fu">aes</span>(<span class="at">x =</span> Dia_Semana, <span class="at">fill =</span> Dia_Semana)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="analisis-descriptivo.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span>  <span class="co">#Grafico de barras</span></span>
+<span id="cb16-4"><a href="analisis-descriptivo.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>( <span class="at">stat =</span> <span class="st">&quot;count&quot;</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..count..), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="co">#Agregar etiquetas</span></span>
+<span id="cb16-5"><a href="analisis-descriptivo.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Día de la semana&quot;</span>, </span>
+<span id="cb16-6"><a href="analisis-descriptivo.html#cb16-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>, </span>
+<span id="cb16-7"><a href="analisis-descriptivo.html#cb16-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Frecuencia por día de la semana&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="analisis-descriptivo.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code></pre></div>
+<pre><code>## Warning: The dot-dot notation (`..count..`) was deprecated in ggplot2 3.4.0.
+## i Please use `after_stat(count)` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Dado que los días domingos no se generan transacciones en la bolsa y que los datos que se tienen los días domingos solo son 9 en 24 años de historia se decide eliminar estos datos.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="analisis-descriptivo.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creando data frame sin el domingo</span></span>
+<span id="cb18-2"><a href="analisis-descriptivo.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="analisis-descriptivo.html#cb18-3" aria-hidden="true" tabindex="-1"></a>df_maiz_SD <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_maiz_filtrado, Dia_Semana <span class="sc">!=</span> <span class="st">&quot;domingo&quot;</span>)</span>
+<span id="cb18-4"><a href="analisis-descriptivo.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="analisis-descriptivo.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#validando filtro</span></span>
+<span id="cb18-6"><a href="analisis-descriptivo.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_maiz_SD<span class="sc">$</span>Dia_Semana)</span></code></pre></div>
+<pre><code>## [1] viernes   jueves    miércoles martes    lunes    
+## Levels: lunes martes miércoles jueves viernes sábado domingo</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="analisis-descriptivo.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el gráfico de boxplot por semana</span></span>
+<span id="cb20-2"><a href="analisis-descriptivo.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_maiz_SD, <span class="fu">aes</span>(<span class="at">x =</span> Dia_Semana, <span class="at">y =</span> Último)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="analisis-descriptivo.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;skyblue&quot;</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="analisis-descriptivo.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Día de la semana&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Último&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div id="series-de-tiempo" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Series de Tiempo<a href="analisis-descriptivo.html#series-de-tiempo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Convertimos la matriz de datos en series de tiempo</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="analisis-descriptivo.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;xts&quot;)</span></span>
+<span id="cb21-2"><a href="analisis-descriptivo.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga el paquete xts</span></span>
+<span id="cb21-3"><a href="analisis-descriptivo.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xts)</span></code></pre></div>
+<pre><code>## Warning: package &#39;xts&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
 <pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
+## Attaching package: &#39;zoo&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="analisis-descriptivo.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suponiendo que tienes un dataframe llamado df y la columna se llama &quot;vol&quot;</span></span>
-<span id="cb11-2"><a href="analisis-descriptivo.html#cb11-2" aria-hidden="true" tabindex="-1"></a>df_maiz <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_maiz, <span class="at">vol_sin_K =</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">&quot;K&quot;</span>, <span class="st">&quot;&quot;</span>, Vol.)))</span>
-<span id="cb11-3"><a href="analisis-descriptivo.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#df_maiz</span></span>
-<span id="cb11-4"><a href="analisis-descriptivo.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#str(df_maiz)</span></span>
-<span id="cb11-5"><a href="analisis-descriptivo.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar las últimas filas del dataframe</span></span>
-<span id="cb11-6"><a href="analisis-descriptivo.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#tail(df_maiz)</span></span>
-<span id="cb11-7"><a href="analisis-descriptivo.html#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="analisis-descriptivo.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Suponiendo que serie_temporal es tu objeto de serie temporal y deseas seleccionar la segunda columna</span></span>
-<span id="cb11-9"><a href="analisis-descriptivo.html#cb11-9" aria-hidden="true" tabindex="-1"></a>solovolumen <span class="ot">&lt;-</span> df_maiz[, <span class="dv">8</span>]</span>
-<span id="cb11-10"><a href="analisis-descriptivo.html#cb11-10" aria-hidden="true" tabindex="-1"></a>solovolumen</span></code></pre></div>
-<pre><code>##    [1]     NA 180.78 139.24 148.12 152.25 202.05 250.70 210.26 219.30 215.99
-##   [11] 192.94 153.81 187.68 235.50 200.47     NA 360.09 165.19 155.31 118.61
-##   [21] 132.90 158.79 131.97 115.12 121.82 140.24   0.05   0.08   0.53   0.62
-##   [31]   0.76   1.65   2.54   1.54   2.21   3.48 145.91 227.19 223.74 227.18
-##   [41] 218.22 199.94 180.05 217.84 176.97 217.73 230.22 182.68 198.80 206.27
-##   [51] 222.88 245.42 193.36 137.66 129.45 153.72 135.49 194.90 203.57 135.73
-##   [61] 169.29 156.00 152.30 112.77 148.10 180.95 205.71 175.65 314.10 165.19
-##   [71] 193.51 215.15 214.32 151.59 127.03 147.91 187.19 109.65  99.40 107.95
-##   [81] 114.20  80.48 108.60 131.03 130.03 129.45 108.55   0.01   0.26   0.27
-##   [91]   0.38   0.32   0.32   0.35   0.64   1.93   3.31 189.36 257.32 263.24
-##  [101] 211.13 109.60 131.96 142.28 111.05 106.98 139.10 188.61 183.14 249.73
-##  [111] 230.54 257.16 322.78 215.81 131.65 200.22 202.19 180.12 136.05 136.57
-##  [121] 126.30 190.73 177.28 161.08 126.44 264.54 279.44 119.27 102.03 113.49
-##  [131] 138.23 208.37 102.59 110.08 115.53 125.23 186.34 129.88 138.10 159.22
-##  [141] 209.42 114.32 125.71 117.59 101.59  88.61 115.20 162.30 139.65 143.32
-##  [151] 110.38   0.09   0.12   0.17   0.43   0.23   0.74   0.84   1.55   3.31
-##  [161]  12.07  74.61  98.80  87.58  84.41  85.16  84.52  72.98  74.71  66.48
-##  [171]  69.17  70.84  89.97  73.61 174.43  93.32 120.22 124.55 164.88  96.91
-##  [181] 101.38 158.41 116.23 111.16  90.55  95.91 106.98 104.80 115.44 121.03
-##  [191] 123.96 193.39 132.50  87.97   0.08   0.13   0.71   0.79   0.52   1.32
-##  [201]   1.41   1.92   1.61   6.46  42.59  89.62  93.04 117.53 142.97 117.76
-##  [211] 150.76 151.99 223.69 194.03 187.54 202.99 208.16 174.69 178.77 174.30
-##  [221] 185.93 168.38 199.86 153.59 170.16 176.21 178.64 145.55 152.82 133.38
-##  [231] 148.54 183.02 181.02 265.00 133.85 164.17   0.24   0.99   1.07   1.59
-##  [241]   0.68   1.22   2.27   2.08   5.51   2.75  13.72  59.71  65.29 100.63
-##  [251] 134.98 127.47 120.92 114.51 130.89 146.90 154.00 147.15 150.11 200.26
-##  [261] 150.10     NA 132.98 143.56 140.10 153.87 201.89 119.49 156.69 135.24
-##  [271] 145.57 191.26 186.44 154.75 133.31 115.79 141.48 167.31 156.41   0.12
-##  [281]   0.54   0.54 223.65 161.08 101.17 110.48   1.04   1.87   5.43  15.55
-##  [291] 105.66 265.19 267.75 125.72 156.08 144.08 134.97 116.55 137.23 193.01
-##  [301] 226.65 214.28 223.79 149.45 123.61 124.85 149.91 144.37 161.23 127.94
-##  [311] 141.24 146.55 126.03 165.29 184.77 134.98 149.96 175.37 179.92 158.82
-##  [321] 242.53 110.88 181.16 112.24 114.16 138.83 175.76 155.54  90.32 104.94
-##  [331] 122.19 123.17  94.50  79.92 125.59  91.46  83.17  66.40  93.74   0.04
-##  [341]   0.18   0.26   0.45   0.43   0.66   0.51   0.76   5.68   8.57  18.20
-##  [351] 110.38 149.23  71.24 104.57 107.55 143.72 131.28 138.56 121.44 234.10
-##  [361] 181.57 233.36 229.08 246.97 227.16 162.56 112.56 123.35 168.33 146.47
-##  [371] 226.70 115.07 112.30 106.23 116.66 119.46 109.02 134.82 112.23 147.46
-##  [381] 106.16 108.82 167.24 180.21 140.43 201.82 113.58 128.78 114.32 119.21
-##  [391] 132.39 253.85 139.45 137.43 163.17 140.73 154.39  97.07 127.22 123.23
-##  [401]  96.69 121.33 111.79   0.15   0.61   1.33   1.44     NA   1.27   1.29
-##  [411]     NA   2.14   9.01   7.83  48.46  86.64  75.54  78.32  76.02  95.35
-##  [421]  67.38  51.22  52.15  49.24  67.19  56.71  98.63 112.04 134.33 142.24
-##  [431] 155.07 125.02  83.78 101.91 107.01  91.87  99.16  72.68  80.96  95.70
-##  [441] 103.45  95.96  76.76  76.18  94.16  75.98  81.57   0.03   0.49   1.32
-##  [451]   1.34     NA   0.78   2.70   3.78   5.49  14.48  63.70  86.04 121.83
-##  [461] 155.99 215.84 167.78 192.14 116.06 121.54 105.91 125.80 170.04 156.10
-##  [471] 226.33 223.85 227.58 131.92 105.54 127.14 210.39 175.46     NA 101.09
-##  [481] 104.92 127.43 147.02  88.36  88.00 106.42 120.12  98.32 138.86   0.03
-##  [491]   0.91   0.65   0.60   0.75   1.25   0.41   1.27   2.21   2.85  11.14
-##  [501]  47.63  70.67  85.31 114.12 140.80 111.00 128.91 133.53 114.98     NA
-##  [511] 108.88 182.92 154.27 170.23 170.87 149.46 110.92 123.89 112.65 155.93
-##  [521] 173.74 109.72 180.17  89.18  73.85 100.95 112.40 104.19  93.78  84.41
-##  [531]  90.27 106.54  89.35   0.07   0.23   0.07   0.19   0.55   1.31   2.19
-##  [541]   3.45   3.35   7.26  15.65  94.80 161.61 154.73 168.82 154.05 121.28
-##  [551] 126.55 177.96 144.92 243.97 372.99 320.41 200.58 232.61 181.43 215.87
-##  [561] 275.66 196.30 243.89 188.66 151.70 172.72 298.40 194.81 187.47 127.68
-##  [571] 179.94 141.74 140.63 186.55 181.63 128.31 135.27 140.37 151.44 148.50
-##  [581] 210.27 146.02  69.87 122.78 117.57 134.21 123.21     NA 108.57 154.97
-##  [591] 119.31 106.04 129.57 101.26 138.52   0.12   0.93   0.86   2.08   2.37
-##  [601]   1.89   2.21   3.44   6.24   6.27  24.99 158.23 180.22 265.93 179.30
-##  [611] 172.30 130.52 171.42 185.38 137.34 128.06 163.54 264.52 209.27 246.90
-##  [621] 166.98 192.12 149.48 149.89 174.07 197.41 135.20 164.26 241.14 147.00
-##  [631] 107.05 109.35 119.39 129.88 119.08 119.58 130.24 140.34 203.33 196.60
-##  [641] 104.17  95.48 105.00 126.94 119.60 132.92 135.60 222.14 107.22 125.83
-##  [651] 144.95  93.10  95.99 112.33 119.15 125.36 109.53 118.91 152.83   0.08
-##  [661]   0.31   0.37   0.16   0.45   0.73     NA   0.97   1.32   5.19   8.14
-##  [671]  73.57 107.36  73.86  80.08  82.65  50.27  83.00  90.49  64.05  67.74
-##  [681]  60.69  97.47 247.37 184.26 143.63 144.34 142.76  92.97  70.05  95.21
-##  [691]  83.84  65.20  71.56  62.38  67.24  72.95  81.45  81.02  79.00  77.00
-##  [701]  67.34  83.02  69.36   0.03   0.33   0.43   0.53   0.50   0.59   1.71
-##  [711]   4.75   4.71  18.23  58.73  83.83 123.02 143.75 127.09 145.93 127.44
-##  [721] 184.52 192.03 169.91 176.45 159.57 233.95 256.32 214.26 224.00 254.04
-##  [731] 142.30 166.36 163.86 163.97     NA 150.33 160.61 182.61 211.65 106.87
-##  [741] 109.62 119.73 136.69 161.91 185.35   0.03   0.31   0.33   0.40   0.81
-##  [751]   0.68   2.42   1.78   1.83   3.09   9.86  30.79 107.99 166.14 157.51
-##  [761] 157.73 147.25 163.26 180.19 105.99 165.26 176.86 242.72 225.72 198.64
-##  [771] 249.74 258.79 158.00 134.85 143.68 249.75 145.90 136.03 119.80 124.03
-##  [781] 142.18  92.01 122.09 129.30 158.52 157.91 129.65 132.71 140.62   0.07
-##  [791]   0.67   1.99   2.22   2.32   1.44   2.13   3.81   8.11   6.53  21.40
-##  [801] 128.54 174.40 134.97 140.63 203.47 123.41 121.35 146.17     NA     NA
-##  [811] 117.97 261.05 285.72 390.74 267.65 216.45 217.08 210.14 175.74 219.07
-##  [821] 279.61 252.54 223.89 232.26 264.76 289.55 169.57 217.78 188.56 167.50
-##  [831] 210.37 327.69 248.45 176.56 163.27 185.78 202.37 219.65 265.16     NA
-##  [841] 168.46 163.37 191.30 145.22  74.88 147.65 140.99 141.95 128.81 119.66
-##  [851] 111.65  98.61   0.20   1.72   1.26   1.08   1.76   1.16   1.68   2.38
-##  [861]   3.55   5.32  14.70  68.26 124.26 144.30 153.80 137.24 133.31 205.43
-##  [871] 156.57 132.12 188.49 234.33 306.43 355.81 204.11 200.68 245.19 176.33
-##  [881] 184.36 165.15 209.48 279.41 320.26 207.08 206.16 168.92 196.23 216.17
-##  [891] 179.89 167.47 226.81 245.38 183.51 130.27 193.54 280.95 202.96 186.78
-##  [901] 213.44 119.04 164.09 216.36 337.54 137.62 162.09 130.07 152.37 122.19
-##  [911] 159.15 209.55 180.03 235.21 158.94 133.02   0.22   0.68   0.67   0.11
-##  [921]   0.87     NA   1.68   1.45   2.61   3.70  11.03  94.06 123.79  89.22
-##  [931] 147.00 126.82 134.88  92.74  87.62 130.09 111.93 160.38 317.36 209.80
-##  [941] 170.71 167.51 124.48 106.03 103.36 161.83  83.19  77.06 120.45 136.66
-##  [951] 110.74  96.02 144.24  92.65 122.91 132.25 105.21  83.69 109.53 101.70
-##  [961]   0.15   0.44   0.81   0.50   0.35   1.27   2.09   2.49   4.58  21.41
-##  [971] 150.22 216.58 194.69 180.31 185.86 134.48 170.57 201.44 225.64 229.10
-##  [981] 170.74 236.62 272.98 243.29 253.63 206.34 215.91 155.61 128.01 130.47
-##  [991] 151.32 192.31 246.97  78.42 145.18     NA  97.19 115.12 154.47 126.38
-## [1001]  99.37 101.61   0.06   0.09   0.27   0.33   1.07   1.08   0.52   0.87
-## [1011]   2.62   3.51  11.09 121.80 138.10 108.69 113.48 136.85 146.97 197.93
-## [1021] 150.68  99.36 136.58 161.44 191.91 147.09     NA 169.67 151.31 157.37
-## [1031] 111.04 158.65 151.69 151.93 208.19 108.49 114.03 113.53 118.83 126.66
-## [1041] 114.73 189.07 223.25 255.11 219.22 188.79   0.12   0.34   0.94   0.61
-## [1051]   0.92   1.28   1.83   3.28   3.19   6.09  18.81 156.14 268.80 119.87
-## [1061] 170.53 169.07 173.14 172.27 215.11 216.86 202.46 241.46 200.41 219.02
-## [1071] 256.72 191.89 122.10 176.00 216.44 151.81 160.21 136.81 243.27 264.47
-## [1081] 196.12 256.30 155.60 182.96 293.12 230.56 141.48 115.96 139.99 226.66
-## [1091] 130.94 135.52  93.54 112.13 125.93 103.99     NA  85.10 123.53  85.21
-## [1101]  49.93     NA  50.42  82.26  85.33  99.13 125.53 118.24 180.90   0.09
-## [1111]   0.66   0.26   0.89   0.64   0.96   3.03   2.99   4.94   6.28  15.51
-## [1121]     NA 163.97 207.68 199.30 228.11 158.70 297.02 202.02 206.27 140.18
-## [1131] 144.89 195.98 220.51 211.22 343.77 219.15 185.34 157.13 145.37 151.94
-## [1141] 176.19 177.03 153.73 122.79 131.68 130.66 117.56 136.69 150.19 122.01
-## [1151] 141.53 139.68 143.68 170.71 272.44 297.05 140.85 200.46 100.42 116.34
-## [1161] 125.49 158.92 227.07 337.25  90.80 175.42 119.19 144.29 100.44 133.00
-## [1171] 117.07 126.83 154.63 133.44   0.12   0.15   0.33   0.31   0.94   1.36
-## [1181]   1.81   3.85   5.34  11.24 122.79 172.93 129.89 122.54 169.87  99.25
-## [1191] 125.86  89.47  78.54 104.81 108.78 185.09 312.97 248.13 185.37 184.79
-## [1201] 167.53 113.07 109.69  90.36 145.33 151.79  81.03  90.11 120.75 172.28
-## [1211]  93.16 131.11 110.95 114.52 156.00 125.87 144.49 164.47   0.27   0.60
-## [1221]   0.49   0.45   2.08   2.13   3.47   6.53  13.48  34.51 141.13 158.88
-## [1231] 158.43 172.09 251.09 198.63 193.33 221.47 279.48 312.81 402.15 331.36
-## [1241] 360.32 279.95 227.75 279.01 231.86 306.70 288.44 302.17 324.91 484.44
-## [1251] 417.68 299.95 340.12 291.26 451.26 358.73 319.50 248.51 336.99   0.20
-## [1261]   0.29   0.31   0.66   0.86   1.16   1.71   1.65   4.31   8.29  14.38
-## [1271] 250.77 166.75 236.88 241.39 194.77 144.71     NA 102.30 148.18 192.35
-## [1281] 208.54  95.87 264.73 253.30 275.45 269.56 273.06 159.33 135.85 117.19
-## [1291] 239.35 441.01 105.83 127.92 165.18 155.85 222.58 220.23 101.48 159.38
-## [1301] 169.24 197.27   0.39   0.32   0.80   1.75   2.27   2.48   2.92   4.57
-## [1311]   5.27  12.36  23.51 189.22 242.77 344.71 316.66 257.19 310.67 230.71
-## [1321]     NA     NA 209.10 225.29 243.88 291.26 309.36 340.78 259.74 145.15
-## [1331] 171.95 145.83 151.47 205.75 198.90 187.02 102.14 134.09 124.11 127.61
-## [1341] 211.43     NA 191.03 207.63 164.72 251.26 144.74 131.82 181.39 192.06
-## [1351] 172.29 110.62 178.17 101.46 104.72  91.13  89.17  96.24  97.15  54.84
-## [1361] 138.73 205.50 107.24 131.88  97.62   0.36   0.23   0.63   1.37   1.66
-## [1371]   2.24   2.30   2.09   2.93   7.58  17.99 186.62 221.95 248.13 331.20
-## [1381] 174.04     NA 184.08 146.93 179.46 180.97 182.15 121.77 178.86 176.02
-## [1391] 212.42 432.34 233.52 206.08 191.62 242.63 304.75 163.23 137.33 142.75
-## [1401] 220.03 262.81 114.26 136.63 140.54 165.33 137.27 106.45 185.90 227.94
-## [1411] 185.82 233.12 121.04 119.57 122.01 204.82 130.83 139.28 206.15 214.37
-## [1421] 237.21 113.91 137.90 187.87 148.37 156.11 266.80 151.07 199.08 145.27
-## [1431]   0.06   0.13   0.41   0.29   1.26   0.69   2.16   3.51   4.87     NA
-## [1441]  17.11 122.61 113.20 143.20 139.29 124.75 144.61 102.51  98.59  88.31
-## [1451]  82.45  79.36 102.54 101.21 178.69 182.40 148.24 123.37 167.09  80.95
-## [1461]  77.99 161.08 120.05 141.81 127.46 133.49 146.38 121.59 105.61  75.40
-## [1471]  69.61  81.41  81.87 100.12  95.29   0.27   0.53   1.53   2.74   3.26
-## [1481]   3.07   3.30   3.05   7.67  19.39 143.97 163.32 227.15 203.16 141.68
-## [1491] 168.57 200.17 334.34 177.75 297.48 357.60 227.65 310.11 294.91 177.41
-## [1501] 300.59 227.30 212.44 266.55 172.12 195.81 293.00 242.71     NA 129.41
-## [1511] 236.84 163.38 166.30 181.09 181.91 147.54 171.92 190.99   0.20   0.50
-## [1521]   0.60   0.91   2.02   1.96   2.09   1.32   3.18   7.50  19.34 165.58
-## [1531] 132.00 148.79 115.02 151.35 156.69 113.02 142.85 239.87 175.61 233.79
-## [1541] 201.80 158.05 272.80 215.39 309.02 263.91 367.00 211.50 207.53 377.91
-## [1551] 173.54 134.33 183.53 279.20 161.68 149.27 204.62 245.78 150.93 182.45
-## [1561]   0.24   2.04   1.46   2.98   2.39   4.26   2.30   8.18   5.92   8.65
-## [1571]  20.80 240.12 318.91 212.35 229.12 266.66 319.32     NA     NA 185.26
-## [1581] 193.48 173.64 257.67 264.08 254.70 341.48 478.33 236.19 260.35 198.99
-## [1591] 254.88 180.49 223.19 179.93 140.79 223.61 326.30 204.57 177.59 145.95
-## [1601] 186.65 236.71 179.43 216.39 159.18 145.55 150.41 274.88 143.91 179.97
-## [1611] 138.59 150.14 100.18 102.49  93.75  65.86  67.47 110.47 110.06  82.27
-## [1621]  97.58 133.62   0.15   0.36   0.85   1.06   1.28   2.89   5.52   7.54
-## [1631]   9.37  10.23  26.04 234.59 183.16 281.56 163.45 184.44 257.46 289.33
-## [1641] 352.93 186.66 217.01 220.98 289.72 349.16 475.09 219.59 297.24 204.48
-## [1651] 200.48 162.58 213.76 174.83 122.26 171.57 148.53 200.92 214.41 256.75
-## [1661] 192.81 128.71 132.78 137.78 142.22 155.34 332.72 164.71 113.93 111.79
-## [1671] 140.44 112.67 168.21 191.40 187.89 241.96 134.80 186.06 176.19 109.53
-## [1681] 138.98  93.44 112.07 159.68 113.07 117.68   0.05   0.25   0.45   0.75
-## [1691]   0.78   1.75   2.89   4.61   7.81  14.61 159.95 130.11 113.74 124.31
-## [1701] 107.37  87.53 119.93  97.33 132.65  84.68 159.75 112.63  95.28 130.81
-## [1711] 316.36 182.89 185.79 150.03 101.34 156.60  93.63 108.46  81.96  71.01
-## [1721]  77.17 102.55 123.05 124.95 147.01 139.46 139.74 154.63 113.70   0.13
-## [1731]   0.50   0.90   1.71   1.41   2.87   4.90   7.60  10.73  24.41 169.17
-## [1741] 219.54 208.88 212.56 250.37 178.70 164.65 203.11 237.06 206.39 266.28
-## [1751] 199.41 247.97 371.35 268.36 398.38 523.85 255.15 196.48 131.23 177.07
-## [1761] 263.40 208.78 130.48 110.61 108.55 178.14 170.82 201.67 194.69 140.85
-## [1771] 115.03 116.96   0.21   0.34   1.02   1.63   1.96   2.39   2.96   4.17
-## [1781]   4.95   9.79  31.57 148.98 199.69 180.78 159.11 181.73 176.90 188.30
-## [1791] 200.18 146.56 267.05 237.72 254.16 222.75 233.39 137.98 143.41 157.42
-## [1801] 230.41 302.10 105.35 140.22 126.48 146.44 114.28 125.35 135.92 153.61
-## [1811] 146.67  94.24 111.74 107.40   0.52   1.65   1.74   2.00   7.05   4.53
-## [1821]   3.71   4.00  10.94  11.27  43.46 227.53 217.65 176.31 167.70 192.46
-## [1831] 190.29 202.51 234.39 182.59 243.36 258.23 302.88 215.52 201.07 123.03
-## [1841] 131.49 161.84 238.05 144.84 185.50 131.33 115.94 144.57 198.15 145.75
-## [1851] 199.86 167.43 210.57 317.61 168.02 256.25 209.46 134.08 185.76 166.34
-## [1861] 194.54 171.29 174.70 112.01  92.60 122.29 132.72  79.91  97.05 105.21
-## [1871] 103.80  93.94 113.01 136.20   0.52   1.37   2.00   1.72   1.94   2.35
-## [1881]   2.55   4.15   8.16   8.93  35.07 190.80 208.95 176.20 190.75 197.45
-## [1891] 169.05 171.45 192.49 145.24 190.52 181.71 212.98 261.28 323.41 351.91
-## [1901] 200.74 126.19 138.70 217.59 219.27 171.94 122.85 197.47 170.68 127.78
-## [1911] 152.70 115.81 173.30 168.84 140.47 150.35 275.68 216.23 219.04 148.30
-## [1921] 112.53 173.88 178.13 142.71 158.04 234.81 258.97 119.73 107.53 147.07
-## [1931] 160.54 150.67 122.26 101.26 127.94 139.74 165.29 131.02   0.04   0.71
-## [1941]   1.20   0.78   1.48   2.57   2.46   3.41  11.50  25.26 132.22 128.34
-## [1951]  98.58  94.42  77.91  90.24  71.84  85.60  72.27 103.66  78.80  75.70
-## [1961] 146.08 125.76 148.92 121.42 148.92 139.53  83.08  91.70 120.08  83.57
-## [1971] 102.31  88.78  81.05  95.06  92.72 101.55  92.50 111.93  88.39  84.62
-## [1981] 104.62   0.23   0.67   0.39   1.16   1.16   2.55   4.29   4.79   6.93
-## [1991]  37.49  99.43 121.38 123.57 180.56 164.76 211.88 292.42 204.94 179.12
-## [2001] 196.40 186.44 236.33 304.09 291.07 262.53 342.76 273.08 223.12 183.28
-## [2011] 223.63 213.03 205.69 174.31 223.71 170.81 160.51 156.43 177.95 229.12
-## [2021] 184.09 193.69 161.78   0.29   0.79   1.09   0.84   1.04   1.55   2.45
-## [2031]  10.04   5.54   8.37  20.11  74.35  89.20 110.84 123.10 174.98 191.43
-## [2041] 217.78 280.51 222.14 295.45 296.75 392.88 341.62 249.69 227.92 281.79
-## [2051] 174.26 208.62 183.74 268.65 522.43 214.61 174.31 127.56 146.17 126.70
-## [2061] 148.11 109.50  96.10 197.30 104.23 111.21   0.39   1.78   0.80   1.75
-## [2071]   1.19   1.17   2.34   4.11   2.36  11.13  23.04 120.56 147.06 170.41
-## [2081] 127.84 218.97 197.44 231.65 174.34 213.50 183.83 219.26 148.37 262.40
-## [2091] 222.97 232.06 181.87 156.55 203.48 144.22 220.97 180.82 176.39 167.69
-## [2101] 153.21 163.78 245.07 193.97 227.11     NA     NA 179.66 163.85 216.87
-## [2111] 298.18 174.49 178.65 151.66 138.86 147.26 188.75  77.00 102.10 123.50
-## [2121] 101.01  57.48  95.52 124.22 129.72 180.30 269.29 159.02 103.75   1.01
-## [2131]   2.06   2.95   3.55   3.12   3.40   4.95  11.68   4.78  10.60  33.64
-## [2141]  73.10 147.25 163.37 177.57 188.67 175.84 245.40 195.76 139.16 165.82
-## [2151] 264.49 274.52 428.76 295.99 218.10 241.09 245.05 247.28 173.28 152.85
-## [2161] 146.18 153.09 205.74 200.13 171.65 132.71 215.67 169.21 120.05 142.26
-## [2171] 123.42 137.52 148.07 134.60 262.77 131.35 146.39 190.31 113.45 164.40
-## [2181] 136.43 268.86 128.65 143.67 143.04 106.34  99.20 125.42 148.75 122.70
-## [2191] 100.75 136.52 137.58   0.74   2.23   2.09   4.07   4.76   5.79   8.52
-## [2201]   8.73  14.22  26.93 121.53 128.43  82.91 110.03 157.28  96.22 106.84
-## [2211]  95.77  92.42  96.02 121.63 171.46 213.76 150.14 179.13 135.95  90.80
-## [2221] 124.09  84.70  87.16 108.95 122.98 102.34  90.25 168.64  95.62  91.75
-## [2231] 102.95  99.83 115.54 108.36 144.24 155.16   0.71   1.53   1.96   5.16
-## [2241]   5.78   6.96  10.26     NA  11.00  18.65  39.75 138.12 191.98 176.63
-## [2251] 210.67 202.63 179.34 164.91 180.25 197.54 253.14 261.74 223.04 256.05
-## [2261] 349.01 230.80 174.60 209.28 146.47 222.94 180.41 140.81 141.54 163.61
-## [2271] 180.70 172.18 155.68 170.41 152.95 175.47 155.82 171.13   0.12   0.58
-## [2281]   0.41   0.64   1.21   3.29   2.99   4.25   3.34   6.09  19.35  79.15
-## [2291] 116.77 139.21 145.31 191.79 141.19 179.37 133.45 152.40 122.45 220.50
-## [2301] 173.03 184.71 196.23 198.13 214.36  99.16  84.78     NA 177.88 221.06
-## [2311] 127.42  77.17  61.58  61.35  52.41  50.15  57.89  67.77  52.64  43.42
-## [2321]  75.43  54.54 155.27 142.15 136.49 172.86 122.60 132.89 117.02 108.59
-## [2331] 142.64 132.31 187.70 168.74 201.58 228.08 120.80  91.65 121.56  87.37
-## [2341]  99.88  93.24 101.71 109.16 125.10 123.43 100.63  53.54  65.52  68.18
-## [2351]  46.07  79.37  74.37  57.89  36.77  34.26  65.27  46.09  27.43  25.89
-## [2361]  28.42  39.33  58.35  55.67  65.34  41.62  26.96  17.49  24.11  30.85
-## [2371]  18.29  27.37  23.27  15.11   5.92   9.17  12.29  17.22  24.21  24.76
-## [2381]  22.12  37.51  35.46 194.05 156.15 134.06 107.70 142.76 140.57 158.95
-## [2391]  93.86 154.91 151.23 120.75     NA 190.75 172.55 153.37 158.94 169.69
-## [2401] 146.40 120.28 124.80 100.17 187.82 215.69 112.68 141.42  89.97  55.53
-## [2411]  70.54  64.18  54.45  70.66  82.82  86.90  67.52  38.07  45.85  40.81
-## [2421]  58.72  34.87  39.99  28.73  37.40  42.86  49.59  28.98  53.74  37.39
-## [2431]  31.79  60.38  25.96  18.06  31.59  26.11  45.33  16.49  24.60  30.41
-## [2441]  30.00  34.70  29.69  22.67  33.92  19.91  38.09  19.11 106.22 171.48
-## [2451] 101.23  96.22 113.54 153.54 154.58 176.84  90.53 108.16 145.74 110.20
-## [2461] 149.58 112.47 141.42 144.76 138.74 132.36 136.14 147.03 121.59 151.83
-## [2471] 302.33 210.49 163.65 161.65 131.12  78.17 114.72 103.43  80.65 108.33
-## [2481] 106.94  84.41 107.88 125.35  90.39  75.28 112.74  90.20 150.48 124.46
-## [2491] 132.95  63.85  99.78  93.87  90.43  91.91 107.40  47.65  63.54  96.30
-## [2501] 174.73 120.71 115.27 102.41  89.06  76.98  66.35  72.67  58.44  68.06
-## [2511]  76.89  88.09 116.68 118.74 104.00  98.38  96.23  54.76  44.59  56.02
-## [2521]  68.29  54.63  74.72  40.90  32.60  25.47  32.80  29.98  34.18  26.35
-## [2531]  24.64  28.17 105.79  95.49  98.61 219.71 106.99 115.71 118.39 109.91
-## [2541] 125.01 151.05 112.74 158.52 158.65 124.58 145.31 131.29 186.66 125.15
-## [2551] 106.11 113.52 122.00  91.09 127.88 133.96 231.82  97.25 125.86  72.23
-## [2561]  76.57  98.44 108.11 138.70  61.97  68.18  34.25  35.98  45.01  39.05
-## [2571]  37.46  43.89  36.46  31.84 109.12 119.83 131.59 147.23 178.32 197.21
-## [2581] 166.43 191.22 201.25 264.34 159.58 214.22 154.46 135.37 155.28 152.94
-## [2591] 160.62 200.23 100.67 133.93 128.49 137.56 142.61 150.60 111.18 101.67
-## [2601]  77.86  58.82  69.91  66.17  69.28  63.81  52.46  43.95  50.37  66.97
-## [2611]  41.43  50.93  25.74  37.56  32.62  25.44  42.72  82.17  59.02  57.29
-## [2621]  27.89  20.00  22.74  28.24     NA  11.16   8.34   6.97  11.52   5.53
-## [2631]  13.47  25.00  17.26  14.98  17.76  27.90 106.10 146.41  75.54 137.77
-## [2641]  83.19  94.02 101.07 154.19 116.95 105.35  68.99 169.92 184.31 108.83
-## [2651] 144.18 149.47 106.09 142.31 157.22 141.29 116.63 173.31  89.30 154.47
-## [2661] 188.96 142.46 112.88  81.10  74.42  92.25 112.78  67.72  66.87  74.53
-## [2671]  51.26  62.36  55.45  21.91  28.63  27.93  38.10  37.58  33.82  27.35
-## [2681]  21.92  27.70  34.94  37.17  57.31  16.50  16.77  24.81  29.99  45.64
-## [2691]  22.84  19.02  14.82  15.48  14.86  26.95  19.14  31.42  26.09  14.28
-## [2701]  95.25 201.30 110.48 112.86  93.54  96.58 128.94 116.68 170.02 102.57
-## [2711] 124.25 135.51 184.35 289.11 121.54 171.43 145.56 135.04 186.86 133.85
-## [2721] 247.97 148.25 211.49 264.32 144.58 139.63 147.71 119.79 126.68 131.25
-## [2731] 147.10 120.54 106.70  99.03  89.71 154.26 117.26 169.55  87.93 128.70
-## [2741] 123.36  97.77 116.68  85.68  59.83  71.82  62.91  71.33  46.34  45.93
-## [2751]     NA  59.88  75.57  90.63 128.00  98.32  80.80  59.22  54.99  66.65
-## [2761]  73.81 104.55  86.76  58.61  65.81  91.04  91.58  65.93  65.84  69.28
-## [2771]  34.85  50.26  37.28  51.50  40.78  45.64  65.23  37.05  28.48  31.16
-## [2781]  38.83  49.18  29.16  38.43  27.05  27.23  64.38 134.78 115.71  99.40
-## [2791]  75.41  85.54  99.01  77.80  92.58  88.19 151.67 189.90  92.83  79.93
-## [2801] 104.69 103.10  80.52  81.81 123.09  95.41  89.79  71.44  73.88 112.79
-## [2811] 142.57 125.29  99.13 122.47 119.34 106.25 117.59 171.55 165.63  54.09
-## [2821]  47.30  43.38  61.04  48.17  61.45  59.64  36.91  42.01 103.86 144.58
-## [2831] 115.81 139.79 137.19 128.83 171.13 108.98 129.19 115.81 161.02 185.81
-## [2841] 178.26 127.00 120.93 114.34  92.98  84.75  81.29  95.21 145.72 133.40
-## [2851] 122.73 142.75 108.05  49.07  76.44  35.69  58.55  89.54  59.65  47.61
-## [2861]  34.33  34.22  45.66  42.19  31.74     NA  53.43  41.32  60.08  68.61
-## [2871]  54.96  96.16  35.54  41.07  39.57  40.49  36.07  24.16  25.76  16.44
-## [2881]  10.59  11.50   8.80   5.60  18.60  44.30  34.26  19.00  17.54 110.15
-## [2891] 147.74 132.78 139.55 127.96 167.05  97.19 119.79 146.79 110.70 140.95
-## [2901] 188.13 162.30 163.46 129.19  50.64  83.20  90.47  90.73 106.66  79.40
-## [2911]  97.76 150.04 137.02 145.05  90.80  89.70  54.33  48.68  76.19  74.91
-## [2921]  89.19  64.54  32.76  42.21  49.10  81.57  53.68  19.08  45.62  34.51
-## [2931]  27.88  31.48  31.70  29.12  78.69  37.44  28.96  27.24  27.03  27.66
-## [2941]  63.27  40.18  39.56  62.78  42.12  49.45  22.93  30.95  23.90  36.06
-## [2951]  35.02  37.02  28.41 142.08 109.08 239.33 148.39 179.80 107.91 126.28
-## [2961] 130.88 149.83 132.27 136.11 171.17 134.76 122.32 122.23 176.44 132.47
-## [2971] 158.08 148.18 106.98 116.59 144.23 110.77 199.45 266.14 184.06 173.96
-## [2981] 131.11 113.88 134.44 152.97 190.48 139.93 140.85 128.05 143.94 160.70
-## [2991] 216.26 177.78 189.21 216.49 187.56 192.82 202.52  87.03  78.49 144.58
-## [3001]  88.76  84.01  72.80 127.71  78.29  88.53 124.86 116.50 145.20 133.91
-## [3011]  80.12  84.94 105.77  67.99  95.15  69.93  72.40  71.52 122.00  76.00
-## [3021]  66.16  74.59  71.81  53.95  58.81  32.85  59.07  68.63  56.20  46.04
-## [3031]  42.64  41.35  28.64  43.51  24.95  30.52  25.74  33.51  26.90 106.88
-## [3041] 180.93 205.19 143.62 164.01 104.06 168.58 107.79 161.26 121.57 134.37
-## [3051] 233.04 183.96 185.32 178.80 127.14 169.99 169.81 229.52 111.60  93.47
-## [3061] 119.40 143.47 139.44 156.37 100.67  75.18  96.53 107.06 106.55 137.73
-## [3071]  93.44  84.36  55.70  75.36  35.03  45.75  51.69  62.56  48.99  49.05
-## [3081]  64.88 163.82 153.85 167.69 199.91 145.89 183.51 141.54 149.43 133.15
-## [3091] 134.44 168.40  19.03  18.40 119.94 140.21  95.30 122.61  94.03 101.24
-## [3101]  91.91 114.30 131.69  72.21 100.24 109.17  77.14  58.87  43.60  61.94
-## [3111]  48.61  79.86  40.68  30.23  50.34  60.45  58.92  35.85  36.63  79.57
-## [3121]  64.79  48.16  34.62  52.99  69.01  37.14  36.63  47.18  60.27  42.60
-## [3131]  42.77     NA  17.91  22.25  24.43  20.45     NA     NA  14.52  19.81
-## [3141]  21.69  19.39  35.79  36.86  37.96 140.09  99.80 112.13 155.74 132.96
-## [3151] 105.88 168.42 124.21 138.26 132.33 162.67 210.65 179.18 100.72 152.60
-## [3161] 129.57 114.49 128.19 125.41 108.88 117.24 128.50 113.80 137.99 189.21
-## [3171] 130.05 113.45  71.14  54.79  67.66  87.55  39.76  66.33  47.50  61.70
-## [3181]  40.15  33.01  54.75  45.15  51.75  79.80  39.07  53.93  35.73  56.01
-## [3191]  55.09  41.26  17.46  37.64  31.79  52.07  57.24  59.42  33.41  41.77
-## [3201]  45.07  29.13  35.07  32.18  23.85  31.78  49.36  43.89  33.37 145.71
-## [3211] 227.07 188.00 156.55 192.16 145.63 150.94     NA 171.54 194.12 157.34
-## [3221] 205.25 180.29 229.98 150.91 144.13 156.99 123.20 127.92 137.94 133.03
-## [3231] 163.95 111.85 189.63 215.47 185.21 225.02 200.02 211.89 216.16 182.28
-## [3241] 230.86 146.11 157.10 136.06 141.51 129.01 123.98 123.63 144.43 140.38
-## [3251] 173.52 125.67 172.76  61.51  82.13  80.87  52.29  59.45  52.54  65.54
-## [3261]  76.87     NA 126.73  85.94 164.67 120.86 106.15  77.47 105.49  98.70
-## [3271] 112.56  58.71  91.79 112.39 118.17  87.75  76.44  81.86  93.95 107.94
-## [3281]  88.59  42.57  31.58  46.51  39.62  35.68     NA  30.25  38.57  31.40
-## [3291]  44.63  26.72  25.50  28.67  43.11  38.64  32.53 121.02 190.25 140.45
-## [3301] 142.84 142.44 216.83 169.04 135.62 173.91 167.83 180.20 291.92 235.96
-## [3311] 239.99 201.19     NA 142.80 192.34 150.97 198.75 156.79 130.18 176.92
-## [3321] 176.74 132.06 216.15 155.74 108.62 116.20 139.21 169.60  74.21  85.34
-## [3331]  70.32  72.98 103.62 110.00  55.13  60.45  68.21 149.65  89.02 151.61
-## [3341] 100.12 140.72 235.47 189.67 175.91 154.36 167.84 161.46 137.57 234.96
-## [3351] 158.84 185.93 239.01 205.09 245.72 170.20 105.58  86.13 130.45 148.72
-## [3361]  94.03 123.28 181.32 135.33  79.95 113.54  45.16  51.95  39.46  48.78
-## [3371]  44.47  42.29  50.33  50.64  45.19  45.06  33.28  43.37  51.10  47.23
-## [3381]     NA  41.64  59.49  62.71  31.44  33.36  34.14  42.71  26.28  25.22
-## [3391]  24.68  20.18  17.75  13.24  18.55  11.25     NA  14.37  23.45  14.26
-## [3401]  18.67  21.73  14.80  25.91 103.10 131.66 114.37 132.50 149.13 142.67
-## [3411] 123.40 161.34 161.99 191.34 148.35 201.67  77.88 132.90 179.31 143.58
-## [3421] 147.12 120.40 187.24 165.02 143.61 159.52 144.86 141.18 193.36  85.83
-## [3431]  99.34  84.50  76.74  69.08  68.43  48.34 104.75  49.97  57.75  62.46
-## [3441]  50.38  70.53  77.31  88.90  37.40  57.68  67.34  82.86 107.06 108.98
-## [3451]  52.27  98.32  41.00  58.83  59.96  91.07  78.02  47.27  35.28  50.12
-## [3461]  54.02  43.12  56.79  42.21  83.00  84.49  53.80  45.13 206.32 211.04
-## [3471] 223.40 198.49 148.50 184.01     NA     NA 309.73 116.78 146.54 194.77
-## [3481] 182.67 171.86 162.30 125.05 178.78 103.65 143.55 177.23 156.76 167.64
-## [3491] 130.57 115.11 256.85 178.75 136.25 168.09 175.34 278.97 145.18 118.23
-## [3501] 193.56 168.49 136.28 133.92  84.28 115.60 110.39 124.09  76.75  94.84
-## [3511] 130.66 110.07 184.10  70.64  76.45  54.03  71.39  98.40  68.14  93.66
-## [3521]     NA     NA  71.77  93.23 164.65 121.25  94.33  64.73  74.99  57.55
-## [3531]  48.21  65.56  61.18  54.82  54.42  51.53  49.58  61.33  82.10  84.11
-## [3541] 101.93  69.80  46.07  48.61  38.14  41.99     NA  43.61  28.30  27.02
-## [3551]  24.19  20.60  27.95  24.41  15.51  18.72  17.33 127.49 103.45 170.94
-## [3561] 134.15 115.54 109.89 204.34 129.57 131.92 108.12 135.02 220.14 205.90
-## [3571] 155.26 149.68 138.73 129.32 149.13 121.53 125.28 102.59  77.43 153.08
-## [3581] 143.75 107.74  62.17  81.60 121.49  49.40  52.78  45.72  62.05  69.04
-## [3591]  43.48  19.41  31.53  22.05  23.53  40.57  15.05  31.84  25.20  18.06
-## [3601]  24.82  71.32  87.48 150.36  95.71  75.16  95.05  85.48  94.11 106.47
-## [3611] 113.72 124.05 117.13 108.96 105.82 171.93  64.61  67.47  58.00  77.25
-## [3621]  45.88  78.19  99.21  95.13  70.79  86.50  49.87  47.57  64.61  35.24
-## [3631]  36.04  34.36  24.77  23.81  22.74  30.65  27.93  25.78  24.62     NA
-## [3641]  21.77  41.42  45.30  26.63  26.04  23.89  30.45  16.91  11.09  19.41
-## [3651]     NA  11.64  14.08  12.00  14.57     NA   4.90   6.22   6.45  18.44
-## [3661]  11.81  11.91  14.15  16.94  94.62 128.33 133.72 118.43  98.68 117.83
-## [3671] 139.29 124.78 108.66 129.41 149.89 150.84 128.77 119.68  93.72  59.06
-## [3681]  52.87  78.41  57.82  56.47  38.26  90.21 157.47  91.99  77.97  67.60
-## [3691]  50.57  34.47  44.11  63.19  47.08  39.35  38.02  37.64  37.68  38.20
-## [3701]  34.56  51.81  27.27  23.17  21.18  19.49  31.12  37.24  30.41  22.45
-## [3711]  39.52  21.30  53.65  34.11  19.60  10.83  17.77  20.04  18.25  38.44
-## [3721]  17.28  18.49  14.69  15.80  10.08  14.37  28.24  49.97  66.07 108.29
-## [3731]  91.19  81.31  89.75  94.90 100.03  87.62 125.28 141.94 115.19  96.71
-## [3741]  89.01 112.87 104.31  92.78  66.26 113.03  77.79 123.95  91.93 146.34
-## [3751] 160.52 127.43 146.44 153.74 125.33 137.01 103.19 170.12 104.64  95.55
-## [3761]  94.24 122.19  88.88  86.64 139.26 117.01 102.84 104.44  73.32 118.33
-## [3771] 118.34  67.02  75.12  64.20  53.06  55.82 163.10 124.56     NA  80.92
-## [3781]  61.15  80.19  67.85  65.30  40.04  64.20  72.21  45.98  26.94  50.68
-## [3791]  40.93  42.51  48.57  57.91  56.59  70.59  57.62  33.24  33.67  40.40
-## [3801]  25.81  22.01  21.22  55.95  28.75  44.48  23.75   7.49  13.14  19.42
-## [3811]  22.69  20.28  78.98 155.76 191.45  80.47 102.39 162.68  84.17 110.51
-## [3821] 109.02 131.88 146.71 151.57 100.82 110.20 103.15  94.51  84.81  88.42
-## [3831]  91.74  54.26  41.56  53.68  99.87  36.87  90.67  73.95  50.87  18.83
-## [3841]  29.31  61.56  63.64  55.59  22.61  13.58  15.78  22.71  19.01  41.12
-## [3851]  14.62  39.36  17.11  21.93  34.93 118.18 160.14  97.76 130.40  73.57
-## [3861]  85.15  70.66 122.18  97.33 116.41 123.61 132.52 142.46  85.98  78.97
-## [3871]  88.70  87.40  95.68  69.17  39.30  79.48  52.63  80.00  36.74  53.55
-## [3881]  46.48  52.41  22.07  44.14  30.67  29.65  12.33  14.80  15.58  11.82
-## [3891]  18.00  34.27  31.31  13.59   9.92  14.53  14.94  17.53  31.10  13.18
-## [3901]  16.46  14.93  17.59   4.48  10.81   6.81  12.36   8.21   5.47   8.37
-## [3911]  23.52  23.40  11.30  24.49  15.45  11.74 155.70 100.86  98.83  81.32
-## [3921] 107.25 178.02 105.38  91.57 111.26 101.30  56.99 117.53 115.86 100.51
-## [3931] 108.17  65.28  71.78  58.06  61.84  51.76  65.13  85.34  82.22  55.29
-## [3941]  48.40  69.09  41.32  34.13  32.68  66.66  49.65  32.14  41.43  33.67
-## [3951]  37.42  40.76  51.25  61.41  16.92  26.49  44.00  31.88  21.74  27.17
-## [3961]  12.24  32.98  33.04  57.79  58.20  20.24  27.96  28.06  47.38  20.74
-## [3971]  15.61  18.98  16.38  28.78  33.58  27.84  71.69  54.27  49.56  38.22
-## [3981] 125.79  80.68  86.93 143.49  85.48 117.86 102.52 139.59 133.74 111.55
-## [3991] 125.29 156.52 136.80 120.23 110.02 133.78 106.33 124.84 112.15 108.31
-## [4001] 201.14 141.89 204.43 122.31 147.16 132.53 164.29 176.80 121.82 123.95
-## [4011] 112.86 107.55 114.61 106.03  87.73 133.15 205.37 155.90 176.34 147.03
-## [4021] 143.41 142.82 155.77  54.92  70.84  55.10  68.57 129.11  38.19  58.89
-## [4031]  91.61  91.76  92.85 109.95 108.41  66.71  88.60  54.68  61.55   1.25
-## [4041]  54.48  68.55  59.30  89.06 103.00  44.66  76.79  60.89 103.80  58.64
-## [4051]  33.29  37.80  33.87  34.05  45.37  29.65  15.13  23.86  29.61  12.74
-## [4061]  14.81  14.81  15.74  18.67  94.81 141.46 111.95 140.74 146.34 117.08
-## [4071] 177.18 161.54 129.19 144.70 157.43 201.59 164.40 143.15 177.66 100.15
-## [4081] 137.59 135.68  84.90  90.12  73.91 120.39  90.33  92.71  97.83 103.99
-## [4091] 103.34  88.65  43.95  49.58  74.25 162.25 197.37  68.33  51.45  71.60
-## [4101]  58.50  83.26 152.80 102.44  52.55  48.51 240.05 184.90 185.11 272.94
-## [4111] 309.79 169.98 238.82 323.05 320.51 225.58 253.35 221.55 140.77 171.96
-## [4121] 167.46  84.20 142.05 132.78 118.27  81.88 117.01 120.26 109.17 103.85
-## [4131] 145.41 105.51  82.10  57.85  37.72  60.18  40.27  34.18  26.97  30.65
-## [4141]  38.96  34.38  48.60  53.82  25.49   5.87   5.00  12.81   7.42   3.07
-## [4151]  24.95  25.10  21.80  15.23  19.67  16.41  17.80   8.39  14.26  11.29
-## [4161]   9.78   3.19  16.19  14.97  18.66  16.64  16.17  97.14 136.08 117.10
-## [4171] 129.46  88.19  98.69  68.80  91.67 133.46 134.12 133.00 122.56  92.38
-## [4181]  79.83 101.14  58.51  46.16  89.22  49.92  59.23  99.09  42.53  59.68
-## [4191]  71.72 103.52  70.23 114.70  62.07  39.99  53.84  42.25  31.83  35.79
-## [4201]  32.33  36.99  20.70  23.28  20.39  23.24  36.30  21.26  23.25  22.40
-## [4211]  22.69  33.86  19.54  12.79  22.83  17.45  14.94  17.97  30.44  30.99
-## [4221]  23.41  35.64  39.31  23.77  23.20  28.97  22.19  38.21  21.26  22.84
-## [4231]  10.41  73.93 105.71 177.38  93.42  65.67  98.78 105.65 140.92 139.21
-## [4241]  97.26 147.94 107.10 109.53  89.84  81.84 115.13 118.70  93.56  65.50
-## [4251]  96.27 161.72  92.97 110.91 103.11 127.43 128.04 145.35 126.13  94.31
-## [4261]  76.27  87.46  98.06  96.29  91.44  65.32 114.65  56.61  98.28 110.17
-## [4271]  87.47 114.56 131.30 169.68  58.20  44.88  56.53  43.97  74.39  43.60
-## [4281]  18.85  54.23  56.54 102.80  95.27  79.17  87.09  80.83  77.16  61.13
-## [4291]  53.52  51.61  64.95  38.15  66.05  75.47  94.48  80.82  68.01  60.70
-## [4301]  57.23  47.50  39.26  28.40  41.82  39.29  36.60  27.59  20.51  18.19
-## [4311]  23.16  14.84  10.98  25.96  40.97  38.88  21.82  72.97  99.35  92.79
-## [4321]  98.36 130.14  27.15  94.29 137.97 106.41 123.45 101.02 125.91 131.24
-## [4331] 156.86 111.95  81.95 102.03 142.73 169.01 103.77  76.76 104.46 130.89
-## [4341]  83.88 107.70 100.13  44.99  82.12 119.52 115.02  60.89  57.87  55.91
-## [4351]  41.74  60.08  46.14  29.92  55.31  57.74  54.97  84.73  53.74 133.55
-## [4361] 132.06 131.66  91.35 107.13 104.73 108.43 134.74 122.78 169.09 129.45
-## [4371] 208.55 169.18 119.97 141.64 128.56  79.87  48.17  66.62  66.29  66.71
-## [4381]  68.08  71.32  66.98  82.39  32.91  26.07  25.71  39.69  43.14  28.28
-## [4391]  23.43  23.08  27.17  37.42  71.12  22.84  29.51  31.94  32.77  66.03
-## [4401]  22.29  50.46  30.50  43.05  13.67  16.09  21.03  24.06   0.46   9.25
-## [4411]   9.43   8.63   7.40   6.63  10.47   9.72  13.48  12.56  15.52  88.52
-## [4421] 123.59  89.60  96.54  78.29 110.88  64.89  47.83  62.47 102.93 153.50
-## [4431] 144.08 123.54 153.18  55.58  32.30  94.88 127.77  85.21  52.78 107.00
-## [4441] 121.74 118.63  84.03 135.72 139.48  98.20  57.62  65.02  87.90  52.27
-## [4451]  82.86  45.18  40.14  39.14  56.50  46.97  48.25  31.27  38.04  40.02
-## [4461]  54.92  50.96  58.55  90.61  59.08  58.91  57.18  46.07  76.01  35.67
-## [4471]  20.33  26.59  42.83  56.29  15.70  21.67  22.44  29.37  30.86  19.19
-## [4481]  15.90  22.11  40.80  80.80  99.65 144.69 108.73  93.28 151.51 129.80
-## [4491] 135.30 103.81 127.65 131.81  81.02  70.84  89.52  92.67  75.66  59.81
-## [4501]  47.67  66.96 104.05  93.93  98.76 173.00 224.27  88.23  98.30 122.58
-## [4511] 110.23  76.86  81.80 162.44 108.64 103.03  49.30  68.22  70.82  94.68
-## [4521]  61.20 108.59  98.92 159.66 134.51 116.07  48.30  50.61  72.61  61.67
-## [4531]  57.15  38.75  54.50  56.75  60.46  65.74  64.21  59.68  52.58  63.78
-## [4541]  31.25  32.21  25.49  37.29  43.80  43.95  49.31  40.57  64.61  51.71
-## [4551]  63.22  58.81  68.84  19.52  18.00  17.53  18.81  48.04   9.61  19.06
-## [4561]  16.12  15.11  21.77  36.09  13.85   9.28  12.59  10.59  23.81 181.99
-## [4571]  81.46  78.89 102.87  90.71  81.82  93.57  93.95  89.56  76.21 116.69
-## [4581] 105.65  79.40  95.86  87.91  57.30  98.65  63.04  64.23  82.00  82.62
-## [4591]  83.80  70.58  69.84  72.24  66.63  32.82  33.69  53.91  81.00  22.12
-## [4601]  23.62  24.47  44.14  15.54  23.67  28.84  49.16  41.60  33.78  15.18
-## [4611]  17.03  69.95  60.23  61.72  56.69  69.32  60.11  98.35  66.81  88.24
-## [4621]  92.48  75.60 106.01 111.18  97.19  71.28  78.12  49.54  43.59  57.48
-## [4631]  40.67  49.14  64.18  69.28  53.48  56.20  33.02  62.29  32.14  31.38
-## [4641]  56.50  20.92  31.38  14.51  26.61  15.89  12.86  22.90  11.11  16.69
-## [4651]  14.08  10.18  16.11   8.71  12.53  16.09   6.68  11.62  14.81  23.32
-## [4661]  11.46   8.14   7.85   7.51   7.17   5.75   5.43   8.52   7.47   6.21
-## [4671]   8.45  61.29  64.92 113.18  55.63  38.73  63.48  67.44  84.66  43.63
-## [4681]  74.24  57.87 106.70  84.86  41.84   2.49  46.84  54.46  34.05  45.41
-## [4691]  81.37  42.68  47.90  59.28  55.80  50.05  42.08  41.40  28.01  29.79
-## [4701]  22.75  27.65  35.78  15.32  12.01  18.38  21.85  26.67  15.97   9.80
-## [4711]  11.53  11.75  11.83  33.98  15.99  21.99   8.52   7.24   9.91   8.71
-## [4721]   9.54  14.94  17.25  12.85  13.23  11.85   9.93   8.81   8.37  13.41
-## [4731]  13.34   8.63   8.73   9.64  11.94  52.93  57.59 113.04  42.08  55.30
-## [4741]  62.35  66.67  63.68  78.95 116.32  96.26  85.43  81.46  80.76  52.79
-## [4751]  50.07  38.83  67.30  54.39  80.47  72.68 115.51 101.21  75.35  78.15
-## [4761]  83.78  77.37  86.32  56.36  80.04  63.44  79.89  65.88  47.66  41.44
-## [4771]  73.22  88.02  56.68  76.44  99.58 117.99 111.39 102.73  43.57  41.93
-## [4781]  32.79  31.41  40.32  42.83  44.19  51.70  43.77  45.17  58.47  59.78
-## [4791]  42.52  37.08  29.24  22.30  28.52  31.81  30.23  24.04  25.60  21.13
-## [4801]  44.19  43.34  35.53  30.22  28.09  25.25  24.53  23.52  14.59  15.47
-## [4811]   7.41   7.63  16.09  15.78  20.82   6.21   5.65   6.94   5.79   5.32
-## [4821]  35.49  59.62  36.23  49.50  46.73  44.77  69.19  69.82 112.76  94.87
-## [4831]  60.50  86.36  77.49  48.19  95.93  41.65  45.38  57.53  75.82  47.11
-## [4841]  36.84  56.77  51.23  48.25  44.41  49.04  40.28  26.54  36.11  27.28
-## [4851]  33.43  29.74  14.60  11.62  12.18  15.50  23.71  13.97  22.01  12.46
-## [4861]  22.90  39.35  31.28  50.03  83.53  66.54  47.72  58.36  53.12  41.92
-## [4871]  60.52  75.09  72.41 138.64 165.86  77.30  79.06 150.42  51.91  61.46
-## [4881]  51.51  32.02  30.08  30.81  52.53  31.06  35.28  33.04  15.35  20.02
-## [4891]  17.32  18.33  13.54  10.45  13.33  10.03  13.12   9.47   7.20  14.35
-## [4901]  10.85   9.47  12.51  15.77  15.57   9.58   5.76  16.09   6.20   4.17
-## [4911]   7.08   6.60   7.24   3.24   4.60   4.88   2.99   3.11   3.35   5.67
-## [4921]   5.75   3.31   5.59  33.13  43.66  38.32  24.25  42.41  68.44  38.74
-## [4931]  44.59  41.03  59.96  66.09 111.14  38.82  40.48  43.73  53.42  43.33
-## [4941]  26.21  35.63  30.94  33.48  34.54  31.17  30.75  31.82  29.27  40.00
-## [4951]  25.12  15.55  13.37  19.28  25.56  10.73  11.50  12.88  11.12  14.18
-## [4961]  12.39  15.17  12.91  10.45  15.25  15.40  13.98  20.62   6.68  10.26
-## [4971]   9.03  12.26   9.07  12.50   6.87  10.27   6.79   8.68  11.12  13.26
-## [4981]  11.14  12.17  11.27   8.39   6.47   6.40  11.88  45.39  57.20  97.43
-## [4991]  33.73  41.12  63.82  48.47  49.87  79.82  52.26  74.71  62.04  39.14
-## [5001]  65.96  47.79  44.58  33.53  44.38  46.09  75.09  47.10  27.77  78.66
-## [5011]  59.77  48.85  46.51  49.44  49.03  52.51  41.56  45.69  44.40  42.01
-## [5021]  39.54  38.49  42.66  52.31  69.17  64.43  51.21  43.74  38.52  42.48
-## [5031]  19.07  19.91  18.93  14.79  19.19  20.58  28.76  20.34  30.59  38.86
-## [5041]  38.44  28.74  18.42  20.48  20.94  27.65  22.82  13.87  16.52  14.47
-## [5051]  17.22  19.61     NA  27.37  22.08  20.31  17.91  16.68  13.27  18.40
-## [5061]   6.08   9.22   6.39   4.43   6.04   5.49   4.38   6.58   3.09   4.74
-## [5071]   3.99  32.77  32.09  42.77  31.33  40.90  30.71  28.51  22.94  23.36
-## [5081]  24.83  38.94  31.54  36.91  45.29  29.01  33.36  33.65  37.88  33.76
-## [5091]  24.80  40.93  49.92  46.77  48.74  36.94  40.08  34.96  31.97  45.05
-## [5101]  35.57  30.94  37.79  27.18  12.79  17.59  20.65  25.79  18.08  30.36
-## [5111]  22.06  21.64  12.87  18.80  10.11  27.08  33.59  41.91  51.26  49.99
-## [5121]  32.26  50.84  51.59  71.11  52.49  59.99  56.42  59.86  64.11  82.67
-## [5131]  36.63  29.36  44.27  24.08  21.69  30.15  32.16  50.56  36.55  31.61
-## [5141]  23.48  13.97  15.10  15.27  20.14  12.10  18.13  13.64  14.14  16.22
-## [5151]  11.77  22.91  26.47  17.73  14.74  18.41  20.01  25.31   6.55   5.64
-## [5161]   5.48   6.35  12.14   8.77   5.08   4.36   6.12   8.82  16.70   4.79
-## [5171]   3.07   5.53   5.90   6.42   4.43   4.61  45.25  53.00  29.01  38.48
-## [5181]  38.65  42.72  66.57  76.33  39.92  48.06  37.07  62.80  75.92  49.41
-## [5191]  42.38  36.90  33.56  28.01  24.86  20.69  27.97  34.26  24.03  20.02
-## [5201]  23.84  22.87  26.84  35.75  25.55  30.25  43.29  37.80  21.65  39.53
-## [5211]  33.33  52.80  27.62  19.87  13.12  13.89  14.37   7.36  12.45   6.92
-## [5221]  18.64   9.40   8.55   6.37   6.37  11.21   9.60  10.77  17.42   6.76
-## [5231]   4.12   9.39   9.67   8.97   6.18   8.91   7.53   6.87  11.49   8.95
-## [5241]  76.54  99.68  43.58  37.60  48.74  52.56  59.61  61.91  42.10  53.68
-## [5251]  65.67  43.99  84.56  33.46  45.27  72.12  43.38  61.41  92.08  32.07
-## [5261]  49.26  47.36 119.71  56.77  35.87  46.16  38.50  34.09  44.95  48.66
-## [5271]  32.72  29.86  43.18  41.20  29.19  36.74  27.36  37.05  46.52  24.85
-## [5281]  30.46  25.18  40.72  18.41  21.82  24.61  22.74  24.42  28.83  26.30
-## [5291]  19.20  25.04  28.04  28.91  39.36  13.53  20.57  14.49  11.47  11.00
-## [5301]  14.84  12.64   7.96  12.68  14.30  14.74  11.56  11.71  11.81  12.15
-## [5311]   8.99   7.56   6.88   9.33   5.41   4.56   5.00   3.14   5.93   5.72
-## [5321]   4.82   4.54   4.41   4.72  60.96  43.30 135.38  88.85  71.84  75.49
-## [5331]  34.19  49.90  31.11  30.55  39.06  66.47  67.32  48.60  38.31  38.04
-## [5341]  25.57  20.13  22.37  27.08  24.35  26.60  24.98  32.42  17.68  38.83
-## [5351]  35.34   9.55  14.99  25.30  19.42  30.51  10.66   6.30   7.38  11.25
-## [5361]   9.68  10.03   6.05   9.66  21.67  18.30  26.88  28.87  27.20  30.10
-## [5371]  26.31  35.87  43.72  34.33  56.93  24.61  39.00  42.56  48.03  43.22
-## [5381]  56.17  37.90  16.56  17.26  12.41   9.56  12.75  14.92  16.32  16.40
-## [5391]  13.92  12.41   9.61   6.85   6.09  13.56   4.55   4.86   4.02   4.08
-## [5401]   5.25   5.00   6.15   5.36   6.03   6.45   5.82   7.39  15.13   8.11
-## [5411]   5.97   5.79   5.28   4.55   3.49   4.73   5.21   4.79   4.37   2.55
-## [5421]     NA   2.41   5.18   4.26   2.26   3.62   2.80  25.13  35.86  31.92
-## [5431]  25.16  20.17  35.94  58.93  48.62  40.60  33.88  31.04  46.49  50.96
-## [5441]  52.74  22.85  25.24  37.89  39.88  24.85  25.75  26.97  31.35  26.17
-## [5451]  21.08  24.93  19.81  22.12  27.33  17.67  14.58  21.94  16.63  15.53
-## [5461]  16.70  10.78  13.63  16.03  10.41  10.33   7.81  20.07  18.95  18.60
-## [5471]  15.78  20.72  13.98  11.03   6.72   9.86   8.39   8.81  10.04  13.31
-## [5481]  14.29   6.38   5.59  10.79  12.31  14.09  19.96  17.33  12.35  13.95
-## [5491]   8.82  64.23  77.87  57.71  55.83  84.83  45.78  59.75  50.40  54.58
-## [5501]  50.70  81.52  53.83  37.97  37.62  48.25  47.45  58.49  72.89  55.41
-## [5511]  50.74  74.16  89.63  74.61  93.38  43.15  34.84  42.14  50.59  62.56
-## [5521]  61.28  90.89  67.33  42.54  74.34  38.41  54.44  66.18  71.69  86.16
-## [5531]  32.35  33.74  43.38  54.36  40.33  18.17  26.50  24.44  22.81  23.44
-## [5541]  19.07  27.84  29.52  32.53  33.05  39.93  36.21  34.92  51.59  18.23
-## [5551]  15.19  12.09  17.04  10.70  10.82  12.04  15.62   7.79   7.60   9.86
-## [5561]   6.28   7.61   3.66   4.01   6.31   3.67   5.34   3.19   2.62   4.06
-## [5571]   7.35   2.28   2.20   3.64   3.07   4.04  77.61  84.55  42.72  30.30
-## [5581]  33.15  57.61  37.13  25.44  40.88  30.83  29.77  67.45  37.50  27.01
-## [5591]  37.01  19.49  37.03  36.90  25.44  18.54  17.26  14.53  23.27  13.42
-## [5601]  24.42  13.29  10.92  15.84   9.41   9.69   8.43   7.19  18.66  10.95
-## [5611]   5.45   5.46   4.69   5.98   4.99   5.17   7.70   8.90  22.56  35.94
-## [5621]  40.36  26.30  29.99  31.57  28.49  23.60  28.03  39.33  41.05  60.95
-## [5631]  61.77  70.06  24.30  15.57  17.79  20.48  16.70  14.88  16.66  10.02
-## [5641]  12.69  10.27  10.11   9.65   6.19  11.99   6.97   8.52   4.02   6.43
-## [5651]   5.95   4.56   3.79   8.86   4.16   5.42   7.08   5.55   5.46  40.05
-## [5661]  53.63  36.74  41.50  25.95  36.15  30.87  30.20  26.63  18.28  26.34
-## [5671]  24.61  37.54     NA  35.93  27.68  33.41  29.58  24.67   0.49   0.33
-## [5681]   0.44   0.11   0.07   0.43   0.10   1.30   0.41   2.41   0.20   0.89
-## [5691]   0.35   0.11   0.31   0.03   0.17   0.12   0.06   0.09   0.07  35.17
-## [5701]  34.79  32.79  69.09  34.55  31.05  39.33  32.19  32.19  38.57  45.08
-## [5711]  37.55  50.51  28.40  25.82  33.26  27.73  23.19  30.68  30.32  43.63
-## [5721]  32.97  43.71  55.60  26.94  30.71  26.78  28.11  33.67  38.42  31.64
-## [5731]  60.65  62.69  36.86  27.26  31.59  36.76  24.44  42.01  53.77  97.32
-## [5741]  50.98  55.33   0.03     NA  20.07   0.04   0.05   0.12   0.01   0.08
-## [5751]   0.22   0.10   0.04   0.11   0.04   0.63     NA   0.11   0.01   0.06
-## [5761]   0.04   0.02   0.01   0.04   0.01   0.00   0.01   0.01   0.00   0.01
-## [5771]   0.00     NA   0.00   0.03     NA   0.01   0.01   0.01   0.00   0.08
-## [5781]   0.01   0.02   0.05   0.09  29.51  43.00  49.67  37.88  28.73  28.91
-## [5791]  35.14  33.55  30.28  29.74  42.11  25.44  14.31  17.58  13.39  14.25
-## [5801]  10.72   9.36  13.00  12.92  10.22  11.26   5.98   5.89   6.23   6.77
-## [5811]   5.33   6.16   5.72   6.11   4.13   3.26   3.60   2.27   3.18   5.85
-## [5821]   3.59   6.51   1.02   1.61   2.50   4.61   4.01  36.22  60.40  24.34
-## [5831]  40.54  30.61  21.85  33.34  35.19  43.65  57.01  50.19  49.68  46.02
-## [5841]  56.07  58.51  39.95  49.28  20.50  18.96  14.22  16.55  10.15  16.54
-## [5851]  10.72   9.07  12.33   9.58   8.94   8.23  27.83   8.22   5.21   4.77
-## [5861]   7.01   6.93   9.03  12.89   7.55   9.72  11.80  21.18  36.47  21.68
-## [5871]  24.96  15.36  34.60  37.16  19.50  26.77  28.34  46.82  56.68  48.12
-## [5881]  29.03  31.65  32.56  30.39  16.30  15.51  15.18  10.05  12.07  11.88
-## [5891]   9.01   9.74   9.10   7.67  26.77   9.70  10.81   9.51   6.22  13.45
-## [5901]  24.22   4.95   7.44   5.36  13.72  14.49   7.59   6.69   7.97  89.72
-## [5911]  69.82  37.89  24.92  35.10  49.47  36.83  40.32  42.26  31.42  71.05
-## [5921]  34.59  15.92  19.27  25.35  32.45  40.52  44.81  27.36   0.92   0.60
-## [5931]   0.51   0.62   0.63   0.41   0.35   0.32   0.53   2.33   0.96   1.18
-## [5941]   0.46   0.43   0.53   0.40   0.30   0.71   0.92   0.22   0.20  37.74
-## [5951]  27.72  40.97  40.03  40.69  39.73  50.78  39.26  57.69  54.62  73.46
-## [5961]  35.46  41.07  33.71  33.71  34.87  36.32  34.88  35.11  28.62  30.91
-## [5971]  28.97  36.20  80.23  34.17  32.03  23.17  42.05  34.54  56.75  73.76
-## [5981]  49.06  47.66  44.15  28.32  37.76  36.34  42.22  32.16  30.38  29.24
-## [5991]  39.56  35.42   0.21   2.11   0.60   4.55   2.58   4.97   6.52   0.25
-## [6001]   4.94   1.90   0.58   0.31   0.28   0.06   0.05   0.13   0.29   0.17
-## [6011]   0.16   0.08   0.26   0.02   0.07   0.14   0.08   0.03   0.01   0.02
-## [6021]   0.04   0.03   0.02   0.01   0.17   0.02   0.02   0.12   0.08   0.12
-## [6031]   0.02   0.27   0.05   0.12   0.21  17.42  19.91  23.12  18.75  23.14
-## [6041]  17.44  24.16  25.24  25.19  31.99  45.81  32.28  21.16  19.02  15.96
-## [6051]  15.50  12.76  16.36  12.80   7.78  11.24  19.81  12.58  22.74   9.82
-## [6061]  10.72  11.38   5.08   5.51   5.32   4.85   6.08  10.15   3.46   6.86
-## [6071]   4.11   2.77   3.69   3.64   6.06   4.82   3.87   6.78  37.81  38.43
-## [6081]  47.60  57.11  63.24  46.68  41.31 105.55  72.63  80.51  50.25  50.54
-## [6091]  48.94  48.09  32.23  23.74  30.77  29.96  28.55  33.18  22.97  16.36
-## [6101]  29.12  17.61  16.32  15.42  11.53  12.88  16.81  20.55  14.46  16.96
-## [6111]  27.58  15.06  15.12  12.34   9.63  14.45  14.54  20.22  18.65  20.34
-## [6121]  84.52  55.54  28.47  34.79  34.40  41.15  45.87  30.65  26.20  36.76
-## [6131]  51.52  57.20  51.81  41.18  51.48  29.65  16.14  16.32  19.41  10.46
-## [6141]  11.13  17.76  20.94  14.88  11.19  11.46  13.11  12.39   6.14   7.02
-## [6151]   9.37   5.47  11.09  11.57   9.74  15.06   7.93   6.06   8.34  10.59
-## [6161]  13.69  18.35  19.98   8.12   6.32   4.91   4.77   4.32   3.62   4.43</code></pre>
+##     as.Date, as.Date.numeric</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="analisis-descriptivo.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que la columna &#39;Fecha&#39; esté en formato de fecha</span></span>
+<span id="cb26-2"><a href="analisis-descriptivo.html#cb26-2" aria-hidden="true" tabindex="-1"></a>df_maiz_filtrado<span class="sc">$</span>Fecha <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(df_maiz_filtrado<span class="sc">$</span>Fecha)</span>
+<span id="cb26-3"><a href="analisis-descriptivo.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="analisis-descriptivo.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una serie de tiempo con la función ts</span></span>
+<span id="cb26-5"><a href="analisis-descriptivo.html#cb26-5" aria-hidden="true" tabindex="-1"></a>df_maiz_filtradots <span class="ot">&lt;-</span> <span class="fu">ts</span>(df_maiz_filtrado<span class="sc">$</span>Último, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">1</span>), <span class="at">frequency=</span><span class="fl">261.25</span>)</span>
+<span id="cb26-6"><a href="analisis-descriptivo.html#cb26-6" aria-hidden="true" tabindex="-1"></a>df_maiz_filtradots</span></code></pre></div>
+<pre><code>## Time Series:
+## Start = 2000 
+## End = 2023.61339712919 
+## Frequency = 261.25 
+##    [1] 433.50 426.75 430.25 431.00 431.50 435.50 428.75 434.25 431.25 435.50
+##   [11] 434.25 435.25 431.75 426.50 435.50 442.25 442.00 426.75 432.50 437.75
+##   [21] 439.25 440.75 439.00 439.50 436.00 436.75 422.50 426.50 429.00 428.25
+##   [31] 426.25 426.00 418.00 413.50 417.50 412.25 429.50 428.50 423.50 407.00
+##   [41] 399.75 406.00 411.00 418.75 416.50 417.75 424.25 430.75 430.50 429.00
+##   [51] 433.25 434.25 438.75 442.75 442.75 447.25 448.25 447.75 440.25 446.25
+##   [61] 451.75 452.25 446.50 445.75 445.50 444.00 442.25 443.50 447.00 457.75
+##   [71] 459.50 459.25 455.00 460.75 466.50 465.25 463.75 471.25 474.25 476.50
+##   [81] 480.25 473.00 472.50 469.75 472.75 477.00 483.00 456.75 456.75 462.50
+##   [91] 460.50 465.75 468.25 464.75 468.50 460.25 464.50 482.75 475.75 473.50
+##  [101] 475.25 482.50 487.75 489.00 487.50 485.25 493.25 488.50 478.25 477.25
+##  [111] 464.00 468.00 476.00 468.50 477.25 477.25 470.00 475.00 478.75 478.25
+##  [121] 480.75 479.25 480.00 484.00 490.25 495.50 505.00 492.00 489.00 490.00
+##  [131] 493.25 496.00 488.00 485.50 488.25 492.00 497.50 486.00 487.50 488.75
+##  [141] 476.75 488.50 483.25 479.75 481.25 477.25 475.25 482.25 476.25 471.50
+##  [151] 476.25 462.50 464.00 463.25 471.25 468.50 470.75 471.50 471.00 464.75
+##  [161] 461.00 461.75 469.50 478.50 470.75 472.25 476.25 466.50 469.25 479.50
+##  [171] 473.00 469.50 464.00 475.75 474.50 483.25 481.00 485.75 482.25 484.25
+##  [181] 480.75 488.25 497.00 504.00 521.00 533.25 540.25 557.50 560.50 527.00
+##  [191] 537.25 545.50 528.75 499.25 599.75 593.50 549.75 571.75 570.75 560.50
+##  [201] 566.75 548.25 557.25 554.50 581.00 590.00 623.00 637.25 630.75 660.50
+##  [211] 671.00 643.75 640.25 623.25 607.75 612.50 617.25 604.25 610.25 604.25
+##  [221] 608.00 597.50 609.00 592.50 594.00 594.00 604.00 590.75 587.25 577.50
+##  [231] 571.00 554.50 555.25 561.50 581.25 592.50 633.25 632.50 645.50 642.25
+##  [241] 656.50 653.25 646.50 645.25 638.00 639.50 636.00 627.00 641.50 646.50
+##  [251] 651.25 663.25 663.75 672.25 677.50 676.50 666.25 652.25 656.00 651.00
+##  [261] 654.00 643.50 643.50 652.75 653.75 657.75 660.50 649.50 650.50 647.25
+##  [271] 648.25 643.00 631.75 633.50 630.00 633.00 634.25 632.75 626.50 627.50
+##  [281] 624.50 624.25 611.50 625.50 634.25 637.00 645.25 637.75 640.50 629.50
+##  [291] 642.75 649.25 659.25 674.25 680.50 677.75 676.00 676.25 682.25 685.00
+##  [301] 680.50 670.75 678.50 674.00 679.00 677.50 675.25 681.00 679.75 683.75
+##  [311] 683.00 682.50 674.75 677.00 666.25 676.25 677.25 681.25 685.25 675.00
+##  [321] 671.00 656.00 655.00 652.75 654.00 652.75 653.75 670.50 678.50 679.50
+##  [331] 682.75 674.75 666.25 660.50 662.25 652.00 647.25 653.00 653.50 639.00
+##  [341] 643.75 641.25 634.75 632.00 627.75 625.50 628.75 635.00 650.00 662.00
+##  [351] 665.75 668.75 668.00 663.25 656.75 659.50 667.75 667.50 665.25 666.75
+##  [361] 657.25 658.00 653.25 664.50 667.50 675.75 681.00 679.25 687.50 697.75
+##  [371] 691.50 680.75 682.25 685.00 686.25 681.50 684.25 684.00 678.25 681.00
+##  [381] 683.50 689.75 697.75 693.00 693.00 698.25 683.25 675.50 684.00 683.00
+##  [391] 680.75 677.50 669.50 670.50 667.50 666.25 676.75 688.25 685.50 692.00
+##  [401] 678.25 677.25 677.50 709.00 709.00 712.25 698.50 668.50 676.75 680.75
+##  [411] 667.38 669.00 658.25 673.75 679.75 683.75 668.75 657.50 665.75 660.00
+##  [421] 633.50 626.00 619.75 615.00 611.00 626.75 639.75 629.25 621.25 615.50
+##  [431] 608.50 610.25 602.25 591.50 591.25 607.00 616.25 615.00 600.25 597.00
+##  [441] 580.00 564.25 575.75 592.25 596.75 612.25 604.25 695.00 740.00 732.75
+##  [451] 781.25 778.25 747.00 744.25 736.00 754.50 743.75 770.25 759.50 744.25
+##  [461] 750.25 746.75 768.00 760.75 784.50 788.25 774.00 768.25 769.25 773.25
+##  [471] 773.00 764.50 757.00 742.50 727.00 730.25 731.25 753.50 775.62 777.25
+##  [481] 765.00 772.25 771.75 786.25 778.75 783.25 781.50 800.75 809.50 794.50
+##  [491] 813.50 802.25 786.50 784.50 792.25 803.75 798.50 800.75 813.00 818.25
+##  [501] 816.00 815.50 803.25 800.25 793.00 799.25 815.75 804.00 813.25 791.00
+##  [511] 790.25 783.50 776.25 764.50 768.75 757.75 756.50 759.75 750.50 735.00
+##  [521] 748.75 738.00 726.25 748.50 754.00 748.25 757.75 753.00 756.25 741.75
+##  [531] 754.50 730.00 758.00 728.25 764.50 757.75 735.00 754.50 749.25 756.50
+##  [541] 751.25 739.00 739.75 697.50 659.50 695.00 683.75 674.75 654.25 650.00
+##  [551] 647.00 638.00 655.75 651.00 641.75 646.75 632.25 635.25 620.50 616.75
+##  [561] 622.50 634.75 626.00 636.00 625.25 627.00 620.00 621.00 616.25 611.00
+##  [571] 610.50 599.50 596.25 587.50 599.00 601.00 599.75 606.75 603.75 602.25
+##  [581] 609.50 589.25 593.25 596.00 605.50 604.75 614.75 605.80 605.75 602.50
+##  [591] 598.25 591.00 593.25 591.25 585.75 588.75 584.25 588.50 588.50 584.75
+##  [601] 586.25 583.50 586.00 577.00 572.00 567.00 581.00 586.75 579.75 580.50
+##  [611] 576.75 570.75 573.00 575.25 571.00 576.50 577.25 569.50 569.25 554.75
+##  [621] 551.50 553.00 559.25 564.00 573.00 579.00 568.25 562.75 557.25 543.50
+##  [631] 538.00 538.00 532.25 539.25 530.25 532.75 525.75 516.75 512.25 522.50
+##  [641] 533.00 530.50 534.00 532.25 537.50 540.75 541.50 536.75 539.00 532.50
+##  [651] 539.50 526.75 529.25 525.50 517.00 521.75 527.25 529.50 533.50 503.00
+##  [661] 496.75 502.75 496.00 498.25 495.75 524.25 508.00 516.25 515.50 534.00
+##  [671] 540.25 558.00 552.75 551.25 544.50 538.00 538.75 550.00 561.75 558.25
+##  [681] 564.75 568.25 567.00 556.25 549.25 550.25 555.00 555.75 545.75 550.50
+##  [691] 558.75 547.00 558.00 549.25 548.75 549.75 547.25 564.50 571.75 571.75
+##  [701] 556.00 556.00 564.25 683.00 677.00 669.25 629.75 638.00 652.50 656.00
+##  [711] 697.25 719.75 720.00 694.50 675.50 636.50 653.25 664.25 659.75 659.25
+##  [721] 655.25 633.00 673.00 667.50 659.25 684.50 699.00 690.75 680.00 679.25
+##  [731] 682.75 662.00 675.00 688.75 666.88 656.75 664.50 624.50 620.25 657.25
+##  [741] 659.50 664.50 658.25 658.25 652.50 685.00 719.00 757.50 759.50 748.00
+##  [751] 772.75 759.50 753.25 744.75 732.25 740.00 702.00 686.25 695.50 680.50
+##  [761] 655.50 650.50 625.50 606.50 592.00 585.50 590.00 594.00 580.00 569.00
+##  [771] 577.25 579.75 560.50 554.25 553.25 559.75 564.25 539.25 546.75 552.50
+##  [781] 546.50 553.25 551.25 549.00 557.75 546.50 558.00 554.25 549.50 549.25
+##  [791] 555.00 547.75 562.00 565.00 562.00 546.25 550.25 560.75 547.50 555.50
+##  [801] 554.75 559.25 553.75 551.00 542.75 550.25 553.00 552.25 539.62 539.50
+##  [811] 538.75 541.00 534.50 556.25 563.75 548.50 550.00 552.00 543.00 549.25
+##  [821] 547.00 534.50 534.00 532.25 511.50 500.50 524.25 522.00 526.00 531.50
+##  [831] 534.25 524.50 517.25 492.25 496.25 494.00 495.00 491.75 483.75 485.75
+##  [841] 484.00 474.50 466.00 456.50 451.00 447.25 443.50 440.00 437.50 432.50
+##  [851] 427.25 424.75 419.25 424.25 420.25 422.00 417.00 419.50 417.00 422.50
+##  [861] 419.00 414.75 419.75 425.50 420.00 425.75 426.50 423.25 422.50 425.75
+##  [871] 420.25 416.25 410.50 408.25 417.25 423.00 407.50 406.75 409.25 405.25
+##  [881] 401.00 397.50 398.50 398.50 401.50 416.00 417.75 419.25 416.25 413.75
+##  [891] 408.75 405.25 402.00 403.75 396.50 391.25 389.00 395.00 387.00 388.75
+##  [901] 385.00 379.50 379.75 382.75 379.00 364.75 366.75 365.25 363.50 368.50
+##  [911] 369.25 369.75 378.50 375.25 371.75 366.00 357.50 365.00 357.25 350.00
+##  [921] 351.00 344.50 347.25 344.50 349.75 349.50 348.50 346.00 344.25 340.50
+##  [931] 340.75 331.75 327.00 324.50 325.00 327.00 331.00 324.50 325.25 314.50
+##  [941] 311.50 310.50 307.75 311.25 311.00 308.25 317.50 316.00 315.75 315.50
+##  [951] 320.00 325.00 326.25 328.00 327.50 322.75 328.25 333.00 330.25 326.25
+##  [961] 334.75 334.00 340.50 351.25 348.25 345.00 346.50 342.50 348.25 338.50
+##  [971] 326.25 317.00 317.25 324.25 325.00 328.25 332.50 331.00 330.25 329.00
+##  [981] 329.25 330.00 329.75 326.25 327.50 333.75 331.25 329.00 324.00 324.25
+##  [991] 323.25 325.75 327.50 320.50 319.00 316.88 318.00 317.75 319.50 321.25
+## [1001] 320.75 319.25 320.25 320.25 323.75 318.50 319.00 316.00 311.75 313.00
+## [1011] 310.75 311.50 311.50 304.50 302.75 305.50 315.75 319.25 317.50 309.25
+## [1021] 314.25 322.25 319.75 319.25 326.00 331.50 332.25 331.75 330.00 331.50
+## [1031] 327.75 330.75 333.50 334.75 340.75 341.25 346.00 348.75 348.50 347.25
+## [1041] 343.50 343.75 345.50 335.25 344.00 354.75 370.75 369.75 379.25 380.00
+## [1051] 374.25 377.25 384.50 387.00 381.75 374.75 366.50 364.50 370.50 372.50
+## [1061] 372.25 377.00 378.50 380.50 383.00 377.75 379.50 383.00 379.75 381.75
+## [1071] 383.50 379.25 380.75 382.25 378.75 381.25 379.50 384.25 386.50 380.50
+## [1081] 387.25 393.75 388.75 387.50 389.25 375.50 387.50 389.00 389.50 385.75
+## [1091] 383.25 384.25 384.50 384.75 386.50 391.50 387.25 387.75 388.25 390.00
+## [1101] 388.50 388.25 387.50 388.75 387.75 386.50 387.00 390.00 388.00 366.25
+## [1111] 367.00 357.75 363.25 365.75 366.50 365.50 368.75 372.00 373.50 371.25
+## [1121] 373.50 362.75 367.50 370.50 368.75 368.50 366.75 370.00 367.75 371.25
+## [1131] 375.75 375.25 377.75 373.25 377.25 375.25 378.75 381.75 383.25 389.25
+## [1141] 390.00 390.75 386.25 384.00 386.75 386.75 387.75 388.00 387.25 391.00
+## [1151] 394.75 391.75 393.25 397.75 397.75 380.25 394.25 395.75 387.00 384.75
+## [1161] 388.75 387.75 392.50 388.00 371.50 372.50 374.25 374.75 373.25 370.75
+## [1171] 372.75 371.25 368.00 374.00 355.50 354.50 348.25 348.50 340.75 342.50
+## [1181] 346.50 346.00 349.75 358.00 359.75 362.75 357.00 358.50 359.75 363.25
+## [1191] 362.50 359.50 365.00 371.00 360.75 359.00 366.00 385.25 410.25 411.00
+## [1201] 406.50 404.00 405.25 399.50 392.75 400.25 411.25 417.00 414.50 418.50
+## [1211] 424.00 425.50 422.25 430.75 424.50 436.00 435.25 441.00 449.50 447.75
+## [1221] 434.25 431.75 438.50 434.00 433.00 413.50 412.00 420.25 440.00 443.25
+## [1231] 447.50 446.75 442.25 450.00 441.00 449.75 454.75 453.00 442.00 430.00
+## [1241] 427.75 415.75 415.75 420.50 414.75 425.25 424.25 427.00 436.25 418.75
+## [1251] 420.25 404.25 389.75 394.50 394.25 389.00 383.25 379.00 369.50 360.50
+## [1261] 347.50 342.50 344.50 355.25 358.00 355.75 363.00 362.00 360.00 353.25
+## [1271] 352.00 351.25 347.50 346.75 351.25 354.75 358.50 358.50 358.25 359.00
+## [1281] 362.75 361.00 360.00 361.75 360.00 360.00 362.50 365.25 362.75 361.50
+## [1291] 361.75 356.50 374.00 373.75 377.25 379.75 378.25 376.25 371.50 371.25
+## [1301] 371.50 373.25 361.50 357.25 356.50 352.50 354.75 356.00 362.50 366.00
+## [1311] 365.00 364.00 362.00 363.75 366.25 370.50 375.25 375.50 370.75 369.75
+## [1321] 375.00 374.75 374.75 374.75 378.75 378.25 372.75 374.25 376.50 380.00
+## [1331] 380.75 379.25 378.25 376.50 381.25 377.25 379.75 380.25 377.00 378.75
+## [1341] 379.00 380.50 381.75 380.00 374.00 371.25 378.50 378.25 376.25 382.00
+## [1351] 380.00 382.25 383.00 379.75 375.75 375.00 375.50 374.50 373.25 377.75
+## [1361] 378.50 375.25 381.75 385.50 384.00 376.75 375.50 376.25 375.00 374.25
+## [1371] 374.00 372.00 374.25 374.25 371.25 366.50 360.25 360.50 356.50 356.00
+## [1381] 359.00 361.25 361.75 361.25 362.25 364.75 367.50 367.00 366.50 371.25
+## [1391] 369.75 373.50 372.25 373.25 374.00 371.25 366.75 363.25 364.75 366.75
+## [1401] 367.75 361.00 368.25 370.25 369.50 367.00 370.75 374.25 375.25 378.25
+## [1411] 373.75 369.25 362.75 364.50 366.50 368.25 367.50 364.75 367.50 365.75
+## [1421] 356.25 364.75 363.00 363.75 360.50 357.25 352.50 345.75 343.25 348.00
+## [1431] 337.00 336.25 341.50 355.25 355.50 354.25 353.50 351.75 354.50 365.75
+## [1441] 351.00 341.00 341.25 341.00 346.75 348.50 346.75 352.50 359.75 362.00
+## [1451] 364.25 365.25 361.50 362.25 356.50 357.75 369.25 371.25 370.75 371.00
+## [1461] 369.75 366.75 365.00 372.25 367.25 362.00 361.50 359.25 352.00 357.25
+## [1471] 355.25 351.25 347.25 346.25 341.75 330.25 336.50 331.25 339.75 345.75
+## [1481] 351.75 343.50 342.75 337.50 350.25 345.00 352.50 352.50 350.50 357.25
+## [1491] 357.00 354.25 353.75 356.00 361.25 363.00 376.00 377.50 367.25 377.75
+## [1501] 376.25 378.25 383.75 380.75 391.50 394.00 393.50 400.00 408.75 406.00
+## [1511] 404.25 408.50 404.75 402.75 402.50 395.25 399.25 402.25 389.00 389.75
+## [1521] 394.75 394.75 395.50 393.25 398.75 399.50 396.00 396.75 392.50 389.50
+## [1531] 386.00 386.50 381.25 378.50 376.50 382.00 383.00 380.25 382.50 386.25
+## [1541] 388.75 387.00 389.25 390.75 388.50 389.50 381.00 388.50 387.25 387.75
+## [1551] 373.50 374.00 374.00 377.25 376.00 375.00 374.50 375.00 382.75 386.75
+## [1561] 383.50 385.50 384.25 383.00 385.75 379.25 379.75 378.25 377.25 378.75
+## [1571] 374.50 370.50 368.50 366.25 366.75 365.75 365.50 367.25 367.25 367.50
+## [1581] 367.75 367.25 366.75 367.00 362.00 365.75 365.25 363.50 358.75 361.50
+## [1591] 361.75 361.50 361.50 358.75 356.50 355.25 356.50 351.25 352.00 352.50
+## [1601] 351.50 353.00 348.25 346.25 348.75 349.00 349.00 347.25 351.25 351.00
+## [1611] 353.00 353.25 350.75 352.00 353.75 352.75 352.00 351.25 349.25 347.50
+## [1621] 347.00 347.50 336.25 336.75 335.75 336.50 340.00 338.75 339.25 339.75
+## [1631] 339.50 344.75 341.75 339.00 336.25 338.75 342.25 345.25 345.00 345.00
+## [1641] 343.00 336.50 338.25 337.50 342.25 343.50 341.50 348.25 347.75 348.00
+## [1651] 348.25 350.50 348.25 345.75 348.75 348.75 350.50 351.00 352.75 351.25
+## [1661] 344.50 349.00 348.50 350.00 350.50 352.75 349.00 346.00 349.25 349.50
+## [1671] 350.00 349.50 348.25 349.50 351.50 355.25 352.50 354.00 352.25 353.75
+## [1681] 353.50 350.25 350.00 348.25 351.50 354.75 341.75 338.50 340.00 345.50
+## [1691] 344.25 341.75 347.00 344.25 340.00 342.25 329.50 333.50 336.00 338.75
+## [1701] 342.00 342.00 346.00 349.00 352.00 350.50 352.50 355.25 362.75 360.75
+## [1711] 357.25 372.25 369.75 372.25 366.50 363.50 365.00 362.50 370.75 374.25
+## [1721] 374.25 372.75 368.75 377.25 379.75 391.00 382.50 377.00 375.00 365.25
+## [1731] 361.00 376.25 392.25 391.75 382.25 380.25 381.75 378.00 370.50 359.75
+## [1741] 356.75 359.25 359.00 357.75 362.75 368.75 370.00 375.25 384.00 379.50
+## [1751] 377.00 381.00 377.25 387.75 385.75 384.75 377.25 373.00 372.75 370.50
+## [1761] 372.00 367.00 374.25 369.25 371.25 369.50 375.00 372.50 366.00 371.50
+## [1771] 367.75 367.75 361.75 360.50 365.25 358.25 356.75 361.75 358.00 366.25
+## [1781] 364.00 369.25 358.00 362.00 359.00 365.00 359.25 357.00 357.75 361.75
+## [1791] 361.75 366.50 371.00 369.00 366.50 367.00 359.50 360.75 364.75 363.00
+## [1801] 367.75 364.25 357.50 358.50 357.75 355.75 356.25 356.75 358.75 361.25
+## [1811] 363.50 367.50 366.00 363.50 353.75 354.50 358.00 359.75 365.25 369.50
+## [1821] 372.75 374.75 372.75 375.75 366.75 360.25 364.00 365.50 371.00 369.25
+## [1831] 368.25 373.50 378.75 374.25 375.50 374.50 369.50 370.75 368.50 363.75
+## [1841] 365.25 367.50 368.25 359.75 357.75 362.50 363.75 366.25 363.25 369.50
+## [1851] 369.75 366.25 365.00 365.50 358.50 358.25 357.25 358.25 360.00 358.00
+## [1861] 361.25 359.75 355.75 352.00 349.75 348.25 355.00 345.75 347.25 347.25
+## [1871] 350.25 353.25 356.25 356.50 351.75 356.25 354.50 352.50 346.50 350.50
+## [1881] 351.00 349.50 337.50 331.75 336.75 336.75 348.50 349.25 350.75 351.00
+## [1891] 349.75 345.50 342.00 338.50 341.50 337.25 340.25 343.50 340.75 354.25
+## [1901] 346.25 348.75 348.00 346.25 349.00 354.75 355.00 357.50 354.00 349.25
+## [1911] 348.25 352.50 351.00 357.50 353.75 354.00 354.25 349.50 337.00 345.50
+## [1921] 343.25 339.75 340.50 347.75 348.25 346.00 336.75 329.25 329.25 331.75
+## [1931] 329.00 336.50 336.75 340.00 340.50 337.25 337.00 330.00 322.25 319.25
+## [1941] 329.25 330.00 327.00 321.00 316.75 316.50 311.00 301.50 304.00 311.75
+## [1951] 316.25 323.50 327.50 328.50 333.25 334.25 332.00 330.25 327.50 326.50
+## [1961] 322.25 321.00 322.50 322.25 325.25 324.25 320.75 325.00 324.25 325.75
+## [1971] 334.50 331.25 335.75 332.50 334.75 335.00 334.25 337.50 341.75 357.00
+## [1981] 352.25 362.25 365.75 349.75 343.75 349.75 335.50 335.75 344.00 353.00
+## [1991] 358.75 372.75 385.25 385.25 384.50 387.25 393.00 396.25 421.25 437.75
+## [2001] 425.25 429.00 436.50 430.00 423.00 426.50 431.25 427.75 427.25 418.25
+## [2011] 415.25 413.75 404.75 412.75 408.25 404.75 397.50 397.75 394.50 390.00
+## [2021] 399.50 397.00 394.00 382.00 385.25 374.00 378.50 367.75 376.00 371.75
+## [2031] 373.25 378.25 390.25 390.25 387.00 380.75 382.25 377.00 371.75 384.50
+## [2041] 394.75 384.50 381.00 378.50 374.00 373.50 362.75 356.75 362.25 361.50
+## [2051] 358.00 356.75 354.50 354.00 351.50 367.00 373.00 370.50 370.00 368.50
+## [2061] 370.00 369.50 367.00 368.50 368.25 368.50 366.75 366.00 362.50 359.00
+## [2071] 358.75 355.00 354.50 353.75 354.50 353.75 353.50 354.50 355.50 359.75
+## [2081] 362.00 367.50 365.50 365.50 367.25 363.00 358.75 360.25 360.25 361.00
+## [2091] 362.25 365.75 368.50 371.00 372.50 371.25 372.00 365.50 369.25 369.25
+## [2101] 369.75 370.25 367.00 368.75 367.75 363.25 363.13 363.25 358.00 358.00
+## [2111] 356.75 351.75 357.00 353.00 353.25 353.00 351.50 358.75 359.00 362.50
+## [2121] 361.00 364.50 365.50 366.25 372.00 374.50 374.25 369.75 377.25 381.75
+## [2131] 373.00 377.25 371.75 370.00 368.50 376.25 370.25 364.00 367.00 365.00
+## [2141] 359.25 366.00 364.25 367.25 363.25 364.25 361.75 362.00 360.00 358.25
+## [2151] 362.00 362.25 359.00 366.75 373.00 374.50 380.50 380.50 376.50 382.25
+## [2161] 380.00 376.00 380.00 384.50 379.75 378.25 380.75 376.75 373.00 376.75
+## [2171] 375.50 379.00 384.50 380.75 382.75 391.25 395.75 398.25 393.50 389.25
+## [2181] 388.75 387.75 389.00 386.75 389.00 381.50 383.25 380.50 384.50 377.25
+## [2191] 379.75 386.00 390.50 379.00 374.50 361.75 356.50 355.00 349.50 347.75
+## [2201] 354.00 356.00 363.75 363.25 363.75 361.75 365.50 368.75 365.25 371.00
+## [2211] 367.25 366.25 363.25 364.00 363.75 357.25 376.50 390.25 372.75 369.75
+## [2221] 372.75 368.75 366.50 371.00 373.25 367.75 375.00 373.00 392.50 403.25
+## [2231] 402.75 406.50 405.00 420.25 430.00 429.50 424.00 433.50 427.25 421.25
+## [2241] 416.25 415.75 418.50 428.50 419.75 413.75 414.00 383.25 385.00 376.50
+## [2251] 366.50 367.50 360.00 353.25 358.00 359.25 354.00 348.25 353.00 356.50
+## [2261] 357.25 365.00 365.25 360.50 363.50 359.00 359.00 352.25 351.50 353.50
+## [2271] 349.50 355.00 360.00 365.00 360.00 362.00 368.00 365.50 361.00 356.00
+## [2281] 357.00 358.25 358.50 357.75 366.50 361.25 358.75 359.75 362.50 363.75
+## [2291] 361.00 360.75 364.50 370.75 372.50 373.00 378.00 379.75 376.25 376.00
+## [2301] 373.50 370.50 377.00 378.00 379.25 383.00 385.00 386.50 386.50 381.75
+## [2311] 384.25 402.50 399.00 399.25 403.00 401.25 398.00 392.75 381.50 382.75
+## [2321] 379.00 387.00 380.50 388.50 391.00 388.00 388.75 386.00 390.50 389.50
+## [2331] 391.00 388.00 393.25 388.50 383.75 385.50 386.75 393.00 397.75 392.00
+## [2341] 397.75 395.25 391.00 393.75 396.25 399.50 394.00 393.25 391.50 393.75
+## [2351] 377.75 378.50 380.00 381.50 389.75 392.50 395.25 392.00 395.75 397.75
+## [2361] 394.25 387.25 388.50 393.50 410.00 408.25 402.75 404.75 413.50 414.75
+## [2371] 404.50 405.75 415.00 421.25 423.00 416.25 422.50 420.25 419.00 419.50
+## [2381] 416.50 414.50 416.50 407.50 398.50 393.75 395.25 390.25 395.00 389.75
+## [2391] 382.00 381.25 389.75 388.75 391.63 391.50 387.25 380.25 385.25 386.25
+## [2401] 376.00 385.00 390.50 394.25 398.75 390.50 386.50 382.00 380.50 384.00
+## [2411] 383.00 377.25 386.00 389.25 387.00 388.50 378.00 376.75 366.75 373.50
+## [2421] 367.00 369.50 361.75 361.25 365.25 360.50 370.00 358.50 346.75 357.75
+## [2431] 356.50 353.50 345.25 336.25 335.75 334.00 333.50 338.50 335.75 339.00
+## [2441] 342.25 338.25 342.75 344.25 350.75 354.00 355.50 355.00 338.50 341.00
+## [2451] 345.75 344.25 348.25 356.00 346.50 352.00 363.75 364.75 369.25 365.00
+## [2461] 365.00 367.50 371.50 369.00 367.50 372.25 371.50 377.00 373.50 369.75
+## [2471] 369.00 368.25 363.50 371.25 374.25 367.25 369.25 362.25 367.00 371.50
+## [2481] 371.00 376.75 371.75 369.50 370.75 368.25 372.00 378.50 387.25 386.75
+## [2491] 381.75 381.50 378.25 386.25 391.25 398.25 400.50 409.50 412.25 416.00
+## [2501] 418.75 442.25 439.00 435.75 436.75 439.00 448.25 444.25 435.50 434.00
+## [2511] 436.75 443.00 440.00 437.50 441.25 447.50 456.25 444.25 452.25 454.00
+## [2521] 459.25 458.00 463.25 469.25 466.25 475.50 474.00 472.50 472.25 475.50
+## [2531] 481.25 481.00 495.50 502.75 499.50 507.50 516.50 514.00 517.50 508.00
+## [2541] 499.50 507.00 519.00 521.50 513.75 512.75 507.25 509.50 502.00 493.75
+## [2551] 500.50 503.50 509.75 509.25 504.50 507.25 508.00 513.00 505.25 507.50
+## [2561] 505.25 501.00 512.50 506.75 496.25 496.25 489.25 491.25 494.50 483.75
+## [2571] 483.50 492.75 491.00 484.00 486.00 485.00 488.50 483.25 478.25 489.00
+## [2581] 491.00 482.00 484.25 470.50 463.50 454.50 461.00 461.25 457.75 459.00
+## [2591] 462.25 460.25 455.50 450.75 446.50 446.00 447.25 448.75 450.00 448.50
+## [2601] 447.50 447.75 441.75 439.50 439.50 434.00 438.00 438.00 436.00 435.25
+## [2611] 433.00 432.25 431.75 435.50 433.50 439.50 442.50 440.75 420.25 425.25
+## [2621] 433.75 435.75 431.75 429.00 421.38 430.25 431.75 435.75 434.50 442.75
+## [2631] 442.50 441.50 438.50 433.50 435.25 431.75 425.50 434.25 439.25 436.00
+## [2641] 438.00 434.25 433.50 436.50 431.25 424.50 424.50 426.50 424.75 431.25
+## [2651] 429.25 429.50 425.25 426.25 421.00 430.50 436.50 440.25 444.00 446.50
+## [2661] 438.50 431.50 431.50 435.50 437.00 437.50 439.25 441.75 444.25 443.25
+## [2671] 452.00 452.50 455.25 451.00 456.75 454.00 455.50 455.25 455.75 449.75
+## [2681] 446.25 451.00 456.25 454.50 461.75 456.00 452.00 451.75 451.75 454.50
+## [2691] 466.50 469.50 467.25 461.50 466.00 463.75 472.00 468.75 466.50 469.00
+## [2701] 459.00 466.25 472.50 469.00 463.50 468.25 461.00 469.50 475.25 482.00
+## [2711] 481.50 480.75 486.25 500.50 470.00 464.50 483.25 475.50 485.50 463.50
+## [2721] 472.25 455.25 447.25 464.00 453.25 459.75 458.25 459.25 460.50 463.75
+## [2731] 467.00 479.00 477.50 473.25 476.00 478.75 480.25 485.50 498.00 500.75
+## [2741] 500.75 502.00 510.75 503.50 545.50 560.75 553.75 551.75 533.25 525.75
+## [2751] 533.13 532.25 533.00 531.50 547.25 572.25 574.00 576.50 579.00 592.00
+## [2761] 598.25 610.00 589.00 578.75 571.75 570.50 575.00 583.50 577.25 591.50
+## [2771] 578.00 571.00 583.75 588.75 597.25 591.75 593.75 583.75 566.75 563.50
+## [2781] 559.75 546.75 554.50 556.00 553.75 563.50 652.50 655.50 636.25 648.75
+## [2791] 633.00 640.00 636.50 661.25 662.00 646.75 650.00 659.75 619.75 624.50
+## [2801] 618.25 614.00 623.50 633.00 629.75 641.25 640.75 628.00 641.25 633.50
+## [2811] 632.50 627.50 619.50 617.75 618.50 630.25 627.25 626.75 676.00 716.00
+## [2821] 712.25 715.25 708.50 717.25 717.25 712.00 703.25 700.25 716.50 710.25
+## [2831] 714.25 711.25 703.50 691.25 688.50 709.00 703.25 708.50 703.50 695.25
+## [2841] 694.75 685.50 684.25 685.50 696.25 692.00 697.00 692.75 693.50 695.50
+## [2851] 701.50 708.75 712.00 724.00 730.75 736.25 737.75 742.00 741.00 730.00
+## [2861] 729.25 721.50 724.25 722.75 730.25 727.38 729.25 725.25 731.25 730.75
+## [2871] 723.00 707.00 697.50 693.75 688.75 685.25 680.75 691.00 693.50 700.25
+## [2881] 696.75 694.50 696.50 706.75 704.75 699.75 707.00 723.75 727.50 730.75
+## [2891] 720.25 725.50 728.00 730.00 737.25 751.50 757.75 752.00 754.75 752.75
+## [2901] 758.75 764.00 764.00 751.25 749.75 745.25 747.25 742.50 731.00 725.00
+## [2911] 729.25 726.25 722.25 742.00 743.25 746.00 743.00 738.00 742.50 753.50
+## [2921] 757.00 744.50 739.00 739.75 744.00 756.00 756.00 759.25 759.50 759.25
+## [2931] 744.75 738.25 737.25 752.75 773.25 737.75 742.25 742.00 748.50 757.25
+## [2941] 757.50 759.75 760.00 759.50 719.50 728.50 747.50 748.75 751.00 749.50
+## [2951] 758.75 744.00 752.50 782.00 773.75 769.50 777.75 783.25 799.50 798.50
+## [2961] 790.75 805.00 799.75 808.50 813.50 795.50 800.75 808.50 814.75 834.75
+## [2971] 838.75 823.75 807.25 807.50 804.00 789.00 792.25 809.25 823.75 816.50
+## [2981] 800.50 805.00 807.50 795.75 800.50 805.25 814.00 793.25 776.25 788.00
+## [2991] 778.25 785.50 795.75 778.50 784.25 771.25 772.50 740.50 731.25 704.00
+## [3001] 718.50 732.00 695.25 708.75 674.00 652.25 628.50 626.25 627.50 619.50
+## [3011] 591.25 551.25 550.25 568.75 567.50 537.00 509.50 520.75 515.00 526.50
+## [3021] 540.50 551.00 543.00 527.50 516.00 527.50 514.75 525.50 526.75 522.50
+## [3031] 526.50 518.25 529.00 526.00 548.50 546.50 538.50 537.00 523.00 583.00
+## [3041] 581.00 587.50 607.25 623.00 620.00 620.25 614.50 611.50 629.00 634.25
+## [3051] 625.50 607.50 601.00 608.00 612.50 603.00 612.00 594.00 607.25 613.25
+## [3061] 620.75 629.00 627.00 625.75 641.25 652.25 650.75 653.00 651.00 643.25
+## [3071] 603.75 619.50 630.75 636.00 644.50 642.75 641.25 646.00 661.50 670.25
+## [3081] 667.00 658.75 662.00 659.50 645.00 635.50 638.75 654.00 660.75 655.00
+## [3091] 654.00 658.00 657.25 648.50 644.00 642.50 641.25 633.50 645.25 639.75
+## [3101] 631.00 638.00 643.00 635.50 641.50 648.00 648.50 651.25 650.75 649.50
+## [3111] 648.25 645.25 637.75 647.50 640.00 640.25 635.25 625.75 616.75 612.00
+## [3121] 600.25 610.75 606.50 618.25 658.25 659.25 659.50 650.75 651.50 666.75
+## [3131] 667.00 647.13 654.75 646.25 650.25 641.25 620.13 620.13 628.00 626.25
+## [3141] 625.25 615.75 609.75 591.75 587.75 580.75 594.50 594.00 594.25 600.25
+## [3151] 592.75 596.50 591.00 595.25 601.50 608.00 605.50 598.50 590.00 595.50
+## [3161] 605.75 605.00 618.00 623.25 652.00 654.75 643.25 647.75 654.75 665.00
+## [3171] 671.00 665.25 666.25 663.75 656.00 665.25 659.00 667.00 663.50 649.50
+## [3181] 662.25 662.25 660.00 659.25 648.50 652.75 651.25 651.50 649.75 652.75
+## [3191] 657.50 617.50 612.75 618.25 618.25 600.75 606.00 605.75 645.75 644.00
+## [3201] 665.75 661.25 652.00 663.00 698.75 703.00 705.00 705.50 714.75 724.25
+## [3211] 723.00 745.50 736.50 734.00 748.00 755.75 749.63 760.00 738.50 767.50
+## [3221] 775.25 770.00 767.00 743.50 743.00 743.50 734.50 725.25 713.00 725.50
+## [3231] 727.50 720.00 714.50 714.00 688.50 688.50 686.00 703.00 701.50 713.00
+## [3241] 715.75 685.75 668.75 686.25 691.50 686.75 674.50 685.50 673.00 677.75
+## [3251] 687.25 677.00 685.00 690.75 686.75 664.00 643.00 642.25 625.00 618.75
+## [3261] 625.50 620.38 606.75 648.00 678.00 670.00 644.25 657.00 668.00 672.25
+## [3271] 702.25 687.50 687.00 684.50 704.75 729.00 751.75 756.00 754.00 736.00
+## [3281] 717.00 711.50 731.00 741.50 728.25 717.50 751.13 728.25 718.25 714.75
+## [3291] 705.00 719.75 717.50 711.50 717.50 692.75 671.50 682.00 680.50 677.25
+## [3301] 707.25 707.50 686.25 708.75 729.50 723.75 734.50 756.50 729.25 759.25
+## [3311] 772.75 768.50 745.63 744.50 740.50 757.00 759.50 749.50 761.00 761.00
+## [3321] 757.50 781.25 774.00 766.25 770.50 773.75 767.50 743.00 701.00 671.00
+## [3331] 678.75 678.00 695.50 708.00 688.50 694.00 693.50 690.00 653.75 623.75
+## [3341] 642.50 666.00 664.25 682.75 701.00 705.50 717.50 728.00 736.75 721.50
+## [3351] 735.50 731.00 722.00 696.50 702.25 690.25 720.25 723.00 701.00 701.00
+## [3361] 706.50 717.25 709.50 708.75 684.75 685.75 689.25 673.25 679.75 676.50
+## [3371] 670.00 654.50 661.00 668.00 654.25 665.00 667.00 664.00 651.25 669.25
+## [3381] 649.63 658.00 651.50 639.75 615.25 615.50 603.75 610.75 627.50 616.75
+## [3391] 628.50 636.50 624.00 632.00 631.25 623.00 613.13 622.00 617.00 610.25
+## [3401] 607.00 604.25 595.50 592.25 587.25 588.50 574.25 574.25 574.50 561.75
+## [3411] 568.00 573.50 555.50 566.25 544.00 553.25 553.00 553.75 543.00 529.25
+## [3421] 534.75 555.75 539.25 540.00 569.00 548.00 578.00 581.00 590.25 599.25
+## [3431] 601.75 603.75 594.50 589.25 590.50 595.00 592.00 590.25 584.00 581.50
+## [3441] 572.25 575.75 585.50 558.00 569.25 575.00 578.50 580.25 588.75 565.00
+## [3451] 537.50 507.50 499.25 501.75 483.00 478.25 508.25 517.25 512.50 525.25
+## [3461] 534.25 512.25 518.25 518.00 521.25 525.75 508.75 508.50 495.00 483.50
+## [3471] 478.25 470.75 462.50 466.25 462.00 465.38 464.50 447.50 446.75 439.25
+## [3481] 441.50 436.00 432.00 420.00 420.50 432.75 436.25 429.25 433.25 430.00
+## [3491] 422.75 427.25 421.75 411.00 409.00 418.00 420.00 418.00 415.00 404.00
+## [3501] 404.50 406.75 393.75 390.75 377.00 378.00 384.50 390.25 393.50 387.50
+## [3511] 394.00 407.25 405.25 384.25 375.25 379.75 383.50 385.50 378.25 368.00
+## [3521] 371.50 373.38 372.50 373.25 362.75 333.25 342.25 349.50 353.75 355.50
+## [3531] 361.00 364.25 370.00 367.00 365.75 363.00 363.00 359.00 352.50 347.00
+## [3541] 346.00 345.00 349.25 359.50 358.75 364.00 359.13 369.00 383.25 381.00
+## [3551] 373.25 380.00 376.75 369.50 368.00 368.25 364.00 363.00 373.00 378.25
+## [3561] 377.00 370.50 372.00 371.25 373.00 369.00 371.50 375.25 369.00 364.00
+## [3571] 353.75 359.50 361.00 371.50 369.00 365.25 357.25 374.00 373.75 368.50
+## [3581] 363.25 359.50 357.25 359.50 367.75 358.00 357.50 356.00 356.50 366.00
+## [3591] 368.25 367.50 366.25 376.00 373.75 381.75 385.50 387.00 385.25 377.75
+## [3601] 374.25 364.25 365.25 365.50 369.00 375.00 375.50 383.00 386.75 381.50
+## [3611] 381.75 389.00 383.25 386.25 378.75 382.75 371.75 369.00 371.75 379.00
+## [3621] 373.25 375.00 373.25 370.25 367.50 363.00 365.25 364.50 376.25 370.25
+## [3631] 367.75 372.75 369.25 373.25 378.75 375.50 382.75 378.75 380.25 371.75
+## [3641] 382.50 391.75 395.00 403.00 433.00 433.25 428.00 432.00 429.00 428.75
+## [3651] 414.25 424.25 423.50 427.00 426.00 408.13 418.75 415.25 409.25 410.75
+## [3661] 408.50 407.75 421.00 418.25 408.50 404.50 393.00 383.50 385.00 383.75
+## [3671] 388.50 400.75 406.50 414.50 417.50 413.50 408.00 392.00 403.25 407.00
+## [3681] 410.75 413.75 417.50 417.50 405.75 405.75 409.25 409.00 400.25 381.00
+## [3691] 390.25 397.50 403.50 395.75 379.25 392.50 381.50 383.00 390.00 409.25
+## [3701] 414.75 410.00 396.75 398.00 383.75 385.00 395.00 393.25 393.00 374.50
+## [3711] 376.25 372.25 370.50 354.25 346.50 353.25 356.75 354.00 351.25 346.75
+## [3721] 349.75 343.25 339.00 329.25 331.50 342.25 349.50 359.75 317.75 319.75
+## [3731] 315.25 309.75 307.50 306.25 315.75 319.25 319.25 329.75 329.00 329.25
+## [3741] 326.25 326.75 335.50 326.25 324.00 327.50 322.50 321.75 327.75 332.00
+## [3751] 336.25 331.00 330.50 326.50 340.25 357.00 365.75 369.00 349.50 342.25
+## [3761] 328.00 329.75 333.75 327.25 338.75 319.25 322.00 333.75 331.50 325.25
+## [3771] 337.50 338.50 331.75 328.25 329.50 325.25 325.50 334.75 345.75 356.50
+## [3781] 354.50 384.50 391.75 390.00 395.00 397.25 393.50 407.25 411.75 416.25
+## [3791] 412.75 414.75 434.50 450.00 444.75 453.25 444.75 454.00 458.25 442.50
+## [3801] 459.75 455.75 446.25 439.00 436.25 437.75 440.25 433.75 435.50 435.25
+## [3811] 430.75 426.75 428.25 426.50 427.50 421.25 421.00 412.00 407.50 405.25
+## [3821] 405.50 413.75 403.50 401.25 383.50 380.75 385.75 390.00 382.50 383.00
+## [3831] 378.75 385.75 395.25 394.00 403.50 397.25 399.75 406.75 406.50 415.75
+## [3841] 414.75 412.75 406.25 414.75 396.75 397.50 401.25 396.25 404.25 406.00
+## [3851] 407.00 407.00 398.50 400.75 401.75 388.50 385.25 364.50 375.50 365.50
+## [3861] 361.50 358.50 363.50 350.50 350.25 359.00 370.50 372.25 363.00 360.75
+## [3871] 359.00 362.00 358.00 359.00 373.25 376.00 378.50 387.00 388.00 387.50
+## [3881] 381.50 368.75 372.75 381.75 390.25 393.00 395.50 388.50 404.75 401.50
+## [3891] 398.50 401.00 394.75 401.75 376.25 377.50 373.25 391.25 421.25 417.25
+## [3901] 427.25 438.00 421.50 422.75 417.75 406.50 404.00 422.50 408.00 405.00
+## [3911] 392.00 391.00 400.25 400.50 405.25 386.50 373.50 351.50 342.00 327.75
+## [3921] 330.00 309.25 334.00 348.25 348.25 348.75 365.75 371.00 370.50 371.00
+## [3931] 354.25 380.00 395.25 396.50 403.00 397.00 393.50 386.25 391.75 401.50
+## [3941] 393.50 395.50 408.00 430.75 420.75 419.25 427.50 438.25 408.25 402.25
+## [3951] 388.75 406.25 400.75 427.75 436.25 420.50 401.50 405.50 429.00 429.50
+## [3961] 425.75 455.75 444.00 433.50 442.50 472.50 473.00 503.00 506.50 531.00
+## [3971] 561.00 576.00 580.50 578.00 576.25 559.00 543.25 570.00 550.25 580.25
+## [3981] 563.25 533.25 536.75 544.50 549.00 548.50 564.50 562.25 569.25 585.00
+## [3991] 587.75 596.00 594.00 600.00 606.50 617.50 595.00 584.50 572.75 549.50
+## [4001] 577.25 558.50 528.50 517.00 518.25 542.00 527.75 545.00 555.50 585.00
+## [4011] 607.50 621.25 613.50 601.25 596.50 592.00 590.50 592.25 608.25 628.50
+## [4021] 650.00 677.25 666.75 663.75 691.00 686.50 694.75 704.50 727.75 757.75
+## [4031] 761.00 732.25 737.75 767.75 768.25 744.50 727.00 738.75 735.50 741.75
+## [4041] 760.25 756.50 746.75 745.75 722.75 716.75 686.75 670.50 663.75 656.00
+## [4051] 627.75 621.25 629.00 612.50 595.25 605.50 611.00 612.75 608.50 619.75
+## [4061] 602.25 599.25 603.50 611.25 596.25 607.25 614.75 629.25 630.25 613.00
+## [4071] 606.25 594.00 613.50 617.25 612.25 604.50 613.50 590.75 589.50 601.50
+## [4081] 607.75 593.75 613.00 617.00 617.00 619.50 604.75 597.50 607.50 618.00
+## [4091] 604.25 603.25 611.25 613.50 609.25 598.00 582.00 573.75 567.25 565.00
+## [4101] 557.00 537.00 519.25 539.25 559.25 551.25 559.25 569.50 567.25 572.50
+## [4111] 565.75 547.25 567.25 567.00 554.50 566.50 556.50 556.25 538.00 544.00
+## [4121] 547.00 535.00 537.50 536.00 532.50 527.00 522.75 509.75 511.00 516.75
+## [4131] 521.00 512.25 514.25 521.75 522.75 513.25 513.25 510.25 512.75 514.25
+## [4141] 510.75 501.25 481.25 501.25 510.50 514.75 514.75 521.50 524.25 506.25
+## [4151] 486.25 489.00 490.00 477.50 478.00 476.75 473.50 466.75 463.25 466.00
+## [4161] 462.75 454.75 453.75 448.00 445.25 442.75 449.75 438.25 435.00 433.25
+## [4171] 424.00 417.75 417.25 412.00 411.25 411.25 403.50 401.50 400.75 404.50
+## [4181] 400.75 403.25 405.75 398.75 398.25 394.50 396.50 391.75 400.00 392.00
+## [4191] 396.00 404.00 406.25 401.25 403.00 392.50 394.50 386.00 392.75 387.50
+## [4201] 393.00 388.75 383.00 373.50 377.75 381.00 386.00 383.50 374.50 377.25
+## [4211] 378.25 367.75 360.75 364.25 359.50 356.25 359.00 359.00 361.00 365.50
+## [4221] 385.50 389.25 402.25 390.75 387.25 389.00 392.00 385.25 374.75 369.00
+## [4231] 369.00 349.00 346.75 356.50 341.25 346.00 347.50 339.25 345.75 353.25
+## [4241] 340.00 339.75 340.25 344.75 353.00 358.75 362.00 364.25 355.00 348.75
+## [4251] 345.75 339.00 345.25 345.00 349.00 350.50 348.75 358.00 352.00 343.00
+## [4261] 343.00 341.25 336.00 342.25 340.00 336.50 333.00 327.25 326.75 325.50
+## [4271] 333.50 336.25 342.50 336.75 348.50 354.75 351.50 343.00 345.50 339.25
+## [4281] 341.50 332.50 328.50 339.75 340.00 350.00 353.75 367.00 367.00 376.75
+## [4291] 394.75 404.25 404.00 424.00 426.00 417.50 412.50 402.50 405.00 390.25
+## [4301] 393.50 381.50 385.75 388.25 389.25 391.50 384.75 367.75 377.25 376.75
+## [4311] 371.50 371.25 381.25 369.00 371.50 377.50 376.50 363.25 369.25 354.50
+## [4321] 366.25 363.50 379.00 390.75 389.25 382.00 377.50 367.50 373.75 375.25
+## [4331] 381.75 371.25 364.00 372.00 382.25 375.25 365.25 376.00 381.50 371.50
+## [4341] 372.75 381.25 376.25 378.00 371.50 358.25 366.50 385.50 405.50 400.25
+## [4351] 403.75 403.50 415.25 421.00 421.25 417.00 410.00 410.75 409.00 404.75
+## [4361] 406.75 409.25 417.50 421.50 424.50 422.00 426.75 421.00 428.00 435.50
+## [4371] 424.25 438.50 442.50 447.50 439.00 428.25 429.50 420.00 420.75 423.25
+## [4381] 416.00 418.00 411.75 404.50 408.75 414.50 414.75 409.75 415.75 416.25
+## [4391] 411.50 417.50 418.00 412.50 420.25 416.00 418.00 422.00 419.00 413.75
+## [4401] 407.50 387.50 370.25 364.50 373.25 377.75 371.75 380.00 398.50 398.50
+## [4411] 396.25 394.75 395.25 391.50 385.50 381.25 380.75 373.75 377.00 371.75
+## [4421] 368.25 372.75 370.75 368.50 372.50 366.00 378.00 375.50 387.00 390.50
+## [4431] 385.25 384.75 388.25 386.00 378.25 377.25 375.00 370.50 366.00 372.50
+## [4441] 371.50 358.50 359.50 366.00 373.50 366.75 358.50 357.00 359.25 347.00
+## [4451] 334.75 343.00 344.50 339.50 339.25 335.75 330.25 324.75 327.00 325.25
+## [4461] 329.25 326.50 324.00 308.25 294.00 288.00 302.50 284.00 283.25 287.50
+## [4471] 278.00 280.75 275.25 277.50 267.75 272.75 268.25 268.50 270.00 262.25
+## [4481] 260.25 261.50 255.50 237.25 237.75 237.75 243.50 246.00 245.75 240.75
+## [4491] 244.25 245.75 248.00 244.75 238.75 241.00 241.75 244.25 240.00 236.00
+## [4501] 237.50 235.75 235.50 238.00 238.50 238.25 241.75 255.75 256.75 253.00
+## [4511] 257.00 262.25 262.00 264.25 257.75 256.00 253.50 254.25 252.75 256.00
+## [4521] 255.25 253.50 259.25 261.75 262.50 268.00 260.75 260.25 268.25 264.00
+## [4531] 257.25 251.00 255.00 249.50 253.50 246.00 239.75 237.00 236.50 234.50
+## [4541] 239.75 241.75 244.25 241.25 241.00 247.00 244.50 249.00 255.00 259.50
+## [4551] 253.75 257.50 262.75 259.50 264.75 271.00 266.25 262.50 265.75 265.00
+## [4561] 264.25 261.00 264.00 265.50 264.00 271.25 274.00 270.00 270.50 258.25
+## [4571] 247.00 240.00 238.00 237.00 240.50 239.25 242.50 243.50 248.00 249.00
+## [4581] 242.75 243.25 242.25 244.25 248.00 247.50 250.00 250.75 248.25 248.50
+## [4591] 248.75 253.75 252.75 254.50 252.75 247.50 245.50 247.75 247.25 238.75
+## [4601] 235.50 233.25 232.50 229.75 230.25 233.50 234.50 228.75 232.25 235.00
+## [4611] 239.50 231.75 228.75 234.50 232.00 228.00 230.50 232.75 239.50 239.25
+## [4621] 234.75 238.75 239.00 238.75 233.75 232.50 237.00 237.25 234.25 232.25
+## [4631] 229.00 231.25 231.75 236.25 232.00 228.50 233.00 235.00 230.25 226.50
+## [4641] 229.00 227.75 228.50 226.75 226.00 223.25 218.25 215.00 214.75 215.50
+## [4651] 218.25 223.00 222.25 224.00 222.50 220.50 223.50 224.75 227.00 228.50
+## [4661] 225.00 220.00 225.00 224.25 222.75 221.50 219.00 218.75 217.75 216.25
+## [4671] 214.00 207.25 208.75 207.75 203.75 201.75 201.00 204.25 206.75 203.25
+## [4681] 203.75 201.75 200.50 201.75 202.75 204.25 205.25 205.25 205.25 206.50
+## [4691] 206.75 210.00 210.75 209.75 208.00 209.50 210.00 209.50 209.75 210.50
+## [4701] 210.00 210.75 210.25 210.50 211.25 211.75 212.75 212.75 214.50 215.50
+## [4711] 214.50 214.75 216.50 216.25 216.25 218.25 215.50 214.75 215.50 217.00
+## [4721] 217.75 218.50 221.50 217.75 216.50 216.00 216.00 217.25 219.50 220.50
+## [4731] 219.25 219.25 219.00 218.75 219.00 207.75 210.00 211.50 216.00 216.25
+## [4741] 217.50 221.25 217.25 222.25 216.50 218.50 219.50 217.75 219.75 222.25
+## [4751] 224.00 226.00 223.50 224.75 226.50 222.25 223.25 231.00 238.25 236.50
+## [4761] 232.75 235.75 234.50 237.50 240.00 245.50 244.25 248.25 252.50 247.75
+## [4771] 245.25 241.25 244.75 244.75 252.25 259.00 270.00 268.00 250.50 244.75
+## [4781] 235.50 235.25 234.75 241.75 239.75 240.00 225.50 222.25 226.00 227.75
+## [4791] 231.25 242.00 235.75 238.75 242.00 245.25 238.50 234.75 233.75 228.25
+## [4801] 224.75 220.25 225.00 225.50 229.75 229.75 227.25 225.75 233.25 230.75
+## [4811] 229.50 233.00 230.75 229.00 232.25 221.25 217.75 219.00 215.50 215.00
+## [4821] 203.50 204.25 206.50 208.25 207.75 208.25 208.00 206.00 205.00 209.00
+## [4831] 213.50 213.00 217.00 221.75 222.25 217.50 219.50 219.00 217.75 212.50
+## [4841] 214.25 215.75 214.25 215.25 214.00 212.50 214.00 215.50 213.75 218.00
+## [4851] 221.00 221.00 220.25 221.00 220.50 218.50 218.75 222.00 222.50 227.50
+## [4861] 231.25 233.00 235.25 221.00 224.75 220.00 216.25 214.25 213.25 217.00
+## [4871] 218.00 219.00 219.25 222.75 221.50 213.50 213.75 215.25 207.75 207.00
+## [4881] 204.25 207.50 208.50 206.00 206.00 203.00 202.75 204.50 203.00 203.00
+## [4891] 203.25 204.75 204.50 203.25 203.25 206.25 206.75 205.25 204.25 204.75
+## [4901] 204.00 203.50 204.75 207.50 208.25 214.50 214.75 214.75 216.00 209.25
+## [4911] 208.75 209.75 213.00 211.25 214.75 215.00 214.75 213.00 213.00 213.75
+## [4921] 211.75 211.25 212.50 206.00 204.75 201.25 203.00 204.00 203.25 209.00
+## [4931] 207.25 204.00 203.25 203.75 204.75 207.00 208.25 208.25 208.25 210.25
+## [4941] 215.00 217.50 214.50 214.00 211.25 209.25 210.25 210.25 210.25 211.75
+## [4951] 209.50 210.50 211.25 211.00 213.00 217.25 217.25 217.25 215.50 212.25
+## [4961] 215.00 216.50 217.00 214.50 216.75 214.50 215.75 213.25 215.25 215.25
+## [4971] 217.00 218.00 215.00 213.75 217.00 216.25 218.00 219.50 218.25 216.25
+## [4981] 218.25 220.50 222.75 222.75 225.25 226.25 228.50 218.00 220.50 222.25
+## [4991] 226.50 226.75 226.50 231.00 236.25 242.75 237.75 235.25 229.00 234.00
+## [5001] 237.00 242.00 244.25 241.75 240.25 236.25 239.75 233.00 228.25 229.00
+## [5011] 232.00 235.75 238.00 236.75 234.75 231.25 228.75 227.75 225.50 227.00
+## [5021] 226.75 230.75 231.75 232.00 227.75 234.50 242.00 245.00 247.50 250.25
+## [5031] 246.50 244.75 248.00 246.25 248.50 253.75 254.00 259.25 263.00 262.50
+## [5041] 272.50 275.00 280.50 277.75 279.25 272.50 279.00 278.25 281.25 285.00
+## [5051] 282.75 292.25 289.75 289.75 302.25 299.00 302.50 309.50 310.75 319.75
+## [5061] 319.75 299.75 294.50 296.25 299.25 291.75 284.75 285.50 292.75 286.25
+## [5071] 290.25 292.25 295.25 297.50 299.25 298.50 311.00 310.25 319.75 323.75
+## [5081] 324.00 320.25 319.75 314.25 315.50 307.25 309.75 309.75 309.00 315.00
+## [5091] 317.75 321.00 316.25 324.25 318.50 329.50 337.75 337.50 333.50 336.25
+## [5101] 337.00 332.00 325.50 317.25 309.75 309.75 311.50 315.25 321.25 323.50
+## [5111] 317.00 316.25 312.00 309.50 311.25 301.25 299.00 298.25 301.50 292.50
+## [5121] 297.25 297.00 297.75 295.75 302.75 303.00 302.00 298.50 297.75 294.00
+## [5131] 291.00 291.25 286.25 290.50 288.75 287.75 290.75 286.75 290.25 284.50
+## [5141] 280.25 275.25 278.00 276.00 281.50 274.25 275.25 280.75 285.25 281.00
+## [5151] 280.00 282.00 279.75 276.75 272.50 272.50 271.75 267.75 254.25 255.00
+## [5161] 253.50 254.75 256.25 256.00 248.75 245.75 246.50 244.00 239.75 247.25
+## [5171] 249.50 252.50 252.50 254.25 254.00 255.75 252.50 251.00 249.75 249.75
+## [5181] 248.00 248.50 249.00 252.25 248.25 249.25 248.75 247.25 244.50 239.50
+## [5191] 241.00 241.00 237.50 241.75 244.50 246.50 247.00 246.75 239.50 239.75
+## [5201] 241.50 240.25 242.00 237.75 245.50 252.50 252.75 252.50 246.25 241.75
+## [5211] 241.00 240.75 226.25 222.00 220.50 221.25 221.75 223.75 225.75 224.75
+## [5221] 224.25 229.25 229.50 231.50 229.25 231.00 228.50 228.50 228.75 233.75
+## [5231] 233.75 233.75 231.75 231.00 235.00 233.75 231.50 231.50 232.00 235.25
+## [5241] 228.00 233.00 242.25 242.75 240.25 243.00 247.00 244.25 240.00 241.75
+## [5251] 238.75 237.00 235.75 235.50 235.25 232.50 236.25 232.50 238.25 229.50
+## [5261] 229.50 229.50 229.75 218.25 221.50 220.25 219.00 217.00 217.25 214.00
+## [5271] 212.00 213.75 215.25 215.25 212.25 211.50 211.50 213.50 213.75 211.00
+## [5281] 211.75 211.75 212.25 212.00 213.25 215.00 220.75 223.25 219.50 222.25
+## [5291] 223.25 225.25 223.75 229.75 228.00 234.75 234.50 235.50 238.50 241.00
+## [5301] 240.75 238.75 238.00 239.50 245.00 242.00 237.50 235.00 237.25 234.25
+## [5311] 236.25 238.25 240.50 243.00 243.25 239.25 239.75 242.25 242.25 243.75
+## [5321] 244.50 244.50 250.50 252.00 251.25 252.75 252.25 252.00 242.50 242.50
+## [5331] 237.50 237.25 232.50 231.50 231.25 231.25 231.25 234.00 236.50 238.75
+## [5341] 239.00 239.25 241.50 239.75 242.50 239.75 240.25 240.25 243.75 244.50
+## [5351] 244.50 239.75 239.25 240.50 239.75 237.00 228.00 229.25 228.50 228.50
+## [5361] 229.00 232.00 234.25 232.25 230.75 231.25 233.00 235.50 235.50 235.00
+## [5371] 237.00 240.00 240.25 237.25 236.25 234.50 233.25 232.25 233.75 233.75
+## [5381] 232.75 234.00 238.00 238.25 241.25 243.50 243.00 242.75 244.75 244.50
+## [5391] 242.50 241.50 239.00 240.25 239.50 240.25 239.75 238.25 241.00 238.00
+## [5401] 238.50 238.50 237.50 236.50 235.00 233.25 234.00 233.75 233.25 238.25
+## [5411] 246.50 247.75 243.25 239.75 239.75 240.75 239.75 239.75 243.00 245.75
+## [5421] 245.25 245.25 242.00 242.50 242.25 240.75 241.00 240.00 239.25 240.50
+## [5431] 238.25 236.75 237.25 236.00 239.25 238.75 241.25 241.50 244.25 244.75
+## [5441] 244.75 247.75 246.75 248.50 246.50 244.50 243.75 245.25 244.25 242.75
+## [5451] 240.50 240.75 245.50 247.25 246.00 248.25 251.25 252.00 250.00 252.50
+## [5461] 251.00 254.00 254.75 255.00 257.00 259.75 260.00 261.00 260.25 261.50
+## [5471] 252.75 253.75 258.25 262.50 263.25 265.75 263.75 260.75 263.25 262.50
+## [5481] 259.00 266.00 267.75 265.75 267.00 261.50 268.00 273.75 279.25 282.50
+## [5491] 283.75 276.25 283.25 292.50 287.50 289.25 283.25 280.50 278.50 274.25
+## [5501] 268.00 266.75 270.25 272.25 274.75 273.50 271.50 272.50 270.75 277.50
+## [5511] 282.50 284.00 284.75 279.50 272.25 261.50 257.25 260.00 262.00 263.75
+## [5521] 263.00 258.75 256.50 245.75 240.25 252.75 254.25 259.25 251.25 256.00
+## [5531] 244.75 242.50 241.50 244.50 237.25 222.50 223.75 228.75 232.50 229.25
+## [5541] 236.50 231.25 235.50 240.50 233.00 233.75 229.00 227.75 226.00 217.25
+## [5551] 217.00 215.25 213.50 215.25 216.00 218.50 214.25 211.50 214.00 213.75
+## [5561] 216.00 217.25 217.25 216.50 220.50 219.25 218.00 214.25 211.50 214.25
+## [5571] 214.25 217.00 217.50 215.25 219.50 222.50 215.50 215.00 206.00 205.50
+## [5581] 204.50 204.75 200.50 201.00 200.50 203.00 200.50 200.25 203.00 203.00
+## [5591] 203.50 204.50 204.25 202.50 204.00 205.75 204.00 202.25 203.75 205.00
+## [5601] 206.25 208.00 208.00 207.00 207.75 207.50 210.00 209.75 209.00 212.75
+## [5611] 211.25 210.50 211.50 212.25 212.75 213.25 213.25 212.75 207.75 207.25
+## [5621] 210.50 209.50 208.25 207.75 208.25 209.50 207.75 208.50 207.50 207.00
+## [5631] 205.50 208.25 211.75 213.75 213.75 212.75 211.75 214.00 215.75 212.75
+## [5641] 212.25 212.00 211.75 211.25 213.25 213.00 211.50 213.00 213.00 213.25
+## [5651] 214.50 216.00 216.50 215.75 216.75 218.50 220.50 221.75 219.75 211.00
+## [5661] 212.75 208.75 210.00 211.50 211.50 210.50 210.50 208.50 209.00 209.75
+## [5671] 209.50 208.75 211.50 211.50 212.25 214.25 214.00 215.50 209.75 208.75
+## [5681] 208.25 211.50 212.00 211.25 209.00 211.75 213.75 212.75 212.50 204.00
+## [5691] 202.75 207.75 207.75 212.25 212.75 213.00 213.50 211.50 210.00 206.50
+## [5701] 205.00 206.00 206.00 202.75 202.50 202.50 202.75 202.25 204.00 205.50
+## [5711] 206.00 203.50 205.50 206.50 206.50 204.25 204.25 205.50 205.25 207.75
+## [5721] 206.75 206.00 208.50 213.25 214.25 213.00 215.50 214.25 211.50 210.75
+## [5731] 209.25 210.50 214.50 216.00 216.75 215.50 215.75 217.25 218.75 216.00
+## [5741] 218.50 221.75 219.50 221.75 221.75 221.00 221.25 225.25 226.50 227.75
+## [5751] 225.50 226.25 224.00 226.00 223.75 227.25 223.50 223.50 220.50 223.75
+## [5761] 225.00 227.75 229.75 233.00 230.00 227.25 225.50 223.75 220.25 218.25
+## [5771] 221.00 223.00 226.25 224.50 228.25 226.00 227.25 223.00 217.50 216.50
+## [5781] 223.50 224.25 233.00 224.00 224.25 234.25 224.50 216.50 211.50 207.25
+## [5791] 205.75 202.25 199.25 197.25 197.25 195.75 193.25 192.50 195.25 196.00
+## [5801] 198.00 200.50 198.25 198.25 202.75 204.25 205.00 206.50 205.00 206.50
+## [5811] 206.00 203.25 203.75 206.75 200.50 198.00 197.25 199.25 201.75 200.00
+## [5821] 199.00 201.75 207.75 209.00 209.25 209.50 201.75 197.00 198.25 205.00
+## [5831] 205.00 208.00 210.00 207.75 208.50 207.50 207.50 204.25 207.75 203.50
+## [5841] 202.25 204.25 209.25 211.75 216.75 217.25 220.25 219.75 218.75 217.00
+## [5851] 218.50 218.50 220.25 219.75 217.25 216.25 212.00 215.00 217.25 219.00
+## [5861] 217.75 215.25 213.25 218.25 219.75 217.25 215.50 218.75 217.75 220.50
+## [5871] 221.25 219.75 220.25 220.25 223.25 222.50 222.75 224.00 222.50 218.50
+## [5881] 217.00 217.00 217.75 218.25 220.25 219.50 220.25 220.75 218.00 218.25
+## [5891] 218.75 218.25 220.50 221.75 220.00 221.25 219.25 217.00 217.50 216.25
+## [5901] 217.75 221.75 223.50 222.25 223.50 223.25 226.00 225.75 224.25 219.25
+## [5911] 222.50 229.50 227.50 225.75 226.00 230.00 230.00 227.25 231.75 230.25
+## [5921] 228.75 226.75 226.75 226.25 225.00 225.75 223.25 218.25 210.50 209.50
+## [5931] 208.25 209.00 210.75 207.25 211.25 212.00 212.75 213.50 212.75 209.25
+## [5941] 212.25 214.75 215.50 214.50 215.00 215.25 215.50 213.25 212.00 208.75
+## [5951] 211.25 212.00 213.75 216.00 214.75 213.50 213.25 212.00 206.00 206.00
+## [5961] 200.50 200.75 202.25 203.25 204.00 203.25 205.25 206.75 206.25 207.50
+## [5971] 206.75 208.00 208.00 204.50 203.50 201.50 203.25 203.50 204.25 203.50
+## [5981] 199.25 197.75 196.25 194.50 194.50 193.25 194.00 190.25 188.00 187.25
+## [5991] 189.50 187.75 185.75 187.50 190.00 192.25 192.00 189.25 189.50 194.00
+## [6001] 190.50 192.75 189.50 192.25 187.50 185.00 184.25 183.00 184.00 184.25
+## [6011] 185.25 186.50 186.75 183.75 183.75 182.75 185.25 186.25 187.50 185.75
+## [6021] 187.00 188.00 188.75 187.75 188.50 188.00 188.75 188.00 190.50 192.25
+## [6031] 195.75 194.00 189.50 188.50 187.25 182.50 186.00 185.75 185.00 187.00
+## [6041] 190.75 188.50 192.50 190.75 195.75 203.75 201.00 205.25 202.75 207.75
+## [6051] 211.25 211.75 210.50 213.75 216.00 214.25 212.00 216.75 217.25 228.50
+## [6061] 227.75 228.50 234.00 233.00 237.75 233.75 233.00 233.00 242.25 239.25
+## [6071] 243.00 246.75 249.50 248.50 246.25 243.25 243.75 247.25 245.75 244.75
+## [6081] 244.25 238.75 241.00 248.25 250.25 250.75 246.25 244.00 232.00 234.25
+## [6091] 236.50 239.50 236.75 235.75 236.75 233.50 232.50 235.00 236.25 234.00
+## [6101] 231.75 235.50 237.75 235.75 240.75 240.75 242.75 244.50 241.75 235.50
+## [6111] 233.75 240.75 240.25 238.25 242.75 240.50 244.00 249.00 243.75 244.50
+## [6121] 238.00 230.75 226.75 227.25 226.25 225.25 228.75 225.50 224.00 223.00
+## [6131] 224.00 220.75 221.50 224.75 223.25 228.00 228.75 229.75 231.25 231.00
+## [6141] 230.75 230.25 234.00 230.75 229.50 229.75 227.75 226.00 228.75 230.00
+## [6151] 227.75 231.50 233.50 230.75 235.50 234.75 230.75 228.75 228.75 227.75
+## [6161] 226.75 228.50 223.00 214.50 215.50 214.00 210.75 210.00 209.75 208.00</code></pre>
+<p>Graficamos la serie de tiempo por días desde 03 de Enero del año 2000 hasta el 19 de abril del año 2024, excluyendo los fines de semana</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="analisis-descriptivo.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie de tiempo usando la función plot</span></span>
+<span id="cb28-2"><a href="analisis-descriptivo.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df_maiz_filtradots, <span class="at">main =</span> <span class="st">&quot;Serie de Tiempo de Último Precio del Maíz&quot;</span>, </span>
+<span id="cb28-3"><a href="analisis-descriptivo.html#cb28-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Precio&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Las series de tiempo pueden descomponerse en varias componentes que ayudan a comprender la estructura y los patrones presentes en los datos a lo largo del tiempo. Las principales componentes de una serie de tiempo son:</p>
+<p>Tendencia: Representa la dirección general de los datos a largo plazo. Puede ser ascendente, descendente o plana. La tendencia captura cambios graduales y persistentes en los datos a lo largo del tiempo.</p>
+<p>Estacionalidad: Se refiere a patrones recurrentes o cíclicos que se repiten en la serie de tiempo a intervalos fijos de tiempo, como diarios, semanales, mensuales o anuales. La estacionalidad puede ser causada por factores como la temporada, eventos naturales o económicos.</p>
+<p>Ciclo: Es similar a la estacionalidad, pero con una duración más larga y menos regular. Los ciclos representan fluctuaciones económicas o patrones de negocios que se repiten en períodos de varios años.</p>
+<p>Variación aleatoria o ruido: Es la parte no sistemática o irregular de la serie de tiempo que no puede explicarse por la tendencia, la estacionalidad o el ciclo. La variación aleatoria puede deberse a factores aleatorios o eventos impredecibles que afectan los datos.</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="importación-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="series-de-tiempo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análisis-ddescriptivo-y-filtro-base-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="url-your-book-url-like-httpsbookdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

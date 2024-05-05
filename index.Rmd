@@ -13,6 +13,8 @@ description: |
   set in the _output.yml file.
 link-citations: yes
 github-repo: rstudio/bookdown-demo
+
+
 ---
 # Justificación uso de datos historicos del precio del maíz 
 
@@ -81,6 +83,8 @@ ruta_archivo <- "C:/Users/USUARIO/Desktop/Tercer semestre/series_tiempo/series_d
 
 df_maiz <- read.csv(ruta_archivo, sep = ";")
 
+names(df_maiz)
+
 ```
 
 ```{r}
@@ -96,53 +100,242 @@ La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, con
 -	Vol: Volumen negociado en toneladas
 -	% Var: Porcentaje de variación. 
 
-# Analisis Descriptivo
+# Análisis descriptivo y filtro base de datos
+
+## Filtro de datos.
+
+Considerando que el foco principal de este ejercicio recae en la variable objetivo **último**, se opta por construir un nuevo data frame que contenga exclusivamente la fecha y el valor de último.
+
+```{r}
+#data frame filtrado
+df_maiz_filtrado <- df_maiz[, c("Fecha", "Último")]
+
+head(df_maiz_filtrado, 5)
+```
+
+## Analisis Descriptivo
 
 A continuación se estudiarán los estadísticos descriptivos de la matriz de datos:
 
 ```{r}
-summary(df_maiz)
+str(df_maiz_filtrado)
 ```
-De la salida anterior podemos visualizar que se presentan 6170 registros, la apertura mínima fue de 182.8 con una media de 409.2, cuya apertura máxima fue de 837.5.
+
+Teniendo en cuenta que la variable **Fecha** se encuentra categorizada como caracter y no como fecha, se convierte esta columna a tipo fecha
 
 ```{r}
-library(dplyr)
+#Convertir fecha en formato fecha
+df_maiz_filtrado$Fecha <- as.Date(df_maiz_filtrado$Fecha, format = "%d/%m/%Y")
 
-# Suponiendo que tienes un dataframe llamado df y la columna se llama "vol"
-df_maiz <- mutate(df_maiz, vol_sin_K = as.numeric(sub("K", "", Vol.)))
-#df_maiz
-#str(df_maiz)
-# Mostrar las últimas filas del dataframe
-#tail(df_maiz)
+#validar
+str(df_maiz_filtrado)
+```
 
-# Suponiendo que serie_temporal es tu objeto de serie temporal y deseas seleccionar la segunda columna
-solovolumen <- df_maiz[, 8]
-solovolumen
 
+
+```{r}
+#install.packages("skimr")
+skimr::skim(df_maiz_filtrado)
+```
+
+De la salida anterior podemos visualizar que se presentan 6170 registros, el data frame tiene datos que van desde el 03 de Enero del año 2000 hasta el 19 de abril del año 2024, el precio de cierre del maíz en este periodo de tiempo tiene una media de 409 dolares con una desviación estándar de 159 dolares, el valor mínimo se encuentra en 182,5 dolares y el precio máximo en 838.75 dolares.
+
+
+Ahora, se va analizar el precio de cierre por día de la semana. 
+```{r}
+#Crear una columna que muestre el día de la semana
+df_maiz_filtrado$Dia_Semana <- weekdays(as.Date(df_maiz_filtrado$Fecha))
+
+head(df_maiz_filtrado, 5)
+```
+```{r}
+#Ordenar la variable Dia_Semana
+df_maiz_filtrado$Dia_Semana <- factor(df_maiz_filtrado$Dia_Semana, 
+                                      levels = c("lunes", 
+                                                 "martes", 
+                                                 "miércoles", 
+                                                 "jueves", 
+                                                 "viernes", 
+                                                 "sábado", 
+                                                 "domingo"))
+
+```
+
+
+
+```{r}
+#Cargar libreria para graficar
+#install.packages("ggplot2")
+library(ggplot2)
+
+```
+
+```{r}
+# Crear el gráfico de barras de la frecuencia por día de la semana
+ggplot(df_maiz_filtrado, aes(x = Dia_Semana, fill = Dia_Semana)) +
+  geom_bar() +  #Grafico de barras
+  geom_text( stat = "count", aes(label = ..count..), vjust = -0.5) + #Agregar etiquetas
+  labs(x = "Día de la semana", 
+       y = "Frecuencia", 
+       title = "Frecuencia por día de la semana") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+```
+
+Dado que los días domingos no se generan transacciones en la bolsa y que los datos que se tienen los días domingos solo son 9 en 24 años de historia se decide eliminar estos datos. 
+
+
+```{r}
+#Creando data frame sin el domingo
+
+df_maiz_SD <- subset(df_maiz_filtrado, Dia_Semana != "domingo")
+
+#validando filtro
+unique(df_maiz_SD$Dia_Semana)
+
+```
+```{r}
+# Crear el gráfico de boxplot por semana
+ggplot(df_maiz_SD, aes(x = Dia_Semana, y = Último)) +
+  geom_boxplot(fill = "skyblue", color = "blue") +
+  labs(x = "Día de la semana", y = "Último")
 ```
 
 # Series de Tiempo
 
-Convertir el archivo en formato ts
+Convertimos la matriz de datos en series de tiempo
 
 ```{r}
-#install.packages("tseries")
-#install.packages("timsac")
-#install.packages("changepoint")
+#install.packages("xts")
+# Carga el paquete xts
+library(xts)
 
+# Asegúrarse  de que la columna 'Fecha' esté en formato de fecha
+#SI SE EJECUTA DE NUEVO SE DEBE VOLVER A CARGAR
+#df_maiz_filtrado$Fecha <- as.Date(df_maiz_filtrado$Fecha)
 
-library(tseries)
-library(timsac)
-library(changepoint)
-#serie_temporal <- ts(df_maiz$vol_sin_K, start = c(2000,1),  frequency = 365.25)
-serie_temporal <- ts(solovolumen, start = c(2000,1),  frequency = 365.25)
-serie_temporal
+# Crea una serie de tiempo con la función ts
+df_maiz_filtradots <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261.25)
+#df_maiz_filtradots
+
 ```
 ```{r}
-#columna_a_trazar <- serie_temporal[, 6]
-#columna_a_trazar 
-plot(serie_temporal,main="")
+#revisamos que sea una clase ts
+
+class(df_maiz_filtradots)
+```
+```{r}
+#Corroboramos el inicio de la serie
+start(df_maiz_filtradots)
 
 ```
 
+
+
+
+
+
+
+
+Graficamos la serie de tiempo por días desde 03 de Enero del año 2000 hasta el 19 de abril del año 2024, excluyendo los fines de semana
+
+```{r}
+# Graficar la serie de tiempo usando la función plot
+plot(df_maiz_filtradots, main = "Serie de Tiempo de Último Precio del Maíz", 
+     xlab = "Fecha", ylab = "Precio", type = "l")
+
+```
+
+## Aproximación en media móvil
+
+Una parte importante del análisis descriptivo de un conjunto de datos son los indicadores de tendencia central, entre ellos, la media. Sin embargo, en el contexto del análisis de series de tiempo, este indicador puede aumentar su sensibilidad, pues la vulnerabilidad de los datos a cambios impredecibles es más alta que en otros conjuntos de datos. Es por eso que se plantea la media móvil, que se define como el promedio de los datos en una ventana de tiempo, es decir, se toma la media de un intervalo de los datos, en vez de la media de los datos en su totalidad. Esto reduce la variabilidad y se puede utilizar para una mejor descripción de estaciones o ventanas de tiempo específicas.
+
+A continuación se pueden observar diferentes ejemplo de aproximación de los datos a través de la media móvil con diversos k, en dónde k representa el tamaño del intervalo tomado:
+
+
+```{r}
+
+# Calcula el promedio móvil k = 10
+promedio_movil <- rollmean(df_maiz_filtradots, k = 10, align = "center", fill = NA)
+
+# Gráfico comparativo k = 10
+plot(df_maiz_filtradots, type = "l", col = "black", lwd = 2, xlab ="Fecha", ylab ="Precio", main = "Aproximación en Promedio Móvil con k = 10")
+lines(promedio_movil, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = c("Serie Original", "Promedio Móvil"), col = c("black", "red"), lty = c(1, 2), lwd = 2)
+
+# Calcula el promedio móvil k = 50
+promedio_movil <- rollmean(df_maiz_filtradots, k = 50, align = "center", fill = NA)
+
+# Gráfico comparativo k = 50
+plot(df_maiz_filtradots, type = "l", col = "black", lwd = 2, xlab ="Fecha", ylab ="Precio", main = "Aproximación en Promedio Móvil con k = 50")
+lines(promedio_movil, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = c("Serie Original", "Promedio Móvil"), col = c("black", "red"), lty = c(1, 2), lwd = 2)
+
+# Calcula el promedio móvil k = 100
+promedio_movil <- rollmean(df_maiz_filtradots, k = 100, align = "center", fill = NA)
+
+# Gráfico comparativo k = 100
+plot(df_maiz_filtradots, type = "l", col = "black", lwd = 2, xlab ="Fecha", ylab ="Precio", main = "Aproximación en Promedio Móvil con k = 100")
+lines(promedio_movil, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = c("Serie Original", "Promedio Móvil"), col = c("black", "red"), lty = c(1, 2), lwd = 2)
+
+# Calcula el promedio móvil k = 500
+promedio_movil <- rollmean(df_maiz_filtradots, k = 500, align = "center", fill = NA)
+
+# Gráfico comparativo k = 500
+plot(df_maiz_filtradots, type = "l", col = "black", lwd = 2, xlab ="Fecha", ylab ="Precio", main = "Aproximación en Promedio Móvil con k = 500")
+lines(promedio_movil, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = c("Serie Original", "Promedio Móvil"), col = c("black", "red"), lty = c(1, 2), lwd = 2)
+
+```
+
+
+
+
+
+
+## Componentes de una Serie de Tiempo
+
+
+Las series de tiempo pueden descomponerse en varias componentes que ayudan a comprender la estructura y los patrones presentes en los datos a lo largo del tiempo. Las principales componentes de una serie de tiempo son:
+
++ Tendencia: Representa la dirección general de los datos a largo plazo. Puede ser ascendente, descendente o plana. La tendencia captura cambios graduales y persistentes en los datos a lo largo del tiempo.
+
++ Estacionalidad: Se refiere a patrones recurrentes o cíclicos que se repiten en la serie de tiempo a intervalos fijos de tiempo, como diarios, semanales, mensuales o anuales. La estacionalidad puede ser causada por factores como la temporada, eventos naturales o económicos.
+
++ Ciclo: Es similar a la estacionalidad, pero con una duración más larga y menos regular. Los ciclos representan fluctuaciones económicas o patrones de negocios que se repiten en períodos de varios años.
+
++ Variación aleatoria o ruido: Es la parte no sistemática o irregular de la serie de tiempo que no puede explicarse por la tendencia, la estacionalidad o el ciclo. La variación aleatoria puede deberse a factores aleatorios o eventos impredecibles que afectan los datos.
+
+## Estacionalidad
+
+```{r}
+# Calcular la función de autocorrelación
+acf_result <- acf(df_maiz_filtradots, plot = FALSE)
+
+# Trazar la función de autocorrelación
+plot(acf_result, main = "Función de Autocorrelación")
+
+```
+
+Trazada ya la serie df_maiz_filtradot, se puede determinar que no presenta una tendencia ascendente o descendente por lo tanto la serie parece ser estacionaria en media. 
+
+```{r}
+
+
+# Calcular la descomposición estacional
+descomposicion <- stl(df_maiz_filtradots, s.window = "periodic")
+
+# Trazar la descomposición
+plot(descomposicion, col = "blue")
+
+```
+
+La gráfica generada por la función stl muestra la descomposición estacional de una serie de tiempo en tres componentes principales: tendencia, estacionalidad y residuos. 
+
+*Estacionalidad:* La parte intermedia de la gráfica muestra la estacionalidad de la serie de tiempo. Esto representa patrones recurrentes o cíclicos que se repiten a intervalos regulares. Por ejemplo, si la serie de tiempo representa datos mensuales, la estacionalidad mostrará patrones que se repiten cada año.
+
+*Tendencia:* La línea suavizada en la parte superior de la gráfica representa la tendencia de la serie de tiempo. La tendencia muestra la dirección general en la que los datos están cambiando a lo largo del tiempo. Una tendencia ascendente indica un crecimiento en los datos, una tendencia descendente indica una disminución, y una tendencia plana sugiere estabilidad.
+
+*Residuos:* La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.
 

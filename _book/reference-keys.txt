@@ -42,3 +42,12 @@ principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo
 principales-campos-donde-se-aplican-las-series-de-tiempo-1
 principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo-1
 series-de-tiempo
+tab:unnamed-chunk-6
+filtro-base-de-datos
+análisis-ddescriptivo-y-filtro-base-de-datos
+análisis-descriptivo-y-filtro-base-de-datos
+filtro-de-datos.
+componentes-de-una-serie-de-tiempo
+estacionalidad
+section
+aproximación-en-media-móvil
