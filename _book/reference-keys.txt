@@ -51,3 +51,4 @@ componentes-de-una-serie-de-tiempo
 estacionalidad
 section
 aproximación-en-media-móvil
+tab:unnamed-chunk-7

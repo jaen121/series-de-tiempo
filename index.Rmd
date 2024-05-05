@@ -77,8 +77,12 @@ Los datos a trabajar se obtuvieron de https://es.investing.com/commodities/us-co
 
 Se importa la matriz de  datos
 
+
+
+
 ```{r}
-# Importar datos desde un archivo CSV con la ruta completa
+# Importar datos desde un archivo CSV desde github 2.0
+#>>>>>>> 19a31d5173326c607f3130d8bf1c2526947be103
 ruta_archivo <- "Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
 
 df_maiz <- read.csv(ruta_archivo, sep = ";")
@@ -148,6 +152,8 @@ df_maiz_filtrado$Dia_Semana <- weekdays(as.Date(df_maiz_filtrado$Fecha))
 
 head(df_maiz_filtrado, 5)
 ```
+
+
 ```{r}
 #Ordenar la variable Dia_Semana
 df_maiz_filtrado$Dia_Semana <- factor(df_maiz_filtrado$Dia_Semana, 
@@ -194,6 +200,8 @@ df_maiz_SD <- subset(df_maiz_filtrado, Dia_Semana != "domingo")
 unique(df_maiz_SD$Dia_Semana)
 
 ```
+
+
 ```{r}
 # Crear el gráfico de boxplot por semana
 ggplot(df_maiz_SD, aes(x = Dia_Semana, y = Último)) +
@@ -219,11 +227,15 @@ df_maiz_filtradots <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency
 #df_maiz_filtradots
 
 ```
+
+
 ```{r}
 #revisamos que sea una clase ts
 
 class(df_maiz_filtradots)
 ```
+
+
 ```{r}
 #Corroboramos el inicio de la serie
 start(df_maiz_filtradots)
@@ -338,4 +350,10 @@ La gráfica generada por la función stl muestra la descomposición estacional d
 *Tendencia:* La línea suavizada en la parte superior de la gráfica representa la tendencia de la serie de tiempo. La tendencia muestra la dirección general en la que los datos están cambiando a lo largo del tiempo. Una tendencia ascendente indica un crecimiento en los datos, una tendencia descendente indica una disminución, y una tendencia plana sugiere estabilidad.
 
 *Residuos:* La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.
+
+
+
+Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2 
+
+Cambios 2, prueb
 
