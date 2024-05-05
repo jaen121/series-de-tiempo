@@ -82,7 +82,6 @@ Se importa la matriz de  datos
 
 ```{r}
 # Importar datos desde un archivo CSV desde github 2.0
-#>>>>>>> 19a31d5173326c607f3130d8bf1c2526947be103
 ruta_archivo <- "Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
 
 df_maiz <- read.csv(ruta_archivo, sep = ";")
