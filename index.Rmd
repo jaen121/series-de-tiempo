@@ -355,5 +355,5 @@ La gráfica generada por la función stl muestra la descomposición estacional d
 
 Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2 
 
-Cambios 2, prueba Jairo
+Cambios 2, prueba Jairo ohhh
 
