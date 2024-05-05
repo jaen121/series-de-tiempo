@@ -237,7 +237,7 @@ start(df_maiz_filtradots)
 
 
 
-Graficamos la serie de tiempo por días desde 03 de Enero del año 2000 hasta el 19 de abril del año 2024, excluyendo los fines de semana
+Graficamos la serie de tiempo por días desde 03 de Enero del año 2000 hasta el 19 de abril del año 2024, excluyendo los fines de semanaaa
 
 ```{r}
 # Graficar la serie de tiempo usando la función plot
