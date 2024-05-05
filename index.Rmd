@@ -357,11 +357,3 @@ La gráfica generada por la función stl muestra la descomposición estacional d
 
 *Residuos:* La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.
 
-
-
-Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2, prueba Cristian
-
-Cambios 2, prueba Jairo ohhh
-
-Texto ejemplo a ver si sirve, prueba Laura
-
