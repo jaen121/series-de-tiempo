@@ -37,7 +37,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="análisis-descriptivo-y-filtro-base-de-datos.html"/>
-<link rel="next" href="url-your-book-url-like-httpsbookdown.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -164,11 +164,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#componentes-de-una-serie-de-tiempo"><i class="fa fa-check"></i><b>5.2</b> Componentes de una Serie de Tiempo</a></li>
 <li class="chapter" data-level="5.3" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#estacionalidad"><i class="fa fa-check"></i><b>5.3</b> Estacionalidad</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="url-your-book-url-like-httpsbookdown.html"><a href="url-your-book-url-like-httpsbookdown.html"><i class="fa fa-check"></i><b>6</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="url-your-book-url-like-httpsbookdown.html"><a href="url-your-book-url-like-httpsbookdown.html#principales-campos-donde-se-aplican-las-series-de-tiempo-1"><i class="fa fa-check"></i><b>6.1</b> Principales campos donde se aplican las series de tiempo</a></li>
-<li class="chapter" data-level="6.2" data-path="url-your-book-url-like-httpsbookdown.html"><a href="url-your-book-url-like-httpsbookdown.html#principales-pasos-para-llevar-a-cabo-un-aálisis-de-series-de-tiempo-1"><i class="fa fa-check"></i><b>6.2</b> Principales pasos para llevar a cabo un aálisis de series de tiempo</a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -270,25 +265,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="estacionalidad" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Estacionalidad<a href="series-de-tiempo.html#estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="series-de-tiempo.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular la función de autocorrelación</span></span>
-<span id="cb37-2"><a href="series-de-tiempo.html#cb37-2" aria-hidden="true" tabindex="-1"></a>acf_result <span class="ot">&lt;-</span> <span class="fu">acf</span>(df_maiz_filtradots, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb37-3"><a href="series-de-tiempo.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="series-de-tiempo.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Trazar la función de autocorrelación</span></span>
-<span id="cb37-5"><a href="series-de-tiempo.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(acf_result, <span class="at">main =</span> <span class="st">&quot;Función de Autocorrelación&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="series-de-tiempo.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;aTSA&quot;)</span></span>
+<span id="cb37-2"><a href="series-de-tiempo.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aTSA)</span></code></pre></div>
+<pre><code>## Warning: package &#39;aTSA&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;aTSA&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     identify</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="series-de-tiempo.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aTSA)</span>
+<span id="cb41-2"><a href="series-de-tiempo.html#cb41-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">adf.test</span>(df_maiz_filtradots)</span></code></pre></div>
+<pre><code>## Augmented Dickey-Fuller Test 
+## alternative: stationary 
+##  
+## Type 1: no drift no trend 
+##       lag    ADF p.value
+##  [1,]   0 -0.998   0.322
+##  [2,]   1 -0.999   0.322
+##  [3,]   2 -0.988   0.326
+##  [4,]   3 -1.005   0.320
+##  [5,]   4 -0.999   0.322
+##  [6,]   5 -1.001   0.321
+##  [7,]   6 -0.998   0.322
+##  [8,]   7 -1.017   0.315
+##  [9,]   8 -1.014   0.317
+## [10,]   9 -1.018   0.315
+## Type 2: with drift no trend 
+##       lag   ADF p.value
+##  [1,]   0 -1.87   0.381
+##  [2,]   1 -1.91   0.362
+##  [3,]   2 -1.84   0.391
+##  [4,]   3 -1.91   0.362
+##  [5,]   4 -1.88   0.374
+##  [6,]   5 -1.87   0.380
+##  [7,]   6 -1.90   0.367
+##  [8,]   7 -1.95   0.349
+##  [9,]   8 -1.95   0.346
+## [10,]   9 -1.94   0.351
+## Type 3: with drift and trend 
+##       lag   ADF p.value
+##  [1,]   0 -2.58   0.332
+##  [2,]   1 -2.64   0.305
+##  [3,]   2 -2.56   0.341
+##  [4,]   3 -2.64   0.308
+##  [5,]   4 -2.60   0.322
+##  [6,]   5 -2.58   0.331
+##  [7,]   6 -2.63   0.311
+##  [8,]   7 -2.67   0.294
+##  [9,]   8 -2.68   0.289
+## [10,]   9 -2.66   0.297
+## ---- 
+## Note: in fact, p.value = 0.01 means p.value &lt;= 0.01</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="series-de-tiempo.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular la función de autocorrelación</span></span>
+<span id="cb43-2"><a href="series-de-tiempo.html#cb43-2" aria-hidden="true" tabindex="-1"></a>acf_result <span class="ot">&lt;-</span> <span class="fu">acf</span>(df_maiz_filtradots, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb43-3"><a href="series-de-tiempo.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="series-de-tiempo.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Trazar la función de autocorrelación</span></span>
+<span id="cb43-5"><a href="series-de-tiempo.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(acf_result, <span class="at">main =</span> <span class="st">&quot;Función de Autocorrelación&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Trazada ya la serie df_maiz_filtradot, se puede determinar que no presenta una tendencia ascendente o descendente por lo tanto la serie parece ser estacionaria en media.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="series-de-tiempo.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular la descomposición estacional</span></span>
-<span id="cb38-2"><a href="series-de-tiempo.html#cb38-2" aria-hidden="true" tabindex="-1"></a>descomposicion <span class="ot">&lt;-</span> <span class="fu">stl</span>(df_maiz_filtradots, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)</span>
-<span id="cb38-3"><a href="series-de-tiempo.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="series-de-tiempo.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Trazar la descomposición</span></span>
-<span id="cb38-5"><a href="series-de-tiempo.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(descomposicion, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="series-de-tiempo.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular la descomposición estacional</span></span>
+<span id="cb44-2"><a href="series-de-tiempo.html#cb44-2" aria-hidden="true" tabindex="-1"></a>descomposicion <span class="ot">&lt;-</span> <span class="fu">stl</span>(df_maiz_filtradots, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)</span>
+<span id="cb44-3"><a href="series-de-tiempo.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="series-de-tiempo.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Trazar la descomposición</span></span>
+<span id="cb44-5"><a href="series-de-tiempo.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(descomposicion, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>La gráfica generada por la función stl muestra la descomposición estacional de una serie de tiempo en tres componentes principales: tendencia, estacionalidad y residuos.</p>
 <p><em>Estacionalidad:</em> La parte intermedia de la gráfica muestra la estacionalidad de la serie de tiempo. Esto representa patrones recurrentes o cíclicos que se repiten a intervalos regulares. Por ejemplo, si la serie de tiempo representa datos mensuales, la estacionalidad mostrará patrones que se repiten cada año.</p>
 <p><em>Tendencia:</em> La línea suavizada en la parte superior de la gráfica representa la tendencia de la serie de tiempo. La tendencia muestra la dirección general en la que los datos están cambiando a lo largo del tiempo. Una tendencia ascendente indica un crecimiento en los datos, una tendencia descendente indica una disminución, y una tendencia plana sugiere estabilidad.</p>
 <p><em>Residuos:</em> La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.</p>
 <p>Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2</p>
-<p>Cambios 2, prueba</p>
+<p>Cambios 2, prueba Jairo ohhh</p>
+<p>Texto ejemplo a ver si sirve</p>
 
 </div>
 </div>
@@ -297,8 +344,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="análisis-descriptivo-y-filtro-base-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="url-your-book-url-like-httpsbookdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análisis-descriptivo-y-filtro-base-de-datos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

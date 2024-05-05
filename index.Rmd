@@ -321,6 +321,13 @@ Las series de tiempo pueden descomponerse en varias componentes que ayudan a com
 ## Estacionalidad
 
 ```{r}
+#install.packages("aTSA")
+library(aTSA)
+
+
+library(aTSA)
+ adf.test(df_maiz_filtradots)
+ 
 # Calcular la función de autocorrelación
 acf_result <- acf(df_maiz_filtradots, plot = FALSE)
 
@@ -329,7 +336,7 @@ plot(acf_result, main = "Función de Autocorrelación")
 
 ```
 
-Trazada ya la serie df_maiz_filtradot, se puede determinar que no presenta una tendencia ascendente o descendente por lo tanto la serie parece ser estacionaria en media. 
+Trazada ya la serie df_maiz_filtradot, se puede determinar que no presenta una tendencia ascendente o descendente por lo tanto la serie parece ser estacionaria en media. Aplicando la prueba  de Dickey-Fuller donde la hipótesis nula de  aumentada es que la serie de tiempo tiene una raíz unitaria, lo que significa que no es estacionaria y la hipótesis alternativa es que la serie de tiempo es estacionaria. La prueba arroja  un p valor de 0.01 evidenciando que la serie es estacionaria.
 
 ```{r}
 
@@ -352,9 +359,9 @@ La gráfica generada por la función stl muestra la descomposición estacional d
 
 
 
-Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2 
+Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2, prueba Cristian
 
 Cambios 2, prueba Jairo ohhh
 
-Texto ejemplo a ver si sirve
+Texto ejemplo a ver si sirve, prueba Laura
 
