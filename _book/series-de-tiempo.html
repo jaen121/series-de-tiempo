@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-05-05" />
+<meta name="date" content="2024-05-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -322,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb43-4"><a href="series-de-tiempo.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Trazar la función de autocorrelación</span></span>
 <span id="cb43-5"><a href="series-de-tiempo.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(acf_result, <span class="at">main =</span> <span class="st">&quot;Función de Autocorrelación&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>Trazada ya la serie df_maiz_filtradot, se puede determinar que no presenta una tendencia ascendente o descendente por lo tanto la serie parece ser estacionaria en media.</p>
+<p>Trazada ya la serie df_maiz_filtradot, se puede determinar que no presenta una tendencia ascendente o descendente por lo tanto la serie parece ser estacionaria en media. Aplicando la prueba de Dickey-Fuller donde la hipótesis nula de aumentada es que la serie de tiempo tiene una raíz unitaria, lo que significa que no es estacionaria y la hipótesis alternativa es que la serie de tiempo es estacionaria. La prueba arroja un p valor de 0.01 evidenciando que la serie es estacionaria.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="series-de-tiempo.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular la descomposición estacional</span></span>
 <span id="cb44-2"><a href="series-de-tiempo.html#cb44-2" aria-hidden="true" tabindex="-1"></a>descomposicion <span class="ot">&lt;-</span> <span class="fu">stl</span>(df_maiz_filtradots, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)</span>
 <span id="cb44-3"><a href="series-de-tiempo.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -333,9 +333,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Estacionalidad:</em> La parte intermedia de la gráfica muestra la estacionalidad de la serie de tiempo. Esto representa patrones recurrentes o cíclicos que se repiten a intervalos regulares. Por ejemplo, si la serie de tiempo representa datos mensuales, la estacionalidad mostrará patrones que se repiten cada año.</p>
 <p><em>Tendencia:</em> La línea suavizada en la parte superior de la gráfica representa la tendencia de la serie de tiempo. La tendencia muestra la dirección general en la que los datos están cambiando a lo largo del tiempo. Una tendencia ascendente indica un crecimiento en los datos, una tendencia descendente indica una disminución, y una tendencia plana sugiere estabilidad.</p>
 <p><em>Residuos:</em> La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.</p>
-<p>Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2</p>
+<p>Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2, prueba Cristian</p>
 <p>Cambios 2, prueba Jairo ohhh</p>
-<p>Texto ejemplo a ver si sirve</p>
+<p>Texto ejemplo a ver si sirve, prueba Laura</p>
 
 </div>
 </div>
