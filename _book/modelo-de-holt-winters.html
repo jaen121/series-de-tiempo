@@ -232,6 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2023.644       208.0002 177.6625 238.3378 161.6028 254.3976
 ## 2023.648       208.0002 175.8223 240.1781 158.7884 257.2120
 ## 2023.652       208.0002 174.0818 241.9186 156.1264 259.8739</code></pre>
+<p>la salida anterior presenta los intervalos de confianza de los pronosticos, del valor del precio del maiz.</p>
 </div>
 <div id="método-holt-winters-para-predicciones" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Método Holt-Winters para Predicciones<a href="modelo-de-holt-winters.html#método-holt-winters-para-predicciones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -292,7 +293,7 @@ donde:</li>
 <span id="cb54-3"><a href="modelo-de-holt-winters.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-4"><a href="modelo-de-holt-winters.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una serie de tiempo con la función ts, se cambio a frecuencia 261</span></span>
 <span id="cb54-5"><a href="modelo-de-holt-winters.html#cb54-5" aria-hidden="true" tabindex="-1"></a>df_maiz_filtradots1 <span class="ot">&lt;-</span> <span class="fu">ts</span>(df_maiz_filtrado<span class="sc">$</span>Último, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">1</span>), <span class="at">frequency=</span><span class="dv">261</span>)</span>
-<span id="cb54-6"><a href="modelo-de-holt-winters.html#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="co">#df_maiz_filtradots1</span></span>
+<span id="cb54-6"><a href="modelo-de-holt-winters.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-7"><a href="modelo-de-holt-winters.html#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-8"><a href="modelo-de-holt-winters.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo Holt-Winters</span></span>
 <span id="cb54-9"><a href="modelo-de-holt-winters.html#cb54-9" aria-hidden="true" tabindex="-1"></a>modelo_hw <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(df_maiz_filtradots1)</span>
@@ -574,6 +575,7 @@ donde:</li>
 ## s261 -64.638802752</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelo-de-holt-winters.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>A continuación se presenta la predicción para el siguiente año</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modelo-de-holt-winters.html#cb57-1" aria-hidden="true" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_hw, <span class="at">n.ahead =</span> <span class="dv">261</span>, <span class="at">prediction.interval =</span> T, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
 <span id="cb57-2"><a href="modelo-de-holt-winters.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw, forecast)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
