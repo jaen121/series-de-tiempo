@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-05-11" />
+<meta name="date" content="2024-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,6 +164,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#componentes-de-una-serie-de-tiempo"><i class="fa fa-check"></i><b>5.2</b> Componentes de una Serie de Tiempo</a></li>
 <li class="chapter" data-level="5.3" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#estacionalidad"><i class="fa fa-check"></i><b>5.3</b> Estacionalidad</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="modelo-de-holt-winters.html"><a href="modelo-de-holt-winters.html"><i class="fa fa-check"></i><b>6</b> Modelo de Holt-Winters</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="modelo-de-holt-winters.html"><a href="modelo-de-holt-winters.html#modelo-de-suavizado-exponencial-simple-ses-por-sus-siglas-en-inglés"><i class="fa fa-check"></i><b>6.1</b> Modelo de suavizado exponencial simple (SES, por sus siglas en inglés)</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -187,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Series de Tiempo</h1>
 <p class="author"><em>Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño</em></p>
-<p class="date"><em>2024-05-11</em></p>
+<p class="date"><em>2024-05-12</em></p>
 </div>
 <div id="justificación-uso-de-datos-historicos-del-precio-del-maíz" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Justificación uso de datos historicos del precio del maíz<a href="index.html#justificación-uso-de-datos-historicos-del-precio-del-maíz" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -265,6 +269,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

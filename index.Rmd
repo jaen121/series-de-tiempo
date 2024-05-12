@@ -84,7 +84,7 @@ Se importa la matriz de  datos
 # Importar datos desde un archivo CSV desde github 2.0
 ruta_archivo <- "Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
 
-df_maiz <- read.csv(ruta_archivo, sep = ";")
+df_maiz <- read.csv(ruta_archivo, sep = ";",fileEncoding = "UTF-8")
 
 names(df_maiz)
 
@@ -357,12 +357,72 @@ La gráfica generada por la función stl muestra la descomposición estacional d
 
 *Residuos:* La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.
 
+<<<<<<< HEAD
 
 # Modelo de  Holt-Winters
 
-Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2, prueba Cristian
+## Modelo de suavizado exponencial simple (SES, por sus siglas en inglés)
 
-Cambios 2, prueba Jairo ohhh
+Es un modelo de suavizado exponencial simple (SES, por sus siglas en inglés). En términos generales, el suavizado exponencial simple es un método de pronóstico que utiliza un único factor de suavizado (alpha) para dar más peso a las observaciones más recientes mientras suaviza las fluctuaciones aleatorias.
 
-Texto ejemplo a ver si sirve, prueba Laura
+El modelo SES se define por la siguiente ecuación de recursividad:
+
+\[ \hat{y}_{t+1} = \alpha \cdot y_t + (1 - \alpha) \cdot \hat{y}_t \]
+
+Donde:
+- \(\hat{y}_{t+1}\) es el pronóstico para el siguiente periodo,
+- \(y_t\) es la observación actual en el periodo \(t\),
+- \(\hat{y}_t\) es el pronóstico actual en el periodo \(t\), y
+- \(\alpha\) es el factor de suavizado, que controla cuánto peso se le da a la observación actual versus el pronóstico anterior.
+
+
+```{r}
+# Verificar la cantidad de períodos en la serie temporal
+cantidad_periodos <- length(df_maiz_filtradots)
+
+print(cantidad_periodos)
+
+```
+
+
+```{r}
+
+library(forecast)
+
+
+# Ajustar un modelo de suavizado exponencial simple
+modelo_ses <- ses(df_maiz_filtradots)
+
+# Imprimir el modelo
+print(modelo_ses)
+
+
+```
+
+
+```{r}
+
+library(xts)
+
+# Asegúrarse  de que la columna 'Fecha' esté en formato de fecha
+#SI SE EJECUTA DE NUEVO SE DEBE VOLVER A CARGAR
+#df_maiz_filtrado$Fecha <- as.Date(df_maiz_filtrado$Fecha)
+
+# Crea una serie de tiempo con la función ts
+df_maiz_filtradots1 <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261)
+#df_maiz_filtradots1
+
+# Ajustar un modelo Holt-Winters
+modelo_hw <- HoltWinters(df_maiz_filtradots1)
+modelo_hw
+```
+
+```{r}
+plot(modelo_hw)
+```
+
+```{r}
+forecast <- predict(modelo_hw, n.ahead = 261, prediction.interval = T, level = 0.95)
+plot(modelo_hw, forecast)
+```
 

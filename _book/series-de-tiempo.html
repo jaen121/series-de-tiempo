@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-05-11" />
+<meta name="date" content="2024-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,7 +37,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="análisis-descriptivo-y-filtro-base-de-datos.html"/>
-
+<link rel="next" href="modelo-de-holt-winters.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -163,6 +163,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#aproximación-en-media-móvil"><i class="fa fa-check"></i><b>5.1</b> Aproximación en media móvil</a></li>
 <li class="chapter" data-level="5.2" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#componentes-de-una-serie-de-tiempo"><i class="fa fa-check"></i><b>5.2</b> Componentes de una Serie de Tiempo</a></li>
 <li class="chapter" data-level="5.3" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#estacionalidad"><i class="fa fa-check"></i><b>5.3</b> Estacionalidad</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modelo-de-holt-winters.html"><a href="modelo-de-holt-winters.html"><i class="fa fa-check"></i><b>6</b> Modelo de Holt-Winters</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="modelo-de-holt-winters.html"><a href="modelo-de-holt-winters.html#modelo-de-suavizado-exponencial-simple-ses-por-sus-siglas-en-inglés"><i class="fa fa-check"></i><b>6.1</b> Modelo de suavizado exponencial simple (SES, por sus siglas en inglés)</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -333,10 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Estacionalidad:</em> La parte intermedia de la gráfica muestra la estacionalidad de la serie de tiempo. Esto representa patrones recurrentes o cíclicos que se repiten a intervalos regulares. Por ejemplo, si la serie de tiempo representa datos mensuales, la estacionalidad mostrará patrones que se repiten cada año.</p>
 <p><em>Tendencia:</em> La línea suavizada en la parte superior de la gráfica representa la tendencia de la serie de tiempo. La tendencia muestra la dirección general en la que los datos están cambiando a lo largo del tiempo. Una tendencia ascendente indica un crecimiento en los datos, una tendencia descendente indica una disminución, y una tendencia plana sugiere estabilidad.</p>
 <p><em>Residuos:</em> La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.</p>
-<p>Estoy realizando una prueba de que los cambios que realice si se actualicen en la nube v2, prueba Cristian</p>
-<p>Cambios 2, prueba Jairo ohhh</p>
-<p>Texto ejemplo a ver si sirve, prueba Laura</p>
-
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 </div>
 </div>
             </section>
@@ -344,8 +345,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="análisis-descriptivo-y-filtro-base-de-datos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="análisis-descriptivo-y-filtro-base-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modelo-de-holt-winters.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -399,6 +400,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
