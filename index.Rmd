@@ -398,17 +398,57 @@ print(modelo_ses)
 
 
 ```
+## Método Holt-Winters para Predicciones 
 
+El Método Holt-Winters es un modelo de suavizado exponencial ampliamente utilizado para el pronóstico de series temporales que exhiben tendencia y estacionalidad. Este método es una extensión del suavizado exponencial simple (SES)presentado anteriormente,  que también tiene en cuenta la componente de tendencia y la componente estacional de la serie temporal.
+
+Una explicación  del Método Holt-Winters:
+
+1. **Componente de Nivel (Nivel)**:
+   - El Método Holt-Winters comienza con la estimación de un nivel inicial. Este nivel inicial se representa como \( L_0 \).
+   - El nivel actual se calcula utilizando una combinación lineal de la observación actual y el nivel anterior. La fórmula para calcular el nivel actual es:
+     \[ L_t = \alpha \times Y_t + (1 - \alpha) \times (L_{t-1} + T_{t-1}) \]
+     donde:
+     - \( L_t \) es el nivel en el tiempo \( t \).
+     - \( Y_t \) es la observación en el tiempo \( t \).
+     - \( \alpha \) es la constante de suavizado para la componente de nivel. Controla cuánto peso se le da a la observación actual en la estimación del nivel.
+     - \( T_{t-1} \) es la estimación de la tendencia en el tiempo \( t-1 \).
+
+2. **Componente de Tendencia (Tendencia)**:
+   - La tendencia representa la dirección general de los datos a lo largo del tiempo.
+   - El Método Holt-Winters utiliza una estimación inicial de la tendencia, que se representa como \( T_0 \).
+   - La tendencia actual se calcula utilizando una combinación lineal de la estimación de la tendencia anterior y la diferencia entre el nivel actual y el nivel anterior. La fórmula para calcular la tendencia actual es:
+     \[ T_t = \beta \times (L_t - L_{t-1}) + (1 - \beta) \times T_{t-1} \]
+     donde:
+     - \( T_t \) es la tendencia en el tiempo \( t \).
+     - \( \beta \) es la constante de suavizado para la componente de tendencia. Controla cuánto peso se le da a la estimación de la tendencia anterior en la estimación de la tendencia actual.
+
+3. **Componente Estacional (Estacionalidad)**:
+   - La estacionalidad representa patrones periódicos en los datos, como estacionalidad mensual, trimestral o anual.
+   - El Método Holt-Winters puede manejar estacionalidad aditiva o multiplicativa, dependiendo de la naturaleza de la variación estacional en los datos.
+   - La estacionalidad actual se calcula utilizando una combinación lineal de la estimación de la estacionalidad anterior y la observación actual. La fórmula para calcular la estacionalidad actual es:
+     - **Estacionalidad Aditiva**:
+       \[ S_t = \gamma \times (Y_t - L_t) + (1 - \gamma) \times S_{t-m} \]
+     - **Estacionalidad Multiplicativa**:
+       \[ S_t = \gamma \times \frac{Y_t}{L_t} + (1 - \gamma) \times S_{t-m} \]
+     donde:
+     - \( S_t \) es la estacionalidad en el tiempo \( t \).
+     - \( \gamma \) es la constante de suavizado para la componente de estacionalidad. Controla cuánto peso se le da a la observación actual en la estimación de la estacionalidad actual.
+     - \( m \) es el número de períodos en una temporada.
+
+4. **Pronósticos**:
+   - Una vez que se han estimado los componentes de nivel, tendencia y estacionalidad, se pueden hacer pronósticos para periodos futuros.
+   - Los pronósticos futuros se calculan extrapolando los componentes de nivel, tendencia y estacionalidad estimados.
+   - Los intervalos de predicción también se pueden calcular para tener en cuenta la incertidumbre en los pronósticos.
+
+En resumen, el Método Holt-Winters es un método de suavizado exponencial que se utiliza para pronosticar series temporales con tendencia y estacionalidad. Utiliza tres componentes (nivel, tendencia y estacionalidad) que se actualizan en cada periodo para proporcionar pronósticos precisos y ajustados a los datos históricos observados.
 
 ```{r}
 
 library(xts)
 
-# Asegúrarse  de que la columna 'Fecha' esté en formato de fecha
-#SI SE EJECUTA DE NUEVO SE DEBE VOLVER A CARGAR
-#df_maiz_filtrado$Fecha <- as.Date(df_maiz_filtrado$Fecha)
 
-# Crea una serie de tiempo con la función ts
+# Crea una serie de tiempo con la función ts, se cambio a frecuencia 261
 df_maiz_filtradots1 <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261)
 #df_maiz_filtradots1
 
