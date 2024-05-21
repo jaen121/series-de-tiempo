@@ -470,3 +470,13 @@ forecast <- predict(modelo_hw, n.ahead = 261, prediction.interval = T, level = 0
 plot(modelo_hw, forecast)
 ```
 
+# Metodología Box-Jenkins
+
+## Definición del modelo
+
+```{r}
+mod <- auto.arima(df_maiz_filtradots)
+mod
+```
+
+
