@@ -84,7 +84,7 @@ Se importa la matriz de  datos
 # Importar datos desde un archivo CSV desde github 2.0
 ruta_archivo <- "Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
 
-df_maiz <- read.csv(ruta_archivo, sep = ";")
+df_maiz <- read.csv(ruta_archivo, sep = ";",fileEncoding = "UTF-8")
 
 names(df_maiz)
 
@@ -356,4 +356,117 @@ La gráfica generada por la función stl muestra la descomposición estacional d
 *Tendencia:* La línea suavizada en la parte superior de la gráfica representa la tendencia de la serie de tiempo. La tendencia muestra la dirección general en la que los datos están cambiando a lo largo del tiempo. Una tendencia ascendente indica un crecimiento en los datos, una tendencia descendente indica una disminución, y una tendencia plana sugiere estabilidad.
 
 *Residuos:* La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.
+
+<<<<<<< HEAD
+
+# Modelo de  Holt-Winters
+
+## Modelo de suavizado exponencial simple (SES, por sus siglas en inglés)
+
+Es un modelo de suavizado exponencial simple (SES, por sus siglas en inglés). En términos generales, el suavizado exponencial simple es un método de pronóstico que utiliza un único factor de suavizado (alpha) para dar más peso a las observaciones más recientes mientras suaviza las fluctuaciones aleatorias.
+
+El modelo SES se define por la siguiente ecuación de recursividad:
+
+\[ \hat{y}_{t+1} = \alpha \cdot y_t + (1 - \alpha) \cdot \hat{y}_t \]
+
+Donde:
+- \(\hat{y}_{t+1}\) es el pronóstico para el siguiente periodo,
+- \(y_t\) es la observación actual en el periodo \(t\),
+- \(\hat{y}_t\) es el pronóstico actual en el periodo \(t\), y
+- \(\alpha\) es el factor de suavizado, que controla cuánto peso se le da a la observación actual versus el pronóstico anterior.
+
+
+```{r}
+# Verificar la cantidad de períodos en la serie temporal
+cantidad_periodos <- length(df_maiz_filtradots)
+
+print(cantidad_periodos)
+
+```
+
+
+```{r}
+
+library(forecast)
+
+
+# Ajustar un modelo de suavizado exponencial simple
+modelo_ses <- ses(df_maiz_filtradots)
+
+# Imprimir el modelo
+print(modelo_ses)
+
+
+```
+la salida anterior presenta los intervalos de confianza de los pronosticos, del valor del precio del maiz.
+
+## Método Holt-Winters para Predicciones 
+
+El Método Holt-Winters es un modelo de suavizado exponencial ampliamente utilizado para el pronóstico de series temporales que exhiben tendencia y estacionalidad. Este método es una extensión del suavizado exponencial simple (SES)presentado anteriormente,  que también tiene en cuenta la componente de tendencia y la componente estacional de la serie temporal.
+
+Una explicación  del Método Holt-Winters:
+
+1. **Componente de Nivel (Nivel)**:
+   - El Método Holt-Winters comienza con la estimación de un nivel inicial. Este nivel inicial se representa como \( L_0 \).
+   - El nivel actual se calcula utilizando una combinación lineal de la observación actual y el nivel anterior. La fórmula para calcular el nivel actual es:
+     \[ L_t = \alpha \times Y_t + (1 - \alpha) \times (L_{t-1} + T_{t-1}) \]
+     donde:
+     - \( L_t \) es el nivel en el tiempo \( t \).
+     - \( Y_t \) es la observación en el tiempo \( t \).
+     - \( \alpha \) es la constante de suavizado para la componente de nivel. Controla cuánto peso se le da a la observación actual en la estimación del nivel.
+     - \( T_{t-1} \) es la estimación de la tendencia en el tiempo \( t-1 \).
+
+2. **Componente de Tendencia (Tendencia)**:
+   - La tendencia representa la dirección general de los datos a lo largo del tiempo.
+   - El Método Holt-Winters utiliza una estimación inicial de la tendencia, que se representa como \( T_0 \).
+   - La tendencia actual se calcula utilizando una combinación lineal de la estimación de la tendencia anterior y la diferencia entre el nivel actual y el nivel anterior. La fórmula para calcular la tendencia actual es:
+     \[ T_t = \beta \times (L_t - L_{t-1}) + (1 - \beta) \times T_{t-1} \]
+     donde:
+     - \( T_t \) es la tendencia en el tiempo \( t \).
+     - \( \beta \) es la constante de suavizado para la componente de tendencia. Controla cuánto peso se le da a la estimación de la tendencia anterior en la estimación de la tendencia actual.
+
+3. **Componente Estacional (Estacionalidad)**:
+   - La estacionalidad representa patrones periódicos en los datos, como estacionalidad mensual, trimestral o anual.
+   - El Método Holt-Winters puede manejar estacionalidad aditiva o multiplicativa, dependiendo de la naturaleza de la variación estacional en los datos.
+   - La estacionalidad actual se calcula utilizando una combinación lineal de la estimación de la estacionalidad anterior y la observación actual. La fórmula para calcular la estacionalidad actual es:
+     - **Estacionalidad Aditiva**:
+       \[ S_t = \gamma \times (Y_t - L_t) + (1 - \gamma) \times S_{t-m} \]
+     - **Estacionalidad Multiplicativa**:
+       \[ S_t = \gamma \times \frac{Y_t}{L_t} + (1 - \gamma) \times S_{t-m} \]
+     donde:
+     - \( S_t \) es la estacionalidad en el tiempo \( t \).
+     - \( \gamma \) es la constante de suavizado para la componente de estacionalidad. Controla cuánto peso se le da a la observación actual en la estimación de la estacionalidad actual.
+     - \( m \) es el número de períodos en una temporada.
+
+4. **Pronósticos**:
+   - Una vez que se han estimado los componentes de nivel, tendencia y estacionalidad, se pueden hacer pronósticos para periodos futuros.
+   - Los pronósticos futuros se calculan extrapolando los componentes de nivel, tendencia y estacionalidad estimados.
+   - Los intervalos de predicción también se pueden calcular para tener en cuenta la incertidumbre en los pronósticos.
+
+En resumen, el Método Holt-Winters es un método de suavizado exponencial que se utiliza para pronosticar series temporales con tendencia y estacionalidad. Utiliza tres componentes (nivel, tendencia y estacionalidad) que se actualizan en cada periodo para proporcionar pronósticos precisos y ajustados a los datos históricos observados.
+
+```{r}
+
+library(xts)
+
+
+# Crea una serie de tiempo con la función ts, se cambio a frecuencia 261
+df_maiz_filtradots1 <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261)
+
+
+# Ajustar un modelo Holt-Winters
+modelo_hw <- HoltWinters(df_maiz_filtradots1)
+modelo_hw
+```
+
+```{r}
+plot(modelo_hw)
+```
+
+A continuación se presenta la predicción para el siguiente año
+
+```{r}
+forecast <- predict(modelo_hw, n.ahead = 261, prediction.interval = T, level = 0.95)
+plot(modelo_hw, forecast)
+```
 

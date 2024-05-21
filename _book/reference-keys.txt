@@ -52,3 +52,6 @@ estacionalidad
 section
 aproximación-en-media-móvil
 tab:unnamed-chunk-7
+modelo-de-holt-winters
+modelo-de-suavizado-exponencial-simple-ses-por-sus-siglas-en-inglés
+método-holt-winters-para-predicciones
