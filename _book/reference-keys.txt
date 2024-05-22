@@ -57,3 +57,7 @@ modelo-de-suavizado-exponencial-simple-ses-por-sus-siglas-en-inglés
 método-holt-winters-para-predicciones
 metodología-box-jenkins
 definición-del-modelo
+visualizar-la-serie
+trasnformación-de-la-serie-en-estacionaria
+graficar-acf-pacf-escoger-los-parametros
+predicción

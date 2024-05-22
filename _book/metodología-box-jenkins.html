@@ -171,7 +171,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html"><i class="fa fa-check"></i><b>7</b> Metodología Box-Jenkins</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#definición-del-modelo"><i class="fa fa-check"></i><b>7.1</b> Definición del modelo</a></li>
+<li class="chapter" data-level="7.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#visualizar-la-serie"><i class="fa fa-check"></i><b>7.1</b> visualizar la serie</a></li>
+<li class="chapter" data-level="7.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#trasnformación-de-la-serie-en-estacionaria"><i class="fa fa-check"></i><b>7.2</b> Trasnformación de la serie en estacionaria</a></li>
+<li class="chapter" data-level="7.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#graficar-acf-pacf-escoger-los-parametros"><i class="fa fa-check"></i><b>7.3</b> Graficar ACF-PACF, Escoger los parametros</a></li>
+<li class="chapter" data-level="7.4" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#definición-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Definición del modelo</a></li>
+<li class="chapter" data-level="7.5" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#predicción"><i class="fa fa-check"></i><b>7.5</b> Predicción</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -195,9 +199,169 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="metodología-box-jenkins" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Metodología Box-Jenkins<a href="metodología-box-jenkins.html#metodología-box-jenkins" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="definición-del-modelo" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Definición del modelo<a href="metodología-box-jenkins.html#definición-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="metodología-box-jenkins.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#mod &lt;- auto.arima(df_maiz_filtradots)</span></span></code></pre></div>
+<div id="visualizar-la-serie" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> visualizar la serie<a href="metodología-box-jenkins.html#visualizar-la-serie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="metodología-box-jenkins.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico de la serie</span></span>
+<span id="cb57-2"><a href="metodología-box-jenkins.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ts.plot</span>(df_maiz_filtradots, <span class="at">main =</span> <span class="st">&quot;PRECIO DEL MAIZ POR DÍA&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+</div>
+<div id="trasnformación-de-la-serie-en-estacionaria" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Trasnformación de la serie en estacionaria<a href="metodología-box-jenkins.html#trasnformación-de-la-serie-en-estacionaria" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="metodología-box-jenkins.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#transformar la serie</span></span>
+<span id="cb58-2"><a href="metodología-box-jenkins.html#cb58-2" aria-hidden="true" tabindex="-1"></a>dif_dia <span class="ot">&lt;-</span> <span class="fu">diff</span>(df_maiz_filtradots)</span>
+<span id="cb58-3"><a href="metodología-box-jenkins.html#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="metodología-box-jenkins.html#cb58-4" aria-hidden="true" tabindex="-1"></a>variacion_dia <span class="ot">&lt;-</span> <span class="fu">diff</span>(df_maiz_filtradots) <span class="sc">/</span> <span class="fu">lag</span>(df_maiz_filtradots, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb58-5"><a href="metodología-box-jenkins.html#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="metodología-box-jenkins.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico de la serie</span></span>
+<span id="cb58-7"><a href="metodología-box-jenkins.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ts.plot</span>(dif_dia, <span class="at">main =</span> <span class="st">&quot;Diferencia&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="metodología-box-jenkins.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ts.plot</span>(variacion_dia, <span class="at">main =</span> <span class="st">&quot;Variación&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkred&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<p>Validar estacionariedad de las series</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="metodología-box-jenkins.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prueba de estacionariedad</span></span>
+<span id="cb60-2"><a href="metodología-box-jenkins.html#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="metodología-box-jenkins.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(df_maiz_filtradots)</span></code></pre></div>
+<pre><code>## Augmented Dickey-Fuller Test 
+## alternative: stationary 
+##  
+## Type 1: no drift no trend 
+##       lag    ADF p.value
+##  [1,]   0 -0.998   0.322
+##  [2,]   1 -0.999   0.322
+##  [3,]   2 -0.988   0.326
+##  [4,]   3 -1.005   0.320
+##  [5,]   4 -0.999   0.322
+##  [6,]   5 -1.001   0.321
+##  [7,]   6 -0.998   0.322
+##  [8,]   7 -1.017   0.315
+##  [9,]   8 -1.014   0.317
+## [10,]   9 -1.018   0.315
+## Type 2: with drift no trend 
+##       lag   ADF p.value
+##  [1,]   0 -1.87   0.381
+##  [2,]   1 -1.91   0.362
+##  [3,]   2 -1.84   0.391
+##  [4,]   3 -1.91   0.362
+##  [5,]   4 -1.88   0.374
+##  [6,]   5 -1.87   0.380
+##  [7,]   6 -1.90   0.367
+##  [8,]   7 -1.95   0.349
+##  [9,]   8 -1.95   0.346
+## [10,]   9 -1.94   0.351
+## Type 3: with drift and trend 
+##       lag   ADF p.value
+##  [1,]   0 -2.58   0.332
+##  [2,]   1 -2.64   0.305
+##  [3,]   2 -2.56   0.341
+##  [4,]   3 -2.64   0.308
+##  [5,]   4 -2.60   0.322
+##  [6,]   5 -2.58   0.331
+##  [7,]   6 -2.63   0.311
+##  [8,]   7 -2.67   0.294
+##  [9,]   8 -2.68   0.289
+## [10,]   9 -2.66   0.297
+## ---- 
+## Note: in fact, p.value = 0.01 means p.value &lt;= 0.01</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="metodología-box-jenkins.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(dif_dia)</span></code></pre></div>
+<pre><code>## Augmented Dickey-Fuller Test 
+## alternative: stationary 
+##  
+## Type 1: no drift no trend 
+##       lag   ADF p.value
+##  [1,]   0 -76.9    0.01
+##  [2,]   1 -56.8    0.01
+##  [3,]   2 -44.5    0.01
+##  [4,]   3 -39.3    0.01
+##  [5,]   4 -35.4    0.01
+##  [6,]   5 -31.7    0.01
+##  [7,]   6 -28.9    0.01
+##  [8,]   7 -27.0    0.01
+##  [9,]   8 -25.7    0.01
+## [10,]   9 -24.1    0.01
+## Type 2: with drift no trend 
+##       lag   ADF p.value
+##  [1,]   0 -76.9    0.01
+##  [2,]   1 -56.8    0.01
+##  [3,]   2 -44.5    0.01
+##  [4,]   3 -39.3    0.01
+##  [5,]   4 -35.4    0.01
+##  [6,]   5 -31.7    0.01
+##  [7,]   6 -28.9    0.01
+##  [8,]   7 -27.0    0.01
+##  [9,]   8 -25.7    0.01
+## [10,]   9 -24.1    0.01
+## Type 3: with drift and trend 
+##       lag   ADF p.value
+##  [1,]   0 -76.9    0.01
+##  [2,]   1 -56.8    0.01
+##  [3,]   2 -44.5    0.01
+##  [4,]   3 -39.3    0.01
+##  [5,]   4 -35.4    0.01
+##  [6,]   5 -31.7    0.01
+##  [7,]   6 -28.9    0.01
+##  [8,]   7 -27.0    0.01
+##  [9,]   8 -25.7    0.01
+## [10,]   9 -24.1    0.01
+## ---- 
+## Note: in fact, p.value = 0.01 means p.value &lt;= 0.01</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="metodología-box-jenkins.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(variacion_dia)</span></code></pre></div>
+<pre><code>## Augmented Dickey-Fuller Test 
+## alternative: stationary 
+##  
+## Type 1: no drift no trend 
+##       lag   ADF p.value
+##  [1,]   0 -76.9    0.01
+##  [2,]   1 -56.3    0.01
+##  [3,]   2 -45.0    0.01
+##  [4,]   3 -39.3    0.01
+##  [5,]   4 -35.7    0.01
+##  [6,]   5 -32.4    0.01
+##  [7,]   6 -30.0    0.01
+##  [8,]   7 -27.9    0.01
+##  [9,]   8 -26.1    0.01
+## [10,]   9 -24.4    0.01
+## Type 2: with drift no trend 
+##       lag   ADF p.value
+##  [1,]   0 -76.9    0.01
+##  [2,]   1 -56.3    0.01
+##  [3,]   2 -45.0    0.01
+##  [4,]   3 -39.3    0.01
+##  [5,]   4 -35.7    0.01
+##  [6,]   5 -32.4    0.01
+##  [7,]   6 -29.9    0.01
+##  [8,]   7 -27.9    0.01
+##  [9,]   8 -26.1    0.01
+## [10,]   9 -24.4    0.01
+## Type 3: with drift and trend 
+##       lag   ADF p.value
+##  [1,]   0 -76.9    0.01
+##  [2,]   1 -56.3    0.01
+##  [3,]   2 -45.0    0.01
+##  [4,]   3 -39.3    0.01
+##  [5,]   4 -35.7    0.01
+##  [6,]   5 -32.4    0.01
+##  [7,]   6 -30.0    0.01
+##  [8,]   7 -27.9    0.01
+##  [9,]   8 -26.1    0.01
+## [10,]   9 -24.4    0.01
+## ---- 
+## Note: in fact, p.value = 0.01 means p.value &lt;= 0.01</code></pre>
+</div>
+<div id="graficar-acf-pacf-escoger-los-parametros" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Graficar ACF-PACF, Escoger los parametros<a href="metodología-box-jenkins.html#graficar-acf-pacf-escoger-los-parametros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="metodología-box-jenkins.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb66-2"><a href="metodología-box-jenkins.html#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="metodología-box-jenkins.html#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(df_maiz_filtradots, <span class="at">lag.max =</span>  <span class="dv">36</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="metodología-box-jenkins.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(df_maiz_filtradots, <span class="at">lag.max =</span>  <span class="dv">36</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
+</div>
+<div id="definición-del-modelo" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Definición del modelo<a href="metodología-box-jenkins.html#definición-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="metodología-box-jenkins.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co">#mod &lt;- auto.arima(df_maiz_filtradots)</span></span></code></pre></div>
+</div>
+<div id="predicción" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Predicción<a href="metodología-box-jenkins.html#predicción" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>prueba de cambios</p>
 
 </div>
