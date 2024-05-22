@@ -61,3 +61,5 @@ visualizar-la-serie
 trasnformación-de-la-serie-en-estacionaria
 graficar-acf-pacf-escoger-los-parametros
 predicción
+transformación-de-la-serie-en-estacionaria
+validar-estacionariedad-de-las-series

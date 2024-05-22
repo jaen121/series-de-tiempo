@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-05-21" />
+<meta name="date" content="2024-05-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -171,11 +171,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html"><i class="fa fa-check"></i><b>7</b> Metodología Box-Jenkins</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#visualizar-la-serie"><i class="fa fa-check"></i><b>7.1</b> visualizar la serie</a></li>
-<li class="chapter" data-level="7.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#trasnformación-de-la-serie-en-estacionaria"><i class="fa fa-check"></i><b>7.2</b> Trasnformación de la serie en estacionaria</a></li>
-<li class="chapter" data-level="7.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#graficar-acf-pacf-escoger-los-parametros"><i class="fa fa-check"></i><b>7.3</b> Graficar ACF-PACF, Escoger los parametros</a></li>
-<li class="chapter" data-level="7.4" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#definición-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Definición del modelo</a></li>
-<li class="chapter" data-level="7.5" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#predicción"><i class="fa fa-check"></i><b>7.5</b> Predicción</a></li>
+<li class="chapter" data-level="7.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#visualizar-la-serie"><i class="fa fa-check"></i><b>7.1</b> Visualizar la serie</a></li>
+<li class="chapter" data-level="7.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#transformación-de-la-serie-en-estacionaria"><i class="fa fa-check"></i><b>7.2</b> Transformación de la serie en estacionaria</a></li>
+<li class="chapter" data-level="7.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#validar-estacionariedad-de-las-series"><i class="fa fa-check"></i><b>7.3</b> Validar estacionariedad de las series</a></li>
+<li class="chapter" data-level="7.4" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#graficar-acf-pacf-escoger-los-parametros"><i class="fa fa-check"></i><b>7.4</b> Graficar ACF-PACF, Escoger los parametros</a></li>
+<li class="chapter" data-level="7.5" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#definición-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Definición del modelo</a></li>
+<li class="chapter" data-level="7.6" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#predicción"><i class="fa fa-check"></i><b>7.6</b> Predicción</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -200,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Series de Tiempo</h1>
 <p class="author"><em>Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño</em></p>
-<p class="date"><em>2024-05-21</em></p>
+<p class="date"><em>2024-05-22</em></p>
 </div>
 <div id="justificación-uso-de-datos-historicos-del-precio-del-maíz" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Justificación uso de datos historicos del precio del maíz<a href="index.html#justificación-uso-de-datos-historicos-del-precio-del-maíz" class="anchor-section" aria-label="Anchor link to header"></a></h1>
