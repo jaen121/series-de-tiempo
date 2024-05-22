@@ -475,8 +475,8 @@ plot(modelo_hw, forecast)
 ## Definición del modelo
 
 ```{r}
-mod <- auto.arima(df_maiz_filtradots)
-mod
+#mod <- auto.arima(df_maiz_filtradots)
 ```
 
 
+prueba de cambios 
