@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -197,18 +197,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 7</span> Metodología Box-Jenkins<a href="metodología-box-jenkins.html#metodología-box-jenkins" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="definición-del-modelo" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Definición del modelo<a href="metodología-box-jenkins.html#definición-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="metodología-box-jenkins.html#cb61-1" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(df_maiz_filtradots)</span>
-<span id="cb61-2"><a href="metodología-box-jenkins.html#cb61-2" tabindex="-1"></a>mod</span></code></pre></div>
-<pre><code>## Series: df_maiz_filtradots 
-## ARIMA(0,1,3) 
-## 
-## Coefficients:
-##          ma1      ma2     ma3
-##       0.0240  -0.0335  0.0297
-## s.e.  0.0127   0.0129  0.0125
-## 
-## sigma^2 = 69.9:  log likelihood = -21852.11
-## AIC=43712.22   AICc=43712.22   BIC=43739.12</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="metodología-box-jenkins.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#mod &lt;- auto.arima(df_maiz_filtradots)</span></span></code></pre></div>
+<p>prueba de cambios</p>
 
 </div>
 </div>
