@@ -472,11 +472,57 @@ plot(modelo_hw, forecast)
 
 # Metodología Box-Jenkins
 
+## visualizar la serie
+
+```{r}
+# Gráfico de la serie
+ts.plot(df_maiz_filtradots, main = "PRECIO DEL MAIZ POR DÍA", col = "darkgreen")
+
+
+```
+
+## Trasnformación de la serie en estacionaria
+
+```{r}
+#transformar la serie
+dif_dia <- diff(df_maiz_filtradots)
+
+variacion_dia <- diff(df_maiz_filtradots) / lag(df_maiz_filtradots, -1)
+
+# Gráfico de la serie
+ts.plot(dif_dia, main = "Diferencia", col = "darkblue")
+
+
+ts.plot(variacion_dia, main = "Variación", col = "darkred")
+```
+
+Validar estacionariedad de las series
+```{r}
+
+#prueba de estacionariedad
+
+adf.test(df_maiz_filtradots)
+adf.test(dif_dia)
+adf.test(variacion_dia)
+```
+
+## Graficar ACF-PACF, Escoger los parametros
+
+```{r}
+par(mfrow = c(1,1))
+
+acf(df_maiz_filtradots, lag.max =  36)
+pacf(df_maiz_filtradots, lag.max =  36)
+```
+
+
+
 ## Definición del modelo
 
 ```{r}
 #mod <- auto.arima(df_maiz_filtradots)
 ```
 
+## Predicción
 
 prueba de cambios 
