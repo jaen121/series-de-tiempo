@@ -485,15 +485,28 @@ ts.plot(df_maiz_filtradots, main = "PRECIO DEL MAIZ POR DÍA", col = "darkgreen"
 
 ```{r}
 #transformar la serie
+
+#Diferenciación de primer orden
 dif_dia <- diff(df_maiz_filtradots)
 
+#variación
 variacion_dia <- diff(df_maiz_filtradots) / lag(df_maiz_filtradots, -1)
+
+#tranformación logaritmica
+df_maiz_log <- log(df_maiz_filtradots)
+
 
 # Gráfico de la serie
 ts.plot(dif_dia, main = "Diferencia", col = "darkblue")
 
 
 ts.plot(variacion_dia, main = "Variación", col = "darkred")
+
+
+ts.plot(df_maiz_log, main = "df_maiz_log", col = "darkgray")
+
+
+
 ```
 
 Validar estacionariedad de las series
@@ -501,10 +514,28 @@ Validar estacionariedad de las series
 
 #prueba de estacionariedad
 
+print('------------------------')
+print('Prueba Estacionariedad DF Maíz')
 adf.test(df_maiz_filtradots)
+
+print('------------------------')
+print('Prueba Estacionariedad Diferencia diaria')
 adf.test(dif_dia)
+
+print('------------------------')
+print('Prueba Estacionariedad Variación diaria')
 adf.test(variacion_dia)
+
+
+print('------------------------')
+print('Prueba Estacionariedad df_maiz_log')
+adf.test(df_maiz_log)
+
+
 ```
+
+
+
 
 ## Graficar ACF-PACF, Escoger los parametros
 
