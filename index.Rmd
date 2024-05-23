@@ -472,7 +472,7 @@ plot(modelo_hw, forecast)
 
 # Metodología Box-Jenkins
 
-## visualizar la serie
+## Visualizar la serie
 
 ```{r}
 # Gráfico de la serie
@@ -481,7 +481,7 @@ ts.plot(df_maiz_filtradots, main = "PRECIO DEL MAIZ POR DÍA", col = "darkgreen"
 
 ```
 
-## Trasnformación de la serie en estacionaria
+## Transformación de la serie en estacionaria
 
 ```{r}
 #transformar la serie
@@ -509,7 +509,8 @@ ts.plot(df_maiz_log, main = "df_maiz_log", col = "darkgray")
 
 ```
 
-Validar estacionariedad de las series
+## Validar estacionariedad de las series
+
 ```{r}
 
 #prueba de estacionariedad
@@ -550,10 +551,22 @@ pacf(df_maiz_filtradots, lag.max =  36)
 
 ## Definición del modelo
 
+Se realiza una validación del mejor modelo ARIMA predictivo con la función auto.arima().
+
 ```{r}
-#mod <- auto.arima(df_maiz_filtradots)
+#mod <- auto.arima(df_maiz_filtradots1)
+#mod
 ```
 
 ## Predicción
 
 prueba de cambios 
+
+```{r}
+#pronostico<- predict(mod, n.ahead = 261, prediction.interval = T, level = 0.95)
+#pronostico
+#plot(pronostico,main="Pronóstico con auto.arima",xlab="Tiempo",ylab="Precio")
+#plot(mod, pronostico)
+#grid()
+```
+
