@@ -547,16 +547,54 @@ acf(df_maiz_filtradots, lag.max =  36)
 pacf(df_maiz_filtradots, lag.max =  36)
 ```
 
+```{r}
+par(mfrow = c(1,1))
+
+acf(dif_dia, lag.max =  36)
+pacf(dif_dia, lag.max =  36)
+```
 
 
+
+```{r}
+par(mfrow = c(1,1))
+
+acf(variacion_dia, lag.max =  36)
+pacf(variacion_dia, lag.max =  36)
+```
 ## Definición del modelo
 
 Se realiza una validación del mejor modelo ARIMA predictivo con la función auto.arima().
 
 ```{r}
+
 #mod <- auto.arima(df_maiz_filtradots1)
 #mod
 ```
+
+```{r}
+
+mod_arima_auto <- auto.arima(dif_dia)
+
+ #Mostrar el modelo seleccionado
+
+summary(mod_arima_auto)
+```
+
+
+
+```{r}
+
+modelo_arima1<- arima(dif_dia, order=c(1, 0, 8))
+
+# Residuos del modelo ARIMA
+residuos_mod_arima1 <- residuals(modelo_arima1)
+
+# Gráfico de los residuos
+plot(residuos_mod_arima1)
+
+```
+
 
 ## Predicción
 
@@ -570,3 +608,83 @@ prueba de cambios
 #grid()
 ```
 
+
+
+```{r}
+# Validación cruzada
+# Conjunto de entrenamiento y testeo
+n <- length(dif_dia)
+train <- dif_dia[1:(n/2)]
+test <- dif_dia[(n/2+1):n]
+
+# Ajustar el modelo ARIMA en los datos de entrenamiento
+modelo_arima2 <- arima(train, order=c(1, 0, 8))
+
+# Hacer pronósticos con el modelo ajustado
+predicciones <- predict(modelo_arima2, n.ahead=length(test))
+
+# Calcular el error de pronóstico
+error <- test - predicciones$pred
+
+print(error)
+```
+
+```{r}
+# Calcular las métricas de evaluación
+mse <- mean((test - predicciones$pred)^2)
+rmse <- sqrt(mse)
+mae <- mean(abs(test - predicciones$pred))
+r_squared <- 1 - sum((test - predicciones$pred)^2) / sum((test - mean(test))^2)
+
+# Crear una tabla con las métricas
+evaluacion <- data.frame(
+  MSE = mse,
+  RMSE = rmse,
+  MAE = mae,
+  R_squared = r_squared
+)
+
+# Mostrar la tabla
+print("Métricas de evaluación del modelo ARIMA:")
+print(evaluacion)
+```
+
+
+Modelo Autoarima
+
+```{r}
+# Validación cruzada
+# Conjunto de entrenamiento y testeo
+n <- length(dif_dia)
+train <- dif_dia[1:(n/2)]
+test <- dif_dia[(n/2+1):n]
+
+
+# Hacer pronósticos con el modelo ajustado
+predicciones_auto <- predict(mod_arima_auto, n.ahead=length(test))
+
+# Calcular el error de pronóstico
+error_auto <- test - predicciones$pred
+
+print(error_auto)
+```
+
+```{r}
+# Calcular las métricas de evaluación
+mse <- mean((test - predicciones_auto$pred)^2)
+rmse <- sqrt(mse)
+mae <- mean(abs(test - predicciones_auto$pred))
+r_squared <- 1 - sum((test - predicciones_auto$pred)^2) / sum((test - mean(test))^2)
+
+# Crear una tabla con las métricas
+evaluacion_auto <- data.frame(
+  MSE = mse,
+  RMSE = rmse,
+  MAE = mae,
+  R_squared = r_squared
+)
+
+# Mostrar la tabla
+print("Métricas de evaluación del modelo ARIMA:")
+print(evaluacion_auto)
+```
