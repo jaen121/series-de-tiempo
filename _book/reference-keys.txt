@@ -68,3 +68,15 @@ estacionariedad-de-los-residuos
 autocorrelación-de-los-residuos
 normalidad-de-los-residuos
 pronosticos
+modelo-autoarima
+modelo-arima108
+conclusiones
+evaluación-de-la-calidad-del-modelo
+analisis-de-los-residuos
+conclusiones-adicionales
+modelo-prophet
+generalidades-del-modelo
+implementación-del-modelo
+cargando-librerias
+preprocesamiento-de-datos-para-el-modelo
+modelo

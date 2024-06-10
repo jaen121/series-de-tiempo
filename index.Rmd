@@ -501,6 +501,7 @@ adf.test(df_maiz_filtradots1, alternative =  c("stationary", "explosive") )
 Tenemos un valor de p-value>0.05 no rechazamos la hipótesis nula de que la serie no sea estacionaria.
 
 Validando cuantas veces se debe diferenciar para tener una serie estacional
+
 ```{r}
 ndiffs(df_maiz_filtradots1)
 
@@ -633,6 +634,46 @@ Los test tienen p-value < 0.05 lo cual rechaza la hipotesis de que los residuos 
 ## Pronosticos
 
 
+
+### Modelo Autoarima
+
+```{r}
+# Validación cruzada
+# Conjunto de entrenamiento y testeo
+n <- length(dif1_maiz)
+train <- dif1_maiz[1:(n/2)]
+test <- dif1_maiz[(n/2+1):n]
+
+
+# Hacer pronósticos con el modelo ajustado
+predicciones_auto <- predict(mod_arima_auto, n.ahead=length(test))
+
+# Calcular el error de pronóstico
+error_auto <- test - predicciones_auto$pred
+
+```
+
+```{r}
+# Calcular las métricas de evaluación
+mse <- mean((test - predicciones_auto$pred)^2)
+rmse <- sqrt(mse)
+mae <- mean(abs(test - predicciones_auto$pred))
+r_squared <- 1 - sum((test - predicciones_auto$pred)^2) / sum((test - mean(test))^2)
+
+# Crear una tabla con las métricas
+evaluacion_auto <- data.frame(
+  MSE = mse,
+  RMSE = rmse,
+  MAE = mae,
+  R_squared = r_squared
+)
+
+# Mostrar la tabla
+print("Métricas de evaluación del modelo ARIMA:")
+print(evaluacion_auto)
+```
+### Modelo ARIMA(1,0,8)
+
 ```{r}
 # Validación cruzada
 # Conjunto de entrenamiento y testeo
@@ -649,7 +690,6 @@ predicciones <- predict(modelo_arima2, n.ahead=length(test))
 # Calcular el error de pronóstico
 error <- test - predicciones$pred
 
-print(error)
 ```
 
 ```{r}
@@ -673,41 +713,128 @@ print(evaluacion)
 ```
 
 
-Modelo Autoarima
+## Conclusiones
+
+### Evaluación de la calidad del modelo
+
+- *MSE (Mean Squared Error)*: La varianza promedio de los erroes de predicicón es de *58.8*.
+- *RMSE (Root Mean Squared Error)*: La raíz cuadrada del MSE es de *7.7*
+- *MAE (Mean Absolute Error):* El error absoluto promedio es de *4.96*
+- *R_squared:* El R cuadrado es un valor muy cercano a cero y negativo, por consiguiente el desempeño del modelo no es el adecuado. 
+
+### Analisis de los residuos
+
+Las pruebas de normalidad de los residuos (Anderson-Darling y Kolmogorov-Smirnov) tienen p-valores extremadamente bajos (< 2.2e-16), lo que indica que los residuos no siguen una distribución normal.
+
+Esto lo que indica es que el modelo Auto.arima no está capturando toda la variabilidad de los datos. 
+
+### Conclusiones adicionales:
+
+Se evalúa otro tipo de modelo ARIMA(1,0,8) y sus resultados son deficientes en la predicción.
+
+Por consiguiente se propone utilizar otro tipo de modelos. 
+
+
+# Modelo Prophet
+
+
+## Generalidades del modelo
+
+El modelo Prophet es un modelo que fue lanzado por el equipo Core Data Science de Facebook que proporciona caracteristicas tanto de modelos lineales generalizados(MLG) como de modelos aditivos (MA).
+
+Prophet se puede considerar un modelo no lineal o aditivo de la forma:
+
+\[
+y(t) = g(t) + s(t) + h(t) + \epsilon_t
+\]
+
+Donde:
+
+
+\begin{itemize}
+    \item \( y(t) \): es el valor de la serie temporal en el tiempo \( t \).
+    \item \( g(t) \): Representa la tendencia de la serie
+    \item \( s(t) \): Representa el componente de estacionalidad
+    \item \( h(t) \): Representa el componente cíclico, captura los efectos de las vacaciones
+    \item \( \epsilon_t \): representa el ruido blanco
+\end{itemize}
+
+
+## Implementación del modelo
+
+### Cargando librerias
 
 ```{r}
-# Validación cruzada
-# Conjunto de entrenamiento y testeo
-n <- length(dif1_maiz)
-train <- dif1_maiz[1:(n/2)]
-test <- dif1_maiz[(n/2+1):n]
+#Intalar el paquete si no se encuentra instalado
+if (!requireNamespace("TTR", quietly = TRUE)) {
+  install.packages("TTR")
+}
+
+library(TTR)
+library(quantmod)
 
 
-# Hacer pronósticos con el modelo ajustado
-predicciones_auto <- predict(mod_arima_auto, n.ahead=length(test))
-
-# Calcular el error de pronóstico
-error_auto <- test - predicciones$pred
-
-print(error_auto)
+#Intalar el paquete si no se encuentra instalado
+if (!requireNamespace("prophet", quietly = TRUE)) {
+  install.packages("prophet")
+}
+library(prophet)
 ```
+
+### Preprocesamiento de datos para el modelo
 
 ```{r}
-# Calcular las métricas de evaluación
-mse <- mean((test - predicciones_auto$pred)^2)
-rmse <- sqrt(mse)
-mae <- mean(abs(test - predicciones_auto$pred))
-r_squared <- 1 - sum((test - predicciones_auto$pred)^2) / sum((test - mean(test))^2)
-
-# Crear una tabla con las métricas
-evaluacion_auto <- data.frame(
-  MSE = mse,
-  RMSE = rmse,
-  MAE = mae,
-  R_squared = r_squared
-)
-
-# Mostrar la tabla
-print("Métricas de evaluación del modelo ARIMA:")
-print(evaluacion_auto)
+#Visualizar DF
+head(df_maiz_filtrado, 5)
 ```
+
+Para lograr utilizar *Prophet* se debe de tener un data frame donde las columnas de fecha se nombren "ds" y los valores "y"
+
+```{r}
+# Renombrar las columnas
+df_prophet <- df_maiz_filtrado %>%
+  dplyr::select(Fecha, Último) %>%
+  dplyr::rename(ds = Fecha, y = Último)
+
+# Visualizar df_prophet
+head(df_prophet, 5)
+```
+```{r}
+#Validando
+class(df_prophet)
+```
+
+### Modelo
+
+```{r}
+
+model_prophet <- prophet(df_prophet, daily.seasonality = TRUE)
+
+predict_prophet <- make_future_dataframe(model_prophet, periods = 30, freq = 'day')
+
+tail(predict_prophet)
+```
+
+
+```{r}
+
+forecast_prophet <- predict(model_prophet, predict_prophet)
+
+
+# Imprimir las predicciones en la consola
+print(forecast_prophet)
+
+#No funciona, error de nombre archivo temporal largo
+#dyplot.prophet(model_prophet, forecast_prophet)
+
+```
+
+
+```{r}
+tail(forecast_prophet[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
+```
+```{r}
+prophet_plot_components(model_prophet,forecast_prophet)
+```
+
+ 
