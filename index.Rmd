@@ -821,7 +821,7 @@ forecast_prophet <- predict(model_prophet, predict_prophet)
 
 
 # Imprimir las predicciones en la consola
-print(forecast_prophet)
+head(forecast_prophet, 5)
 
 #No funciona, error de nombre archivo temporal largo
 #dyplot.prophet(model_prophet, forecast_prophet)
