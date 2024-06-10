@@ -751,13 +751,12 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 Donde:
 
 
-\begin{itemize}
-    \item \( y(t) \): es el valor de la serie temporal en el tiempo \( t \).
-    \item \( g(t) \): Representa la tendencia de la serie
-    \item \( s(t) \): Representa el componente de estacionalidad
-    \item \( h(t) \): Representa el componente cíclico, captura los efectos de las vacaciones
-    \item \( \epsilon_t \): representa el ruido blanco
-\end{itemize}
+
+- *y/t):* es el valor de la serie temporal en el tiempo \( t \).
+- *g(t)*: Representa la tendencia de la serie
+- *s(t)*: Representa el componente de estacionalidad
+- *h(t)*: Representa el componente cíclico, captura los efectos de las vacaciones
+- *ϵt*: Representa el ruido blanco
 
 
 ## Implementación del modelo
