@@ -63,3 +63,8 @@ graficar-acf-pacf-escoger-los-parametros
 predicción
 transformación-de-la-serie-en-estacionaria
 validar-estacionariedad-de-las-series
+validación-del-modelo
+estacionariedad-de-los-residuos
+autocorrelación-de-los-residuos
+normalidad-de-los-residuos
+pronosticos

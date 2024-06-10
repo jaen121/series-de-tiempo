@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-05-26" />
+<meta name="date" content="2024-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,7 +175,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#transformación-de-la-serie-en-estacionaria"><i class="fa fa-check"></i><b>7.2</b> Transformación de la serie en estacionaria</a></li>
 <li class="chapter" data-level="7.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#validar-estacionariedad-de-las-series"><i class="fa fa-check"></i><b>7.3</b> Validar estacionariedad de las series</a></li>
 <li class="chapter" data-level="7.4" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#graficar-acf-pacf-escoger-los-parametros"><i class="fa fa-check"></i><b>7.4</b> Graficar ACF-PACF, Escoger los parametros</a></li>
-<li class="chapter" data-level="7.5" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#predicción"><i class="fa fa-check"></i><b>7.5</b> Predicción</a></li>
+<li class="chapter" data-level="7.5" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#definición-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Definición del modelo</a></li>
+<li class="chapter" data-level="7.6" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#validación-del-modelo"><i class="fa fa-check"></i><b>7.6</b> Validación del modelo</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#estacionariedad-de-los-residuos"><i class="fa fa-check"></i><b>7.6.1</b> Estacionariedad de los residuos</a></li>
+<li class="chapter" data-level="7.6.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#autocorrelación-de-los-residuos"><i class="fa fa-check"></i><b>7.6.2</b> Autocorrelación de los residuos:</a></li>
+<li class="chapter" data-level="7.6.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#normalidad-de-los-residuos"><i class="fa fa-check"></i><b>7.6.3</b> Normalidad de los residuos:</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#pronosticos"><i class="fa fa-check"></i><b>7.7</b> Pronosticos</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -209,12 +216,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 - <span class="math inline">\(y_t\)</span> es la observación actual en el periodo <span class="math inline">\(t\)</span>,
 - <span class="math inline">\(\hat{y}_t\)</span> es el pronóstico actual en el periodo <span class="math inline">\(t\)</span>, y
 - <span class="math inline">\(\alpha\)</span> es el factor de suavizado, que controla cuánto peso se le da a la observación actual versus el pronóstico anterior.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modelo-de-holt-winters.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar la cantidad de períodos en la serie temporal</span></span>
-<span id="cb44-2"><a href="modelo-de-holt-winters.html#cb44-2" aria-hidden="true" tabindex="-1"></a>cantidad_periodos <span class="ot">&lt;-</span> <span class="fu">length</span>(df_maiz_filtradots)</span>
-<span id="cb44-3"><a href="modelo-de-holt-winters.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="modelo-de-holt-winters.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cantidad_periodos)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modelo-de-holt-winters.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar la cantidad de períodos en la serie temporal</span></span>
+<span id="cb45-2"><a href="modelo-de-holt-winters.html#cb45-2" aria-hidden="true" tabindex="-1"></a>cantidad_periodos <span class="ot">&lt;-</span> <span class="fu">length</span>(df_maiz_filtradots)</span>
+<span id="cb45-3"><a href="modelo-de-holt-winters.html#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="modelo-de-holt-winters.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cantidad_periodos)</span></code></pre></div>
 <pre><code>## [1] 6170</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modelo-de-holt-winters.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modelo-de-holt-winters.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div>
 <pre><code>## Warning: package &#39;forecast&#39; was built under R version 4.1.3</code></pre>
 <pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
 ##   method            from
@@ -224,11 +231,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## The following object is masked from &#39;package:aTSA&#39;:
 ## 
 ##     forecast</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modelo-de-holt-winters.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo de suavizado exponencial simple</span></span>
-<span id="cb51-2"><a href="modelo-de-holt-winters.html#cb51-2" aria-hidden="true" tabindex="-1"></a>modelo_ses <span class="ot">&lt;-</span> <span class="fu">ses</span>(df_maiz_filtradots)</span>
-<span id="cb51-3"><a href="modelo-de-holt-winters.html#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-4"><a href="modelo-de-holt-winters.html#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir el modelo</span></span>
-<span id="cb51-5"><a href="modelo-de-holt-winters.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(modelo_ses)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelo-de-holt-winters.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo de suavizado exponencial simple</span></span>
+<span id="cb52-2"><a href="modelo-de-holt-winters.html#cb52-2" aria-hidden="true" tabindex="-1"></a>modelo_ses <span class="ot">&lt;-</span> <span class="fu">ses</span>(df_maiz_filtradots)</span>
+<span id="cb52-3"><a href="modelo-de-holt-winters.html#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="modelo-de-holt-winters.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir el modelo</span></span>
+<span id="cb52-5"><a href="modelo-de-holt-winters.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(modelo_ses)</span></code></pre></div>
 <pre><code>##          Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
 ## 2023.617       208.0002 197.2733 218.7271 191.5948 224.4056
 ## 2023.621       208.0002 192.8308 223.1696 184.8006 231.1998
@@ -296,16 +303,16 @@ donde:</li>
 </ul></li>
 </ol>
 <p>En resumen, el Método Holt-Winters es un método de suavizado exponencial que se utiliza para pronosticar series temporales con tendencia y estacionalidad. Utiliza tres componentes (nivel, tendencia y estacionalidad) que se actualizan en cada periodo para proporcionar pronósticos precisos y ajustados a los datos históricos observados.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="modelo-de-holt-winters.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xts)</span>
-<span id="cb53-2"><a href="modelo-de-holt-winters.html#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="modelo-de-holt-winters.html#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-4"><a href="modelo-de-holt-winters.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una serie de tiempo con la función ts, se cambio a frecuencia 261</span></span>
-<span id="cb53-5"><a href="modelo-de-holt-winters.html#cb53-5" aria-hidden="true" tabindex="-1"></a>df_maiz_filtradots1 <span class="ot">&lt;-</span> <span class="fu">ts</span>(df_maiz_filtrado<span class="sc">$</span>Último, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">1</span>), <span class="at">frequency=</span><span class="dv">261</span>)</span>
-<span id="cb53-6"><a href="modelo-de-holt-winters.html#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-7"><a href="modelo-de-holt-winters.html#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-8"><a href="modelo-de-holt-winters.html#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo Holt-Winters</span></span>
-<span id="cb53-9"><a href="modelo-de-holt-winters.html#cb53-9" aria-hidden="true" tabindex="-1"></a>modelo_hw <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(df_maiz_filtradots1)</span>
-<span id="cb53-10"><a href="modelo-de-holt-winters.html#cb53-10" aria-hidden="true" tabindex="-1"></a>modelo_hw</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="modelo-de-holt-winters.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xts)</span>
+<span id="cb54-2"><a href="modelo-de-holt-winters.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="modelo-de-holt-winters.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="modelo-de-holt-winters.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una serie de tiempo con la función ts, se cambio a frecuencia 261</span></span>
+<span id="cb54-5"><a href="modelo-de-holt-winters.html#cb54-5" aria-hidden="true" tabindex="-1"></a>df_maiz_filtradots1 <span class="ot">&lt;-</span> <span class="fu">ts</span>(df_maiz_filtrado<span class="sc">$</span>Último, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">1</span>), <span class="at">frequency=</span><span class="dv">261</span>)</span>
+<span id="cb54-6"><a href="modelo-de-holt-winters.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="modelo-de-holt-winters.html#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-8"><a href="modelo-de-holt-winters.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo Holt-Winters</span></span>
+<span id="cb54-9"><a href="modelo-de-holt-winters.html#cb54-9" aria-hidden="true" tabindex="-1"></a>modelo_hw <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(df_maiz_filtradots1)</span>
+<span id="cb54-10"><a href="modelo-de-holt-winters.html#cb54-10" aria-hidden="true" tabindex="-1"></a>modelo_hw</span></code></pre></div>
 <pre><code>## Holt-Winters exponential smoothing with trend and additive seasonal component.
 ## 
 ## Call:
@@ -581,11 +588,11 @@ donde:</li>
 ## s259 -68.568729011
 ## s260 -66.670745061
 ## s261 -64.638802752</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="modelo-de-holt-winters.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelo-de-holt-winters.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>A continuación se presenta la predicción para el siguiente año</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelo-de-holt-winters.html#cb56-1" aria-hidden="true" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_hw, <span class="at">n.ahead =</span> <span class="dv">261</span>, <span class="at">prediction.interval =</span> T, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb56-2"><a href="modelo-de-holt-winters.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw, forecast)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modelo-de-holt-winters.html#cb57-1" aria-hidden="true" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_hw, <span class="at">n.ahead =</span> <span class="dv">261</span>, <span class="at">prediction.interval =</span> T, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb57-2"><a href="modelo-de-holt-winters.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw, forecast)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 </div>
