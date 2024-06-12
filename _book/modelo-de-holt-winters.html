@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-06-10" />
+<meta name="date" content="2024-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -163,6 +163,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#aproximación-en-media-móvil"><i class="fa fa-check"></i><b>5.1</b> Aproximación en media móvil</a></li>
 <li class="chapter" data-level="5.2" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#componentes-de-una-serie-de-tiempo"><i class="fa fa-check"></i><b>5.2</b> Componentes de una Serie de Tiempo</a></li>
 <li class="chapter" data-level="5.3" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#estacionalidad"><i class="fa fa-check"></i><b>5.3</b> Estacionalidad</a></li>
+<li class="chapter" data-level="5.4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#transformación-de-la-serie-en-estacionaria"><i class="fa fa-check"></i><b>5.4</b> Transformación de la serie en estacionaria</a></li>
+<li class="chapter" data-level="5.5" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#validar-estacionariedad-de-las-series"><i class="fa fa-check"></i><b>5.5</b> Validar estacionariedad de las series</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="modelo-de-holt-winters.html"><a href="modelo-de-holt-winters.html"><i class="fa fa-check"></i><b>6</b> Modelo de Holt-Winters</a>
 <ul>
@@ -172,26 +174,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html"><i class="fa fa-check"></i><b>7</b> Metodología Box-Jenkins</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#visualizar-la-serie"><i class="fa fa-check"></i><b>7.1</b> Visualizar la serie</a></li>
-<li class="chapter" data-level="7.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#transformación-de-la-serie-en-estacionaria"><i class="fa fa-check"></i><b>7.2</b> Transformación de la serie en estacionaria</a></li>
-<li class="chapter" data-level="7.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#validar-estacionariedad-de-las-series"><i class="fa fa-check"></i><b>7.3</b> Validar estacionariedad de las series</a></li>
-<li class="chapter" data-level="7.4" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#graficar-acf-pacf-escoger-los-parametros"><i class="fa fa-check"></i><b>7.4</b> Graficar ACF-PACF, Escoger los parametros</a></li>
-<li class="chapter" data-level="7.5" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#definición-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Definición del modelo</a></li>
-<li class="chapter" data-level="7.6" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#validación-del-modelo"><i class="fa fa-check"></i><b>7.6</b> Validación del modelo</a>
+<li class="chapter" data-level="7.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#graficar-acf-pacf-escoger-los-parametros"><i class="fa fa-check"></i><b>7.2</b> Graficar ACF-PACF, Escoger los parametros</a></li>
+<li class="chapter" data-level="7.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#definición-del-modelo"><i class="fa fa-check"></i><b>7.3</b> Definición del modelo</a></li>
+<li class="chapter" data-level="7.4" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#validación-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Validación del modelo</a>
 <ul>
-<li class="chapter" data-level="7.6.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#estacionariedad-de-los-residuos"><i class="fa fa-check"></i><b>7.6.1</b> Estacionariedad de los residuos</a></li>
-<li class="chapter" data-level="7.6.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#autocorrelación-de-los-residuos"><i class="fa fa-check"></i><b>7.6.2</b> Autocorrelación de los residuos:</a></li>
-<li class="chapter" data-level="7.6.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#normalidad-de-los-residuos"><i class="fa fa-check"></i><b>7.6.3</b> Normalidad de los residuos:</a></li>
+<li class="chapter" data-level="7.4.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#estacionariedad-de-los-residuos"><i class="fa fa-check"></i><b>7.4.1</b> Estacionariedad de los residuos</a></li>
+<li class="chapter" data-level="7.4.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#autocorrelación-de-los-residuos"><i class="fa fa-check"></i><b>7.4.2</b> Autocorrelación de los residuos:</a></li>
+<li class="chapter" data-level="7.4.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#normalidad-de-los-residuos"><i class="fa fa-check"></i><b>7.4.3</b> Normalidad de los residuos:</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#pronosticos"><i class="fa fa-check"></i><b>7.7</b> Pronosticos</a>
+<li class="chapter" data-level="7.5" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#pronosticos"><i class="fa fa-check"></i><b>7.5</b> Pronosticos</a>
 <ul>
-<li class="chapter" data-level="7.7.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#modelo-autoarima"><i class="fa fa-check"></i><b>7.7.1</b> Modelo Autoarima</a></li>
-<li class="chapter" data-level="7.7.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#modelo-arima108"><i class="fa fa-check"></i><b>7.7.2</b> Modelo ARIMA(1,0,8)</a></li>
+<li class="chapter" data-level="7.5.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#modelo-autoarima"><i class="fa fa-check"></i><b>7.5.1</b> Modelo Autoarima</a></li>
+<li class="chapter" data-level="7.5.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#modelo-arima108"><i class="fa fa-check"></i><b>7.5.2</b> Modelo ARIMA(1,0,8)</a></li>
 </ul></li>
-<li class="chapter" data-level="7.8" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#conclusiones"><i class="fa fa-check"></i><b>7.8</b> Conclusiones</a>
+<li class="chapter" data-level="7.6" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#conclusiones"><i class="fa fa-check"></i><b>7.6</b> Conclusiones</a>
 <ul>
-<li class="chapter" data-level="7.8.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#evaluación-de-la-calidad-del-modelo"><i class="fa fa-check"></i><b>7.8.1</b> Evaluación de la calidad del modelo</a></li>
-<li class="chapter" data-level="7.8.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#analisis-de-los-residuos"><i class="fa fa-check"></i><b>7.8.2</b> Analisis de los residuos</a></li>
-<li class="chapter" data-level="7.8.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#conclusiones-adicionales"><i class="fa fa-check"></i><b>7.8.3</b> Conclusiones adicionales:</a></li>
+<li class="chapter" data-level="7.6.1" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#evaluación-de-la-calidad-del-modelo"><i class="fa fa-check"></i><b>7.6.1</b> Evaluación de la calidad del modelo</a></li>
+<li class="chapter" data-level="7.6.2" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#analisis-de-los-residuos"><i class="fa fa-check"></i><b>7.6.2</b> Analisis de los residuos</a></li>
+<li class="chapter" data-level="7.6.3" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html#conclusiones-adicionales"><i class="fa fa-check"></i><b>7.6.3</b> Conclusiones adicionales:</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="modelo-prophet.html"><a href="modelo-prophet.html"><i class="fa fa-check"></i><b>8</b> Modelo Prophet</a>
@@ -236,37 +236,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 - <span class="math inline">\(y_t\)</span> es la observación actual en el periodo <span class="math inline">\(t\)</span>,
 - <span class="math inline">\(\hat{y}_t\)</span> es el pronóstico actual en el periodo <span class="math inline">\(t\)</span>, y
 - <span class="math inline">\(\alpha\)</span> es el factor de suavizado, que controla cuánto peso se le da a la observación actual versus el pronóstico anterior.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modelo-de-holt-winters.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar la cantidad de períodos en la serie temporal</span></span>
-<span id="cb45-2"><a href="modelo-de-holt-winters.html#cb45-2" aria-hidden="true" tabindex="-1"></a>cantidad_periodos <span class="ot">&lt;-</span> <span class="fu">length</span>(df_maiz_filtradots)</span>
-<span id="cb45-3"><a href="modelo-de-holt-winters.html#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="modelo-de-holt-winters.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cantidad_periodos)</span></code></pre></div>
-<pre><code>## [1] 6170</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modelo-de-holt-winters.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div>
-<pre><code>## Warning: package &#39;forecast&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
-##   method            from
-##   as.zoo.data.frame zoo</code></pre>
-<pre><code>## 
-## Attaching package: &#39;forecast&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:aTSA&#39;:
-## 
-##     forecast</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelo-de-holt-winters.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo de suavizado exponencial simple</span></span>
-<span id="cb52-2"><a href="modelo-de-holt-winters.html#cb52-2" aria-hidden="true" tabindex="-1"></a>modelo_ses <span class="ot">&lt;-</span> <span class="fu">ses</span>(df_maiz_filtradots)</span>
-<span id="cb52-3"><a href="modelo-de-holt-winters.html#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="modelo-de-holt-winters.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir el modelo</span></span>
-<span id="cb52-5"><a href="modelo-de-holt-winters.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(modelo_ses)</span></code></pre></div>
-<pre><code>##          Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
-## 2023.617       208.0002 197.2733 218.7271 191.5948 224.4056
-## 2023.621       208.0002 192.8308 223.1696 184.8006 231.1998
-## 2023.625       208.0002 189.4219 226.5785 179.5871 236.4133
-## 2023.629       208.0002 186.5480 229.4524 175.1918 240.8085
-## 2023.633       208.0002 184.0160 231.9844 171.3195 244.6808
-## 2023.636       208.0002 181.7269 234.2734 167.8187 248.1817
-## 2023.640       208.0002 179.6219 236.3785 164.5993 251.4011
-## 2023.644       208.0002 177.6625 238.3378 161.6028 254.3976
-## 2023.648       208.0002 175.8223 240.1781 158.7884 257.2120
-## 2023.652       208.0002 174.0818 241.9186 156.1264 259.8739</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="modelo-de-holt-winters.html#cb62-1" tabindex="-1"></a><span class="co"># Verificar la cantidad de períodos en la serie temporal</span></span>
+<span id="cb62-2"><a href="modelo-de-holt-winters.html#cb62-2" tabindex="-1"></a>cantidad_periodos <span class="ot">&lt;-</span> <span class="fu">length</span>(dif1_maiz)</span>
+<span id="cb62-3"><a href="modelo-de-holt-winters.html#cb62-3" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="modelo-de-holt-winters.html#cb62-4" tabindex="-1"></a><span class="fu">print</span>(cantidad_periodos)</span></code></pre></div>
+<pre><code>## [1] 6165</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="modelo-de-holt-winters.html#cb64-1" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb64-2"><a href="modelo-de-holt-winters.html#cb64-2" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="modelo-de-holt-winters.html#cb64-3" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="modelo-de-holt-winters.html#cb64-4" tabindex="-1"></a><span class="co"># Ajustar un modelo de suavizado exponencial simple</span></span>
+<span id="cb64-5"><a href="modelo-de-holt-winters.html#cb64-5" tabindex="-1"></a>modelo_ses <span class="ot">&lt;-</span> <span class="fu">ses</span>(dif1_maiz)</span>
+<span id="cb64-6"><a href="modelo-de-holt-winters.html#cb64-6" tabindex="-1"></a></span>
+<span id="cb64-7"><a href="modelo-de-holt-winters.html#cb64-7" tabindex="-1"></a><span class="co"># Imprimir el modelo</span></span>
+<span id="cb64-8"><a href="modelo-de-holt-winters.html#cb64-8" tabindex="-1"></a><span class="fu">print</span>(modelo_ses)</span></code></pre></div>
+<pre><code>##          Point Forecast     Lo 80    Hi 80    Lo 95  Hi 95
+## 2023.640     -0.1005253 -86.78370 86.58265 -132.671 132.47
+## 2023.644     -0.1005253 -86.78370 86.58265 -132.671 132.47
+## 2023.647     -0.1005253 -86.78370 86.58265 -132.671 132.47
+## 2023.651     -0.1005253 -86.78370 86.58265 -132.671 132.47
+## 2023.655     -0.1005253 -86.78370 86.58265 -132.671 132.47
+## 2023.659     -0.1005253 -86.78370 86.58265 -132.671 132.47
+## 2023.663     -0.1005253 -86.78370 86.58265 -132.671 132.47
+## 2023.667     -0.1005253 -86.78371 86.58265 -132.671 132.47
+## 2023.670     -0.1005253 -86.78371 86.58265 -132.671 132.47
+## 2023.674     -0.1005253 -86.78371 86.58266 -132.671 132.47</code></pre>
 <p>la salida anterior presenta los intervalos de confianza de los pronosticos, del valor del precio del maiz.</p>
 </div>
 <div id="método-holt-winters-para-predicciones" class="section level2 hasAnchor" number="6.2">
@@ -323,297 +316,296 @@ donde:</li>
 </ul></li>
 </ol>
 <p>En resumen, el Método Holt-Winters es un método de suavizado exponencial que se utiliza para pronosticar series temporales con tendencia y estacionalidad. Utiliza tres componentes (nivel, tendencia y estacionalidad) que se actualizan en cada periodo para proporcionar pronósticos precisos y ajustados a los datos históricos observados.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="modelo-de-holt-winters.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xts)</span>
-<span id="cb54-2"><a href="modelo-de-holt-winters.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="modelo-de-holt-winters.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-4"><a href="modelo-de-holt-winters.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una serie de tiempo con la función ts, se cambio a frecuencia 261</span></span>
-<span id="cb54-5"><a href="modelo-de-holt-winters.html#cb54-5" aria-hidden="true" tabindex="-1"></a>df_maiz_filtradots1 <span class="ot">&lt;-</span> <span class="fu">ts</span>(df_maiz_filtrado<span class="sc">$</span>Último, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">1</span>), <span class="at">frequency=</span><span class="dv">261</span>)</span>
-<span id="cb54-6"><a href="modelo-de-holt-winters.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-7"><a href="modelo-de-holt-winters.html#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-8"><a href="modelo-de-holt-winters.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo Holt-Winters</span></span>
-<span id="cb54-9"><a href="modelo-de-holt-winters.html#cb54-9" aria-hidden="true" tabindex="-1"></a>modelo_hw <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(df_maiz_filtradots1)</span>
-<span id="cb54-10"><a href="modelo-de-holt-winters.html#cb54-10" aria-hidden="true" tabindex="-1"></a>modelo_hw</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="modelo-de-holt-winters.html#cb66-1" tabindex="-1"></a><span class="fu">library</span>(xts)</span>
+<span id="cb66-2"><a href="modelo-de-holt-winters.html#cb66-2" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="modelo-de-holt-winters.html#cb66-3" tabindex="-1"></a><span class="co"># Crea una serie de tiempo con la función ts, se cambio a frecuencia 261</span></span>
+<span id="cb66-4"><a href="modelo-de-holt-winters.html#cb66-4" tabindex="-1"></a>df_maiz_filtradots1 <span class="ot">&lt;-</span> <span class="fu">ts</span>(df_maiz_filtrado<span class="sc">$</span>Último, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">1</span>), <span class="at">frequency=</span><span class="dv">261</span>)</span>
+<span id="cb66-5"><a href="modelo-de-holt-winters.html#cb66-5" tabindex="-1"></a></span>
+<span id="cb66-6"><a href="modelo-de-holt-winters.html#cb66-6" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="modelo-de-holt-winters.html#cb66-7" tabindex="-1"></a><span class="co"># Ajustar un modelo Holt-Winters</span></span>
+<span id="cb66-8"><a href="modelo-de-holt-winters.html#cb66-8" tabindex="-1"></a>modelo_hw <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(dif1_maiz)</span>
+<span id="cb66-9"><a href="modelo-de-holt-winters.html#cb66-9" tabindex="-1"></a>modelo_hw</span></code></pre></div>
 <pre><code>## Holt-Winters exponential smoothing with trend and additive seasonal component.
 ## 
 ## Call:
-## HoltWinters(x = df_maiz_filtradots1)
+## HoltWinters(x = dif1_maiz)
 ## 
 ## Smoothing parameters:
-##  alpha: 0.8411595
-##  beta : 0.0007756481
-##  gamma: 1
+##  alpha: 0
+##  beta : 0
+##  gamma: 0.2584539
 ## 
 ## Coefficients:
 ##               [,1]
-## a    272.638802752
-## b     -0.009577179
-## s1   -62.461810071
-## s2   -60.078003774
-## s3   -60.363866627
-## s4   -64.721022778
-## s5   -64.952767445
-## s6   -62.726789470
-## s7   -61.644041620
-## s8   -63.196613765
-## s9   -65.460694849
-## s10  -63.743866583
-## s11  -62.474015682
-## s12  -61.638456078
-## s13  -61.205577225
-## s14  -65.668144365
-## s15  -68.125356097
-## s16  -68.658829628
-## s17  -64.404877247
-## s18  -58.754144653
-## s19  -53.061724496
-## s20  -49.215087790
-## s21  -41.223298162
-## s22  -30.393886348
-## s23  -17.107273915
-## s24  -10.394951817
-## s25  -10.187964706
-## s26  -10.935780595
-## s27  -14.992048306
-## s28  -18.901265047
-## s29  -20.424364120
-## s30  -18.701448987
-## s31  -15.246386125
-## s32   -9.719715189
-## s33   -8.655289020
-## s34   -4.653388050
-## s35   -3.598217303
-## s36   -4.031099066
-## s37   -5.716882722
-## s38   -5.535852972
-## s39   -5.104401966
-## s40   -4.249930012
-## s41    0.290138158
-## s42   10.706132283
-## s43   25.654374686
-## s44   41.515922006
-## s45   53.428899239
-## s46   64.012161893
-## s47   69.146854594
-## s48   69.653525484
-## s49   64.133476810
-## s50   55.563895259
-## s51   47.322651718
-## s52   41.424587101
-## s53   38.578956403
-## s54   36.200954546
-## s55   32.615223094
-## s56   27.937920061
-## s57   24.452810901
-## s58   22.610423296
-## s59   19.741319619
-## s60   16.352139203
-## s61   13.593527464
-## s62   13.537490985
-## s63   13.378394701
-## s64    8.879626260
-## s65    4.089622238
-## s66   -2.732229074
-## s67  -12.668666507
-## s68  -19.853673124
-## s69  -23.607825668
-## s70  -22.034104701
-## s71  -16.471143984
-## s72   -7.814253728
-## s73    3.547774892
-## s74   15.458821527
-## s75   27.722671131
-## s76   36.883900252
-## s77   43.172714209
-## s78   47.311532405
-## s79   49.115637863
-## s80   46.385338341
-## s81   43.052251343
-## s82   39.706711662
-## s83   35.127387850
-## s84   33.553376302
-## s85   37.088016675
-## s86   40.402880534
-## s87   44.398109879
-## s88   48.621174470
-## s89   53.023011180
-## s90   57.124701583
-## s91   59.223033253
-## s92   58.293867470
-## s93   57.935764721
-## s94   52.312809143
-## s95   47.006392265
-## s96   41.235826557
-## s97   37.840434672
-## s98   37.189696360
-## s99   34.683421349
-## s100  38.067569916
-## s101  39.795677803
-## s102  42.116164555
-## s103  41.667620609
-## s104  39.066413796
-## s105  33.318646623
-## s106  32.094289854
-## s107  28.221003317
-## s108  21.686293665
-## s109  17.453732187
-## s110  14.835021997
-## s111  13.196170995
-## s112  15.094416745
-## s113  13.982588028
-## s114  10.664215176
-## s115   6.271550171
-## s116   3.599446685
-## s117  -0.712480699
-## s118  -4.262275138
-## s119  -5.194357387
-## s120  -3.872967287
-## s121  -3.721158412
-## s122  -2.784159398
-## s123   0.748601059
-## s124   4.469272342
-## s125   5.085818781
-## s126   6.480672705
-## s127   9.163383112
-## s128  12.921657580
-## s129  17.124245171
-## s130  20.165791135
-## s131  27.075403758
-## s132  31.056400505
-## s133  36.615956681
-## s134  38.122044860
-## s135  38.319430753
-## s136  36.362465329
-## s137  35.572167534
-## s138  35.556606040
-## s139  38.255202628
-## s140  37.417898904
-## s141  38.556023785
-## s142  35.696652247
-## s143  34.013432251
-## s144  32.152451096
-## s145  34.139284003
-## s146  34.274481413
-## s147  34.138436276
-## s148  32.613082052
-## s149  31.899409643
-## s150  32.052889642
-## s151  33.437744944
-## s152  29.668708008
-## s153  26.660921021
-## s154  25.964667688
-## s155  21.749662217
-## s156  19.343177677
-## s157  17.352862849
-## s158  14.731647526
-## s159  12.352703622
-## s160   8.774318338
-## s161   4.569574530
-## s162   6.246887127
-## s163   6.727255649
-## s164  10.125916264
-## s165  13.909948516
-## s166  16.924786237
-## s167  17.098353092
-## s168  17.052007819
-## s169  13.427073281
-## s170   7.605503071
-## s171   3.668800176
-## s172  -0.576012316
-## s173  -4.394618268
-## s174  -5.819758710
-## s175  -8.599170670
-## s176 -13.296419144
-## s177 -17.642983308
-## s178 -21.352290411
-## s179 -27.919208120
-## s180 -32.510889931
-## s181 -34.408021278
-## s182 -34.339842149
-## s183 -33.063362119
-## s184 -31.309723844
-## s185 -25.018286223
-## s186 -20.332264339
-## s187 -14.841027462
-## s188  -9.185497500
-## s189  -6.273193402
-## s190  -5.796127540
-## s191  -5.431318297
-## s192  -7.815935249
-## s193  -7.226471569
-## s194  -8.289452780
-## s195 -10.285471336
-## s196 -13.477363439
-## s197 -17.069519533
-## s198 -17.409184054
-## s199 -14.988777844
-## s200 -14.319131816
-## s201 -13.394311108
-## s202 -10.046355470
-## s203  -5.673557081
-## s204  -3.258379800
-## s205  -2.140356296
-## s206  -0.281584681
-## s207  -1.805013822
-## s208   1.335348642
-## s209   4.324317972
-## s210   4.025761628
-## s211   1.001216109
-## s212  -2.040371412
-## s213  -2.893767077
-## s214  -3.603390918
-## s215  -6.864036340
-## s216  -9.465191137
-## s217 -10.167131677
-## s218  -8.678279180
-## s219  -7.075821212
-## s220  -2.970691232
-## s221  -3.773080792
-## s222  -4.356840944
-## s223  -5.321527328
-## s224  -7.335870713
-## s225  -8.826422136
-## s226 -13.239146522
-## s227 -14.588311983
-## s228 -18.297961585
-## s229 -20.104753017
-## s230 -22.338447389
-## s231 -22.921202409
-## s232 -22.228981298
-## s233 -20.798411187
-## s234 -20.181056447
-## s235 -23.348776078
-## s236 -25.941464495
-## s237 -26.473041071
-## s238 -27.996884446
-## s239 -27.255861520
-## s240 -28.515218178
-## s241 -29.618813398
-## s242 -31.145377444
-## s243 -33.179398191
-## s244 -37.173461416
-## s245 -38.690467585
-## s246 -38.729294496
-## s247 -41.489349834
-## s248 -46.918766855
-## s249 -50.833261401
-## s250 -53.507231814
-## s251 -56.802225122
-## s252 -58.088588730
-## s253 -57.470816612
-## s254 -58.524551260
-## s255 -63.083490396
-## s256 -63.908105272
-## s257 -66.209090410
-## s258 -68.982452001
-## s259 -68.568729011
-## s260 -66.670745061
-## s261 -64.638802752</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelo-de-holt-winters.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<p>A continuación se presenta la predicción para el siguiente año</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modelo-de-holt-winters.html#cb57-1" aria-hidden="true" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_hw, <span class="at">n.ahead =</span> <span class="dv">261</span>, <span class="at">prediction.interval =</span> T, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb57-2"><a href="modelo-de-holt-winters.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw, forecast)</span></code></pre></div>
+## a     2.095458e-02
+## b     3.580037e-06
+## s1   -1.548160e+00
+## s2    2.045626e+00
+## s3   -6.953178e+00
+## s4    3.157821e+00
+## s5    9.181121e+00
+## s6   -1.430079e+01
+## s7    7.849160e+00
+## s8   -2.437576e+00
+## s9    1.171048e+00
+## s10   4.352456e+00
+## s11  -1.347679e+01
+## s12   1.480440e+01
+## s13  -4.147956e+00
+## s14  -8.495435e+00
+## s15   1.461974e+01
+## s16  -1.505508e+01
+## s17   1.227866e+01
+## s18  -1.073951e+01
+## s19   8.871741e+00
+## s20  -5.533115e+00
+## s21   8.269358e+00
+## s22  -1.202752e+01
+## s23   7.844776e+00
+## s24  -7.784251e+00
+## s25   1.203081e+01
+## s26  -5.345324e+00
+## s27  -6.578340e+00
+## s28   1.019162e+01
+## s29  -7.386833e+00
+## s30   3.713369e+00
+## s31  -1.780734e+00
+## s32   4.246059e+00
+## s33  -9.672684e+00
+## s34   1.446846e+01
+## s35  -2.012582e+01
+## s36   2.214127e+01
+## s37  -1.462750e+01
+## s38   6.021571e+00
+## s39  -6.462270e+00
+## s40   8.418272e+00
+## s41  -2.340201e+00
+## s42  -4.220589e+00
+## s43   3.354965e+00
+## s44   3.773735e-01
+## s45  -5.207086e+00
+## s46   9.349533e+00
+## s47  -9.964547e+00
+## s48   9.476400e+00
+## s49  -9.412202e+00
+## s50   6.651175e+00
+## s51  -4.745291e-01
+## s52  -3.650137e+00
+## s53   3.267168e+00
+## s54  -1.335009e+00
+## s55  -2.236250e+00
+## s56   3.028024e+00
+## s57   1.163034e+00
+## s58  -2.246051e+00
+## s59  -3.356840e+00
+## s60   7.424040e+00
+## s61  -3.352462e+00
+## s62  -1.535844e+00
+## s63  -1.795221e+00
+## s64   3.571287e+00
+## s65   4.313158e+00
+## s66  -1.016212e+01
+## s67   3.952346e+00
+## s68   5.769092e+00
+## s69  -7.371769e+00
+## s70   3.712731e+00
+## s71  -4.690408e+00
+## s72   6.280804e+00
+## s73  -9.751531e-01
+## s74  -3.676346e+00
+## s75   3.270738e+00
+## s76  -4.446585e+00
+## s77   4.512120e+00
+## s78  -1.836513e+00
+## s79   1.773075e+00
+## s80  -4.246726e+00
+## s81   6.280549e+00
+## s82  -5.827290e+00
+## s83   1.099368e+00
+## s84   4.112636e+00
+## s85  -1.369546e+00
+## s86  -7.890001e+00
+## s87   8.841610e+00
+## s88  -3.094942e+00
+## s89   3.367334e+00
+## s90  -4.266344e+00
+## s91   6.380069e-01
+## s92  -1.479832e+00
+## s93   7.478694e+00
+## s94  -1.292647e+01
+## s95   1.584093e+01
+## s96  -1.475227e+01
+## s97   9.621005e+00
+## s98  -3.226281e+00
+## s99  -4.005204e+00
+## s100  1.475769e+01
+## s101 -2.561392e+01
+## s102  2.519129e+01
+## s103 -1.680077e+01
+## s104  1.097503e+01
+## s105 -8.865018e+00
+## s106  1.350164e+01
+## s107 -2.144309e+01
+## s108  1.803503e+01
+## s109 -3.648180e+00
+## s110 -7.989344e+00
+## s111  8.814574e+00
+## s112  1.411160e-01
+## s113 -1.111565e+01
+## s114  1.304545e+01
+## s115 -6.630049e+00
+## s116  4.672817e+00
+## s117 -9.580709e+00
+## s118  9.279220e+00
+## s119 -3.081956e+00
+## s120  2.863074e-01
+## s121 -1.201557e+00
+## s122  2.315372e+00
+## s123 -2.239616e+00
+## s124 -3.317861e-01
+## s125  8.133029e-01
+## s126  2.283791e+00
+## s127 -5.021908e+00
+## s128  6.325771e+00
+## s129 -5.421503e+00
+## s130  1.201183e+00
+## s131  7.120912e+00
+## s132 -1.764923e+01
+## s133  2.214137e+01
+## s134 -2.177721e+01
+## s135  2.085539e+01
+## s136 -1.659762e+01
+## s137  1.177139e+01
+## s138 -9.917983e+00
+## s139  8.202974e+00
+## s140 -9.923622e+00
+## s141  1.687362e+01
+## s142 -2.123123e+01
+## s143  1.939372e+01
+## s144 -1.658756e+01
+## s145  1.695506e+01
+## s146 -1.677030e+01
+## s147  1.006556e+01
+## s148 -5.287910e+00
+## s149  8.084131e+00
+## s150 -7.068455e+00
+## s151  3.616156e+00
+## s152 -1.217256e+01
+## s153  2.078319e+01
+## s154 -9.857925e+00
+## s155 -1.068875e+01
+## s156  2.172364e+01
+## s157 -1.861025e+01
+## s158  5.469103e+00
+## s159  7.097902e+00
+## s160 -8.813615e+00
+## s161  5.391261e-01
+## s162  8.584322e+00
+## s163 -1.486950e+01
+## s164  1.772867e+01
+## s165 -1.473831e+01
+## s166  7.021954e+00
+## s167 -2.773050e+00
+## s168  7.677448e+00
+## s169 -1.250055e+01
+## s170  6.301919e+00
+## s171  2.970255e+00
+## s172 -6.590954e+00
+## s173  5.842551e+00
+## s174 -3.286427e-01
+## s175 -6.797523e+00
+## s176  4.516597e+00
+## s177  2.946950e+00
+## s178 -2.612383e+00
+## s179 -3.406385e+00
+## s180  7.639363e+00
+## s181 -5.166719e+00
+## s182  9.341483e-01
+## s183 -6.596045e+00
+## s184  1.009251e+01
+## s185  1.037395e+00
+## s186 -1.361268e+01
+## s187  1.577716e+01
+## s188 -1.036060e+01
+## s189  3.923810e+00
+## s190 -1.994014e+00
+## s191  3.166206e+00
+## s192 -4.870205e+00
+## s193  1.054137e+01
+## s194 -1.629432e+01
+## s195  1.277748e+01
+## s196 -5.460645e+00
+## s197  1.386539e+00
+## s198  1.562244e+00
+## s199 -2.289162e+00
+## s200 -3.402939e+00
+## s201  8.099362e+00
+## s202 -1.943624e+00
+## s203 -4.512865e+00
+## s204 -1.160036e+00
+## s205  6.176780e+00
+## s206  2.190687e-01
+## s207 -1.082763e+01
+## s208  1.915764e+01
+## s209 -2.163410e+01
+## s210  1.186420e+01
+## s211  2.746697e+00
+## s212 -5.549147e+00
+## s213 -1.999104e+00
+## s214  5.849257e+00
+## s215 -3.007818e+00
+## s216  7.565627e-01
+## s217 -3.390768e+00
+## s218  5.853349e+00
+## s219 -5.551690e+00
+## s220  6.604293e+00
+## s221 -1.118403e+01
+## s222  1.636265e+01
+## s223 -1.771699e+01
+## s224  1.084275e+01
+## s225  9.341675e-01
+## s226 -9.706042e+00
+## s227  1.526932e+01
+## s228 -2.044287e+01
+## s229  2.121767e+01
+## s230 -1.608771e+01
+## s231  9.482669e+00
+## s232 -4.983196e+00
+## s233  3.705376e+00
+## s234 -2.808093e+00
+## s235 -2.823892e+00
+## s236  8.693087e+00
+## s237 -6.649049e+00
+## s238 -2.672151e+00
+## s239  1.142967e+01
+## s240 -1.306332e+01
+## s241  9.745595e+00
+## s242 -8.593845e+00
+## s243  9.019336e+00
+## s244 -8.692797e+00
+## s245  7.854800e+00
+## s246 -4.917203e+00
+## s247 -1.637870e+00
+## s248  4.716382e+00
+## s249  1.779849e+00
+## s250 -8.225930e+00
+## s251  6.118473e+00
+## s252 -4.341322e-01
+## s253 -3.214431e+00
+## s254  4.854976e-01
+## s255  2.118149e+00
+## s256  7.816138e+00
+## s257 -2.151106e+01
+## s258  1.923778e+01
+## s259 -3.991115e+00
+## s260 -7.061258e+00
+## s261  6.173276e+00</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="modelo-de-holt-winters.html#cb68-1" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>A continuación se presenta la predicción para el siguiente año</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="modelo-de-holt-winters.html#cb69-1" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_hw, <span class="at">n.ahead =</span> <span class="dv">261</span>, <span class="at">prediction.interval =</span> T, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb69-2"><a href="modelo-de-holt-winters.html#cb69-2" tabindex="-1"></a><span class="fu">plot</span>(modelo_hw, forecast)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 </div>
             </section>

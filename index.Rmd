@@ -4,6 +4,8 @@ author: "Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
+params:
+  R_MAX_STACK_SIZE: 100000000
 bibliography: [book.bib, packages.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
@@ -16,6 +18,9 @@ github-repo: rstudio/bookdown-demo
 
 
 ---
+
+
+
 # Justificación uso de datos historicos del precio del maíz 
 
 En el curso se va a trabajar con la base de datos del precio del maíz a través de la historia, con el fin de proyectar su precio futuro. 
@@ -76,7 +81,6 @@ En general los análisis de series de tiempo tienen los siguientes tres pasos:
 Los datos a trabajar se obtuvieron de https://es.investing.com/commodities/us-corn-streaming-chart y corresponden al mercado de maiz, durante los años....
 
 Se importa la matriz de  datos
-
 
 
 
@@ -351,7 +355,7 @@ Según el resultado se debe diferenciar una vez para para tener la serie estacio
 #transformar la serie
 
 #Diferenciación de primer orden
-dif1_maiz <- diff(df_maiz_filtradots)
+dif1_maiz <- diff(df_maiz_filtradots, differences = 5)
 
 # Redondear la frecuencia
 frequency_rounded <- round(frequency(dif1_maiz))
@@ -496,7 +500,6 @@ library(xts)
 # Crea una serie de tiempo con la función ts, se cambio a frecuencia 261
 df_maiz_filtradots1 <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261)
 
-#memory.limit(size = 100000000)
 
 # Ajustar un modelo Holt-Winters
 modelo_hw <- HoltWinters(dif1_maiz)
