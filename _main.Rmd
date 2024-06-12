@@ -331,7 +331,7 @@ library(tseries)
 
 print('------------------------')
 print('Prueba Estacionariedad DF Maíz')
-adf.test(df_maiz_filtradots1, alternative =  c("stationary", "explosive") )
+adf.test(df_maiz_filtradots, alternative =  c("stationary", "explosive") )
 
 ```
 Tenemos un valor de p-value>0.05 no rechazamos la hipótesis nula de que la serie no sea estacionaria.
@@ -339,7 +339,7 @@ Tenemos un valor de p-value>0.05 no rechazamos la hipótesis nula de que la seri
 Validando cuantas veces se debe diferenciar para tener una serie estacional
 
 ```{r}
-ndiffs(df_maiz_filtradots1)
+ndiffs(df_maiz_filtradots)
 
 ```
 Según el resultado se debe diferenciar una vez para para tener la serie estacional
@@ -347,11 +347,17 @@ Según el resultado se debe diferenciar una vez para para tener la serie estacio
 
 ## Transformación de la serie en estacionaria
 
-```{r}
+```{r ubicacion}
 #transformar la serie
 
 #Diferenciación de primer orden
-dif1_maiz <- diff(df_maiz_filtradots1)
+dif1_maiz <- diff(df_maiz_filtradots)
+
+# Redondear la frecuencia
+frequency_rounded <- round(frequency(dif1_maiz))
+
+# Ajustar la serie temporal con la frecuencia redondeada
+dif1_maiz <- ts(as.numeric(dif1_maiz), start = start(dif1_maiz), frequency = frequency_rounded)
 
 
 # Gráfico de la serie
@@ -484,7 +490,7 @@ Una explicación  del Método Holt-Winters:
 
 En resumen, el Método Holt-Winters es un método de suavizado exponencial que se utiliza para pronosticar series temporales con tendencia y estacionalidad. Utiliza tres componentes (nivel, tendencia y estacionalidad) que se actualizan en cada periodo para proporcionar pronósticos precisos y ajustados a los datos históricos observados.
 
-```{r}
+```{r ver}
 
 library(xts)
 
