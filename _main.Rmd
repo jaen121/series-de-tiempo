@@ -846,3 +846,6 @@ prophet_plot_components(model_prophet,forecast_prophet)
 ```
 
  
+
+<!--chapter:end:index.Rmd-->
+
