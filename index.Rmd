@@ -82,9 +82,7 @@ Los datos a trabajar se obtuvieron de https://es.investing.com/commodities/us-co
 
 Se importa la matriz de  datos
 
-# AAAAA
 
-dadsabdaskdjsakdasndaskdasjkdsakdasjkdsajdkasdaksdjask
 
 ```{r}
 # Importar datos desde un archivo CSV desde github 2.0
@@ -854,4 +852,7 @@ tail(forecast_prophet[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
 prophet_plot_components(model_prophet,forecast_prophet)
 ```
 
+# Modelo elman 
+
+nbgouynkomkñulyuioopuioji
  

@@ -81,3 +81,4 @@ cargando-librerias
 preprocesamiento-de-datos-para-el-modelo
 modelo
 aaaaa
+modelo-elman
