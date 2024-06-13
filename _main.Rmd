@@ -1,0 +1,858 @@
+--- 
+title: "Series de Tiempo"
+author: "Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+params:
+  R_MAX_STACK_SIZE: 100000000
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+
+
+---
+
+
+
+# Justificación uso de datos historicos del precio del maíz 
+
+En el curso se va a trabajar con la base de datos del precio del maíz a través de la historia, con el fin de proyectar su precio futuro. 
+La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, consta de las siguientes columnas:
+-	Fecha: Fecha de transacción
+-	Ultimo: Ultimo precio del día, precio de cierre
+-	Apertura: Primer precio del día, precio de apertura
+-	Máximo: Máximo precio en la negociación del día
+-	Mínimo: Mínimo precio en la negociación del día
+-	Vol: Volumen negociado en toneladas
+-	% Var: Porcentaje de variación. 
+
+Es importante predecir el valor del maíz con el fin de anticipar y mitigar los efectos de la inflación por la posible subida del precio del maíz, esto dado que el maíz es un insumo muy importante para el alimento de aves de corral como lo son, gallinas reproductoras, pollos de engorde y gallinas ponedoras, también desempeña un papel fundamental en la producción de alimento balanceado para cerdos. 
+El maíz representa una proporción significativa, que oscila entre el 50 % y el 70 %, de los ingredientes utilizados en la elaboración de alimentos balanceados para aves de corral y cerdos. Es evidente que el precio del maíz ejerce una influencia directa y proporcional en el costo de la carne de pollo, huevo y cerdo, ya que el alimento balanceado representa la mayor parte de los costos en la producción de aves de corral y cerdo.
+La industria de alimentos balanceados también depende de la predicción del precio del maíz. Las empresas de alimentos balanceados pueden ajustar sus estrategias de aprovisionamiento y producción para reducir el impacto de los cambios en los costos de materias primas al conocer con anticipación las variaciones en el precio del maíz. Esto a su vez ayuda a mantener estables los precios del alimento balanceado para animales, lo que es esencial para garantizar la rentabilidad y sostenibilidad de sus productos.
+Además, la predicción del precio del maíz puede ayudar a los gobiernos nacionales y regionales a desarrollar políticas y programas efectivos para proteger la seguridad alimentaria. El gobierno se puede anticipar a posibles aumentos de los costos de alimentos básicos y tomar medidas preventivas para disminuir su impacto negativo en el aumento de precios por el aumento de costos en las materias primas observando de cerca las tendencias del precio del maíz Esto puede incluir la implementación de subsidios alimentarios, programas de asistencia alimentaria y políticas para respaldar la producción agrícola nacional.
+
+
+# Introducción a las series de tiempo
+
+Una serie de tiempo es una secuencia de datos ordenados en función del tiempo. Estos datos se recopilan en intervalos regulares, como horas, días, meses, años, etc. El objetivo principal de analizar una serie de tiempo es descubrir patrones, tendencias y comportamientos que cambian con el tiempo.
+
+Las series de tiempo se utilizan en una amplia variedad de campos, como finanzas, economía, meteorología, ciencias sociales y muchas otras áreas donde se registran datos a lo largo del tiempo. Algunos ejemplos comunes de series de tiempo incluyen el precio de las acciones en bolsa a lo largo del tiempo, las ventas mensuales de una empresa, la temperatura diaria registrada en una región, entre otros.
+
+El análisis de series de tiempo implica técnicas como el modelado de tendencias, la detección de estacionalidad, la identificación de patrones cíclicos y la predicción de valores futuros. Estas técnicas son útiles para tomar decisiones informadas y predecir el comportamiento futuro basado en datos históricos.
+
+## Principales campos donde se aplican las series de tiempo 
+
+Las series de tiempo se utilizan en una amplia variedad de situaciones y campos. Algunas de las situaciones más comunes en las que se utilizan las series de tiempo son:
+
++ **Finanzas y economía**: En análisis financiero, las series de tiempo se utilizan para estudiar el rendimiento de acciones, bonos, índices bursátiles y otros instrumentos financieros a lo largo del tiempo. También son fundamentales en el análisis económico para estudiar indicadores como el PIB, la inflación, el desempleo y las tasas de interés a lo largo del tiempo.
+
++ **Ciencias naturales**: En campos como la meteorología, la climatología y la oceanografía, las series de tiempo se utilizan para analizar patrones climáticos, temperaturas, niveles de precipitación, concentraciones de gases, entre otros datos ambientales a lo largo del tiempo.
+
++ **Ingeniería y tecnología**: En ingeniería eléctrica, mecánica y civil, las series de tiempo se utilizan para monitorear el rendimiento de sistemas, predecir fallas, analizar el comportamiento de estructuras y realizar mantenimiento predictivo.
+
++ **Ciencias de la salud**: En medicina y epidemiología, las series de tiempo se utilizan para analizar tendencias en la propagación de enfermedades, estudiar la eficacia de tratamientos médicos, analizar datos de pacientes a lo largo del tiempo y realizar proyecciones epidemiológicas.
+
++ **Marketing y ventas**: En análisis de mercado, las series de tiempo se utilizan para estudiar tendencias de ventas, patrones estacionales, efectividad de campañas de marketing, demanda de productos y pronósticos de ventas.
+
++ **Investigación social**: En sociología, psicología y ciencias sociales en general, las series de tiempo se utilizan para estudiar tendencias sociales, cambios de actitudes, análisis de encuestas a lo largo del tiempo y estudios longitudinales.
+
+Por lo tanto las series de tiempo son herramientas poderosas que se utilizan en una amplia gama de disciplinas para analizar patrones, tendencias y cambios a lo largo del tiempo, lo que permite tomar decisiones informadas y realizar pronósticos precisos.
+
+## Principales pasos para llevar a cabo un aálisis de series de tiempo
+
+El análisis de series de tiempo se refiere al proceso de analizar los datos disponibles para descubrir el patrón o la tendencia en los datos. Permite extraer y modelar las relaciones entre datos a lo largo del tiempo, sea extrapolando (hacia futuro) o interpolando (hacia el pasado) el comportamiento de datos no observados.
+
+En general los análisis de series de tiempo tienen los siguientes tres pasos:
+
++ Análisis exploratorio
++ Escogencia y ajuste del modelo
++ Diagnóstico
+
+
+# Importación de Datos
+ 
+Los datos a trabajar se obtuvieron de https://es.investing.com/commodities/us-corn-streaming-chart y corresponden al mercado de maiz, durante los años....
+
+Se importa la matriz de  datos
+
+
+
+```{r}
+# Importar datos desde un archivo CSV desde github 2.0
+ruta_archivo <- "Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
+
+df_maiz <- read.csv(ruta_archivo, sep = ";",fileEncoding = "UTF-8")
+
+names(df_maiz)
+
+```
+
+```{r}
+head(df_maiz)
+
+```
+La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, consta de las siguientes columnas:
+-	Fecha: Fecha de transacción
+-	Ultimo: Ultimo precio del día, precio de cierre
+-	Apertura: Primer precio del día, precio de apertura
+-	Máximo: Máximo precio en la negociación del día
+-	Mínimo: Mínimo precio en la negociación del día
+-	Vol: Volumen negociado en toneladas
+-	% Var: Porcentaje de variación. 
+
+# Análisis descriptivo y filtro base de datos
+
+## Filtro de datos.
+
+Considerando que el foco principal de este ejercicio recae en la variable objetivo **último**, se opta por construir un nuevo data frame que contenga exclusivamente la fecha y el valor de último.
+
+```{r}
+#data frame filtrado
+df_maiz_filtrado <- df_maiz[, c("Fecha", "Último")]
+
+head(df_maiz_filtrado, 5)
+```
+
+## Analisis Descriptivo
+
+A continuación se estudiarán los estadísticos descriptivos de la matriz de datos:
+
+```{r}
+str(df_maiz_filtrado)
+```
+
+Teniendo en cuenta que la variable **Fecha** se encuentra categorizada como caracter y no como fecha, se convierte esta columna a tipo fecha
+
+```{r}
+#Convertir fecha en formato fecha
+df_maiz_filtrado$Fecha <- as.Date(df_maiz_filtrado$Fecha, format = "%d/%m/%Y")
+
+#validar
+str(df_maiz_filtrado)
+```
+
+
+
+```{r}
+#install.packages("skimr")
+skimr::skim(df_maiz_filtrado)
+```
+
+De la salida anterior podemos visualizar que se presentan 6170 registros, el data frame tiene datos que van desde el 03 de Enero del año 2000 hasta el 19 de abril del año 2024, el precio de cierre del maíz en este periodo de tiempo tiene una media de 409 dolares con una desviación estándar de 159 dolares, el valor mínimo se encuentra en 182,5 dolares y el precio máximo en 838.75 dolares.
+
+
+Ahora, se va analizar el precio de cierre por día de la semana. 
+```{r}
+#Crear una columna que muestre el día de la semana
+df_maiz_filtrado$Dia_Semana <- weekdays(as.Date(df_maiz_filtrado$Fecha))
+
+head(df_maiz_filtrado, 5)
+```
+
+
+```{r}
+#Ordenar la variable Dia_Semana
+df_maiz_filtrado$Dia_Semana <- factor(df_maiz_filtrado$Dia_Semana, 
+                                      levels = c("lunes", 
+                                                 "martes", 
+                                                 "miércoles", 
+                                                 "jueves", 
+                                                 "viernes", 
+                                                 "sábado", 
+                                                 "domingo"))
+
+```
+
+
+
+```{r}
+#Cargar libreria para graficar
+#install.packages("ggplot2")
+library(ggplot2)
+
+```
+
+```{r}
+# Crear el gráfico de barras de la frecuencia por día de la semana
+ggplot(df_maiz_filtrado, aes(x = Dia_Semana, fill = Dia_Semana)) +
+  geom_bar() +  #Grafico de barras
+  geom_text( stat = "count", aes(label = ..count..), vjust = -0.5) + #Agregar etiquetas
+  labs(x = "Día de la semana", 
+       y = "Frecuencia", 
+       title = "Frecuencia por día de la semana") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+```
+
+Dado que los días domingos no se generan transacciones en la bolsa y que los datos que se tienen los días domingos solo son 9 en 24 años de historia se decide eliminar estos datos. 
+
+
+```{r}
+#Creando data frame sin el domingo
+
+df_maiz_SD <- subset(df_maiz_filtrado, Dia_Semana != "domingo")
+
+#validando filtro
+unique(df_maiz_SD$Dia_Semana)
+
+```
+
+
+```{r}
+# Crear el gráfico de boxplot por semana
+ggplot(df_maiz_SD, aes(x = Dia_Semana, y = Último)) +
+  geom_boxplot(fill = "skyblue", color = "blue") +
+  labs(x = "Día de la semana", y = "Último")
+```
+
+# Series de Tiempo
+
+Convertimos la matriz de datos en series de tiempo
+
+```{r}
+#install.packages("xts")
+# Carga el paquete xts
+library(xts)
+
+
+# Crea una serie de tiempo con la función ts
+df_maiz_filtradots <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261.25)
+df_maiz_filtradots
+
+```
+
+
+```{r}
+#revisamos que sea una clase ts
+
+class(df_maiz_filtradots)
+```
+
+
+```{r}
+#Corroboramos el inicio de la serie
+start(df_maiz_filtradots)
+
+```
+
+
+
+
+
+
+
+
+Graficamos la serie de tiempo por días desde 03 de Enero del año 2000 hasta el 19 de abril del año 2024, excluyendo los fines de semanaaa
+
+```{r}
+# Graficar la serie de tiempo usando la función plot
+plot(df_maiz_filtradots, main = "Serie de Tiempo de Último Precio del Maíz", 
+     xlab = "Fecha", ylab = "Precio", type = "l")
+
+```
+
+## Aproximación en media móvil
+
+Una parte importante del análisis descriptivo de un conjunto de datos son los indicadores de tendencia central, entre ellos, la media. Sin embargo, en el contexto del análisis de series de tiempo, este indicador puede aumentar su sensibilidad, pues la vulnerabilidad de los datos a cambios impredecibles es más alta que en otros conjuntos de datos. Es por eso que se plantea la media móvil, que se define como el promedio de los datos en una ventana de tiempo, es decir, se toma la media de un intervalo de los datos, en vez de la media de los datos en su totalidad. Esto reduce la variabilidad y se puede utilizar para una mejor descripción de estaciones o ventanas de tiempo específicas.
+
+A continuación se pueden observar diferentes ejemplo de aproximación de los datos a través de la media móvil con diversos k, en dónde k representa el tamaño del intervalo tomado:
+
+
+```{r}
+
+# Calcula el promedio móvil k = 10
+promedio_movil <- rollmean(df_maiz_filtradots, k = 10, align = "center", fill = NA)
+
+# Gráfico comparativo k = 10
+plot(df_maiz_filtradots, type = "l", col = "black", lwd = 2, xlab ="Fecha", ylab ="Precio", main = "Aproximación en Promedio Móvil con k = 10")
+lines(promedio_movil, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = c("Serie Original", "Promedio Móvil"), col = c("black", "red"), lty = c(1, 2), lwd = 2)
+
+# Calcula el promedio móvil k = 50
+promedio_movil <- rollmean(df_maiz_filtradots, k = 50, align = "center", fill = NA)
+
+# Gráfico comparativo k = 50
+plot(df_maiz_filtradots, type = "l", col = "black", lwd = 2, xlab ="Fecha", ylab ="Precio", main = "Aproximación en Promedio Móvil con k = 50")
+lines(promedio_movil, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = c("Serie Original", "Promedio Móvil"), col = c("black", "red"), lty = c(1, 2), lwd = 2)
+
+# Calcula el promedio móvil k = 100
+promedio_movil <- rollmean(df_maiz_filtradots, k = 100, align = "center", fill = NA)
+
+# Gráfico comparativo k = 100
+plot(df_maiz_filtradots, type = "l", col = "black", lwd = 2, xlab ="Fecha", ylab ="Precio", main = "Aproximación en Promedio Móvil con k = 100")
+lines(promedio_movil, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = c("Serie Original", "Promedio Móvil"), col = c("black", "red"), lty = c(1, 2), lwd = 2)
+
+# Calcula el promedio móvil k = 500
+promedio_movil <- rollmean(df_maiz_filtradots, k = 500, align = "center", fill = NA)
+
+# Gráfico comparativo k = 500
+plot(df_maiz_filtradots, type = "l", col = "black", lwd = 2, xlab ="Fecha", ylab ="Precio", main = "Aproximación en Promedio Móvil con k = 500")
+lines(promedio_movil, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = c("Serie Original", "Promedio Móvil"), col = c("black", "red"), lty = c(1, 2), lwd = 2)
+
+```
+
+
+
+
+
+
+## Componentes de una Serie de Tiempo
+
+
+Las series de tiempo pueden descomponerse en varias componentes que ayudan a comprender la estructura y los patrones presentes en los datos a lo largo del tiempo. Las principales componentes de una serie de tiempo son:
+
++ Tendencia: Representa la dirección general de los datos a largo plazo. Puede ser ascendente, descendente o plana. La tendencia captura cambios graduales y persistentes en los datos a lo largo del tiempo.
+
++ Estacionalidad: Se refiere a patrones recurrentes o cíclicos que se repiten en la serie de tiempo a intervalos fijos de tiempo, como diarios, semanales, mensuales o anuales. La estacionalidad puede ser causada por factores como la temporada, eventos naturales o económicos.
+
++ Ciclo: Es similar a la estacionalidad, pero con una duración más larga y menos regular. Los ciclos representan fluctuaciones económicas o patrones de negocios que se repiten en períodos de varios años.
+
++ Variación aleatoria o ruido: Es la parte no sistemática o irregular de la serie de tiempo que no puede explicarse por la tendencia, la estacionalidad o el ciclo. La variación aleatoria puede deberse a factores aleatorios o eventos impredecibles que afectan los datos.
+
+## Estacionalidad
+
+```{r}
+# Instalar y cargar el paquete tseries si no está instalado
+if (!requireNamespace("tseries", quietly = TRUE)) {
+  install.packages("tseries")
+}
+#
+# Cargar la librería
+library(forecast)
+library(tseries)
+
+#prueba de estacionariedad
+
+print('------------------------')
+print('Prueba Estacionariedad DF Maíz')
+adf.test(df_maiz_filtradots, alternative =  c("stationary", "explosive") )
+
+```
+Tenemos un valor de p-value>0.05 no rechazamos la hipótesis nula de que la serie no sea estacionaria.
+
+Validando cuantas veces se debe diferenciar para tener una serie estacional
+
+```{r}
+ndiffs(df_maiz_filtradots)
+
+```
+Según el resultado se debe diferenciar una vez para para tener la serie estacional
+
+
+## Transformación de la serie en estacionaria
+
+```{r ubicacion}
+#transformar la serie
+
+#Diferenciación de primer orden
+dif1_maiz <- diff(df_maiz_filtradots, differences = 5)
+
+# Redondear la frecuencia
+frequency_rounded <- round(frequency(dif1_maiz))
+
+# Ajustar la serie temporal con la frecuencia redondeada
+dif1_maiz <- ts(as.numeric(dif1_maiz), start = start(dif1_maiz), frequency = frequency_rounded)
+
+
+# Gráfico de la serie
+ts.plot(dif1_maiz, main = "Grafico Diferencia del precio del Maíz",
+        ylab= "valor",
+        xlab= "años",
+        col = "darkblue")
+
+
+
+```
+
+## Validar estacionariedad de las series
+
+
+```{r}
+
+#prueba de estacionariedad
+
+print('------------------------')
+print('Prueba Estacionariedad Diferencia Maíz')
+adf.test(dif1_maiz, alternative =  c("stationary", "explosive") )
+
+```
+Se tiene un p-value < 0.05, por consiguiente se puede concluir que la serie es estacionaria. 
+
+
+```{r}
+# Calcular la descomposición estacional
+descomposicion <- stl(dif1_maiz, s.window = "periodic")
+
+# Trazar la descomposición
+plot(descomposicion, col = "blue")
+
+```
+
+La gráfica generada por la función stl muestra la descomposición estacional de una serie de tiempo en tres componentes principales: tendencia, estacionalidad y residuos. 
+
+*Estacionalidad:* La parte intermedia de la gráfica muestra la estacionalidad de la serie de tiempo. Esto representa patrones recurrentes o cíclicos que se repiten a intervalos regulares. Por ejemplo, si la serie de tiempo representa datos mensuales, la estacionalidad mostrará patrones que se repiten cada año.
+
+*Tendencia:* La línea suavizada en la parte superior de la gráfica representa la tendencia de la serie de tiempo. La tendencia muestra la dirección general en la que los datos están cambiando a lo largo del tiempo. Una tendencia ascendente indica un crecimiento en los datos, una tendencia descendente indica una disminución, y una tendencia plana sugiere estabilidad.
+
+*Residuos:* La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.
+
+<<<<<<< HEAD
+
+# Modelo de  Holt-Winters
+
+## Modelo de suavizado exponencial simple (SES, por sus siglas en inglés)
+
+Es un modelo de suavizado exponencial simple (SES, por sus siglas en inglés). En términos generales, el suavizado exponencial simple es un método de pronóstico que utiliza un único factor de suavizado (alpha) para dar más peso a las observaciones más recientes mientras suaviza las fluctuaciones aleatorias.
+
+El modelo SES se define por la siguiente ecuación de recursividad:
+
+\[ \hat{y}_{t+1} = \alpha \cdot y_t + (1 - \alpha) \cdot \hat{y}_t \]
+
+Donde:
+- \(\hat{y}_{t+1}\) es el pronóstico para el siguiente periodo,
+- \(y_t\) es la observación actual en el periodo \(t\),
+- \(\hat{y}_t\) es el pronóstico actual en el periodo \(t\), y
+- \(\alpha\) es el factor de suavizado, que controla cuánto peso se le da a la observación actual versus el pronóstico anterior.
+
+
+```{r}
+# Verificar la cantidad de períodos en la serie temporal
+cantidad_periodos <- length(dif1_maiz)
+
+print(cantidad_periodos)
+
+```
+
+
+```{r}
+
+library(forecast)
+
+
+# Ajustar un modelo de suavizado exponencial simple
+modelo_ses <- ses(dif1_maiz)
+
+# Imprimir el modelo
+print(modelo_ses)
+
+
+```
+la salida anterior presenta los intervalos de confianza de los pronosticos, del valor del precio del maiz.
+
+## Método Holt-Winters para Predicciones 
+
+El Método Holt-Winters es un modelo de suavizado exponencial ampliamente utilizado para el pronóstico de series temporales que exhiben tendencia y estacionalidad. Este método es una extensión del suavizado exponencial simple (SES)presentado anteriormente,  que también tiene en cuenta la componente de tendencia y la componente estacional de la serie temporal.
+
+Una explicación  del Método Holt-Winters:
+
+1. **Componente de Nivel (Nivel)**:
+   - El Método Holt-Winters comienza con la estimación de un nivel inicial. Este nivel inicial se representa como \( L_0 \).
+   - El nivel actual se calcula utilizando una combinación lineal de la observación actual y el nivel anterior. La fórmula para calcular el nivel actual es:
+     \[ L_t = \alpha \times Y_t + (1 - \alpha) \times (L_{t-1} + T_{t-1}) \]
+     donde:
+     - \( L_t \) es el nivel en el tiempo \( t \).
+     - \( Y_t \) es la observación en el tiempo \( t \).
+     - \( \alpha \) es la constante de suavizado para la componente de nivel. Controla cuánto peso se le da a la observación actual en la estimación del nivel.
+     - \( T_{t-1} \) es la estimación de la tendencia en el tiempo \( t-1 \).
+
+2. **Componente de Tendencia (Tendencia)**:
+   - La tendencia representa la dirección general de los datos a lo largo del tiempo.
+   - El Método Holt-Winters utiliza una estimación inicial de la tendencia, que se representa como \( T_0 \).
+   - La tendencia actual se calcula utilizando una combinación lineal de la estimación de la tendencia anterior y la diferencia entre el nivel actual y el nivel anterior. La fórmula para calcular la tendencia actual es:
+     \[ T_t = \beta \times (L_t - L_{t-1}) + (1 - \beta) \times T_{t-1} \]
+     donde:
+     - \( T_t \) es la tendencia en el tiempo \( t \).
+     - \( \beta \) es la constante de suavizado para la componente de tendencia. Controla cuánto peso se le da a la estimación de la tendencia anterior en la estimación de la tendencia actual.
+
+3. **Componente Estacional (Estacionalidad)**:
+   - La estacionalidad representa patrones periódicos en los datos, como estacionalidad mensual, trimestral o anual.
+   - El Método Holt-Winters puede manejar estacionalidad aditiva o multiplicativa, dependiendo de la naturaleza de la variación estacional en los datos.
+   - La estacionalidad actual se calcula utilizando una combinación lineal de la estimación de la estacionalidad anterior y la observación actual. La fórmula para calcular la estacionalidad actual es:
+     - **Estacionalidad Aditiva**:
+       \[ S_t = \gamma \times (Y_t - L_t) + (1 - \gamma) \times S_{t-m} \]
+     - **Estacionalidad Multiplicativa**:
+       \[ S_t = \gamma \times \frac{Y_t}{L_t} + (1 - \gamma) \times S_{t-m} \]
+     donde:
+     - \( S_t \) es la estacionalidad en el tiempo \( t \).
+     - \( \gamma \) es la constante de suavizado para la componente de estacionalidad. Controla cuánto peso se le da a la observación actual en la estimación de la estacionalidad actual.
+     - \( m \) es el número de períodos en una temporada.
+
+4. **Pronósticos**:
+   - Una vez que se han estimado los componentes de nivel, tendencia y estacionalidad, se pueden hacer pronósticos para periodos futuros.
+   - Los pronósticos futuros se calculan extrapolando los componentes de nivel, tendencia y estacionalidad estimados.
+   - Los intervalos de predicción también se pueden calcular para tener en cuenta la incertidumbre en los pronósticos.
+
+En resumen, el Método Holt-Winters es un método de suavizado exponencial que se utiliza para pronosticar series temporales con tendencia y estacionalidad. Utiliza tres componentes (nivel, tendencia y estacionalidad) que se actualizan en cada periodo para proporcionar pronósticos precisos y ajustados a los datos históricos observados.
+
+```{r ver}
+library(xts)
+
+# Crea una serie de tiempo con la función ts, se cambio a frecuencia 261
+df_maiz_filtradots1 <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261)
+
+
+# Ajustar un modelo Holt-Winters
+modelo_hw <- HoltWinters(dif1_maiz)
+modelo_hw
+
+```
+
+```{r}
+plot(modelo_hw)
+
+
+```
+
+A continuación se presenta la predicción para el siguiente año
+
+```{r}
+forecast <- predict(modelo_hw, n.ahead = 261, prediction.interval = T, level = 0.95)
+plot(modelo_hw, forecast)
+
+
+```
+
+# Metodología Box-Jenkins
+
+## Visualizar la serie
+
+```{r}
+# Gráfico de la serie
+ts.plot(dif1_maiz, main = "PRECIO DEL MAIZ POR DÍA", col = "darkgreen")
+
+
+```
+
+```{r}
+
+# Instalar y cargar el paquete tseries si no está instalado
+if (!requireNamespace("tseries", quietly = TRUE)) {
+  install.packages("tseries")
+}
+
+library(tseries)
+
+#prueba de estacionariedad
+
+print('------------------------')
+print('Prueba Estacionariedad DF Maíz')
+adf.test(dif1_maiz, alternative =  c("stationary", "explosive") )
+
+```
+Tenemos un valor de p-value>0.05 no rechazamos la hipótesis nula de que la serie no sea estacionaria.
+
+Validando cuantas veces se debe diferenciar para tener una serie estacional
+
+```{r}
+ndiffs(df_maiz_filtradots1)
+
+```
+Según el resultado se debe diferenciar una vez para para tener la serie estacional
+
+## Graficar ACF-PACF, Escoger los parametros
+
+```{r}
+
+
+par(mfrow = c(1,1))
+
+acf(dif1_maiz, lag.max =  36)
+pacf(dif1_maiz, lag.max =  36)
+
+```
+
+
+## Definición del modelo
+
+Se realiza una validación del mejor modelo ARIMA predictivo con la función auto.arima().
+
+
+```{r}
+library(forecast)
+
+mod_arima_auto <- auto.arima(dif1_maiz)
+
+ #Mostrar el modelo seleccionado
+
+summary(mod_arima_auto)
+```
+
+## Validación del modelo
+
+### Estacionariedad de los residuos
+
+Residuos del modelo
+
+```{r}
+plot.ts(mod_arima_auto$residuals, 
+        main="Residuos del modelo Auto.Arima",  
+        xlab="Tiempo",
+        ylab="Residuos")
+
+```
+
+### Autocorrelación de los residuos:
+
+```{r}
+acf(mod_arima_auto$residuals,
+    main="Autocorrelaciones de los residuos del modelo Auto.Arima", 
+    xlab="Años",
+    ylab="Autocorrelación")
+```
+```{r}
+pacf(mod_arima_auto$residuals,
+    main="Autocorrelaciones Parciales de los residuos del modelo Auto.Arima", 
+    xlab="Años",
+    ylab="Autocorrelación")
+```
+
+### Normalidad de los residuos:
+
+```{r}
+qqnorm(mod_arima_auto$residuals,main="Gráfico Q para evaluar normalidad"); qqline(mod_arima_auto$residuals)
+
+```
+```{r}
+# shapiro.test(mod_arima_auto$residuals)
+```
+Dado que se tienen más de 5000 datos se opta por realizar los siguientes test de normalidad de los residuos. 
+
+```{r}
+#Intalar el paquete si no se encuentra instalado
+if (!requireNamespace("nortest", quietly = TRUE)) {
+  install.packages("nortest")
+}
+
+library(nortest)
+
+# Realizar la prueba de Anderson-Darling
+ad_test_result <- ad.test(mod_arima_auto$residuals)
+print(ad_test_result)
+
+# Realizar la prueba de Kolmogorov-Smirnov
+ks_test_result <- ks.test(mod_arima_auto$residuals, "pnorm", mean=mean(mod_arima_auto$residuals), sd=sd(mod_arima_auto$residuals))
+print(ks_test_result)
+
+```
+Los test tienen p-value < 0.05 lo cual rechaza la hipotesis de que los residuos siguen una distribución normal. 
+
+
+## Pronosticos
+
+
+
+### Modelo Autoarima
+
+```{r}
+# Validación cruzada
+# Conjunto de entrenamiento y testeo
+n <- length(dif1_maiz)
+train <- dif1_maiz[1:(n/2)]
+test <- dif1_maiz[(n/2+1):n]
+
+
+# Hacer pronósticos con el modelo ajustado
+predicciones_auto <- predict(mod_arima_auto, n.ahead=length(test))
+
+# Calcular el error de pronóstico
+error_auto <- test - predicciones_auto$pred
+
+```
+
+```{r}
+# Calcular las métricas de evaluación
+mse <- mean((test - predicciones_auto$pred)^2)
+rmse <- sqrt(mse)
+mae <- mean(abs(test - predicciones_auto$pred))
+r_squared <- 1 - sum((test - predicciones_auto$pred)^2) / sum((test - mean(test))^2)
+
+# Crear una tabla con las métricas
+evaluacion_auto <- data.frame(
+  MSE = mse,
+  RMSE = rmse,
+  MAE = mae,
+  R_squared = r_squared
+)
+
+# Mostrar la tabla
+print("Métricas de evaluación del modelo ARIMA:")
+print(evaluacion_auto)
+```
+### Modelo ARIMA(1,0,8)
+
+```{r}
+# Validación cruzada
+# Conjunto de entrenamiento y testeo
+n <- length(dif1_maiz)
+train <- dif1_maiz[1:(n/2)]
+test <- dif1_maiz[(n/2+1):n]
+
+# Ajustar el modelo ARIMA en los datos de entrenamiento
+modelo_arima2 <- arima(train, order=c(1, 0, 8))
+
+# Hacer pronósticos con el modelo ajustado
+predicciones <- predict(modelo_arima2, n.ahead=length(test))
+
+# Calcular el error de pronóstico
+error <- test - predicciones$pred
+
+```
+
+```{r}
+# Calcular las métricas de evaluación
+mse <- mean((test - predicciones$pred)^2)
+rmse <- sqrt(mse)
+mae <- mean(abs(test - predicciones$pred))
+r_squared <- 1 - sum((test - predicciones$pred)^2) / sum((test - mean(test))^2)
+
+# Crear una tabla con las métricas
+evaluacion <- data.frame(
+  MSE = mse,
+  RMSE = rmse,
+  MAE = mae,
+  R_squared = r_squared
+)
+
+# Mostrar la tabla
+print("Métricas de evaluación del modelo ARIMA:")
+print(evaluacion)
+```
+
+
+## Conclusiones
+
+### Evaluación de la calidad del modelo
+
+- *MSE (Mean Squared Error)*: La varianza promedio de los erroes de predicicón es de *58.8*.
+- *RMSE (Root Mean Squared Error)*: La raíz cuadrada del MSE es de *7.7*
+- *MAE (Mean Absolute Error):* El error absoluto promedio es de *4.96*
+- *R_squared:* El R cuadrado es un valor muy cercano a cero y negativo, por consiguiente el desempeño del modelo no es el adecuado. 
+
+### Analisis de los residuos
+
+Las pruebas de normalidad de los residuos (Anderson-Darling y Kolmogorov-Smirnov) tienen p-valores extremadamente bajos (< 2.2e-16), lo que indica que los residuos no siguen una distribución normal.
+
+Esto lo que indica es que el modelo Auto.arima no está capturando toda la variabilidad de los datos. 
+
+### Conclusiones adicionales:
+
+Se evalúa otro tipo de modelo ARIMA(1,0,8) y sus resultados son deficientes en la predicción.
+
+Por consiguiente se propone utilizar otro tipo de modelos. 
+
+
+# Modelo Prophet
+
+
+## Generalidades del modelo
+
+El modelo Prophet es un modelo que fue lanzado por el equipo Core Data Science de Facebook que proporciona caracteristicas tanto de modelos lineales generalizados(MLG) como de modelos aditivos (MA).
+
+Prophet se puede considerar un modelo no lineal o aditivo de la forma:
+
+\[
+y(t) = g(t) + s(t) + h(t) + \epsilon_t
+\]
+
+Donde:
+
+
+
+- *y/t):* es el valor de la serie temporal en el tiempo \( t \).
+- *g(t)*: Representa la tendencia de la serie
+- *s(t)*: Representa el componente de estacionalidad
+- *h(t)*: Representa el componente cíclico, captura los efectos de las vacaciones
+- *ϵt*: Representa el ruido blanco
+
+
+## Implementación del modelo
+
+### Cargando librerias
+
+```{r}
+#Intalar el paquete si no se encuentra instalado
+if (!requireNamespace("TTR", quietly = TRUE)) {
+  install.packages("TTR")
+}
+
+library(TTR)
+library(quantmod)
+
+
+#Intalar el paquete si no se encuentra instalado
+if (!requireNamespace("prophet", quietly = TRUE)) {
+  install.packages("prophet")
+}
+library(prophet)
+```
+
+### Preprocesamiento de datos para el modelo
+
+```{r}
+#Visualizar DF
+head(df_maiz_filtrado, 5)
+```
+
+Para lograr utilizar *Prophet* se debe de tener un data frame donde las columnas de fecha se nombren "ds" y los valores "y"
+
+```{r}
+# Renombrar las columnas
+df_prophet <- df_maiz_filtrado %>%
+  dplyr::select(Fecha, Último) %>%
+  dplyr::rename(ds = Fecha, y = Último)
+
+# Visualizar df_prophet
+head(df_prophet, 5)
+```
+```{r}
+#Validando
+class(df_prophet)
+```
+
+### Modelo
+
+```{r}
+
+model_prophet <- prophet(df_prophet, daily.seasonality = TRUE)
+
+predict_prophet <- make_future_dataframe(model_prophet, periods = 30, freq = 'day')
+
+tail(predict_prophet)
+```
+
+
+```{r}
+
+forecast_prophet <- predict(model_prophet, predict_prophet)
+
+
+# Imprimir las predicciones en la consola
+head(forecast_prophet, 5)
+
+#No funciona, error de nombre archivo temporal largo
+#dyplot.prophet(model_prophet, forecast_prophet)
+
+```
+
+
+```{r}
+tail(forecast_prophet[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
+```
+```{r}
+prophet_plot_components(model_prophet,forecast_prophet)
+```
+
+ 
+
+<!--chapter:end:index.Rmd-->
+
