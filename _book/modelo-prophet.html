@@ -330,11 +330,11 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 ## 4    1.0971958    1.0971958                    0                          0
 ## 5    1.3426027    1.3426027                    0                          0
 ##   multiplicative_terms_upper yhat_lower yhat_upper trend_lower trend_upper
-## 1                          0   120.6137   299.7161    204.6745    204.6745
-## 2                          0   123.9199   303.8976    204.6965    204.6965
-## 3                          0   127.1871   300.4590    204.7184    204.7184
-## 4                          0   122.0666   289.9214    204.7404    204.7404
-## 5                          0   123.1450   297.1116    204.7623    204.7623
+## 1                          0   124.4852   295.3952    204.6745    204.6745
+## 2                          0   121.2899   304.9292    204.6965    204.6965
+## 3                          0   115.0021   298.1051    204.7184    204.7184
+## 4                          0   124.6192   306.6220    204.7404    204.7404
+## 5                          0   121.7585   300.9567    204.7623    204.7623
 ##       yhat
 ## 1 208.9997
 ## 2 209.3558
@@ -345,12 +345,12 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 <span id="cb119-2"><a href="modelo-prophet.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dyplot.prophet(model_prophet, forecast_prophet)</span></span></code></pre></div>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="modelo-prophet.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(forecast_prophet[<span class="fu">c</span>(<span class="st">&#39;ds&#39;</span>, <span class="st">&#39;yhat&#39;</span>, <span class="st">&#39;yhat_lower&#39;</span>, <span class="st">&#39;yhat_upper&#39;</span>)])</span></code></pre></div>
 <pre><code>##              ds     yhat yhat_lower yhat_upper
-## 6195 2024-05-14 663.5435   569.2058   748.9876
-## 6196 2024-05-15 663.3455   574.5624   752.1303
-## 6197 2024-05-16 662.4898   576.5881   749.2355
-## 6198 2024-05-17 662.2759   572.6771   746.9824
-## 6199 2024-05-18 660.2142   575.9149   749.8571
-## 6200 2024-05-19 653.4918   566.7523   740.7652</code></pre>
+## 6195 2024-05-14 663.5435   577.0257   753.0162
+## 6196 2024-05-15 663.3455   570.5191   750.4336
+## 6197 2024-05-16 662.4898   571.6598   747.6440
+## 6198 2024-05-17 662.2759   575.3851   753.5365
+## 6199 2024-05-18 660.2142   570.9925   751.5717
+## 6200 2024-05-19 653.4918   569.9346   747.9411</code></pre>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="modelo-prophet.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(model_prophet,forecast_prophet)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 

@@ -82,7 +82,7 @@ Los datos a trabajar se obtuvieron de https://es.investing.com/commodities/us-co
 
 Se importa la matriz de  datos
 
-
+# AAAAA
 
 ```{r}
 # Importar datos desde un archivo CSV desde github 2.0
