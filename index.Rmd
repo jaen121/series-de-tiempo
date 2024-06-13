@@ -321,6 +321,8 @@ Las series de tiempo pueden descomponerse en varias componentes que ayudan a com
 
 ## Estacionalidad
 
+Llegó la hora se validar la estacionalidad de nuestros datos, esto con el fin de validar uno de los supuestos más importantes a la hora de proponer modelo predictivos de una serie de tiempo. Para esto se utiliza el test Dickey-Fuller que prueba si una serie de tiempo es o no estacional.
+
 ```{r}
 # Instalar y cargar el paquete tseries si no está instalado
 if (!requireNamespace("tseries", quietly = TRUE)) {
@@ -338,24 +340,26 @@ print('Prueba Estacionariedad DF Maíz')
 adf.test(df_maiz_filtradots, alternative =  c("stationary", "explosive") )
 
 ```
-Tenemos un valor de p-value>0.05 no rechazamos la hipótesis nula de que la serie no sea estacionaria.
+Tenemos un valor de $p-value>0.05$, por lo que no rechazamos la hipótesis nula, la cuál indica que la serie no es estacionaria.
 
-Validando cuantas veces se debe diferenciar para tener una serie estacional
+### Transformación de la serie en estacionaria
+
+Por buen manejo metodológico, se opta por realizar una tranformación a la base de datos para poder realizar predicciones. El método elegido para realizar esta transformación es tomando las diferencias de los datos.
+
+Se comienza validando cuantas veces se debe diferenciar para tener una serie estacional:
 
 ```{r}
 ndiffs(df_maiz_filtradots)
 
 ```
-Según el resultado se debe diferenciar una vez para para tener la serie estacional
+Según el resultado se debe diferenciar una vez para tener la serie estacional. Sin embargo, esto aumenta significatiamente el esfuerzo computacional, por lo que se decidió difenciar dos veces.
 
-
-## Transformación de la serie en estacionaria
 
 ```{r ubicacion}
 #transformar la serie
 
 #Diferenciación de primer orden
-dif1_maiz <- diff(df_maiz_filtradots, differences = 5)
+dif1_maiz <- diff(df_maiz_filtradots, differences = 2)
 
 # Redondear la frecuencia
 frequency_rounded <- round(frequency(dif1_maiz))
@@ -374,8 +378,9 @@ ts.plot(dif1_maiz, main = "Grafico Diferencia del precio del Maíz",
 
 ```
 
-## Validar estacionariedad de las series
+### Validar estacionariedad de las series
 
+Ahora se valida que esta serie de tiempo sea estacional con la misma prueba que se utilizó para la original.
 
 ```{r}
 
@@ -386,7 +391,7 @@ print('Prueba Estacionariedad Diferencia Maíz')
 adf.test(dif1_maiz, alternative =  c("stationary", "explosive") )
 
 ```
-Se tiene un p-value < 0.05, por consiguiente se puede concluir que la serie es estacionaria. 
+Se tiene un $p-value < 0.05$, por consiguiente se puede concluir que la serie es estacionaria. 
 
 
 ```{r}
@@ -406,7 +411,6 @@ La gráfica generada por la función stl muestra la descomposición estacional d
 
 *Residuos:* La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.
 
-<<<<<<< HEAD
 
 # Modelo de  Holt-Winters
 
@@ -447,7 +451,8 @@ print(modelo_ses)
 
 
 ```
-la salida anterior presenta los intervalos de confianza de los pronosticos, del valor del precio del maiz.
+
+La salida anterior presenta los intervalos de confianza de los pronosticos, del valor del precio del maiz.
 
 ## Método Holt-Winters para Predicciones 
 
@@ -509,11 +514,9 @@ modelo_hw
 
 ```{r}
 plot(modelo_hw)
-
-
 ```
 
-A continuación se presenta la predicción para el siguiente año
+A continuación se presenta la predicción para el siguiente año:
 
 ```{r}
 forecast <- predict(modelo_hw, n.ahead = 261, prediction.interval = T, level = 0.95)
@@ -522,6 +525,10 @@ plot(modelo_hw, forecast)
 
 ```
 
+## Conclusiones
+
+Vemos que es un modelo que, además de ajustarse bien a los datos ya existentes, genera una predicción bastante adecuada siguiendo el comportamieto de los últimos periodos. Aunque también es importante notar que los intervalos de error que entrega son amplios, dónde vemos que tiene en cuenta el comportamiento de periodos más antiguos, lo que puede verse como una característica positiva, pues también puede tener en cuenta posibles cambios repentinos de comportamiento.
+
 # Metodología Box-Jenkins
 
 ## Visualizar la serie
@@ -529,7 +536,6 @@ plot(modelo_hw, forecast)
 ```{r}
 # Gráfico de la serie
 ts.plot(dif1_maiz, main = "PRECIO DEL MAIZ POR DÍA", col = "darkgreen")
-
 
 ```
 
@@ -549,14 +555,9 @@ print('Prueba Estacionariedad DF Maíz')
 adf.test(dif1_maiz, alternative =  c("stationary", "explosive") )
 
 ```
-Tenemos un valor de p-value>0.05 no rechazamos la hipótesis nula de que la serie no sea estacionaria.
+Tenemos un valor de $p-value<0.05$ rechazamos la hipótesis nula de que la serie no sea estacionaria.
 
-Validando cuantas veces se debe diferenciar para tener una serie estacional
 
-```{r}
-ndiffs(df_maiz_filtradots1)
-
-```
 Según el resultado se debe diferenciar una vez para para tener la serie estacional
 
 ## Graficar ACF-PACF, Escoger los parametros
@@ -644,7 +645,7 @@ ks_test_result <- ks.test(mod_arima_auto$residuals, "pnorm", mean=mean(mod_arima
 print(ks_test_result)
 
 ```
-Los test tienen p-value < 0.05 lo cual rechaza la hipotesis de que los residuos siguen una distribución normal. 
+Los test tienen $p-value < 0.05$ lo cual rechaza la hipotesis de que los residuos siguen una distribución normal. 
 
 
 ## Pronosticos
@@ -733,9 +734,9 @@ print(evaluacion)
 
 ### Evaluación de la calidad del modelo
 
-- *MSE (Mean Squared Error)*: La varianza promedio de los erroes de predicicón es de *58.8*.
-- *RMSE (Root Mean Squared Error)*: La raíz cuadrada del MSE es de *7.7*
-- *MAE (Mean Absolute Error):* El error absoluto promedio es de *4.96*
+- *MSE (Mean Squared Error)*: La varianza promedio de los errores de predicicón es de *112.39*.
+- *RMSE (Root Mean Squared Error)*: La raíz cuadrada del MSE es de *10.60*
+- *MAE (Mean Absolute Error):* El error absoluto promedio es de *7*
 - *R_squared:* El R cuadrado es un valor muy cercano a cero y negativo, por consiguiente el desempeño del modelo no es el adecuado. 
 
 ### Analisis de los residuos
@@ -748,7 +749,8 @@ Esto lo que indica es que el modelo Auto.arima no está capturando toda la varia
 
 Se evalúa otro tipo de modelo ARIMA(1,0,8) y sus resultados son deficientes en la predicción.
 
-Por consiguiente se propone utilizar otro tipo de modelos. 
+Por consiguiente se propone utilizar otro tipo de modelos.
+
 
 
 # Modelo Prophet
