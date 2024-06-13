@@ -84,6 +84,8 @@ Se importa la matriz de  datos
 
 # AAAAA
 
+dadsabdaskdjsakdasndaskdasjkdsakdasjkdsajdkasdaksdjask
+
 ```{r}
 # Importar datos desde un archivo CSV desde github 2.0
 ruta_archivo <- "Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
