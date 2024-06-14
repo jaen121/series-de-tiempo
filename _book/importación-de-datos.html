@@ -8,7 +8,7 @@
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Importación de Datos | Series de Tiempo" />
   <meta property="og:type" content="book" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -207,7 +207,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.3" data-path="modelo-prophet.html"><a href="modelo-prophet.html#modelo"><i class="fa fa-check"></i><b>8.2.3</b> Modelo</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelo-elman.html"><a href="modelo-elman.html"><i class="fa fa-check"></i><b>9</b> Modelo elman</a></li>
+<li class="chapter" data-level="9" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html"><i class="fa fa-check"></i><b>9</b> Modelo de Elman</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#estructura-de-una-red-neuronal-de-elman"><i class="fa fa-check"></i><b>9.0.1</b> Estructura de una Red Neuronal de Elman</a></li>
+<li class="chapter" data-level="9.0.2" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#funcionamiento-de-la-red"><i class="fa fa-check"></i><b>9.0.2</b> Funcionamiento de la Red</a></li>
+<li class="chapter" data-level="9.0.3" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#ventajas-y-aplicaciones"><i class="fa fa-check"></i><b>9.0.3</b> Ventajas y Aplicaciones</a></li>
+<li class="chapter" data-level="9.0.4" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#limitaciones"><i class="fa fa-check"></i><b>9.0.4</b> Limitaciones</a></li>
+<li class="chapter" data-level="9.0.5" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#notación"><i class="fa fa-check"></i><b>9.0.5</b> Notación</a></li>
+<li class="chapter" data-level="9.0.6" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#ecuaciones-del-modelo"><i class="fa fa-check"></i><b>9.0.6</b> Ecuaciones del Modelo</a></li>
+<li class="chapter" data-level="9.0.7" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#resumen-del-funcionamiento"><i class="fa fa-check"></i><b>9.0.7</b> Resumen del Funcionamiento</a></li>
+<li class="chapter" data-level="9.0.8" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#diagrama-del-modelo"><i class="fa fa-check"></i><b>9.0.8</b> Diagrama del Modelo</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -232,14 +242,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 3</span> Importación de Datos<a href="importación-de-datos.html#importación-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Los datos a trabajar se obtuvieron de <a href="https://es.investing.com/commodities/us-corn-streaming-chart" class="uri">https://es.investing.com/commodities/us-corn-streaming-chart</a> y corresponden al mercado de maiz, durante los años….</p>
 <p>Se importa la matriz de datos</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="importación-de-datos.html#cb1-1" tabindex="-1"></a><span class="co"># Importar datos desde un archivo CSV desde github 2.0</span></span>
-<span id="cb1-2"><a href="importación-de-datos.html#cb1-2" tabindex="-1"></a>ruta_archivo <span class="ot">&lt;-</span> <span class="st">&quot;Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv&quot;</span></span>
-<span id="cb1-3"><a href="importación-de-datos.html#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="importación-de-datos.html#cb1-4" tabindex="-1"></a>df_maiz <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(ruta_archivo, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>,<span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
-<span id="cb1-5"><a href="importación-de-datos.html#cb1-5" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="importación-de-datos.html#cb1-6" tabindex="-1"></a><span class="fu">names</span>(df_maiz)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="importación-de-datos.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos desde un archivo CSV desde github 2.0</span></span>
+<span id="cb1-2"><a href="importación-de-datos.html#cb1-2" aria-hidden="true" tabindex="-1"></a>ruta_archivo <span class="ot">&lt;-</span> <span class="st">&quot;Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv&quot;</span></span>
+<span id="cb1-3"><a href="importación-de-datos.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="importación-de-datos.html#cb1-4" aria-hidden="true" tabindex="-1"></a>df_maiz <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(ruta_archivo, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>,<span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb1-5"><a href="importación-de-datos.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="importación-de-datos.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_maiz)</span></code></pre></div>
 <pre><code>## [1] &quot;Fecha&quot;    &quot;Último&quot;   &quot;Apertura&quot; &quot;Máximo&quot;   &quot;Mínimo&quot;   &quot;Vol.&quot;     &quot;X..var.&quot;</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="importación-de-datos.html#cb3-1" tabindex="-1"></a><span class="fu">head</span>(df_maiz)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="importación-de-datos.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_maiz)</span></code></pre></div>
 <pre><code>##        Fecha Último Apertura Máximo Mínimo    Vol. X..var.
 ## 1 19/04/2024 433.50   427.10 433.90 426.88           1.58%
 ## 2 18/04/2024 426.75   429.50 431.00 426.25 180.78K  -0.81%

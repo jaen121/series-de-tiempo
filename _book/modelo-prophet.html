@@ -8,7 +8,7 @@
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Modelo Prophet | Series de Tiempo" />
   <meta property="og:type" content="book" />
@@ -37,7 +37,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="metodología-box-jenkins.html"/>
-<link rel="next" href="modelo-elman.html"/>
+<link rel="next" href="modelo-de-elman.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -207,7 +207,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.3" data-path="modelo-prophet.html"><a href="modelo-prophet.html#modelo"><i class="fa fa-check"></i><b>8.2.3</b> Modelo</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelo-elman.html"><a href="modelo-elman.html"><i class="fa fa-check"></i><b>9</b> Modelo elman</a></li>
+<li class="chapter" data-level="9" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html"><i class="fa fa-check"></i><b>9</b> Modelo de Elman</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#estructura-de-una-red-neuronal-de-elman"><i class="fa fa-check"></i><b>9.0.1</b> Estructura de una Red Neuronal de Elman</a></li>
+<li class="chapter" data-level="9.0.2" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#funcionamiento-de-la-red"><i class="fa fa-check"></i><b>9.0.2</b> Funcionamiento de la Red</a></li>
+<li class="chapter" data-level="9.0.3" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#ventajas-y-aplicaciones"><i class="fa fa-check"></i><b>9.0.3</b> Ventajas y Aplicaciones</a></li>
+<li class="chapter" data-level="9.0.4" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#limitaciones"><i class="fa fa-check"></i><b>9.0.4</b> Limitaciones</a></li>
+<li class="chapter" data-level="9.0.5" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#notación"><i class="fa fa-check"></i><b>9.0.5</b> Notación</a></li>
+<li class="chapter" data-level="9.0.6" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#ecuaciones-del-modelo"><i class="fa fa-check"></i><b>9.0.6</b> Ecuaciones del Modelo</a></li>
+<li class="chapter" data-level="9.0.7" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#resumen-del-funcionamiento"><i class="fa fa-check"></i><b>9.0.7</b> Resumen del Funcionamiento</a></li>
+<li class="chapter" data-level="9.0.8" data-path="modelo-de-elman.html"><a href="modelo-de-elman.html#diagrama-del-modelo"><i class="fa fa-check"></i><b>9.0.8</b> Diagrama del Modelo</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -250,28 +260,28 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 <h2><span class="header-section-number">8.2</span> Implementación del modelo<a href="modelo-prophet.html#implementación-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="cargando-librerias" class="section level3 hasAnchor" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Cargando librerias<a href="modelo-prophet.html#cargando-librerias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="modelo-prophet.html#cb101-1" tabindex="-1"></a><span class="co">#Intalar el paquete si no se encuentra instalado</span></span>
-<span id="cb101-2"><a href="modelo-prophet.html#cb101-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;TTR&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb101-3"><a href="modelo-prophet.html#cb101-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;TTR&quot;</span>)</span>
-<span id="cb101-4"><a href="modelo-prophet.html#cb101-4" tabindex="-1"></a>}</span>
-<span id="cb101-5"><a href="modelo-prophet.html#cb101-5" tabindex="-1"></a></span>
-<span id="cb101-6"><a href="modelo-prophet.html#cb101-6" tabindex="-1"></a><span class="fu">library</span>(TTR)</span></code></pre></div>
-<pre><code>## Warning: package &#39;TTR&#39; was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="modelo-prophet.html#cb103-1" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span></code></pre></div>
-<pre><code>## Warning: package &#39;quantmod&#39; was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="modelo-prophet.html#cb105-1" tabindex="-1"></a><span class="co">#Intalar el paquete si no se encuentra instalado</span></span>
-<span id="cb105-2"><a href="modelo-prophet.html#cb105-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;prophet&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb105-3"><a href="modelo-prophet.html#cb105-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;prophet&quot;</span>)</span>
-<span id="cb105-4"><a href="modelo-prophet.html#cb105-4" tabindex="-1"></a>}</span>
-<span id="cb105-5"><a href="modelo-prophet.html#cb105-5" tabindex="-1"></a><span class="fu">library</span>(prophet)</span></code></pre></div>
-<pre><code>## Warning: package &#39;prophet&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="modelo-prophet.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Intalar el paquete si no se encuentra instalado</span></span>
+<span id="cb102-2"><a href="modelo-prophet.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;TTR&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb102-3"><a href="modelo-prophet.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;TTR&quot;</span>)</span>
+<span id="cb102-4"><a href="modelo-prophet.html#cb102-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb102-5"><a href="modelo-prophet.html#cb102-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-6"><a href="modelo-prophet.html#cb102-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
+<span id="cb102-7"><a href="modelo-prophet.html#cb102-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span></code></pre></div>
+<pre><code>## Warning: package &#39;quantmod&#39; was built under R version 4.2.3</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="modelo-prophet.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Intalar el paquete si no se encuentra instalado</span></span>
+<span id="cb104-2"><a href="modelo-prophet.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;prophet&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb104-3"><a href="modelo-prophet.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;prophet&quot;</span>)</span>
+<span id="cb104-4"><a href="modelo-prophet.html#cb104-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb104-5"><a href="modelo-prophet.html#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(prophet)</span></code></pre></div>
+<pre><code>## Warning: package &#39;prophet&#39; was built under R version 4.2.3</code></pre>
 <pre><code>## Loading required package: Rcpp</code></pre>
 <pre><code>## Loading required package: rlang</code></pre>
+<pre><code>## Warning: package &#39;rlang&#39; was built under R version 4.2.3</code></pre>
 </div>
 <div id="preprocesamiento-de-datos-para-el-modelo" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Preprocesamiento de datos para el modelo<a href="modelo-prophet.html#preprocesamiento-de-datos-para-el-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="modelo-prophet.html#cb109-1" tabindex="-1"></a><span class="co">#Visualizar DF</span></span>
-<span id="cb109-2"><a href="modelo-prophet.html#cb109-2" tabindex="-1"></a><span class="fu">head</span>(df_maiz_filtrado, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="modelo-prophet.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizar DF</span></span>
+<span id="cb109-2"><a href="modelo-prophet.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_maiz_filtrado, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##        Fecha Último Dia_Semana
 ## 1 2024-04-19 433.50    viernes
 ## 2 2024-04-18 426.75     jueves
@@ -279,30 +289,30 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 ## 4 2024-04-16 431.00     martes
 ## 5 2024-04-15 431.50      lunes</code></pre>
 <p>Para lograr utilizar <em>Prophet</em> se debe de tener un data frame donde las columnas de fecha se nombren “ds” y los valores “y”</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="modelo-prophet.html#cb111-1" tabindex="-1"></a><span class="co"># Renombrar las columnas</span></span>
-<span id="cb111-2"><a href="modelo-prophet.html#cb111-2" tabindex="-1"></a>df_prophet <span class="ot">&lt;-</span> df_maiz_filtrado <span class="sc">%&gt;%</span></span>
-<span id="cb111-3"><a href="modelo-prophet.html#cb111-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Fecha, Último) <span class="sc">%&gt;%</span></span>
-<span id="cb111-4"><a href="modelo-prophet.html#cb111-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">ds =</span> Fecha, <span class="at">y =</span> Último)</span>
-<span id="cb111-5"><a href="modelo-prophet.html#cb111-5" tabindex="-1"></a></span>
-<span id="cb111-6"><a href="modelo-prophet.html#cb111-6" tabindex="-1"></a><span class="co"># Visualizar df_prophet</span></span>
-<span id="cb111-7"><a href="modelo-prophet.html#cb111-7" tabindex="-1"></a><span class="fu">head</span>(df_prophet, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="modelo-prophet.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Renombrar las columnas</span></span>
+<span id="cb111-2"><a href="modelo-prophet.html#cb111-2" aria-hidden="true" tabindex="-1"></a>df_prophet <span class="ot">&lt;-</span> df_maiz_filtrado <span class="sc">%&gt;%</span></span>
+<span id="cb111-3"><a href="modelo-prophet.html#cb111-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Fecha, Último) <span class="sc">%&gt;%</span></span>
+<span id="cb111-4"><a href="modelo-prophet.html#cb111-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">ds =</span> Fecha, <span class="at">y =</span> Último)</span>
+<span id="cb111-5"><a href="modelo-prophet.html#cb111-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-6"><a href="modelo-prophet.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar df_prophet</span></span>
+<span id="cb111-7"><a href="modelo-prophet.html#cb111-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_prophet, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##           ds      y
 ## 1 2024-04-19 433.50
 ## 2 2024-04-18 426.75
 ## 3 2024-04-17 430.25
 ## 4 2024-04-16 431.00
 ## 5 2024-04-15 431.50</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="modelo-prophet.html#cb113-1" tabindex="-1"></a><span class="co">#Validando</span></span>
-<span id="cb113-2"><a href="modelo-prophet.html#cb113-2" tabindex="-1"></a><span class="fu">class</span>(df_prophet)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="modelo-prophet.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Validando</span></span>
+<span id="cb113-2"><a href="modelo-prophet.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df_prophet)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 </div>
 <div id="modelo" class="section level3 hasAnchor" number="8.2.3">
 <h3><span class="header-section-number">8.2.3</span> Modelo<a href="modelo-prophet.html#modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="modelo-prophet.html#cb115-1" tabindex="-1"></a>model_prophet <span class="ot">&lt;-</span> <span class="fu">prophet</span>(df_prophet, <span class="at">daily.seasonality =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb115-2"><a href="modelo-prophet.html#cb115-2" tabindex="-1"></a></span>
-<span id="cb115-3"><a href="modelo-prophet.html#cb115-3" tabindex="-1"></a>predict_prophet <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(model_prophet, <span class="at">periods =</span> <span class="dv">30</span>, <span class="at">freq =</span> <span class="st">&#39;day&#39;</span>)</span>
-<span id="cb115-4"><a href="modelo-prophet.html#cb115-4" tabindex="-1"></a></span>
-<span id="cb115-5"><a href="modelo-prophet.html#cb115-5" tabindex="-1"></a><span class="fu">tail</span>(predict_prophet)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="modelo-prophet.html#cb115-1" aria-hidden="true" tabindex="-1"></a>model_prophet <span class="ot">&lt;-</span> <span class="fu">prophet</span>(df_prophet, <span class="at">daily.seasonality =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb115-2"><a href="modelo-prophet.html#cb115-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-3"><a href="modelo-prophet.html#cb115-3" aria-hidden="true" tabindex="-1"></a>predict_prophet <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(model_prophet, <span class="at">periods =</span> <span class="dv">30</span>, <span class="at">freq =</span> <span class="st">&#39;day&#39;</span>)</span>
+<span id="cb115-4"><a href="modelo-prophet.html#cb115-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-5"><a href="modelo-prophet.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(predict_prophet)</span></code></pre></div>
 <pre><code>##              ds
 ## 6195 2024-05-14
 ## 6196 2024-05-15
@@ -310,11 +320,11 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 ## 6198 2024-05-17
 ## 6199 2024-05-18
 ## 6200 2024-05-19</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="modelo-prophet.html#cb117-1" tabindex="-1"></a>forecast_prophet <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_prophet, predict_prophet)</span>
-<span id="cb117-2"><a href="modelo-prophet.html#cb117-2" tabindex="-1"></a></span>
-<span id="cb117-3"><a href="modelo-prophet.html#cb117-3" tabindex="-1"></a></span>
-<span id="cb117-4"><a href="modelo-prophet.html#cb117-4" tabindex="-1"></a><span class="co"># Imprimir las predicciones en la consola</span></span>
-<span id="cb117-5"><a href="modelo-prophet.html#cb117-5" tabindex="-1"></a><span class="fu">head</span>(forecast_prophet, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="modelo-prophet.html#cb117-1" aria-hidden="true" tabindex="-1"></a>forecast_prophet <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_prophet, predict_prophet)</span>
+<span id="cb117-2"><a href="modelo-prophet.html#cb117-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-3"><a href="modelo-prophet.html#cb117-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-4"><a href="modelo-prophet.html#cb117-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir las predicciones en la consola</span></span>
+<span id="cb117-5"><a href="modelo-prophet.html#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(forecast_prophet, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##           ds    trend additive_terms additive_terms_lower additive_terms_upper
 ## 1 2000-01-03 204.6745       4.325153             4.325153             4.325153
 ## 2 2000-01-04 204.6965       4.659304             4.659304             4.659304
@@ -334,28 +344,28 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 ## 4    1.0971958    1.0971958                    0                          0
 ## 5    1.3426027    1.3426027                    0                          0
 ##   multiplicative_terms_upper yhat_lower yhat_upper trend_lower trend_upper
-## 1                          0   120.2579   299.3065    204.6745    204.6745
-## 2                          0   119.7955   296.8827    204.6965    204.6965
-## 3                          0   119.0609   297.8353    204.7184    204.7184
-## 4                          0   114.8556   295.2006    204.7404    204.7404
-## 5                          0   127.8461   294.6324    204.7623    204.7623
+## 1                          0   125.1115   293.1548    204.6745    204.6745
+## 2                          0   121.6620   300.0687    204.6965    204.6965
+## 3                          0   117.8821   299.4346    204.7184    204.7184
+## 4                          0   121.5931   307.4310    204.7404    204.7404
+## 5                          0   119.9199   301.1082    204.7623    204.7623
 ##       yhat
 ## 1 208.9997
 ## 2 209.3558
 ## 3 209.9527
 ## 4 209.8185
 ## 5 210.2433</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="modelo-prophet.html#cb119-1" tabindex="-1"></a><span class="co">#No funciona, error de nombre archivo temporal largo</span></span>
-<span id="cb119-2"><a href="modelo-prophet.html#cb119-2" tabindex="-1"></a><span class="co">#dyplot.prophet(model_prophet, forecast_prophet)</span></span></code></pre></div>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="modelo-prophet.html#cb120-1" tabindex="-1"></a><span class="fu">tail</span>(forecast_prophet[<span class="fu">c</span>(<span class="st">&#39;ds&#39;</span>, <span class="st">&#39;yhat&#39;</span>, <span class="st">&#39;yhat_lower&#39;</span>, <span class="st">&#39;yhat_upper&#39;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="modelo-prophet.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co">#No funciona, error de nombre archivo temporal largo</span></span>
+<span id="cb119-2"><a href="modelo-prophet.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dyplot.prophet(model_prophet, forecast_prophet)</span></span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="modelo-prophet.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(forecast_prophet[<span class="fu">c</span>(<span class="st">&#39;ds&#39;</span>, <span class="st">&#39;yhat&#39;</span>, <span class="st">&#39;yhat_lower&#39;</span>, <span class="st">&#39;yhat_upper&#39;</span>)])</span></code></pre></div>
 <pre><code>##              ds     yhat yhat_lower yhat_upper
-## 6195 2024-05-14 663.5435   573.1823   748.9260
-## 6196 2024-05-15 663.3455   569.5666   747.4392
-## 6197 2024-05-16 662.4898   576.7993   749.5907
-## 6198 2024-05-17 662.2759   575.2106   751.3608
-## 6199 2024-05-18 660.2142   576.0847   749.0680
-## 6200 2024-05-19 653.4918   561.0538   739.8159</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="modelo-prophet.html#cb122-1" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(model_prophet,forecast_prophet)</span></code></pre></div>
+## 6195 2024-05-14 663.5435   579.6027   755.5376
+## 6196 2024-05-15 663.3455   571.2284   752.8017
+## 6197 2024-05-16 662.4898   571.7373   750.3093
+## 6198 2024-05-17 662.2759   573.2176   747.3810
+## 6199 2024-05-18 660.2142   573.4218   749.7180
+## 6200 2024-05-19 653.4918   566.8894   744.9958</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="modelo-prophet.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(model_prophet,forecast_prophet)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 </div>
 </div>
@@ -366,7 +376,7 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
         </div>
       </div>
 <a href="metodología-box-jenkins.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="modelo-elman.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modelo-de-elman.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

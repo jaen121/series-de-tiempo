@@ -83,3 +83,12 @@ modelo
 aaaaa
 modelo-elman
 conclusiones-1
+modelo-de-elman
+estructura-de-una-red-neuronal-de-elman
+funcionamiento-de-la-red
+ventajas-y-aplicaciones
+limitaciones
+notación
+ecuaciones-del-modelo
+resumen-del-funcionamiento
+diagrama-del-modelo
