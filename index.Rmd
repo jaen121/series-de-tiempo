@@ -750,8 +750,6 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 
 Donde:
 
-
-
 - *y/t):* es el valor de la serie temporal en el tiempo \( t \).
 - *g(t)*: Representa la tendencia de la serie
 - *s(t)*: Representa el componente de estacionalidad
@@ -811,9 +809,11 @@ model_prophet <- prophet(df_prophet, daily.seasonality = TRUE)
 
 predict_prophet <- make_future_dataframe(model_prophet, periods = 30, freq = 'day')
 
-tail(predict_prophet)
+head(predict_prophet,5)
 ```
-
+```{r}
+tail(forecast_prophet[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
+```
 
 ```{r}
 
@@ -821,7 +821,7 @@ forecast_prophet <- predict(model_prophet, predict_prophet)
 
 
 # Imprimir las predicciones en la consola
-head(forecast_prophet, 5)
+tail(forecast_prophet)
 
 #No funciona, error de nombre archivo temporal largo
 #dyplot.prophet(model_prophet, forecast_prophet)
@@ -830,10 +830,13 @@ head(forecast_prophet, 5)
 
 
 ```{r}
-tail(forecast_prophet[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
-```
-```{r}
 prophet_plot_components(model_prophet,forecast_prophet)
 ```
 
+# Redes Neuronales
+
+## Modelo ELMAN
+
+
+## Model JORDAN
  
