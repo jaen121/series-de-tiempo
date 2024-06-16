@@ -856,41 +856,41 @@ prophet_plot_components(model_prophet,forecast_prophet)
 
 # Modelo de Elman 
 
-Las redes neuronales de Elman, también conocidas como redes neuronales recurrentes de Elman, son un tipo específico de red neuronal recurrente (RNN) desarrollada por Jeffrey Elman en 1990. Estas redes están diseñadas para manejar datos secuenciales y temporales, lo que las hace adecuadas para tareas como el procesamiento de lenguaje natural, el reconocimiento de patrones y la predicción de series temporales. A continuación se presenta una descripción detallada de sus características y funcionamiento:
+Las redes neuronales de Elman, también conocidas como redes neuronales recurrentes de Elman, son un tipo específico de red neuronal recurrente (RNN) desarrollada por Jeffrey Elman en 1990. Estas redes están diseñadas para manejar datos secuenciales y temporales, lo que las hace adecuadas para tareas como el procesamiento de lenguaje natural, el reconocimiento de patrones y la predicción de series temporales. Algunas de  sus características y funcionamiento es el siguiente:
 
 ### Estructura de una Red Neuronal de Elman
 
 1. **Capas de la Red**:
-   - **Capa de Entrada**: Esta capa recibe el input de datos secuenciales. Cada neurona en esta capa corresponde a una característica del vector de entrada.
-   - **Capa Oculta**: La capa oculta procesa la información recibida de la capa de entrada y contiene una memoria interna llamada **capa de contexto**.
-   - **Capa de Salida**: Esta capa produce el resultado final basado en la activación de las neuronas de la capa oculta.
+   + **Capa de Entrada**: Esta capa recibe el input de datos secuenciales. Cada neurona en esta capa corresponde a una característica del vector de entrada.
+   + **Capa Oculta**: La capa oculta procesa la información recibida de la capa de entrada y contiene una memoria interna llamada **capa de contexto**.
+   + **Capa de Salida**: Esta capa produce el resultado final basado en la activación de las neuronas de la capa oculta.
 
 2. **Capa de Contexto**:
-   - **Unidades de Contexto**: La capa de contexto almacena la activación de la capa oculta en el tiempo \( t-1 \). Estas unidades se retroalimentan a la capa oculta en el siguiente paso temporal \( t \).
-   - **Función de Memoria**: Las unidades de contexto permiten que la red de Elman tenga una memoria a corto plazo, lo que le permite procesar y aprender dependencias temporales.
+   + **Unidades de Contexto**: La capa de contexto almacena la activación de la capa oculta en el tiempo \( t-1 \). Estas unidades se retroalimentan a la capa oculta en el siguiente paso temporal \( t \).
+   + **Función de Memoria**: Las unidades de contexto permiten que la red de Elman tenga una memoria a corto plazo, lo que le permite procesar y aprender dependencias temporales.
 
 ### Funcionamiento de la Red
 
-- **Propagación Hacia Adelante**: En cada paso temporal, la red de Elman procesa la entrada actual y la activación de la capa de contexto (que contiene la activación previa de la capa oculta).
++ **Propagación Hacia Adelante**: En cada paso temporal, la red de Elman procesa la entrada actual y la activación de la capa de contexto (que contiene la activación previa de la capa oculta).
   - La capa oculta recibe tanto la entrada actual como las unidades de contexto.
   - La activación de la capa oculta se calcula aplicando una función de activación (generalmente una función sigmoide o ReLU).
   - La salida de la capa oculta se pasa a la capa de salida para producir el resultado final.
   - La activación de la capa oculta también se almacena en las unidades de contexto para el siguiente paso temporal.
 
-- **Propagación Hacia Atrás (Entrenamiento)**: El entrenamiento se realiza mediante retropropagación a través del tiempo (BPTT), un algoritmo que extiende el algoritmo de retropropagación para manejar dependencias temporales.
++ **Propagación Hacia Atrás (Entrenamiento)**: El entrenamiento se realiza mediante retropropagación a través del tiempo (BPTT), un algoritmo que extiende el algoritmo de retropropagación para manejar dependencias temporales.
   - El error se propaga hacia atrás desde la capa de salida a través de las conexiones recurrentes hasta las capas anteriores.
   - Los pesos de las conexiones se ajustan para minimizar el error de predicción.
 
 ### Ventajas y Aplicaciones
 
-- **Modelado de Secuencias Temporales**: Las redes de Elman son efectivas para tareas que requieren entender secuencias y dependencias temporales, como la predicción de series temporales, el reconocimiento de voz y el procesamiento del lenguaje natural.
-- **Simplicidad**: En comparación con otras RNN más complejas, las redes de Elman tienen una estructura relativamente simple y son más fáciles de entrenar y ajustar.
-- **Memoria a Corto Plazo**: La capa de contexto permite que la red de Elman retenga información de pasos temporales previos, mejorando su capacidad para aprender patrones temporales.
++ **Modelado de Secuencias Temporales**: Las redes de Elman son efectivas para tareas que requieren entender secuencias y dependencias temporales, como la predicción de series temporales, el reconocimiento de voz y el procesamiento del lenguaje natural.
++ **Simplicidad**: En comparación con otras RNN más complejas, las redes de Elman tienen una estructura relativamente simple y son más fáciles de entrenar y ajustar.
++ **Memoria a Corto Plazo**: La capa de contexto permite que la red de Elman retenga información de pasos temporales previos, mejorando su capacidad para aprender patrones temporales.
 
 ### Limitaciones
 
-- **Memoria a Largo Plazo**: Las redes de Elman pueden tener dificultades para aprender dependencias a largo plazo debido a problemas como el desvanecimiento del gradiente.
-- **Capacidad Limitada**: Aunque son efectivas para tareas simples, pueden no ser suficientes para problemas complejos que requieren modelado de dependencias a largo plazo, donde arquitecturas más avanzadas como LSTM o GRU son más adecuadas.
++ **Memoria a Largo Plazo**: Las redes de Elman pueden tener dificultades para aprender dependencias a largo plazo debido a problemas como el desvanecimiento del gradiente.
++ **Capacidad Limitada**: Aunque son efectivas para tareas simples, pueden no ser suficientes para problemas complejos que requieren modelado de dependencias a largo plazo, donde arquitecturas más avanzadas como LSTM o GRU son más adecuadas.
 
 En resumen, las redes neuronales de Elman son un modelo fundamental en el campo de las redes neuronales recurrentes, con aplicaciones útiles en diversas áreas que involucran datos secuenciales y temporales.
 
@@ -898,16 +898,16 @@ El modelo de las redes neuronales de Elman se puede describir de manera formal m
 
 ### Notación
 
-- \( \mathbf{x}(t) \): Vector de entrada en el tiempo \( t \).
-- \( \mathbf{h}(t) \): Vector de activación de la capa oculta en el tiempo \( t \).
-- \( \mathbf{y}(t) \): Vector de salida en el tiempo \( t \).
-- \( \mathbf{h}(t-1) \): Vector de activación de la capa oculta en el tiempo \( t-1 \) (capa de contexto).
-- \( \mathbf{W}_{xh} \): Matriz de pesos entre la capa de entrada y la capa oculta.
-- \( \mathbf{W}_{hh} \): Matriz de pesos entre la capa de contexto (activación de la capa oculta en \( t-1 \)) y la capa oculta.
-- \( \mathbf{W}_{hy} \): Matriz de pesos entre la capa oculta y la capa de salida.
-- \( \mathbf{b}_h \): Vector de sesgo de la capa oculta.
-- \( \mathbf{b}_y \): Vector de sesgo de la capa de salida.
-- \( \sigma \): Función de activación, típicamente una función sigmoide o ReLU.
++ \( \mathbf{x}(t) \): Vector de entrada en el tiempo \( t \).
++ \( \mathbf{h}(t) \): Vector de activación de la capa oculta en el tiempo \( t \).
++ \( \mathbf{y}(t) \): Vector de salida en el tiempo \( t \).
++ \( \mathbf{h}(t-1) \): Vector de activación de la capa oculta en el tiempo \( t-1 \) (capa de contexto).
++ \( \mathbf{W}_{xh} \): Matriz de pesos entre la capa de entrada y la capa oculta.
++ \( \mathbf{W}_{hh} \): Matriz de pesos entre la capa de contexto (activación de la capa oculta en \( t-1 \)) y la capa oculta.
++ \( \mathbf{W}_{hy} \): Matriz de pesos entre la capa oculta y la capa de salida.
++ \( \mathbf{b}_h \): Vector de sesgo de la capa oculta.
++ \( \mathbf{b}_y \): Vector de sesgo de la capa de salida.
++ \( \sigma \): Función de activación, típicamente una función sigmoide o ReLU.
 
 ### Ecuaciones del Modelo
 
@@ -947,8 +947,8 @@ Un diagrama de la red neuronal de Elman puede ayudar a visualizar el flujo de da
 ```
 
 En el diagrama:
-- La capa de entrada envía datos a la capa oculta.
-- La capa oculta tiene una conexión recurrente que le permite recibir información de su propio estado anterior.
-- La capa oculta envía datos a la capa de salida, produciendo la salida de la red.
++ La capa de entrada envía datos a la capa oculta.
++ La capa oculta tiene una conexión recurrente que le permite recibir información de su propio estado anterior.
++ La capa oculta envía datos a la capa de salida, produciendo la salida de la red.
 
 Este modelo permite que la red neuronal de Elman mantenga una memoria a corto plazo de las entradas anteriores, lo que es crucial para tareas que involucran datos secuenciales y temporales.

@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-06-13" />
+<meta name="date" content="2024-06-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -344,11 +344,11 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 ## 4    1.0971958    1.0971958                    0                          0
 ## 5    1.3426027    1.3426027                    0                          0
 ##   multiplicative_terms_upper yhat_lower yhat_upper trend_lower trend_upper
-## 1                          0   125.1115   293.1548    204.6745    204.6745
-## 2                          0   121.6620   300.0687    204.6965    204.6965
-## 3                          0   117.8821   299.4346    204.7184    204.7184
-## 4                          0   121.5931   307.4310    204.7404    204.7404
-## 5                          0   119.9199   301.1082    204.7623    204.7623
+## 1                          0   119.0745   306.1749    204.6745    204.6745
+## 2                          0   124.3196   300.3969    204.6965    204.6965
+## 3                          0   119.7111   300.7807    204.7184    204.7184
+## 4                          0   127.9330   294.7930    204.7404    204.7404
+## 5                          0   122.1617   305.8805    204.7623    204.7623
 ##       yhat
 ## 1 208.9997
 ## 2 209.3558
@@ -359,12 +359,12 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 <span id="cb119-2"><a href="modelo-prophet.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dyplot.prophet(model_prophet, forecast_prophet)</span></span></code></pre></div>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="modelo-prophet.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(forecast_prophet[<span class="fu">c</span>(<span class="st">&#39;ds&#39;</span>, <span class="st">&#39;yhat&#39;</span>, <span class="st">&#39;yhat_lower&#39;</span>, <span class="st">&#39;yhat_upper&#39;</span>)])</span></code></pre></div>
 <pre><code>##              ds     yhat yhat_lower yhat_upper
-## 6195 2024-05-14 663.5435   579.6027   755.5376
-## 6196 2024-05-15 663.3455   571.2284   752.8017
-## 6197 2024-05-16 662.4898   571.7373   750.3093
-## 6198 2024-05-17 662.2759   573.2176   747.3810
-## 6199 2024-05-18 660.2142   573.4218   749.7180
-## 6200 2024-05-19 653.4918   566.8894   744.9958</code></pre>
+## 6195 2024-05-14 663.5435   577.5497   744.3213
+## 6196 2024-05-15 663.3455   578.6673   749.9580
+## 6197 2024-05-16 662.4898   577.0613   749.2415
+## 6198 2024-05-17 662.2759   576.4850   751.7178
+## 6199 2024-05-18 660.2142   569.3325   744.5024
+## 6200 2024-05-19 653.4918   567.7666   744.3891</code></pre>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="modelo-prophet.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(model_prophet,forecast_prophet)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 </div>
