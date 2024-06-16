@@ -92,3 +92,4 @@ notación
 ecuaciones-del-modelo
 resumen-del-funcionamiento
 diagrama-del-modelo
+realización-del-modelo

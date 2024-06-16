@@ -952,3 +952,217 @@ En el diagrama:
 + La capa oculta envía datos a la capa de salida, produciendo la salida de la red.
 
 Este modelo permite que la red neuronal de Elman mantenga una memoria a corto plazo de las entradas anteriores, lo que es crucial para tareas que involucran datos secuenciales y temporales.
+
+### Realización del modelo 
+
+Cargamos los paquetes y normalizamos la serie Utilizamos la fórmula estándar de normalización $\frac{{Y - \min(Y)}}{{\max(Y) - \min(Y)}}$ para obtener $Y1_{\text{normalizado}}$. Luego, utilizamos \texttt{plot()} para graficar la serie de tiempo normalizada.
+
+
+```{r}
+# Instalar y cargar las bibliotecas necesarias
+#install.packages("keras")
+#install.packages("dplyr")
+#install.packages("ggplot2")
+library(keras)
+library(dplyr)
+library(ggplot2)
+
+
+
+# Simulación de datos  
+
+
+
+Y1 <- as.ts(df_maiz_filtrado$Último,start = c(2000, 1), frequency=261)
+
+
+
+
+Z <- as.ts(Y1,F)
+
+# Normalizar los datos
+
+
+S <- (Z-min(Z))/(max(Z)-min(Z))  
+
+plot(S, main = "Serie de Tiempo Normalizada", xlab = "Tiempo", ylab = "Valor Normalizado")
+
+```
+
+Dividimos la serie de tiempo en el 75% de datos de entrenamiento y el 25% en datos de testeo.
+
+
+```{r}
+#A continuación comprobamos el numero de filas totales que contiene nuestro dataset.
+
+tamano_total <- length(S)
+#tamano_total
+
+#Ahora dividiremos los conjuntos de entrenamiento en un 75% y prueba en un 25% respectivamente.
+tamano_train <- round(tamano_total*0.75, digits = 0)
+train <- 0:(tamano_train-1)
+train
+
+test <- (tamano_train):tamano_total
+test
+
+```
+Ahora crearemos un dataframe con n columnas, cada una de las cuales adelantara  un valor de la serie en el futuro, a través de una variable tipo zoo, equivalente al periodo de retardo de la serie.
+
+
+```{r}
+#Ahora crearemos un dataframe con n columnas, cada una de las cuales adelantara 
+#un valor de la serie en el futuro, a través de una variable tipo zoo, equivalente al periodo de retardo de la serie.
+
+library(zoo)
+library(quantmod)
+y <- as.zoo(S)
+x1 <- Lag(y, k = 1)
+x2 <- Lag(y, k = 2)
+x3 <- Lag(y, k = 3)
+x4 <- Lag(y, k = 4)
+x5 <- Lag(y, k = 5)
+x6 <- Lag(y, k = 6)
+x7 <- Lag(y, k = 7)
+x8 <- Lag(y, k = 8)
+x9 <- Lag(y, k = 9)
+x10 <- Lag(y, k = 10)
+x11 <- Lag(y, k = 11)
+x12 <- Lag(y, k = 12)
+slogN <- cbind(y,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12)
+
+DT::datatable(slogN)
+
+#A continuacion eliminaremos los valores NA producidos al desplazar la serie:
+slogN1 <- slogN[-(1:12),]
+DT::datatable(slogN1)
+
+#Luego definimos los valores de entrada y salida de la red neuronal:
+inputs <- slogN1[,2:13]
+outputs <- slogN1[,1]
+
+```
+Ahora crearemos la red de Elman, probando diferentes tipos de combinaciones de neuronas en las capas ocultas e iteraciones máximas, ademas del ritmo de aprendizaje, para ajustar lo mejor posible la curva de predicción a la del modelo de la serie. De esta forma hemos llegado a estos valores a la hora de crear nuestra red. Asi mismo ponemos una semilla para que el resultado sea reproducible.
+
+```{r}
+#Ahora crearemos la red de Elman, probando diferentes tipos de combinaciones de neuronas en las capas ocultas e iteraciones máximas, ademas del ritmo de aprendizaje, para ajustar lo mejor posible la curva de predicción a la del modelo de la serie. De esta forma hemos llegado a estos valores a la hora de crear nuestra red. Asi mismo ponemos una semilla para que el resultado sea reproducible.
+
+#install.packages("RSNNS") se instala solo una vez
+
+
+library(RSNNS)
+
+set.seed(42)
+fit<-elman(inputs[train],outputs[train],size=10,learnFuncParams=c(0.1),
+                  maxit=10000)
+
+
+
+
+plotIterativeError(fit, main = "Error iterativo para  10 neuronas")
+```
+En la gráfica anterior se ve como evoluciona el error de la red con el numero de iteraciones para los parámetros expuestos.Donde se observa la convergencia rápida hacia cero, se espera entonces un ajuste rápido del modelo.
+
+Ahora realizamos la predicción con el resto de los términos de la serie que son los datos seleccionados para test, pasamos pues una vez entrenada a probarla y a representarla #graficamente para ver el ajuste del modelo.
+
+```{r}
+#Ahora realizamos la predicción con el resto de los términos de la serie que son los datos #seleccionados para test, pasamos pues una vez entrenada a probarla y a representarla #graficamente para ver el ajuste del modelo.
+
+y <- as.vector(outputs[-test])
+plot(y,type="l")
+pred <- predict(fit, inputs[-test])
+lines(pred,col = "red")
+
+```
+El grafico anterior muestra tanto los datos reales como las predicciones de un modelo ajustado, donde:
+
++ Líneas Negras corresponden a la serie de tiempo de los valores reales y, que se obtienen de los datos de salida (outputs) excluyendo los datos de prueba (test). La línea negra representa la evolución temporal o secuencial de estos valores reales.
+
++ Líneas Rojas representan las predicciones del modelo ajustado (fit) para los mismos datos de entrada utilizados para generar y, es decir, inputs[-test, lo que nos permite comparar visualmente las predicciones del modelo con los valores reales.
+
+Ahora gracias al efecto memoria vamos a adelantarle a la serie al menos en un valor con una precision muy buena. Para ello volveremos a introducir los datos de entrenamiento.
+
+```{r}
+#Ahora gracias al efecto memoria vamos a adelantarle a la serie al menos en un valor con una precision muy buena. Para ello volveremos a introducir los datos de entrenamiento.
+
+predictions <- predict(fit,inputs[-train])
+#predictions
+
+```
+
+Ahora  desnormalizamos los datos
+
+```{r}
+#posteriori desnormalizaremos los datos:
+
+mod1 <- predictions*(max(Z)-min(Z))+min(Z)
+mod1
+
+```
+Ahora graficamos  la representación de los valores predecidos para los siguiesntes días.
+
+```{r}
+#Ahora veamos la representación de los valores predecidos para el siguiente periodo.
+x <- 1:(tamano_total+length(mod1))
+y <- c(as.vector(Z),mod1)
+plot(x[1:tamano_total], y[1:tamano_total],col = "blue", type="l")
+lines( x[(tamano_total):length(x)], y[(tamano_total):length(x)], col="red")
+```
+# Modelo de Jordan
+
+
+El modelo de red neuronal de Jordan es una variante de las RNN que tiene conexiones hacia atrás de las capas ocultas a sí mismas. Esto significa que la salida de una capa oculta en un momento dado se convierte en una entrada en el siguiente paso de tiempo. Esta estructura le otorga a la red una especie de "memoria de corto plazo", lo que puede ser útil para capturar dependencias temporales complejas en los datos.
+
+El funcionamiento corresponde a que cuando se aplica un modelo de Jordan a datos de series de tiempo, la red neuronal aprende a predecir valores futuros basándose en los valores pasados y presentes de la serie temporal. Por ejemplo, si tienes datos de temperatura registrados cada hora, la red aprenderá patrones y tendencias en los datos para hacer predicciones sobre cómo será la temperatura en la siguiente hora.
+
+```{r}
+set.seed(42)
+fit <-jordan(inputs[train],outputs[train],size=5,learnFuncParams=c(0.1),
+             maxit=35000)
+
+plotIterativeError(fit, main = "Iterative Error for 5 Neuron")
+```
+
+
+```{r}
+y <- as.vector(outputs[-test])
+plot(y,type="l")
+pred <- predict(fit, inputs[-test])
+lines(pred,col = "red")
+```
+
+
+```{r}
+predictions <- predict(fit,inputs[-train])
+mod2 <- predictions*(max(Z)-min(Z))+min(Z)
+#mod2
+```
+
+
+```{r}
+x <- 1:(tamano_total+length(mod2))
+y <- c(as.vector(Z),mod2)
+plot(x[1:tamano_total], y[1:tamano_total],col = "blue", type="l")
+lines( x[(tamano_total):length(x)], y[(tamano_total):length(x)], col="red")
+```
+
+
+
+
+
+Hacemos las serie de tiempo promediandola por año sin tener en cuenta sábados y domingos.
+
+
+```{r}
+# Supongamos que ya has creado la serie de tiempo S y la has normalizado
+# Convertir S a una serie de tiempo con frecuencia anual
+S_ts <- ts(S, start = c(2000, 1), frequency = 262)  # Aquí asumo que F=261 es la frecuencia original
+
+# Calcular el promedio anual de los datos normalizados
+S_anual <- aggregate(S_ts, nfrequency = 1, FUN = mean)
+
+# Graficar la serie de tiempo normalizada de manera anual
+plot(S_anual, main = "Serie de Tiempo Anual Normalizada", xlab = "Año", ylab = "Valor", type = "l")
+
+```
+
