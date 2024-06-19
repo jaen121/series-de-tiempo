@@ -4,6 +4,8 @@ author: "Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
+params:
+  R_MAX_STACK_SIZE: 100000000
 bibliography: [book.bib, packages.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
@@ -16,6 +18,9 @@ github-repo: rstudio/bookdown-demo
 
 
 ---
+
+
+
 # Justificación uso de datos historicos del precio del maíz 
 
 En el curso se va a trabajar con la base de datos del precio del maíz a través de la historia, con el fin de proyectar su precio futuro. 
@@ -79,7 +84,6 @@ Se importa la matriz de  datos
 
 
 
-
 ```{r}
 # Importar datos desde un archivo CSV desde github 2.0
 ruta_archivo <- "Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
@@ -137,7 +141,11 @@ str(df_maiz_filtrado)
 
 
 ```{r}
-#install.packages("skimr")
+# Instalar y cargar el paquete skimr si no está instalado
+if (!requireNamespace("skimr", quietly = TRUE)) {
+  install.packages("skimr")
+}
+
 skimr::skim(df_maiz_filtrado)
 ```
 
@@ -169,8 +177,11 @@ df_maiz_filtrado$Dia_Semana <- factor(df_maiz_filtrado$Dia_Semana,
 
 
 ```{r}
-#Cargar libreria para graficar
-#install.packages("ggplot2")
+# Instalar y cargar el paquete ggplot2 si no está instalado
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+
 library(ggplot2)
 
 ```
@@ -245,7 +256,7 @@ start(df_maiz_filtradots)
 
 
 
-Graficamos la serie de tiempo por días desde 03 de Enero del año 2000 hasta el 19 de abril del año 2024, excluyendo los fines de semanaaa
+Se gráfica la serie de tiempo por días desde 03 de Enero del año 2000 hasta el 19 de abril del año 2024, excluyendo los fines de semana.
 
 ```{r}
 # Graficar la serie de tiempo usando la función plot
@@ -317,27 +328,82 @@ Las series de tiempo pueden descomponerse en varias componentes que ayudan a com
 
 ## Estacionalidad
 
+Llegó la hora se validar la estacionalidad de nuestros datos, esto con el fin de validar uno de los supuestos más importantes a la hora de proponer modelo predictivos de una serie de tiempo. Para esto se utiliza el test Dickey-Fuller que prueba si una serie de tiempo es o no estacional.
+
 ```{r}
-#install.packages("aTSA")
-library(aTSA)
+# Instalar y cargar el paquete tseries si no está instalado
+if (!requireNamespace("tseries", quietly = TRUE)) {
+  install.packages("tseries")
+}
+#
+# Cargar la librería
+library(forecast)
+library(tseries)
+
+#prueba de estacionariedad
+
+print('------------------------')
+print('Prueba Estacionariedad DF Maíz')
+adf.test(df_maiz_filtradots, alternative =  c("stationary", "explosive") )
+
+```
+Tenemos un valor de $p-value>0.05$, por lo que no rechazamos la hipótesis nula, la cuál indica que la serie no es estacionaria.
+
+### Transformación de la serie en estacionaria
+
+Por buen manejo metodológico, se opta por realizar una transformación a la base de datos para poder realizar predicciones. El método elegido para realizar esta transformación es tomando las diferencias de los datos.
+
+Se comienza validando cuantas veces se debe diferenciar para tener una serie estacional:
+
+```{r}
+ndiffs(df_maiz_filtradots)
+
+```
+Según el resultado se debe diferenciar una vez para tener la serie estacional. Sin embargo, esto aumenta significatiamente el esfuerzo computacional, por lo que se decidió diferenciar dos veces.
 
 
-library(aTSA)
- adf.test(df_maiz_filtradots)
- 
-# Calcular la función de autocorrelación
-acf_result <- acf(df_maiz_filtradots, plot = FALSE)
+```{r ubicacion}
+#transformar la serie
 
-# Trazar la función de autocorrelación
-plot(acf_result, main = "Función de Autocorrelación")
+#Diferenciación de primer orden
+dif1_maiz <- diff(df_maiz_filtradots, differences = 2)
+
+# Redondear la frecuencia
+frequency_rounded <- round(frequency(dif1_maiz))
+
+# Ajustar la serie temporal con la frecuencia redondeada
+dif1_maiz <- ts(as.numeric(dif1_maiz), start = start(dif1_maiz), frequency = frequency_rounded)
+
+
+# Gráfico de la serie
+ts.plot(dif1_maiz, main = "Grafico Diferencia del precio del Maíz",
+        ylab= "valor",
+        xlab= "años",
+        col = "darkblue")
+
+
 
 ```
 
-Trazada ya la serie df_maiz_filtradot, se puede determinar que no presenta una tendencia ascendente o descendente por lo tanto la serie parece ser estacionaria en media. Aplicando la prueba  de Dickey-Fuller donde la hipótesis nula de  aumentada es que la serie de tiempo tiene una raíz unitaria, lo que significa que no es estacionaria y la hipótesis alternativa es que la serie de tiempo es estacionaria. La prueba arroja  un p valor de 0.01 evidenciando que la serie es estacionaria.
+### Validar estacionariedad de las series
+
+Ahora se valida que esta serie de tiempo sea estacional con la misma prueba que se utilizó para la original.
+
+```{r}
+
+#prueba de estacionariedad
+
+print('------------------------')
+print('Prueba Estacionariedad Diferencia Maíz')
+adf.test(dif1_maiz, alternative =  c("stationary", "explosive") )
+
+```
+Se tiene un $p-value < 0.05$, por consiguiente se puede concluir que la serie es estacionaria. 
+
 
 ```{r}
 # Calcular la descomposición estacional
-descomposicion <- stl(df_maiz_filtradots, s.window = "periodic")
+descomposicion <- stl(dif1_maiz, s.window = "periodic")
 
 # Trazar la descomposición
 plot(descomposicion, col = "blue")
@@ -352,7 +418,6 @@ La gráfica generada por la función stl muestra la descomposición estacional d
 
 *Residuos:* La parte inferior de la gráfica muestra los residuos, que son las fluctuaciones aleatorias o irregulares que no pueden ser explicadas por la tendencia o la estacionalidad. Los residuos representan la variación aleatoria en los datos que queda después de eliminar la tendencia y la estacionalidad.
 
-<<<<<<< HEAD
 
 # Modelo de  Holt-Winters
 
@@ -373,7 +438,7 @@ Donde:
 
 ```{r}
 # Verificar la cantidad de períodos en la serie temporal
-cantidad_periodos <- length(df_maiz_filtradots)
+cantidad_periodos <- length(dif1_maiz)
 
 print(cantidad_periodos)
 
@@ -386,14 +451,15 @@ library(forecast)
 
 
 # Ajustar un modelo de suavizado exponencial simple
-modelo_ses <- ses(df_maiz_filtradots)
+modelo_ses <- ses(dif1_maiz)
 
 # Imprimir el modelo
 print(modelo_ses)
 
 
 ```
-la salida anterior presenta los intervalos de confianza de los pronosticos, del valor del precio del maiz.
+
+La salida anterior presenta los intervalos de confianza de los pronósticos, del valor del precio del maíz.
 
 ## Método Holt-Winters para Predicciones 
 
@@ -440,29 +506,24 @@ Una explicación  del Método Holt-Winters:
 
 En resumen, el Método Holt-Winters es un método de suavizado exponencial que se utiliza para pronosticar series temporales con tendencia y estacionalidad. Utiliza tres componentes (nivel, tendencia y estacionalidad) que se actualizan en cada periodo para proporcionar pronósticos precisos y ajustados a los datos históricos observados.
 
-```{r}
-
+```{r ver}
 library(xts)
-
 
 # Crea una serie de tiempo con la función ts, se cambio a frecuencia 261
 df_maiz_filtradots1 <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261)
 
 
 # Ajustar un modelo Holt-Winters
-modelo_hw <- HoltWinters(df_maiz_filtradots1)
+modelo_hw <- HoltWinters(dif1_maiz)
 modelo_hw
-
 
 ```
 
 ```{r}
 plot(modelo_hw)
-
-
 ```
 
-A continuación se presenta la predicción para el siguiente año
+A continuación se presenta la predicción para el siguiente año:
 
 ```{r}
 forecast <- predict(modelo_hw, n.ahead = 261, prediction.interval = T, level = 0.95)
@@ -471,14 +532,17 @@ plot(modelo_hw, forecast)
 
 ```
 
+## Conclusiones
+
+Vemos que es un modelo que, además de ajustarse bien a los datos ya existentes, genera una predicción bastante adecuada siguiendo el comportamiento de los últimos periodos. Aunque también es importante notar que los intervalos de error que entrega son amplios, dónde vemos que tiene en cuenta el comportamiento de periodos más antiguos, lo que puede verse como una característica positiva, pues también puede tener en cuenta posibles cambios repentinos de comportamiento.
+
 # Metodología Box-Jenkins
 
 ## Visualizar la serie
 
 ```{r}
 # Gráfico de la serie
-ts.plot(df_maiz_filtradots1, main = "PRECIO DEL MAIZ POR DÍA", col = "darkgreen")
-
+ts.plot(dif1_maiz, main = "PRECIO DEL MAIZ POR DÍA", col = "darkgreen")
 
 ```
 
@@ -495,52 +559,10 @@ library(tseries)
 
 print('------------------------')
 print('Prueba Estacionariedad DF Maíz')
-adf.test(df_maiz_filtradots1, alternative =  c("stationary", "explosive") )
-
-```
-Tenemos un valor de p-value>0.05 no rechazamos la hipótesis nula de que la serie no sea estacionaria.
-
-Validando cuantas veces se debe diferenciar para tener una serie estacional
-
-```{r}
-ndiffs(df_maiz_filtradots1)
-
-```
-Según el resultado se debe diferenciar una vez para para tener la serie estacional
-
-
-## Transformación de la serie en estacionaria
-
-```{r}
-#transformar la serie
-
-#Diferenciación de primer orden
-dif1_maiz <- diff(df_maiz_filtradots1)
-
-
-# Gráfico de la serie
-ts.plot(dif1_maiz, main = "Grafico Diferencia del precio del Maíz",
-        ylab= "valor",
-        xlab= "años",
-        col = "darkblue")
-
-
-
-```
-
-## Validar estacionariedad de las series
-
-
-```{r}
-
-#prueba de estacionariedad
-
-print('------------------------')
-print('Prueba Estacionariedad Diferencia Maíz')
 adf.test(dif1_maiz, alternative =  c("stationary", "explosive") )
 
 ```
-Se tiene un p-value < 0.05, por consiguiente se puede concluir que la serie es estacionaria. 
+Tenemos un valor de $p-value<0.05$ rechazamos la hipótesis nula de que la serie no sea estacionaria.
 
 
 ## Graficar ACF-PACF, Escoger los parametros
@@ -628,7 +650,7 @@ ks_test_result <- ks.test(mod_arima_auto$residuals, "pnorm", mean=mean(mod_arima
 print(ks_test_result)
 
 ```
-Los test tienen p-value < 0.05 lo cual rechaza la hipotesis de que los residuos siguen una distribución normal. 
+Los test tienen $p-value < 0.05$ lo cual rechaza la hipotesis de que los residuos siguen una distribución normal. 
 
 
 ## Pronosticos
@@ -717,9 +739,9 @@ print(evaluacion)
 
 ### Evaluación de la calidad del modelo
 
-- *MSE (Mean Squared Error)*: La varianza promedio de los erroes de predicicón es de *58.8*.
-- *RMSE (Root Mean Squared Error)*: La raíz cuadrada del MSE es de *7.7*
-- *MAE (Mean Absolute Error):* El error absoluto promedio es de *4.96*
+- *MSE (Mean Squared Error)*: La varianza promedio de los errores de predicicón es de *112.39*.
+- *RMSE (Root Mean Squared Error)*: La raíz cuadrada del MSE es de *10.60*
+- *MAE (Mean Absolute Error):* El error absoluto promedio es de *7*
 - *R_squared:* El R cuadrado es un valor muy cercano a cero y negativo, por consiguiente el desempeño del modelo no es el adecuado. 
 
 ### Analisis de los residuos
@@ -732,7 +754,8 @@ Esto lo que indica es que el modelo Auto.arima no está capturando toda la varia
 
 Se evalúa otro tipo de modelo ARIMA(1,0,8) y sus resultados son deficientes en la predicción.
 
-Por consiguiente se propone utilizar otro tipo de modelos. 
+Por consiguiente se propone utilizar otro tipo de modelos.
+
 
 
 # Modelo Prophet
@@ -812,10 +835,6 @@ predict_prophet <- make_future_dataframe(model_prophet, periods = 30, freq = 'da
 head(predict_prophet,5)
 ```
 ```{r}
-tail(forecast_prophet[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
-```
-
-```{r}
 
 forecast_prophet <- predict(model_prophet, predict_prophet)
 
@@ -829,14 +848,120 @@ tail(forecast_prophet)
 ```
 
 
+
+```{r}
+tail(forecast_prophet[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
+```
+
+
+
+
 ```{r}
 prophet_plot_components(model_prophet,forecast_prophet)
 ```
 
+<<<<<<< HEAD
 # Redes Neuronales
 
 ## Modelo ELMAN
 
+=======
+# Modelo de ELMAN
 
-## Model JORDAN
- 
+Las redes neuronales de Elman, también conocidas como redes neuronales recurrentes de Elman, son un tipo específico de red neuronal recurrente (RNN) desarrollada por Jeffrey Elman en 1990. Estas redes están diseñadas para manejar datos secuenciales y temporales, lo que las hace adecuadas para tareas como el procesamiento de lenguaje natural, el reconocimiento de patrones y la predicción de series temporales. A continuación se presenta una descripción detallada de sus características y funcionamiento:
+
+### Estructura de una Red Neuronal de Elman
+
+1. **Capas de la Red**:
+   - **Capa de Entrada**: Esta capa recibe el input de datos secuenciales. Cada neurona en esta capa corresponde a una característica del vector de entrada.
+   - **Capa Oculta**: La capa oculta procesa la información recibida de la capa de entrada y contiene una memoria interna llamada **capa de contexto**.
+   - **Capa de Salida**: Esta capa produce el resultado final basado en la activación de las neuronas de la capa oculta.
+
+2. **Capa de Contexto**:
+   - **Unidades de Contexto**: La capa de contexto almacena la activación de la capa oculta en el tiempo \( t-1 \). Estas unidades se retroalimentan a la capa oculta en el siguiente paso temporal \( t \).
+   - **Función de Memoria**: Las unidades de contexto permiten que la red de Elman tenga una memoria a corto plazo, lo que le permite procesar y aprender dependencias temporales.
+
+### Funcionamiento de la Red
+
+- **Propagación Hacia Adelante**: En cada paso temporal, la red de Elman procesa la entrada actual y la activación de la capa de contexto (que contiene la activación previa de la capa oculta).
+  - La capa oculta recibe tanto la entrada actual como las unidades de contexto.
+  - La activación de la capa oculta se calcula aplicando una función de activación (generalmente una función sigmoide o ReLU).
+  - La salida de la capa oculta se pasa a la capa de salida para producir el resultado final.
+  - La activación de la capa oculta también se almacena en las unidades de contexto para el siguiente paso temporal.
+
+- **Propagación Hacia Atrás (Entrenamiento)**: El entrenamiento se realiza mediante retropropagación a través del tiempo (BPTT), un algoritmo que extiende el algoritmo de retropropagación para manejar dependencias temporales.
+  - El error se propaga hacia atrás desde la capa de salida a través de las conexiones recurrentes hasta las capas anteriores.
+  - Los pesos de las conexiones se ajustan para minimizar el error de predicción.
+
+### Ventajas y Aplicaciones
+
+- **Modelado de Secuencias Temporales**: Las redes de Elman son efectivas para tareas que requieren entender secuencias y dependencias temporales, como la predicción de series temporales, el reconocimiento de voz y el procesamiento del lenguaje natural.
+- **Simplicidad**: En comparación con otras RNN más complejas, las redes de Elman tienen una estructura relativamente simple y son más fáciles de entrenar y ajustar.
+- **Memoria a Corto Plazo**: La capa de contexto permite que la red de Elman retenga información de pasos temporales previos, mejorando su capacidad para aprender patrones temporales.
+
+### Limitaciones
+
+- **Memoria a Largo Plazo**: Las redes de Elman pueden tener dificultades para aprender dependencias a largo plazo debido a problemas como el desvanecimiento del gradiente.
+- **Capacidad Limitada**: Aunque son efectivas para tareas simples, pueden no ser suficientes para problemas complejos que requieren modelado de dependencias a largo plazo, donde arquitecturas más avanzadas como LSTM o GRU son más adecuadas.
+
+En resumen, las redes neuronales de Elman son un modelo fundamental en el campo de las redes neuronales recurrentes, con aplicaciones útiles en diversas áreas que involucran datos secuenciales y temporales.
+
+El modelo de las redes neuronales de Elman se puede describir de manera formal mediante una serie de ecuaciones que representan las activaciones y actualizaciones de las capas en cada paso temporal. Aquí se presenta el modelo matemático:
+
+### Notación
+
+- \( \mathbf{x}(t) \): Vector de entrada en el tiempo \( t \).
+- \( \mathbf{h}(t) \): Vector de activación de la capa oculta en el tiempo \( t \).
+- \( \mathbf{y}(t) \): Vector de salida en el tiempo \( t \).
+- \( \mathbf{h}(t-1) \): Vector de activación de la capa oculta en el tiempo \( t-1 \) (capa de contexto).
+- \( \mathbf{W}_{xh} \): Matriz de pesos entre la capa de entrada y la capa oculta.
+- \( \mathbf{W}_{hh} \): Matriz de pesos entre la capa de contexto (activación de la capa oculta en \( t-1 \)) y la capa oculta.
+- \( \mathbf{W}_{hy} \): Matriz de pesos entre la capa oculta y la capa de salida.
+- \( \mathbf{b}_h \): Vector de sesgo de la capa oculta.
+- \( \mathbf{b}_y \): Vector de sesgo de la capa de salida.
+- \( \sigma \): Función de activación, típicamente una función sigmoide o ReLU.
+
+### Ecuaciones del Modelo
+
+1. **Activación de la Capa Oculta**:
+   La activación de la capa oculta en el tiempo \( t \) se calcula como:
+   \[
+   \mathbf{h}(t) = \sigma(\mathbf{W}_{xh} \mathbf{x}(t) + \mathbf{W}_{hh} \mathbf{h}(t-1) + \mathbf{b}_h)
+   \]
+   Aquí, \( \mathbf{W}_{xh} \mathbf{x}(t) \) representa la contribución de la entrada actual, \( \mathbf{W}_{hh} \mathbf{h}(t-1) \) representa la contribución de la activación previa de la capa oculta (memoria), y \( \mathbf{b}_h \) es el sesgo.
+
+2. **Cálculo de la Salida**:
+   La salida en el tiempo \( t \) se calcula como:
+   \[
+   \mathbf{y}(t) = \sigma(\mathbf{W}_{hy} \mathbf{h}(t) + \mathbf{b}_y)
+   \]
+   Aquí, \( \mathbf{W}_{hy} \mathbf{h}(t) \) representa la contribución de la activación de la capa oculta al cálculo de la salida, y \( \mathbf{b}_y \) es el sesgo.
+
+### Resumen del Funcionamiento
+
+En cada paso temporal \( t \):
+1. Se recibe un nuevo vector de entrada \( \mathbf{x}(t) \).
+2. Se actualiza la activación de la capa oculta \( \mathbf{h}(t) \) utilizando la entrada actual y la activación previa de la capa oculta \( \mathbf{h}(t-1) \).
+3. Se calcula la salida \( \mathbf{y}(t) \) basada en la activación de la capa oculta \( \mathbf{h}(t) \).
+
+### Diagrama del Modelo
+
+Un diagrama de la red neuronal de Elman puede ayudar a visualizar el flujo de datos:
+
+```
+      Entrada (x(t))  ---->  [Capa Oculta (h(t))]
+                                ^      |
+                                |      v
+        Contexto (h(t-1))  ---> [Capa Oculta (h(t))]
+                                |
+                                v
+                           [Salida (y(t))]
+```
+
+En el diagrama:
+- La capa de entrada envía datos a la capa oculta.
+- La capa oculta tiene una conexión recurrente que le permite recibir información de su propio estado anterior.
+- La capa oculta envía datos a la capa de salida, produciendo la salida de la red.
+
+Este modelo permite que la red neuronal de Elman mantenga una memoria a corto plazo de las entradas anteriores, lo que es crucial para tareas que involucran datos secuenciales y temporales.
+>>>>>>> ae37ac19a30df88fb91e0be8b4fba3a25bbbe008
