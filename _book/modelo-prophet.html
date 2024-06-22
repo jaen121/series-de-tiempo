@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-06-16" />
+<meta name="date" content="2024-06-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,7 +37,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="metodología-box-jenkins.html"/>
-
+<link rel="next" href="redes-neuronales---modelo-elman.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -58,6 +58,14 @@ set in the _output.yml file.</p>" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.31/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -206,18 +214,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="modelo-prophet.html"><a href="modelo-prophet.html#preprocesamiento-de-datos-para-el-modelo"><i class="fa fa-check"></i><b>8.2.2</b> Preprocesamiento de datos para el modelo</a></li>
 <li class="chapter" data-level="8.2.3" data-path="modelo-prophet.html"><a href="modelo-prophet.html#modelo"><i class="fa fa-check"></i><b>8.2.3</b> Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="modelo-prophet.html"><a href="modelo-prophet.html#modelo-elman"><i class="fa fa-check"></i><b>8.3</b> Modelo ELMAN</a>
+</ul></li>
+<li class="chapter" data-level="9" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html"><i class="fa fa-check"></i><b>9</b> Redes Neuronales - Modelo ELMAN</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="modelo-prophet.html"><a href="modelo-prophet.html#estructura-de-una-red-neuronal-de-elman"><i class="fa fa-check"></i><b>8.3.1</b> Estructura de una Red Neuronal de Elman</a></li>
-<li class="chapter" data-level="8.3.2" data-path="modelo-prophet.html"><a href="modelo-prophet.html#funcionamiento-de-la-red"><i class="fa fa-check"></i><b>8.3.2</b> Funcionamiento de la Red</a></li>
-<li class="chapter" data-level="8.3.3" data-path="modelo-prophet.html"><a href="modelo-prophet.html#ventajas-y-aplicaciones"><i class="fa fa-check"></i><b>8.3.3</b> Ventajas y Aplicaciones</a></li>
-<li class="chapter" data-level="8.3.4" data-path="modelo-prophet.html"><a href="modelo-prophet.html#limitaciones"><i class="fa fa-check"></i><b>8.3.4</b> Limitaciones</a></li>
-<li class="chapter" data-level="8.3.5" data-path="modelo-prophet.html"><a href="modelo-prophet.html#notación"><i class="fa fa-check"></i><b>8.3.5</b> Notación</a></li>
-<li class="chapter" data-level="8.3.6" data-path="modelo-prophet.html"><a href="modelo-prophet.html#ecuaciones-del-modelo"><i class="fa fa-check"></i><b>8.3.6</b> Ecuaciones del Modelo</a></li>
-<li class="chapter" data-level="8.3.7" data-path="modelo-prophet.html"><a href="modelo-prophet.html#resumen-del-funcionamiento"><i class="fa fa-check"></i><b>8.3.7</b> Resumen del Funcionamiento</a></li>
-<li class="chapter" data-level="8.3.8" data-path="modelo-prophet.html"><a href="modelo-prophet.html#diagrama-del-modelo"><i class="fa fa-check"></i><b>8.3.8</b> Diagrama del Modelo</a></li>
+<li class="chapter" data-level="9.1" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#estructura-de-una-red-neuronal-de-elman"><i class="fa fa-check"></i><b>9.1</b> Estructura de una Red Neuronal de Elman</a></li>
+<li class="chapter" data-level="9.2" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#funcionamiento-de-la-red"><i class="fa fa-check"></i><b>9.2</b> Funcionamiento de la Red</a></li>
+<li class="chapter" data-level="9.3" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#ventajas-y-aplicaciones"><i class="fa fa-check"></i><b>9.3</b> Ventajas y Aplicaciones</a></li>
+<li class="chapter" data-level="9.4" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#limitaciones"><i class="fa fa-check"></i><b>9.4</b> Limitaciones</a></li>
+<li class="chapter" data-level="9.5" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#notación"><i class="fa fa-check"></i><b>9.5</b> Notación</a></li>
+<li class="chapter" data-level="9.6" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#ecuaciones-del-modelo"><i class="fa fa-check"></i><b>9.6</b> Ecuaciones del Modelo</a></li>
+<li class="chapter" data-level="9.7" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#resumen-del-funcionamiento"><i class="fa fa-check"></i><b>9.7</b> Resumen del Funcionamiento</a></li>
+<li class="chapter" data-level="9.8" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#diagrama-del-modelo"><i class="fa fa-check"></i><b>9.8</b> Diagrama del Modelo</a></li>
+<li class="chapter" data-level="9.9" data-path="redes-neuronales---modelo-elman.html"><a href="redes-neuronales---modelo-elman.html#realización-del-modelo"><i class="fa fa-check"></i><b>9.9</b> Realización del modelo</a></li>
 </ul></li>
-</ul></li>
+<li class="chapter" data-level="10" data-path="redes-neuronales---modelo-jordan.html"><a href="redes-neuronales---modelo-jordan.html"><i class="fa fa-check"></i><b>10</b> Redes Neuronales - Modelo JORDAN</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -260,31 +270,25 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 <h2><span class="header-section-number">8.2</span> Implementación del modelo<a href="modelo-prophet.html#implementación-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="cargando-librerias" class="section level3 hasAnchor" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Cargando librerias<a href="modelo-prophet.html#cargando-librerias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="modelo-prophet.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Intalar el paquete si no se encuentra instalado</span></span>
-<span id="cb102-2"><a href="modelo-prophet.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;TTR&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb102-3"><a href="modelo-prophet.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;TTR&quot;</span>)</span>
-<span id="cb102-4"><a href="modelo-prophet.html#cb102-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb102-5"><a href="modelo-prophet.html#cb102-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-6"><a href="modelo-prophet.html#cb102-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TTR)</span></code></pre></div>
-<pre><code>## Warning: package &#39;TTR&#39; was built under R version 4.1.3</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="modelo-prophet.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span>
-<span id="cb104-2"><a href="modelo-prophet.html#cb104-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-3"><a href="modelo-prophet.html#cb104-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-4"><a href="modelo-prophet.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Intalar el paquete si no se encuentra instalado</span></span>
-<span id="cb104-5"><a href="modelo-prophet.html#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;prophet&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb104-6"><a href="modelo-prophet.html#cb104-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;prophet&quot;</span>)</span>
-<span id="cb104-7"><a href="modelo-prophet.html#cb104-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb104-8"><a href="modelo-prophet.html#cb104-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(prophet)</span></code></pre></div>
-<pre><code>## Warning: package &#39;prophet&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Loading required package: Rcpp</code></pre>
-<pre><code>## Warning: package &#39;Rcpp&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Loading required package: rlang</code></pre>
-<pre><code>## Warning: package &#39;rlang&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="modelo-prophet.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Intalar el paquete si no se encuentra instalado</span></span>
+<span id="cb85-2"><a href="modelo-prophet.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;TTR&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb85-3"><a href="modelo-prophet.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;TTR&quot;</span>)</span>
+<span id="cb85-4"><a href="modelo-prophet.html#cb85-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb85-5"><a href="modelo-prophet.html#cb85-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-6"><a href="modelo-prophet.html#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
+<span id="cb85-7"><a href="modelo-prophet.html#cb85-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span>
+<span id="cb85-8"><a href="modelo-prophet.html#cb85-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-9"><a href="modelo-prophet.html#cb85-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-10"><a href="modelo-prophet.html#cb85-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Intalar el paquete si no se encuentra instalado</span></span>
+<span id="cb85-11"><a href="modelo-prophet.html#cb85-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;prophet&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb85-12"><a href="modelo-prophet.html#cb85-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;prophet&quot;</span>)</span>
+<span id="cb85-13"><a href="modelo-prophet.html#cb85-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb85-14"><a href="modelo-prophet.html#cb85-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(prophet)</span></code></pre></div>
 </div>
 <div id="preprocesamiento-de-datos-para-el-modelo" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Preprocesamiento de datos para el modelo<a href="modelo-prophet.html#preprocesamiento-de-datos-para-el-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="modelo-prophet.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizar DF</span></span>
-<span id="cb110-2"><a href="modelo-prophet.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_maiz_filtrado, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="modelo-prophet.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizar DF</span></span>
+<span id="cb86-2"><a href="modelo-prophet.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_maiz_filtrado, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##        Fecha Último Dia_Semana
 ## 1 2024-04-19 433.50    viernes
 ## 2 2024-04-18 426.75     jueves
@@ -292,41 +296,41 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 ## 4 2024-04-16 431.00     martes
 ## 5 2024-04-15 431.50      lunes</code></pre>
 <p>Para lograr utilizar <em>Prophet</em> se debe de tener un data frame donde las columnas de fecha se nombren “ds” y los valores “y”</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="modelo-prophet.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Renombrar las columnas</span></span>
-<span id="cb112-2"><a href="modelo-prophet.html#cb112-2" aria-hidden="true" tabindex="-1"></a>df_prophet <span class="ot">&lt;-</span> df_maiz_filtrado <span class="sc">%&gt;%</span></span>
-<span id="cb112-3"><a href="modelo-prophet.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Fecha, Último) <span class="sc">%&gt;%</span></span>
-<span id="cb112-4"><a href="modelo-prophet.html#cb112-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">ds =</span> Fecha, <span class="at">y =</span> Último)</span>
-<span id="cb112-5"><a href="modelo-prophet.html#cb112-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-6"><a href="modelo-prophet.html#cb112-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar df_prophet</span></span>
-<span id="cb112-7"><a href="modelo-prophet.html#cb112-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_prophet, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="modelo-prophet.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Renombrar las columnas</span></span>
+<span id="cb88-2"><a href="modelo-prophet.html#cb88-2" aria-hidden="true" tabindex="-1"></a>df_prophet <span class="ot">&lt;-</span> df_maiz_filtrado <span class="sc">%&gt;%</span></span>
+<span id="cb88-3"><a href="modelo-prophet.html#cb88-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Fecha, Último) <span class="sc">%&gt;%</span></span>
+<span id="cb88-4"><a href="modelo-prophet.html#cb88-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">ds =</span> Fecha, <span class="at">y =</span> Último)</span>
+<span id="cb88-5"><a href="modelo-prophet.html#cb88-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-6"><a href="modelo-prophet.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar df_prophet</span></span>
+<span id="cb88-7"><a href="modelo-prophet.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_prophet, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##           ds      y
 ## 1 2024-04-19 433.50
 ## 2 2024-04-18 426.75
 ## 3 2024-04-17 430.25
 ## 4 2024-04-16 431.00
 ## 5 2024-04-15 431.50</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="modelo-prophet.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Validando</span></span>
-<span id="cb114-2"><a href="modelo-prophet.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df_prophet)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="modelo-prophet.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Validando</span></span>
+<span id="cb90-2"><a href="modelo-prophet.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df_prophet)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 </div>
 <div id="modelo" class="section level3 hasAnchor" number="8.2.3">
 <h3><span class="header-section-number">8.2.3</span> Modelo<a href="modelo-prophet.html#modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="modelo-prophet.html#cb116-1" aria-hidden="true" tabindex="-1"></a>model_prophet <span class="ot">&lt;-</span> <span class="fu">prophet</span>(df_prophet, <span class="at">daily.seasonality =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb116-2"><a href="modelo-prophet.html#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-3"><a href="modelo-prophet.html#cb116-3" aria-hidden="true" tabindex="-1"></a>predict_prophet <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(model_prophet, <span class="at">periods =</span> <span class="dv">30</span>, <span class="at">freq =</span> <span class="st">&#39;day&#39;</span>)</span>
-<span id="cb116-4"><a href="modelo-prophet.html#cb116-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-5"><a href="modelo-prophet.html#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predict_prophet,<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="modelo-prophet.html#cb92-1" aria-hidden="true" tabindex="-1"></a>model_prophet <span class="ot">&lt;-</span> <span class="fu">prophet</span>(df_prophet, <span class="at">daily.seasonality =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb92-2"><a href="modelo-prophet.html#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="modelo-prophet.html#cb92-3" aria-hidden="true" tabindex="-1"></a>predict_prophet <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(model_prophet, <span class="at">periods =</span> <span class="dv">30</span>, <span class="at">freq =</span> <span class="st">&#39;day&#39;</span>)</span>
+<span id="cb92-4"><a href="modelo-prophet.html#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="modelo-prophet.html#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predict_prophet,<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##           ds
 ## 1 2000-01-03
 ## 2 2000-01-04
 ## 3 2000-01-05
 ## 4 2000-01-06
 ## 5 2000-01-07</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="modelo-prophet.html#cb118-1" aria-hidden="true" tabindex="-1"></a>forecast_prophet <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_prophet, predict_prophet)</span>
-<span id="cb118-2"><a href="modelo-prophet.html#cb118-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-3"><a href="modelo-prophet.html#cb118-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-4"><a href="modelo-prophet.html#cb118-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir las predicciones en la consola</span></span>
-<span id="cb118-5"><a href="modelo-prophet.html#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(forecast_prophet)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="modelo-prophet.html#cb94-1" aria-hidden="true" tabindex="-1"></a>forecast_prophet <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_prophet, predict_prophet)</span>
+<span id="cb94-2"><a href="modelo-prophet.html#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="modelo-prophet.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="modelo-prophet.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir las predicciones en la consola</span></span>
+<span id="cb94-5"><a href="modelo-prophet.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(forecast_prophet)</span></code></pre></div>
 <pre><code>##              ds    trend additive_terms additive_terms_lower
 ## 6195 2024-05-14 641.0927       22.63685             22.63685
 ## 6196 2024-05-15 641.2263       22.30282             22.30282
@@ -356,139 +360,24 @@ y(t) = g(t) + s(t) + h(t) + \epsilon_t
 ## 6199                    0                          0                          0
 ## 6200                    0                          0                          0
 ##      yhat_lower yhat_upper trend_lower trend_upper     yhat
-## 6195   571.6770   753.8718    641.0927    641.0927 663.7295
-## 6196   574.1361   750.2743    641.2263    641.2263 663.5292
-## 6197   571.5688   750.0391    641.3600    641.3600 662.6753
-## 6198   574.2400   757.8091    641.4936    641.4936 662.4678
-## 6199   570.6494   751.1402    641.6273    641.6273 660.4504
-## 6200   569.1498   742.9044    641.7610    641.7610 653.9217</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="modelo-prophet.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co">#No funciona, error de nombre archivo temporal largo</span></span>
-<span id="cb120-2"><a href="modelo-prophet.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dyplot.prophet(model_prophet, forecast_prophet)</span></span></code></pre></div>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="modelo-prophet.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(forecast_prophet[<span class="fu">c</span>(<span class="st">&#39;ds&#39;</span>, <span class="st">&#39;yhat&#39;</span>, <span class="st">&#39;yhat_lower&#39;</span>, <span class="st">&#39;yhat_upper&#39;</span>)])</span></code></pre></div>
+## 6195   582.2352   751.8077    641.0927    641.0927 663.7295
+## 6196   574.2524   747.5857    641.2263    641.2263 663.5292
+## 6197   582.6864   750.0986    641.3600    641.3600 662.6753
+## 6198   578.1087   747.9338    641.4936    641.4936 662.4678
+## 6199   571.1951   746.6952    641.6273    641.6273 660.4504
+## 6200   562.6736   740.3914    641.7610    641.7610 653.9217</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="modelo-prophet.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co">#No funciona, error de nombre archivo temporal largo</span></span>
+<span id="cb96-2"><a href="modelo-prophet.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dyplot.prophet(model_prophet, forecast_prophet)</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="modelo-prophet.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(forecast_prophet[<span class="fu">c</span>(<span class="st">&#39;ds&#39;</span>, <span class="st">&#39;yhat&#39;</span>, <span class="st">&#39;yhat_lower&#39;</span>, <span class="st">&#39;yhat_upper&#39;</span>)])</span></code></pre></div>
 <pre><code>##              ds     yhat yhat_lower yhat_upper
-## 6195 2024-05-14 663.7295   571.6770   753.8718
-## 6196 2024-05-15 663.5292   574.1361   750.2743
-## 6197 2024-05-16 662.6753   571.5688   750.0391
-## 6198 2024-05-17 662.4678   574.2400   757.8091
-## 6199 2024-05-18 660.4504   570.6494   751.1402
-## 6200 2024-05-19 653.9217   569.1498   742.9044</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="modelo-prophet.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(model_prophet,forecast_prophet)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-# Redes Neuronales</p>
-</div>
-</div>
-<div id="modelo-elman" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Modelo ELMAN<a href="modelo-prophet.html#modelo-elman" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>=======
-# Modelo de ELMAN</p>
-<p>Las redes neuronales de Elman, también conocidas como redes neuronales recurrentes de Elman, son un tipo específico de red neuronal recurrente (RNN) desarrollada por Jeffrey Elman en 1990. Estas redes están diseñadas para manejar datos secuenciales y temporales, lo que las hace adecuadas para tareas como el procesamiento de lenguaje natural, el reconocimiento de patrones y la predicción de series temporales. A continuación se presenta una descripción detallada de sus características y funcionamiento:</p>
-<div id="estructura-de-una-red-neuronal-de-elman" class="section level3 hasAnchor" number="8.3.1">
-<h3><span class="header-section-number">8.3.1</span> Estructura de una Red Neuronal de Elman<a href="modelo-prophet.html#estructura-de-una-red-neuronal-de-elman" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: decimal">
-<li><strong>Capas de la Red</strong>:
-<ul>
-<li><strong>Capa de Entrada</strong>: Esta capa recibe el input de datos secuenciales. Cada neurona en esta capa corresponde a una característica del vector de entrada.</li>
-<li><strong>Capa Oculta</strong>: La capa oculta procesa la información recibida de la capa de entrada y contiene una memoria interna llamada <strong>capa de contexto</strong>.</li>
-<li><strong>Capa de Salida</strong>: Esta capa produce el resultado final basado en la activación de las neuronas de la capa oculta.</li>
-</ul></li>
-<li><strong>Capa de Contexto</strong>:
-<ul>
-<li><strong>Unidades de Contexto</strong>: La capa de contexto almacena la activación de la capa oculta en el tiempo <span class="math inline">\(t-1\)</span>. Estas unidades se retroalimentan a la capa oculta en el siguiente paso temporal <span class="math inline">\(t\)</span>.</li>
-<li><strong>Función de Memoria</strong>: Las unidades de contexto permiten que la red de Elman tenga una memoria a corto plazo, lo que le permite procesar y aprender dependencias temporales.</li>
-</ul></li>
-</ol>
-</div>
-<div id="funcionamiento-de-la-red" class="section level3 hasAnchor" number="8.3.2">
-<h3><span class="header-section-number">8.3.2</span> Funcionamiento de la Red<a href="modelo-prophet.html#funcionamiento-de-la-red" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><strong>Propagación Hacia Adelante</strong>: En cada paso temporal, la red de Elman procesa la entrada actual y la activación de la capa de contexto (que contiene la activación previa de la capa oculta).
-<ul>
-<li>La capa oculta recibe tanto la entrada actual como las unidades de contexto.</li>
-<li>La activación de la capa oculta se calcula aplicando una función de activación (generalmente una función sigmoide o ReLU).</li>
-<li>La salida de la capa oculta se pasa a la capa de salida para producir el resultado final.</li>
-<li>La activación de la capa oculta también se almacena en las unidades de contexto para el siguiente paso temporal.</li>
-</ul></li>
-<li><strong>Propagación Hacia Atrás (Entrenamiento)</strong>: El entrenamiento se realiza mediante retropropagación a través del tiempo (BPTT), un algoritmo que extiende el algoritmo de retropropagación para manejar dependencias temporales.
-<ul>
-<li>El error se propaga hacia atrás desde la capa de salida a través de las conexiones recurrentes hasta las capas anteriores.</li>
-<li>Los pesos de las conexiones se ajustan para minimizar el error de predicción.</li>
-</ul></li>
-</ul>
-</div>
-<div id="ventajas-y-aplicaciones" class="section level3 hasAnchor" number="8.3.3">
-<h3><span class="header-section-number">8.3.3</span> Ventajas y Aplicaciones<a href="modelo-prophet.html#ventajas-y-aplicaciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><strong>Modelado de Secuencias Temporales</strong>: Las redes de Elman son efectivas para tareas que requieren entender secuencias y dependencias temporales, como la predicción de series temporales, el reconocimiento de voz y el procesamiento del lenguaje natural.</li>
-<li><strong>Simplicidad</strong>: En comparación con otras RNN más complejas, las redes de Elman tienen una estructura relativamente simple y son más fáciles de entrenar y ajustar.</li>
-<li><strong>Memoria a Corto Plazo</strong>: La capa de contexto permite que la red de Elman retenga información de pasos temporales previos, mejorando su capacidad para aprender patrones temporales.</li>
-</ul>
-</div>
-<div id="limitaciones" class="section level3 hasAnchor" number="8.3.4">
-<h3><span class="header-section-number">8.3.4</span> Limitaciones<a href="modelo-prophet.html#limitaciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><strong>Memoria a Largo Plazo</strong>: Las redes de Elman pueden tener dificultades para aprender dependencias a largo plazo debido a problemas como el desvanecimiento del gradiente.</li>
-<li><strong>Capacidad Limitada</strong>: Aunque son efectivas para tareas simples, pueden no ser suficientes para problemas complejos que requieren modelado de dependencias a largo plazo, donde arquitecturas más avanzadas como LSTM o GRU son más adecuadas.</li>
-</ul>
-<p>En resumen, las redes neuronales de Elman son un modelo fundamental en el campo de las redes neuronales recurrentes, con aplicaciones útiles en diversas áreas que involucran datos secuenciales y temporales.</p>
-<p>El modelo de las redes neuronales de Elman se puede describir de manera formal mediante una serie de ecuaciones que representan las activaciones y actualizaciones de las capas en cada paso temporal. Aquí se presenta el modelo matemático:</p>
-</div>
-<div id="notación" class="section level3 hasAnchor" number="8.3.5">
-<h3><span class="header-section-number">8.3.5</span> Notación<a href="modelo-prophet.html#notación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><span class="math inline">\(\mathbf{x}(t)\)</span>: Vector de entrada en el tiempo <span class="math inline">\(t\)</span>.</li>
-<li><span class="math inline">\(\mathbf{h}(t)\)</span>: Vector de activación de la capa oculta en el tiempo <span class="math inline">\(t\)</span>.</li>
-<li><span class="math inline">\(\mathbf{y}(t)\)</span>: Vector de salida en el tiempo <span class="math inline">\(t\)</span>.</li>
-<li><span class="math inline">\(\mathbf{h}(t-1)\)</span>: Vector de activación de la capa oculta en el tiempo <span class="math inline">\(t-1\)</span> (capa de contexto).</li>
-<li><span class="math inline">\(\mathbf{W}_{xh}\)</span>: Matriz de pesos entre la capa de entrada y la capa oculta.</li>
-<li><span class="math inline">\(\mathbf{W}_{hh}\)</span>: Matriz de pesos entre la capa de contexto (activación de la capa oculta en <span class="math inline">\(t-1\)</span>) y la capa oculta.</li>
-<li><span class="math inline">\(\mathbf{W}_{hy}\)</span>: Matriz de pesos entre la capa oculta y la capa de salida.</li>
-<li><span class="math inline">\(\mathbf{b}_h\)</span>: Vector de sesgo de la capa oculta.</li>
-<li><span class="math inline">\(\mathbf{b}_y\)</span>: Vector de sesgo de la capa de salida.</li>
-<li><span class="math inline">\(\sigma\)</span>: Función de activación, típicamente una función sigmoide o ReLU.</li>
-</ul>
-</div>
-<div id="ecuaciones-del-modelo" class="section level3 hasAnchor" number="8.3.6">
-<h3><span class="header-section-number">8.3.6</span> Ecuaciones del Modelo<a href="modelo-prophet.html#ecuaciones-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: decimal">
-<li><p><strong>Activación de la Capa Oculta</strong>:
-La activación de la capa oculta en el tiempo <span class="math inline">\(t\)</span> se calcula como:
-<span class="math display">\[
-\mathbf{h}(t) = \sigma(\mathbf{W}_{xh} \mathbf{x}(t) + \mathbf{W}_{hh} \mathbf{h}(t-1) + \mathbf{b}_h)
-\]</span>
-Aquí, <span class="math inline">\(\mathbf{W}_{xh} \mathbf{x}(t)\)</span> representa la contribución de la entrada actual, <span class="math inline">\(\mathbf{W}_{hh} \mathbf{h}(t-1)\)</span> representa la contribución de la activación previa de la capa oculta (memoria), y <span class="math inline">\(\mathbf{b}_h\)</span> es el sesgo.</p></li>
-<li><p><strong>Cálculo de la Salida</strong>:
-La salida en el tiempo <span class="math inline">\(t\)</span> se calcula como:
-<span class="math display">\[
-\mathbf{y}(t) = \sigma(\mathbf{W}_{hy} \mathbf{h}(t) + \mathbf{b}_y)
-\]</span>
-Aquí, <span class="math inline">\(\mathbf{W}_{hy} \mathbf{h}(t)\)</span> representa la contribución de la activación de la capa oculta al cálculo de la salida, y <span class="math inline">\(\mathbf{b}_y\)</span> es el sesgo.</p></li>
-</ol>
-</div>
-<div id="resumen-del-funcionamiento" class="section level3 hasAnchor" number="8.3.7">
-<h3><span class="header-section-number">8.3.7</span> Resumen del Funcionamiento<a href="modelo-prophet.html#resumen-del-funcionamiento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>En cada paso temporal <span class="math inline">\(t\)</span>:
-1. Se recibe un nuevo vector de entrada <span class="math inline">\(\mathbf{x}(t)\)</span>.
-2. Se actualiza la activación de la capa oculta <span class="math inline">\(\mathbf{h}(t)\)</span> utilizando la entrada actual y la activación previa de la capa oculta <span class="math inline">\(\mathbf{h}(t-1)\)</span>.
-3. Se calcula la salida <span class="math inline">\(\mathbf{y}(t)\)</span> basada en la activación de la capa oculta <span class="math inline">\(\mathbf{h}(t)\)</span>.</p>
-</div>
-<div id="diagrama-del-modelo" class="section level3 hasAnchor" number="8.3.8">
-<h3><span class="header-section-number">8.3.8</span> Diagrama del Modelo<a href="modelo-prophet.html#diagrama-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Un diagrama de la red neuronal de Elman puede ayudar a visualizar el flujo de datos:</p>
-<pre><code>      Entrada (x(t))  ----&gt;  [Capa Oculta (h(t))]
-                                ^      |
-                                |      v
-        Contexto (h(t-1))  ---&gt; [Capa Oculta (h(t))]
-                                |
-                                v
-                           [Salida (y(t))]</code></pre>
-<p>En el diagrama:
-- La capa de entrada envía datos a la capa oculta.
-- La capa oculta tiene una conexión recurrente que le permite recibir información de su propio estado anterior.
-- La capa oculta envía datos a la capa de salida, produciendo la salida de la red.</p>
-<p>Este modelo permite que la red neuronal de Elman mantenga una memoria a corto plazo de las entradas anteriores, lo que es crucial para tareas que involucran datos secuenciales y temporales.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; ae37ac19a30df88fb91e0be8b4fba3a25bbbe008</p>
-
+## 6195 2024-05-14 663.7295   582.2352   751.8077
+## 6196 2024-05-15 663.5292   574.2524   747.5857
+## 6197 2024-05-16 662.6753   582.6864   750.0986
+## 6198 2024-05-17 662.4678   578.1087   747.9338
+## 6199 2024-05-18 660.4504   571.1951   746.6952
+## 6200 2024-05-19 653.9217   562.6736   740.3914</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="modelo-prophet.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(model_prophet,forecast_prophet)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -497,8 +386,8 @@ Aquí, <span class="math inline">\(\mathbf{W}_{hy} \mathbf{h}(t)\)</span> repres
           </div>
         </div>
       </div>
-<a href="metodología-box-jenkins.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="metodología-box-jenkins.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="redes-neuronales---modelo-elman.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

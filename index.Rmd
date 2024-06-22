@@ -84,7 +84,7 @@ Se importa la matriz de  datos
 
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Importar datos desde un archivo CSV desde github 2.0
 ruta_archivo <- "Datos históricos Futuruos maíz EE.UU. 2000-2024 Importar.csv"
 
@@ -94,7 +94,7 @@ names(df_maiz)
 
 ```
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 head(df_maiz)
 
 ```
@@ -113,7 +113,7 @@ La base datos nos muestra el precio desde el 01-01-2000 hasta el 19-04-2024, con
 
 Considerando que el foco principal de este ejercicio recae en la variable objetivo **último**, se opta por construir un nuevo data frame que contenga exclusivamente la fecha y el valor de último.
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #data frame filtrado
 df_maiz_filtrado <- df_maiz[, c("Fecha", "Último")]
 
@@ -124,13 +124,13 @@ head(df_maiz_filtrado, 5)
 
 A continuación se estudiarán los estadísticos descriptivos de la matriz de datos:
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 str(df_maiz_filtrado)
 ```
 
 Teniendo en cuenta que la variable **Fecha** se encuentra categorizada como caracter y no como fecha, se convierte esta columna a tipo fecha
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Convertir fecha en formato fecha
 df_maiz_filtrado$Fecha <- as.Date(df_maiz_filtrado$Fecha, format = "%d/%m/%Y")
 
@@ -140,7 +140,7 @@ str(df_maiz_filtrado)
 
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Instalar y cargar el paquete skimr si no está instalado
 if (!requireNamespace("skimr", quietly = TRUE)) {
   install.packages("skimr")
@@ -153,7 +153,7 @@ De la salida anterior podemos visualizar que se presentan 6170 registros, el dat
 
 
 Ahora, se va analizar el precio de cierre por día de la semana. 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Crear una columna que muestre el día de la semana
 df_maiz_filtrado$Dia_Semana <- weekdays(as.Date(df_maiz_filtrado$Fecha))
 
@@ -161,7 +161,7 @@ head(df_maiz_filtrado, 5)
 ```
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Ordenar la variable Dia_Semana
 df_maiz_filtrado$Dia_Semana <- factor(df_maiz_filtrado$Dia_Semana, 
                                       levels = c("lunes", 
@@ -176,7 +176,7 @@ df_maiz_filtrado$Dia_Semana <- factor(df_maiz_filtrado$Dia_Semana,
 
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Instalar y cargar el paquete ggplot2 si no está instalado
 if (!requireNamespace("ggplot2", quietly = TRUE)) {
   install.packages("ggplot2")
@@ -186,7 +186,7 @@ library(ggplot2)
 
 ```
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Crear el gráfico de barras de la frecuencia por día de la semana
 ggplot(df_maiz_filtrado, aes(x = Dia_Semana, fill = Dia_Semana)) +
   geom_bar() +  #Grafico de barras
@@ -201,7 +201,7 @@ ggplot(df_maiz_filtrado, aes(x = Dia_Semana, fill = Dia_Semana)) +
 Dado que los días domingos no se generan transacciones en la bolsa y que los datos que se tienen los días domingos solo son 9 en 24 años de historia se decide eliminar estos datos. 
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Creando data frame sin el domingo
 
 df_maiz_SD <- subset(df_maiz_filtrado, Dia_Semana != "domingo")
@@ -212,7 +212,7 @@ unique(df_maiz_SD$Dia_Semana)
 ```
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Crear el gráfico de boxplot por semana
 ggplot(df_maiz_SD, aes(x = Dia_Semana, y = Último)) +
   geom_boxplot(fill = "skyblue", color = "blue") +
@@ -223,10 +223,22 @@ ggplot(df_maiz_SD, aes(x = Dia_Semana, y = Último)) +
 
 Convertimos la matriz de datos en series de tiempo
 
-```{r}
-#install.packages("xts")
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+# Instalar y cargar el paquete xts si no está instalado
+if (!requireNamespace("xts", quietly = TRUE)) {
+  install.packages("xts")
+}
+
+# Instalar y cargar el paquete zoo si no está instalado
+if (!requireNamespace("zoo", quietly = TRUE)) {
+  install.packages("zoo")
+}
+
 # Carga el paquete xts
 library(xts)
+
+# Carga el paquete zoo
+library(zoo)
 
 
 # Crea una serie de tiempo con la función ts
@@ -236,14 +248,14 @@ df_maiz_filtradots
 ```
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #revisamos que sea una clase ts
 
 class(df_maiz_filtradots)
 ```
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Corroboramos el inicio de la serie
 start(df_maiz_filtradots)
 
@@ -258,7 +270,7 @@ start(df_maiz_filtradots)
 
 Se gráfica la serie de tiempo por días desde 03 de Enero del año 2000 hasta el 19 de abril del año 2024, excluyendo los fines de semana.
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Graficar la serie de tiempo usando la función plot
 plot(df_maiz_filtradots, main = "Serie de Tiempo de Último Precio del Maíz", 
      xlab = "Fecha", ylab = "Precio", type = "l")
@@ -272,7 +284,7 @@ Una parte importante del análisis descriptivo de un conjunto de datos son los i
 A continuación se pueden observar diferentes ejemplo de aproximación de los datos a través de la media móvil con diversos k, en dónde k representa el tamaño del intervalo tomado:
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 
 # Calcula el promedio móvil k = 10
 promedio_movil <- rollmean(df_maiz_filtradots, k = 10, align = "center", fill = NA)
@@ -330,7 +342,7 @@ Las series de tiempo pueden descomponerse en varias componentes que ayudan a com
 
 Llegó la hora se validar la estacionalidad de nuestros datos, esto con el fin de validar uno de los supuestos más importantes a la hora de proponer modelo predictivos de una serie de tiempo. Para esto se utiliza el test Dickey-Fuller que prueba si una serie de tiempo es o no estacional.
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Instalar y cargar el paquete tseries si no está instalado
 if (!requireNamespace("tseries", quietly = TRUE)) {
   install.packages("tseries")
@@ -355,14 +367,14 @@ Por buen manejo metodológico, se opta por realizar una transformación a la bas
 
 Se comienza validando cuantas veces se debe diferenciar para tener una serie estacional:
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 ndiffs(df_maiz_filtradots)
 
 ```
 Según el resultado se debe diferenciar una vez para tener la serie estacional. Sin embargo, esto aumenta significatiamente el esfuerzo computacional, por lo que se decidió diferenciar dos veces.
 
 
-```{r ubicacion}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #transformar la serie
 
 #Diferenciación de primer orden
@@ -389,7 +401,7 @@ ts.plot(dif1_maiz, main = "Grafico Diferencia del precio del Maíz",
 
 Ahora se valida que esta serie de tiempo sea estacional con la misma prueba que se utilizó para la original.
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 
 #prueba de estacionariedad
 
@@ -401,7 +413,7 @@ adf.test(dif1_maiz, alternative =  c("stationary", "explosive") )
 Se tiene un $p-value < 0.05$, por consiguiente se puede concluir que la serie es estacionaria. 
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Calcular la descomposición estacional
 descomposicion <- stl(dif1_maiz, s.window = "periodic")
 
@@ -436,7 +448,7 @@ Donde:
 - \(\alpha\) es el factor de suavizado, que controla cuánto peso se le da a la observación actual versus el pronóstico anterior.
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Verificar la cantidad de períodos en la serie temporal
 cantidad_periodos <- length(dif1_maiz)
 
@@ -445,7 +457,7 @@ print(cantidad_periodos)
 ```
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 
 library(forecast)
 
@@ -506,7 +518,7 @@ Una explicación  del Método Holt-Winters:
 
 En resumen, el Método Holt-Winters es un método de suavizado exponencial que se utiliza para pronosticar series temporales con tendencia y estacionalidad. Utiliza tres componentes (nivel, tendencia y estacionalidad) que se actualizan en cada periodo para proporcionar pronósticos precisos y ajustados a los datos históricos observados.
 
-```{r ver}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 library(xts)
 
 # Crea una serie de tiempo con la función ts, se cambio a frecuencia 261
@@ -519,13 +531,13 @@ modelo_hw
 
 ```
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 plot(modelo_hw)
 ```
 
 A continuación se presenta la predicción para el siguiente año:
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 forecast <- predict(modelo_hw, n.ahead = 261, prediction.interval = T, level = 0.95)
 plot(modelo_hw, forecast)
 
@@ -540,13 +552,13 @@ Vemos que es un modelo que, además de ajustarse bien a los datos ya existentes,
 
 ## Visualizar la serie
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Gráfico de la serie
 ts.plot(dif1_maiz, main = "PRECIO DEL MAIZ POR DÍA", col = "darkgreen")
 
 ```
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 
 # Instalar y cargar el paquete tseries si no está instalado
 if (!requireNamespace("tseries", quietly = TRUE)) {
@@ -567,7 +579,7 @@ Tenemos un valor de $p-value<0.05$ rechazamos la hipótesis nula de que la serie
 
 ## Graficar ACF-PACF, Escoger los parametros
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 
 
 par(mfrow = c(1,1))
@@ -583,7 +595,7 @@ pacf(dif1_maiz, lag.max =  36)
 Se realiza una validación del mejor modelo ARIMA predictivo con la función auto.arima().
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 library(forecast)
 
 mod_arima_auto <- auto.arima(dif1_maiz)
@@ -599,7 +611,7 @@ summary(mod_arima_auto)
 
 Residuos del modelo
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 plot.ts(mod_arima_auto$residuals, 
         main="Residuos del modelo Auto.Arima",  
         xlab="Tiempo",
@@ -609,13 +621,13 @@ plot.ts(mod_arima_auto$residuals,
 
 ### Autocorrelación de los residuos:
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 acf(mod_arima_auto$residuals,
     main="Autocorrelaciones de los residuos del modelo Auto.Arima", 
     xlab="Años",
     ylab="Autocorrelación")
 ```
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 pacf(mod_arima_auto$residuals,
     main="Autocorrelaciones Parciales de los residuos del modelo Auto.Arima", 
     xlab="Años",
@@ -624,16 +636,16 @@ pacf(mod_arima_auto$residuals,
 
 ### Normalidad de los residuos:
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 qqnorm(mod_arima_auto$residuals,main="Gráfico Q para evaluar normalidad"); qqline(mod_arima_auto$residuals)
 
 ```
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # shapiro.test(mod_arima_auto$residuals)
 ```
 Dado que se tienen más de 5000 datos se opta por realizar los siguientes test de normalidad de los residuos. 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Intalar el paquete si no se encuentra instalado
 if (!requireNamespace("nortest", quietly = TRUE)) {
   install.packages("nortest")
@@ -659,7 +671,7 @@ Los test tienen $p-value < 0.05$ lo cual rechaza la hipotesis de que los residuo
 
 ### Modelo Autoarima
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Validación cruzada
 # Conjunto de entrenamiento y testeo
 n <- length(dif1_maiz)
@@ -675,7 +687,7 @@ error_auto <- test - predicciones_auto$pred
 
 ```
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Calcular las métricas de evaluación
 mse <- mean((test - predicciones_auto$pred)^2)
 rmse <- sqrt(mse)
@@ -696,7 +708,7 @@ print(evaluacion_auto)
 ```
 ### Modelo ARIMA(1,0,8)
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Validación cruzada
 # Conjunto de entrenamiento y testeo
 n <- length(dif1_maiz)
@@ -714,7 +726,7 @@ error <- test - predicciones$pred
 
 ```
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Calcular las métricas de evaluación
 mse <- mean((test - predicciones$pred)^2)
 rmse <- sqrt(mse)
@@ -784,7 +796,7 @@ Donde:
 
 ### Cargando librerias
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Intalar el paquete si no se encuentra instalado
 if (!requireNamespace("TTR", quietly = TRUE)) {
   install.packages("TTR")
@@ -803,14 +815,14 @@ library(prophet)
 
 ### Preprocesamiento de datos para el modelo
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Visualizar DF
 head(df_maiz_filtrado, 5)
 ```
 
 Para lograr utilizar *Prophet* se debe de tener un data frame donde las columnas de fecha se nombren "ds" y los valores "y"
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 # Renombrar las columnas
 df_prophet <- df_maiz_filtrado %>%
   dplyr::select(Fecha, Último) %>%
@@ -819,14 +831,14 @@ df_prophet <- df_maiz_filtrado %>%
 # Visualizar df_prophet
 head(df_prophet, 5)
 ```
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 #Validando
 class(df_prophet)
 ```
 
 ### Modelo
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 
 model_prophet <- prophet(df_prophet, daily.seasonality = TRUE)
 
@@ -834,7 +846,7 @@ predict_prophet <- make_future_dataframe(model_prophet, periods = 30, freq = 'da
 
 head(predict_prophet,5)
 ```
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 
 forecast_prophet <- predict(model_prophet, predict_prophet)
 
@@ -849,79 +861,74 @@ tail(forecast_prophet)
 
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 tail(forecast_prophet[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
 ```
 
 
 
 
-```{r}
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
 prophet_plot_components(model_prophet,forecast_prophet)
 ```
 
-<<<<<<< HEAD
-# Redes Neuronales
 
-## Modelo ELMAN
+# Redes Neuronales - Modelo ELMAN
 
-=======
-# Modelo de ELMAN
+Las redes neuronales de Elman, también conocidas como redes neuronales recurrentes de Elman, son un tipo específico de red neuronal recurrente (RNN) desarrollada por Jeffrey Elman en 1990. Estas redes están diseñadas para manejar datos secuenciales y temporales, lo que las hace adecuadas para tareas como el procesamiento de lenguaje natural, el reconocimiento de patrones y la predicción de series temporales. Algunas de  sus características y funcionamiento es el siguiente:
 
-Las redes neuronales de Elman, también conocidas como redes neuronales recurrentes de Elman, son un tipo específico de red neuronal recurrente (RNN) desarrollada por Jeffrey Elman en 1990. Estas redes están diseñadas para manejar datos secuenciales y temporales, lo que las hace adecuadas para tareas como el procesamiento de lenguaje natural, el reconocimiento de patrones y la predicción de series temporales. A continuación se presenta una descripción detallada de sus características y funcionamiento:
-
-### Estructura de una Red Neuronal de Elman
+## Estructura de una Red Neuronal de Elman
 
 1. **Capas de la Red**:
-   - **Capa de Entrada**: Esta capa recibe el input de datos secuenciales. Cada neurona en esta capa corresponde a una característica del vector de entrada.
-   - **Capa Oculta**: La capa oculta procesa la información recibida de la capa de entrada y contiene una memoria interna llamada **capa de contexto**.
-   - **Capa de Salida**: Esta capa produce el resultado final basado en la activación de las neuronas de la capa oculta.
+   + **Capa de Entrada**: Esta capa recibe el input de datos secuenciales. Cada neurona en esta capa corresponde a una característica del vector de entrada.
+   + **Capa Oculta**: La capa oculta procesa la información recibida de la capa de entrada y contiene una memoria interna llamada **capa de contexto**.
+   + **Capa de Salida**: Esta capa produce el resultado final basado en la activación de las neuronas de la capa oculta.
 
 2. **Capa de Contexto**:
-   - **Unidades de Contexto**: La capa de contexto almacena la activación de la capa oculta en el tiempo \( t-1 \). Estas unidades se retroalimentan a la capa oculta en el siguiente paso temporal \( t \).
-   - **Función de Memoria**: Las unidades de contexto permiten que la red de Elman tenga una memoria a corto plazo, lo que le permite procesar y aprender dependencias temporales.
+   + **Unidades de Contexto**: La capa de contexto almacena la activación de la capa oculta en el tiempo \( t-1 \). Estas unidades se retroalimentan a la capa oculta en el siguiente paso temporal \( t \).
+   + **Función de Memoria**: Las unidades de contexto permiten que la red de Elman tenga una memoria a corto plazo, lo que le permite procesar y aprender dependencias temporales.
 
-### Funcionamiento de la Red
+## Funcionamiento de la Red
 
-- **Propagación Hacia Adelante**: En cada paso temporal, la red de Elman procesa la entrada actual y la activación de la capa de contexto (que contiene la activación previa de la capa oculta).
++ **Propagación Hacia Adelante**: En cada paso temporal, la red de Elman procesa la entrada actual y la activación de la capa de contexto (que contiene la activación previa de la capa oculta).
   - La capa oculta recibe tanto la entrada actual como las unidades de contexto.
   - La activación de la capa oculta se calcula aplicando una función de activación (generalmente una función sigmoide o ReLU).
   - La salida de la capa oculta se pasa a la capa de salida para producir el resultado final.
   - La activación de la capa oculta también se almacena en las unidades de contexto para el siguiente paso temporal.
 
-- **Propagación Hacia Atrás (Entrenamiento)**: El entrenamiento se realiza mediante retropropagación a través del tiempo (BPTT), un algoritmo que extiende el algoritmo de retropropagación para manejar dependencias temporales.
++ **Propagación Hacia Atrás (Entrenamiento)**: El entrenamiento se realiza mediante retropropagación a través del tiempo (BPTT), un algoritmo que extiende el algoritmo de retropropagación para manejar dependencias temporales.
   - El error se propaga hacia atrás desde la capa de salida a través de las conexiones recurrentes hasta las capas anteriores.
   - Los pesos de las conexiones se ajustan para minimizar el error de predicción.
 
-### Ventajas y Aplicaciones
+## Ventajas y Aplicaciones
 
-- **Modelado de Secuencias Temporales**: Las redes de Elman son efectivas para tareas que requieren entender secuencias y dependencias temporales, como la predicción de series temporales, el reconocimiento de voz y el procesamiento del lenguaje natural.
-- **Simplicidad**: En comparación con otras RNN más complejas, las redes de Elman tienen una estructura relativamente simple y son más fáciles de entrenar y ajustar.
-- **Memoria a Corto Plazo**: La capa de contexto permite que la red de Elman retenga información de pasos temporales previos, mejorando su capacidad para aprender patrones temporales.
++ **Modelado de Secuencias Temporales**: Las redes de Elman son efectivas para tareas que requieren entender secuencias y dependencias temporales, como la predicción de series temporales, el reconocimiento de voz y el procesamiento del lenguaje natural.
++ **Simplicidad**: En comparación con otras RNN más complejas, las redes de Elman tienen una estructura relativamente simple y son más fáciles de entrenar y ajustar.
++ **Memoria a Corto Plazo**: La capa de contexto permite que la red de Elman retenga información de pasos temporales previos, mejorando su capacidad para aprender patrones temporales.
 
-### Limitaciones
+## Limitaciones
 
-- **Memoria a Largo Plazo**: Las redes de Elman pueden tener dificultades para aprender dependencias a largo plazo debido a problemas como el desvanecimiento del gradiente.
-- **Capacidad Limitada**: Aunque son efectivas para tareas simples, pueden no ser suficientes para problemas complejos que requieren modelado de dependencias a largo plazo, donde arquitecturas más avanzadas como LSTM o GRU son más adecuadas.
++ **Memoria a Largo Plazo**: Las redes de Elman pueden tener dificultades para aprender dependencias a largo plazo debido a problemas como el desvanecimiento del gradiente.
++ **Capacidad Limitada**: Aunque son efectivas para tareas simples, pueden no ser suficientes para problemas complejos que requieren modelado de dependencias a largo plazo, donde arquitecturas más avanzadas como LSTM o GRU son más adecuadas.
 
 En resumen, las redes neuronales de Elman son un modelo fundamental en el campo de las redes neuronales recurrentes, con aplicaciones útiles en diversas áreas que involucran datos secuenciales y temporales.
 
 El modelo de las redes neuronales de Elman se puede describir de manera formal mediante una serie de ecuaciones que representan las activaciones y actualizaciones de las capas en cada paso temporal. Aquí se presenta el modelo matemático:
 
-### Notación
+## Notación
 
-- \( \mathbf{x}(t) \): Vector de entrada en el tiempo \( t \).
-- \( \mathbf{h}(t) \): Vector de activación de la capa oculta en el tiempo \( t \).
-- \( \mathbf{y}(t) \): Vector de salida en el tiempo \( t \).
-- \( \mathbf{h}(t-1) \): Vector de activación de la capa oculta en el tiempo \( t-1 \) (capa de contexto).
-- \( \mathbf{W}_{xh} \): Matriz de pesos entre la capa de entrada y la capa oculta.
-- \( \mathbf{W}_{hh} \): Matriz de pesos entre la capa de contexto (activación de la capa oculta en \( t-1 \)) y la capa oculta.
-- \( \mathbf{W}_{hy} \): Matriz de pesos entre la capa oculta y la capa de salida.
-- \( \mathbf{b}_h \): Vector de sesgo de la capa oculta.
-- \( \mathbf{b}_y \): Vector de sesgo de la capa de salida.
-- \( \sigma \): Función de activación, típicamente una función sigmoide o ReLU.
++ \( \mathbf{x}(t) \): Vector de entrada en el tiempo \( t \).
++ \( \mathbf{h}(t) \): Vector de activación de la capa oculta en el tiempo \( t \).
++ \( \mathbf{y}(t) \): Vector de salida en el tiempo \( t \).
++ \( \mathbf{h}(t-1) \): Vector de activación de la capa oculta en el tiempo \( t-1 \) (capa de contexto).
++ \( \mathbf{W}_{xh} \): Matriz de pesos entre la capa de entrada y la capa oculta.
++ \( \mathbf{W}_{hh} \): Matriz de pesos entre la capa de contexto (activación de la capa oculta en \( t-1 \)) y la capa oculta.
++ \( \mathbf{W}_{hy} \): Matriz de pesos entre la capa oculta y la capa de salida.
++ \( \mathbf{b}_h \): Vector de sesgo de la capa oculta.
++ \( \mathbf{b}_y \): Vector de sesgo de la capa de salida.
++ \( \sigma \): Función de activación, típicamente una función sigmoide o ReLU.
 
-### Ecuaciones del Modelo
+## Ecuaciones del Modelo
 
 1. **Activación de la Capa Oculta**:
    La activación de la capa oculta en el tiempo \( t \) se calcula como:
@@ -937,14 +944,14 @@ El modelo de las redes neuronales de Elman se puede describir de manera formal m
    \]
    Aquí, \( \mathbf{W}_{hy} \mathbf{h}(t) \) representa la contribución de la activación de la capa oculta al cálculo de la salida, y \( \mathbf{b}_y \) es el sesgo.
 
-### Resumen del Funcionamiento
+## Resumen del Funcionamiento
 
 En cada paso temporal \( t \):
 1. Se recibe un nuevo vector de entrada \( \mathbf{x}(t) \).
 2. Se actualiza la activación de la capa oculta \( \mathbf{h}(t) \) utilizando la entrada actual y la activación previa de la capa oculta \( \mathbf{h}(t-1) \).
 3. Se calcula la salida \( \mathbf{y}(t) \) basada en la activación de la capa oculta \( \mathbf{h}(t) \).
 
-### Diagrama del Modelo
+## Diagrama del Modelo
 
 Un diagrama de la red neuronal de Elman puede ayudar a visualizar el flujo de datos:
 
@@ -959,9 +966,240 @@ Un diagrama de la red neuronal de Elman puede ayudar a visualizar el flujo de da
 ```
 
 En el diagrama:
-- La capa de entrada envía datos a la capa oculta.
-- La capa oculta tiene una conexión recurrente que le permite recibir información de su propio estado anterior.
-- La capa oculta envía datos a la capa de salida, produciendo la salida de la red.
++ La capa de entrada envía datos a la capa oculta.
++ La capa oculta tiene una conexión recurrente que le permite recibir información de su propio estado anterior.
++ La capa oculta envía datos a la capa de salida, produciendo la salida de la red.
 
 Este modelo permite que la red neuronal de Elman mantenga una memoria a corto plazo de las entradas anteriores, lo que es crucial para tareas que involucran datos secuenciales y temporales.
->>>>>>> ae37ac19a30df88fb91e0be8b4fba3a25bbbe008
+
+## Realización del modelo 
+
+Cargamos los paquetes y normalizamos la serie Utilizamos la fórmula estándar de normalización $\frac{{Y - \min(Y)}}{{\max(Y) - \min(Y)}}$ para obtener $Y1_{\text{normalizado}}$. Luego, utilizamos \texttt{plot()} para graficar la serie de tiempo normalizada.
+
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+
+#Intalar el paquete si no se encuentra instalado
+#if (!requireNamespace("keras", quietly = TRUE)) {
+ # install.packages("keras")
+#}
+
+#Intalar el paquete si no se encuentra instalado
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  install.packages("dplyr")
+}
+
+#Intalar el paquete si no se encuentra instalado
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+
+
+#library(keras3)
+library(dplyr)
+library(ggplot2)
+
+
+
+# Simulación de datos  
+
+
+
+Y1 <- as.ts(df_maiz_filtrado$Último,start = c(2000, 1), frequency=261)
+
+
+
+
+Z <- as.ts(Y1,F)
+
+# Normalizar los datos
+
+
+S <- (Z-min(Z))/(max(Z)-min(Z))  
+
+plot(S, main = "Serie de Tiempo Normalizada", xlab = "Tiempo", ylab = "Valor Normalizado")
+
+```
+
+Dividimos la serie de tiempo en el 75% de datos de entrenamiento y el 25% en datos de testeo.
+
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+#A continuación comprobamos el numero de filas totales que contiene nuestro dataset.
+
+tamano_total <- length(S)
+#tamano_total
+
+#Ahora dividiremos los conjuntos de entrenamiento en un 75% y prueba en un 25% respectivamente.
+tamano_train <- round(tamano_total*0.75, digits = 0)
+train <- 0:(tamano_train-1)
+train
+
+test <- (tamano_train):tamano_total
+test
+
+```
+Ahora crearemos un dataframe con n columnas, cada una de las cuales adelantara  un valor de la serie en el futuro, a través de una variable tipo zoo, equivalente al periodo de retardo de la serie.
+
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+#Ahora crearemos un dataframe con n columnas, cada una de las cuales adelantara 
+#un valor de la serie en el futuro, a través de una variable tipo zoo, equivalente al periodo de retardo de la serie.
+
+library(zoo)
+library(quantmod)
+y <- as.zoo(S)
+x1 <- Lag(y, k = 1)
+x2 <- Lag(y, k = 2)
+x3 <- Lag(y, k = 3)
+x4 <- Lag(y, k = 4)
+x5 <- Lag(y, k = 5)
+x6 <- Lag(y, k = 6)
+x7 <- Lag(y, k = 7)
+x8 <- Lag(y, k = 8)
+x9 <- Lag(y, k = 9)
+x10 <- Lag(y, k = 10)
+x11 <- Lag(y, k = 11)
+x12 <- Lag(y, k = 12)
+slogN <- cbind(y,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12)
+
+DT::datatable(slogN)
+
+#A continuacion eliminaremos los valores NA producidos al desplazar la serie:
+slogN1 <- slogN[-(1:12),]
+DT::datatable(slogN1)
+
+#Luego definimos los valores de entrada y salida de la red neuronal:
+inputs <- slogN1[,2:13]
+outputs <- slogN1[,1]
+
+```
+
+Ahora crearemos la red de Elman, probando diferentes tipos de combinaciones de neuronas en las capas ocultas e iteraciones máximas, ademas del ritmo de aprendizaje, para ajustar lo mejor posible la curva de predicción a la del modelo de la serie. De esta forma hemos llegado a estos valores a la hora de crear nuestra red. Asi mismo ponemos una semilla para que el resultado sea reproducible.
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+
+#Intalar el paquete si no se encuentra instalado
+if (!requireNamespace("RSNNS", quietly = TRUE)) {
+  install.packages("RSNNS")
+}
+
+library(RSNNS)
+
+set.seed(42)
+fit<-elman(inputs[train],outputs[train],size=10,learnFuncParams=c(0.1),
+                  maxit=10000)
+
+
+
+
+plotIterativeError(fit, main = "Error iterativo para  10 neuronas")
+```
+En la gráfica anterior se ve como evoluciona el error de la red con el numero de iteraciones para los parámetros expuestos.Donde se observa la convergencia rápida hacia cero, se espera entonces un ajuste rápido del modelo.
+
+Ahora realizamos la predicción con el resto de los términos de la serie que son los datos seleccionados para test, pasamos pues una vez entrenada a probarla y a representarla #graficamente para ver el ajuste del modelo.
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+#Ahora realizamos la predicción con el resto de los términos de la serie que son los datos #seleccionados para test, pasamos pues una vez entrenada a probarla y a representarla #graficamente para ver el ajuste del modelo.
+
+y <- as.vector(outputs[-test])
+plot(y,type="l")
+pred <- predict(fit, inputs[-test])
+lines(pred,col = "red")
+
+```
+El grafico anterior muestra tanto los datos reales como las predicciones de un modelo ajustado, donde:
+
++ Líneas Negras corresponden a la serie de tiempo de los valores reales y, que se obtienen de los datos de salida (outputs) excluyendo los datos de prueba (test). La línea negra representa la evolución temporal o secuencial de estos valores reales.
+
++ Líneas Rojas representan las predicciones del modelo ajustado (fit) para los mismos datos de entrada utilizados para generar y, es decir, inputs[-test, lo que nos permite comparar visualmente las predicciones del modelo con los valores reales.
+
+Ahora gracias al efecto memoria vamos a adelantarle a la serie al menos en un valor con una precisión muy buena. Para ello volveremos a introducir los datos de entrenamiento.
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+
+predictions <- predict(fit,inputs[-train])
+#predictions
+
+```
+
+Ahora  desnormalizamos los datos
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+#posterior desnormalizaremos los datos:
+
+mod1 <- predictions*(max(Z)-min(Z))+min(Z)
+mod1
+
+```
+Ahora se grafica  la representación de los valores predichos para los siguientes días.
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+#Ahora veamos la representación de los valores predichos para el siguiente periodo.
+x <- 1:(tamano_total+length(mod1))
+y <- c(as.vector(Z),mod1)
+plot(x[1:tamano_total], y[1:tamano_total],col = "blue", type="l")
+lines( x[(tamano_total):length(x)], y[(tamano_total):length(x)], col="red")
+```
+
+# Redes Neuronales - Modelo JORDAN
+
+
+El modelo de red neuronal de Jordan es una variante de las RNN que tiene conexiones hacia atrás de las capas ocultas a sí mismas. Esto significa que la salida de una capa oculta en un momento dado se convierte en una entrada en el siguiente paso de tiempo. Esta estructura le otorga a la red una especie de "memoria de corto plazo", lo que puede ser útil para capturar dependencias temporales complejas en los datos.
+
+El funcionamiento corresponde a que cuando se aplica un modelo de Jordan a datos de series de tiempo, la red neuronal aprende a predecir valores futuros basándose en los valores pasados y presentes de la serie temporal. Por ejemplo, si tienes datos de temperatura registrados cada hora, la red aprenderá patrones y tendencias en los datos para hacer predicciones sobre cómo será la temperatura en la siguiente hora.
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+set.seed(42)
+fit <-jordan(inputs[train],outputs[train],size=5,learnFuncParams=c(0.1),
+             maxit=35000)
+
+plotIterativeError(fit, main = "Iterative Error for 5 Neuron")
+```
+
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+y <- as.vector(outputs[-test])
+plot(y,type="l")
+pred <- predict(fit, inputs[-test])
+lines(pred,col = "red")
+```
+
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+predictions <- predict(fit,inputs[-train])
+mod2 <- predictions*(max(Z)-min(Z))+min(Z)
+#mod2
+```
+
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+x <- 1:(tamano_total+length(mod2))
+y <- c(as.vector(Z),mod2)
+plot(x[1:tamano_total], y[1:tamano_total],col = "blue", type="l")
+lines( x[(tamano_total):length(x)], y[(tamano_total):length(x)], col="red")
+```
+
+
+
+
+
+Hacemos las serie de tiempo promediandola por año sin tener en cuenta sábados y domingos.
+
+
+```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
+# Supongamos que ya has creado la serie de tiempo S y la has normalizado
+# Convertir S a una serie de tiempo con frecuencia anual
+S_ts <- ts(S, start = c(2000, 1), frequency = 262)  # Aquí asumo que F=261 es la frecuencia original
+
+# Calcular el promedio anual de los datos normalizados
+S_anual <- aggregate(S_ts, nfrequency = 1, FUN = mean)
+
+# Graficar la serie de tiempo normalizada de manera anual
+plot(S_anual, main = "Serie de Tiempo Anual Normalizada", xlab = "Año", ylab = "Valor", type = "l")
+
+```
+
+<<<<<<< HEAD
+Este modelo permite que la red neuronal de Elman mantenga una memoria a corto plazo de las entradas anteriores, lo que es crucial para tareas que involucran datos secuenciales y temporales.
+

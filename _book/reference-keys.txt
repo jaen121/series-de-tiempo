@@ -92,3 +92,6 @@ notación
 ecuaciones-del-modelo
 resumen-del-funcionamiento
 diagrama-del-modelo
+realización-del-modelo
+redes-neuronales---modelo-elman
+redes-neuronales---modelo-jordan
