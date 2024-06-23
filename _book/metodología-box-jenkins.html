@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-06-20" />
+<meta name="date" content="2024-06-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -59,6 +59,14 @@ set in the _output.yml file.</p>" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/Dygraph.Plugins.Unzoom-1.0/unzoom.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.31/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -273,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Augmented Dickey-Fuller Test
 ## 
 ## data:  dif1_maiz
-## Dickey-Fuller = -30.095, Lag order = 18, p-value = 0.01
+## Dickey-Fuller = -30.097, Lag order = 18, p-value = 0.01
 ## alternative hypothesis: stationary</code></pre>
 <p>Tenemos un valor de <span class="math inline">\(p-value&lt;0.05\)</span> rechazamos la hipótesis nula de que la serie no sea estacionaria.</p>
 </div>
@@ -297,14 +305,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb64-6"><a href="metodología-box-jenkins.html#cb64-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-7"><a href="metodología-box-jenkins.html#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_arima_auto)</span></code></pre></div>
 <pre><code>## Series: dif1_maiz 
-## ARIMA(0,0,0) with zero mean 
+## ARIMA(5,0,0) with zero mean 
 ## 
-## sigma^2 = 137.1:  log likelihood = -23927.5
-## AIC=47857   AICc=47857   BIC=47863.73
+## Coefficients:
+##           ar1      ar2      ar3      ar4      ar5
+##       -0.8098  -0.6825  -0.4862  -0.3346  -0.1813
+## s.e.   0.0125   0.0157   0.0168   0.0157   0.0125
+## 
+## sigma^2 = 81.34:  log likelihood = -22315.5
+## AIC=44643   AICc=44643.01   BIC=44683.36
 ## 
 ## Training set error measures:
-##                        ME   RMSE      MAE MPE MAPE      MASE       ACF1
-## Training set 0.0008106355 11.709 7.623363 100  100 0.6800642 -0.4723314</code></pre>
+##                        ME     RMSE      MAE MPE MAPE      MASE        ACF1
+## Training set -0.000284699 9.015322 5.869369 NaN  Inf 0.5235941 -0.02872281</code></pre>
 </div>
 <div id="validación-del-modelo" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Validación del modelo<a href="metodología-box-jenkins.html#validación-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -350,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Anderson-Darling normality test
 ## 
 ## data:  mod_arima_auto$residuals
-## A = 134.12, p-value &lt; 2.2e-16</code></pre>
+## A = 135.32, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="metodología-box-jenkins.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar la prueba de Kolmogorov-Smirnov</span></span>
 <span id="cb73-2"><a href="metodología-box-jenkins.html#cb73-2" aria-hidden="true" tabindex="-1"></a>ks_test_result <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(mod_arima_auto<span class="sc">$</span>residuals, <span class="st">&quot;pnorm&quot;</span>, <span class="at">mean=</span><span class="fu">mean</span>(mod_arima_auto<span class="sc">$</span>residuals), <span class="at">sd=</span><span class="fu">sd</span>(mod_arima_auto<span class="sc">$</span>residuals))</span>
 <span id="cb73-3"><a href="metodología-box-jenkins.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ks_test_result)</span></code></pre></div>
@@ -358,7 +371,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  One-sample Kolmogorov-Smirnov test
 ## 
 ## data:  mod_arima_auto$residuals
-## D = 0.096178, p-value &lt; 2.2e-16
+## D = 0.093457, p-value &lt; 2.2e-16
 ## alternative hypothesis: two-sided</code></pre>
 <p>Los test tienen <span class="math inline">\(p-value &lt; 0.05\)</span> lo cual rechaza la hipotesis de que los residuos siguen una distribución normal.</p>
 </div>
@@ -398,7 +411,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;Métricas de evaluación del modelo ARIMA:&quot;</code></pre>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="metodología-box-jenkins.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(evaluacion_auto)</span></code></pre></div>
 <pre><code>##        MSE     RMSE      MAE     R_squared
-## 1 112.3936 10.60159 7.000697 -5.618663e-08</code></pre>
+## 1 161.8303 12.72126 8.247577 -0.0001389056</code></pre>
 </div>
 <div id="modelo-arima108" class="section level3 hasAnchor" number="7.5.2">
 <h3><span class="header-section-number">7.5.2</span> Modelo ARIMA(1,0,8)<a href="metodología-box-jenkins.html#modelo-arima108" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -434,8 +447,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb81-16"><a href="metodología-box-jenkins.html#cb81-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Métricas de evaluación del modelo ARIMA:&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Métricas de evaluación del modelo ARIMA:&quot;</code></pre>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="metodología-box-jenkins.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(evaluacion)</span></code></pre></div>
-<pre><code>##        MSE     RMSE      MAE    R_squared
-## 1 112.3639 10.60018 6.998398 0.0002645448</code></pre>
+<pre><code>##        MSE     RMSE      MAE     R_squared
+## 1 161.8632 12.72255 8.248957 -0.0003418336</code></pre>
 </div>
 </div>
 <div id="conclusiones-1" class="section level2 hasAnchor" number="7.6">
@@ -443,9 +456,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="evaluación-de-la-calidad-del-modelo" class="section level3 hasAnchor" number="7.6.1">
 <h3><span class="header-section-number">7.6.1</span> Evaluación de la calidad del modelo<a href="metodología-box-jenkins.html#evaluación-de-la-calidad-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><em>MSE (Mean Squared Error)</em>: La varianza promedio de los errores de predicicón es de <em>112.39</em>.</li>
-<li><em>RMSE (Root Mean Squared Error)</em>: La raíz cuadrada del MSE es de <em>10.60</em></li>
-<li><em>MAE (Mean Absolute Error):</em> El error absoluto promedio es de <em>7</em></li>
+<li><em>MSE (Mean Squared Error)</em>: La varianza promedio de los errores de predicicón es de <em>161.8</em>.</li>
+<li><em>RMSE (Root Mean Squared Error)</em>: La raíz cuadrada del MSE es de <em>12.72</em></li>
+<li><em>MAE (Mean Absolute Error):</em> El error absoluto promedio es de <em>8.2</em></li>
 <li><em>R_squared:</em> El R cuadrado es un valor muy cercano a cero y negativo, por consiguiente el desempeño del modelo no es el adecuado.</li>
 </ul>
 </div>

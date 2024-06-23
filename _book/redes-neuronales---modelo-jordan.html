@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Laura Blanco Rios,Jairo Enrique Alba Talero, Cristian Ruiz Londoño" />
 
 
-<meta name="date" content="2024-06-20" />
+<meta name="date" content="2024-06-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -59,6 +59,14 @@ set in the _output.yml file.</p>" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/Dygraph.Plugins.Unzoom-1.0/unzoom.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.31/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -272,15 +280,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb118-4"><a href="redes-neuronales---modelo-jordan.html#cb118-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>( x[(tamano_total)<span class="sc">:</span><span class="fu">length</span>(x)], y[(tamano_total)<span class="sc">:</span><span class="fu">length</span>(x)], <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Hacemos las serie de tiempo promediandola por año sin tener en cuenta sábados y domingos.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="redes-neuronales---modelo-jordan.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que ya has creado la serie de tiempo S y la has normalizado</span></span>
-<span id="cb119-2"><a href="redes-neuronales---modelo-jordan.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir S a una serie de tiempo con frecuencia anual</span></span>
-<span id="cb119-3"><a href="redes-neuronales---modelo-jordan.html#cb119-3" aria-hidden="true" tabindex="-1"></a>S_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(S, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">262</span>)  <span class="co"># Aquí asumo que F=261 es la frecuencia original</span></span>
-<span id="cb119-4"><a href="redes-neuronales---modelo-jordan.html#cb119-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb119-5"><a href="redes-neuronales---modelo-jordan.html#cb119-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el promedio anual de los datos normalizados</span></span>
-<span id="cb119-6"><a href="redes-neuronales---modelo-jordan.html#cb119-6" aria-hidden="true" tabindex="-1"></a>S_anual <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(S_ts, <span class="at">nfrequency =</span> <span class="dv">1</span>, <span class="at">FUN =</span> mean)</span>
-<span id="cb119-7"><a href="redes-neuronales---modelo-jordan.html#cb119-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb119-8"><a href="redes-neuronales---modelo-jordan.html#cb119-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie de tiempo normalizada de manera anual</span></span>
-<span id="cb119-9"><a href="redes-neuronales---modelo-jordan.html#cb119-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(S_anual, <span class="at">main =</span> <span class="st">&quot;Serie de Tiempo Anual Normalizada&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Año&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Valor&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="redes-neuronales---modelo-jordan.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir S a una serie de tiempo con frecuencia anual</span></span>
+<span id="cb119-2"><a href="redes-neuronales---modelo-jordan.html#cb119-2" aria-hidden="true" tabindex="-1"></a>S_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(S, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">262</span>)  <span class="co"># Aquí asumo que F=261 es la frecuencia original</span></span>
+<span id="cb119-3"><a href="redes-neuronales---modelo-jordan.html#cb119-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-4"><a href="redes-neuronales---modelo-jordan.html#cb119-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el promedio anual de los datos normalizados</span></span>
+<span id="cb119-5"><a href="redes-neuronales---modelo-jordan.html#cb119-5" aria-hidden="true" tabindex="-1"></a>S_anual <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(S_ts, <span class="at">nfrequency =</span> <span class="dv">1</span>, <span class="at">FUN =</span> mean)</span>
+<span id="cb119-6"><a href="redes-neuronales---modelo-jordan.html#cb119-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-7"><a href="redes-neuronales---modelo-jordan.html#cb119-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie de tiempo normalizada de manera anual</span></span>
+<span id="cb119-8"><a href="redes-neuronales---modelo-jordan.html#cb119-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(S_anual, <span class="at">main =</span> <span class="st">&quot;Serie de Tiempo Anual Normalizada&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Año&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Valor&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 Este modelo permite que la red neuronal de Elman mantenga una memoria a corto plazo de las entradas anteriores, lo que es crucial para tareas que involucran datos secuenciales y temporales.</p>

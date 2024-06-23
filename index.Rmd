@@ -234,15 +234,27 @@ if (!requireNamespace("zoo", quietly = TRUE)) {
   install.packages("zoo")
 }
 
+# Instalar y cargar el paquete dplyr si no está instalado
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  install.packages("dplyr")
+}
+
 # Carga el paquete xts
 library(xts)
 
 # Carga el paquete zoo
 library(zoo)
 
+# Carga el paquete dplyr
+library(dplyr)
+
+#ordenar la serie
+df_maiz_filtrado_ordenado <- df_maiz_filtrado %>%
+  arrange(Fecha)
+
 
 # Crea una serie de tiempo con la función ts
-df_maiz_filtradots <- ts(df_maiz_filtrado$Último, start = c(2000, 1), frequency=261.25)
+df_maiz_filtradots <- ts(df_maiz_filtrado_ordenado$Último, start = c(2000, 1), frequency=261.25)
 df_maiz_filtradots
 
 ```
@@ -751,9 +763,9 @@ print(evaluacion)
 
 ### Evaluación de la calidad del modelo
 
-- *MSE (Mean Squared Error)*: La varianza promedio de los errores de predicicón es de *112.39*.
-- *RMSE (Root Mean Squared Error)*: La raíz cuadrada del MSE es de *10.60*
-- *MAE (Mean Absolute Error):* El error absoluto promedio es de *7*
+- *MSE (Mean Squared Error)*: La varianza promedio de los errores de predicicón es de *161.8*.
+- *RMSE (Root Mean Squared Error)*: La raíz cuadrada del MSE es de *12.72*
+- *MAE (Mean Absolute Error):* El error absoluto promedio es de *8.2*
 - *R_squared:* El R cuadrado es un valor muy cercano a cero y negativo, por consiguiente el desempeño del modelo no es el adecuado. 
 
 ### Analisis de los residuos
@@ -804,7 +816,8 @@ if (!requireNamespace("TTR", quietly = TRUE)) {
 
 library(TTR)
 library(quantmod)
-
+library(Rcpp)
+library(rlang)
 
 #Intalar el paquete si no se encuentra instalado
 if (!requireNamespace("prophet", quietly = TRUE)) {
@@ -854,8 +867,8 @@ forecast_prophet <- predict(model_prophet, predict_prophet)
 # Imprimir las predicciones en la consola
 tail(forecast_prophet)
 
-#No funciona, error de nombre archivo temporal largo
-#dyplot.prophet(model_prophet, forecast_prophet)
+#Mostrar las predicciones
+dyplot.prophet(model_prophet, forecast_prophet)
 
 ```
 
@@ -981,7 +994,7 @@ Cargamos los paquetes y normalizamos la serie Utilizamos la fórmula estándar d
 
 #Intalar el paquete si no se encuentra instalado
 #if (!requireNamespace("keras", quietly = TRUE)) {
- # install.packages("keras")
+#  install.packages("keras")
 #}
 
 #Intalar el paquete si no se encuentra instalado
@@ -1005,7 +1018,7 @@ library(ggplot2)
 
 
 
-Y1 <- as.ts(df_maiz_filtrado$Último,start = c(2000, 1), frequency=261)
+Y1 <- as.ts(df_maiz_filtrado_ordenado$Último,start = c(2000, 1), frequency=261)
 
 
 
@@ -1043,8 +1056,6 @@ Ahora crearemos un dataframe con n columnas, cada una de las cuales adelantara  
 
 
 ```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
-#Ahora crearemos un dataframe con n columnas, cada una de las cuales adelantara 
-#un valor de la serie en el futuro, a través de una variable tipo zoo, equivalente al periodo de retardo de la serie.
 
 library(zoo)
 library(quantmod)
@@ -1100,7 +1111,6 @@ En la gráfica anterior se ve como evoluciona el error de la red con el numero d
 Ahora realizamos la predicción con el resto de los términos de la serie que son los datos seleccionados para test, pasamos pues una vez entrenada a probarla y a representarla #graficamente para ver el ajuste del modelo.
 
 ```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
-#Ahora realizamos la predicción con el resto de los términos de la serie que son los datos #seleccionados para test, pasamos pues una vez entrenada a probarla y a representarla #graficamente para ver el ajuste del modelo.
 
 y <- as.vector(outputs[-test])
 plot(y,type="l")
@@ -1108,7 +1118,8 @@ pred <- predict(fit, inputs[-test])
 lines(pred,col = "red")
 
 ```
-El grafico anterior muestra tanto los datos reales como las predicciones de un modelo ajustado, donde:
+
+El gráfico anterior muestra tanto los datos reales como las predicciones de un modelo ajustado, donde:
 
 + Líneas Negras corresponden a la serie de tiempo de los valores reales y, que se obtienen de los datos de salida (outputs) excluyendo los datos de prueba (test). La línea negra representa la evolución temporal o secuencial de estos valores reales.
 
@@ -1126,16 +1137,15 @@ predictions <- predict(fit,inputs[-train])
 Ahora  desnormalizamos los datos
 
 ```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
-#posterior desnormalizaremos los datos:
 
 mod1 <- predictions*(max(Z)-min(Z))+min(Z)
 mod1
 
 ```
-Ahora se grafica  la representación de los valores predichos para los siguientes días.
+Ahora se gráfica  la representación de los valores predichos para los siguientes días.
 
 ```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
-#Ahora veamos la representación de los valores predichos para el siguiente periodo.
+
 x <- 1:(tamano_total+length(mod1))
 y <- c(as.vector(Z),mod1)
 plot(x[1:tamano_total], y[1:tamano_total],col = "blue", type="l")
@@ -1188,7 +1198,7 @@ Hacemos las serie de tiempo promediandola por año sin tener en cuenta sábados 
 
 
 ```{r echo= TRUE, message=FALSE, warning=FALSE, fig.align='center'}
-# Supongamos que ya has creado la serie de tiempo S y la has normalizado
+
 # Convertir S a una serie de tiempo con frecuencia anual
 S_ts <- ts(S, start = c(2000, 1), frequency = 262)  # Aquí asumo que F=261 es la frecuencia original
 
